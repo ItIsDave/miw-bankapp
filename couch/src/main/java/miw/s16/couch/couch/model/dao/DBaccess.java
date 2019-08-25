@@ -1,4 +1,4 @@
-package model.dao;
+package miw.s16.couch.couch.model.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
