@@ -1,7 +1,7 @@
 package miw.s16.couch.couch;
 
 
-import miw.s16.couch.couch.model.dao.DBaccess;
+import miw.s16.couch.couch.model.DBaccess;
 
 public class ConnectionLauncher {
 
