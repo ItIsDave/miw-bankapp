@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class LoginController {
+
     @RequestMapping(value="aap", method= RequestMethod.GET)
     public String appHandler(Model model){
         model.addAttribute("welkom", "Welkom!");
