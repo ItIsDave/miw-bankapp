@@ -1,12 +1,14 @@
 package miw.s16.couch.couch.controller;
 
+import miw.s16.couch.couch.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class LoginController {
@@ -33,9 +35,26 @@ public class LoginController {
     }
 
     @GetMapping(value="login")
-    public String indexHandler(){
+    public String indexHandler(Model model){
+        User user = new User();
+        model.addAttribute("user", user);
         return "login";
     }
+
+    @PostMapping(value="loginHandler")
+    public String loginHandler(@ModelAttribute User user, Model model){
+        System.out.println("Ingelogd lid: " + user.getUserName() + ", " + user.getUserPassword());
+        User testUser = new User("Test", "1234", 140);
+        if (testUser != null && testUser.getUserPassword().equals(user.getUserPassword())) {
+            List<String> eventList = new ArrayList<>();
+            model.addAttribute("name", testUser.getUserName());
+            model.addAttribute("allEvents", eventList);
+            return "personal_page";
+        }
+        return"login failed";
+
+    }
+
 }
 
 
