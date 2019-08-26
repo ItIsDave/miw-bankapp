@@ -10,7 +10,7 @@ public class User {
 
 
     public User() {
-        this("", "", 0);
+        this("", "", 100);
     }
 
 

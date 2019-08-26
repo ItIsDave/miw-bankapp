@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -6,19 +7,25 @@
 </head>
 <body>
 <h1>Login bij Couchbank</h1>
-<form action="loginHandler" method="post"></form>
-<table>
-    <tr>
-        <td>Naam:</td>
-        <td><input type="text" name="naam"></td>
-    </tr>
-    <tr>
-        <td>Password:</td>
-        <td><input type="text" name="password"><td>
-    </tr>
-    <tr>
-        <td><input type="submit" name="OK"></td>
-    </tr>
-</table>
+
+<form action="#" th:action="@{loginHandler}" th:object="${user}" method="post">
+    <table>
+        <tr>
+            <td>Naam:</td>
+            <td><input type="text" th:field="*{userName}"/></td>
+        </tr>
+        <tr>
+            <td>Password:</td>
+            <td><label>
+                <input type="text" th:field="*{userPassword}"/>
+            </label>
+            <td>
+        </tr>
+        <tr>
+            <td><input type="submit" value="Login"></td>
+        </tr>
+    </table>
+</form>
+Ga <a href="/">terug</a>
 </body>
 </html>

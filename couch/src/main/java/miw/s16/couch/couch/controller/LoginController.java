@@ -7,9 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Controller
 public class LoginController {
     @Autowired
@@ -44,11 +41,12 @@ public class LoginController {
     @PostMapping(value="loginHandler")
     public String loginHandler(@ModelAttribute User user, Model model){
         System.out.println("Ingelogd lid: " + user.getUserName() + ", " + user.getUserPassword());
+
+        // test user for login functionality
         User testUser = new User("Test", "1234", 140);
+
         if (testUser != null && testUser.getUserPassword().equals(user.getUserPassword())) {
-            List<String> eventList = new ArrayList<>();
             model.addAttribute("name", testUser.getUserName());
-            model.addAttribute("allEvents", eventList);
             return "personal_page";
         }
         return"login failed";
