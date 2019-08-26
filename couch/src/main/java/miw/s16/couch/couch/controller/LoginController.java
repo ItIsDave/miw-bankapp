@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -29,6 +30,11 @@ public class LoginController {
     public String appHandler(Model model){
         model.addAttribute("welkom", "Welkom bij Couch Bank");
         return "welcome_template";
+    }
+
+    @GetMapping(value="login")
+    public String indexHandler(){
+        return "login";
     }
 }
 
