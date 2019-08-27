@@ -6,11 +6,13 @@ public class BankAccount {
     //variables
     private int IBAN;
     private String type;
+    private double balance;
 
     //all args constructor
-    public BankAccount(int IBAN, String type) {
+    public BankAccount(int IBAN, String type, double balance) {
         this.IBAN = IBAN;
         this.type = type;
+        this.balance = balance;
     }
 
     //no args constructor
@@ -20,8 +22,13 @@ public class BankAccount {
     //getters
     public int getIBAN() { return IBAN; }
     public String getType() { return type; }
+    public double getBalance() {return balance;}
 
-    //setters are not used, because you can't change a bank account
+    //setter for changes in balance
+    public void setBalance(double balance) {
+        this.balance = balance;
+    }
+
 
 //    @Override
 //    public String toString() {
