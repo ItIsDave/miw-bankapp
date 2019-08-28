@@ -1,6 +1,7 @@
 package miw.s16.couch.couch.controller;
 
 import miw.s16.couch.couch.model.User;
+import miw.s16.couch.couch.model.entity.BankAccount;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -27,13 +28,14 @@ public class LoginController {
 
         // test user for login functionality
         User testUser = new User("Test", "1234", 140);
+        BankAccount bankaccount = new BankAccount("NL", "retail", 5);
 
         if (testUser != null && testUser.getUserPassword().equals(user.getUserPassword())) {
             model.addAttribute("name", testUser.getUserName());
+            model.addAttribute("bankaccount", bankaccount.getIBAN());
             return "personal_page";
         }
         return"login failed";
-
     }
 
 }

@@ -4,12 +4,12 @@ public class BankAccount {
 
     //coding by PvdH
     //variables
-    private int IBAN;
+    private String IBAN;
     private String type;
     private double balance;
 
     //all args constructor
-    public BankAccount(int IBAN, String type, double balance) {
+    public BankAccount(String IBAN, String type, double balance) {
         this.IBAN = IBAN;
         this.type = type;
         this.balance = balance;
@@ -20,7 +20,7 @@ public class BankAccount {
     }
 
     //getters
-    public int getIBAN() { return IBAN; }
+    public String getIBAN() { return IBAN; }
     public String getType() { return type; }
     public double getBalance() {return balance;}
 
