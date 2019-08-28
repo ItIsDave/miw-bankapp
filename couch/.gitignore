@@ -29,3 +29,7 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### single files ###
+C:\Users\Boudewijn\IdeaProjects\team-4\couch\src\main\resources\templates\transaction.html
+C:\Users\Boudewijn\IdeaProjects\team-4\couch\src\main\java\miw\s16\couch\couch\controller\TransactionLauncher.java

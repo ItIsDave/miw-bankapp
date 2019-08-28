@@ -9,8 +9,12 @@ import java.util.Date;
     private static final String DEFAULT_IBAN = "NLxx XXXX 000x xxxx xx";
 
      public BankAccount() {
-         this(DEFAULT_IBAN, 0);
+         this(DEFAULT_IBAN);
      }
+
+    public BankAccount(String IBAN) {
+        this(IBAN, 0);
+    }
 
      public BankAccount(String IBAN, double balance) {
          this.IBAN = IBAN;
@@ -28,6 +32,14 @@ import java.util.Date;
     public void setBalance(double balance) {
         this.balance = balance;
     }
+
+    @Override
+    public String toString() {
+        return "BankAccount{" +
+                "IBAN='" + IBAN + '\'' +
+                ", balance=" + balance +
+                '}';
+    }
 }
 
 //idem
@@ -41,7 +53,7 @@ public class Transaction //implements Serializable
 
 //@Id
     //@GeneratedValue
-  private long idTransaction;
+  private int idTransaction;
   private String description;
   private double amount;
 //@Column(name = "timeStamp")
@@ -58,7 +70,11 @@ public class Transaction //implements Serializable
         this(0,"unknown",0,new Date(),new BankAccount(), new BankAccount(), new Loan(), false);
     }
 
-    public Transaction(long idTransaction, String description, double amount, Date transactionDate, BankAccount from, BankAccount to, Loan loan, boolean isPin) {
+     public Transaction(int idTransaction, String description, double amount, Date transactionDate, String from, String to, Loan loan, boolean isPin) {
+         this(idTransaction, description, amount, transactionDate, new BankAccount(from), new BankAccount(to), loan, isPin);
+     }
+
+    public Transaction(int idTransaction, String description, double amount, Date transactionDate, BankAccount from, BankAccount to, Loan loan, boolean isPin) {
         this.idTransaction = idTransaction;
         this.description = description;
         this.amount = amount;
@@ -71,7 +87,7 @@ public class Transaction //implements Serializable
         this.setBalanceTo();
     }
 
-     public long getIdTransaction() {
+     public int getIdTransaction() {
          return idTransaction;
      }
 
@@ -103,9 +119,7 @@ public class Transaction //implements Serializable
          this.transactionDate = transactionDate;
      }
 
-     public BankAccount getFrom() {
-         return from;
-     }
+     public BankAccount getFrom() { return from; }
 
      public void setFrom(BankAccount from) {
          this.from = from;
@@ -135,4 +149,17 @@ public class Transaction //implements Serializable
          to.setBalance(to.getBalance() + amount);
      }
 
+     @Override
+     public String toString() {
+         return "Transaction{" +
+                 "idTransaction=" + idTransaction +
+                 ", description='" + description + '\'' +
+                 ", amount=" + amount +
+                 ", transactionDate=" + transactionDate +
+                 ", from=" + from +
+                 ", to=" + to +
+                 ", loan=" + loan +
+                 ", isPin=" + isPin +
+                 '}';
+     }
  }
