@@ -12,17 +12,11 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 public class LoginController {
 
-    @RequestMapping(value="couch", method= RequestMethod.GET)
-    public String appHandler(Model model){
-        model.addAttribute("welkom", "Welkom bij Couch Bank");
-        return "welcome_template";
-    }
-
-    @GetMapping(value="login")
+    @GetMapping
     public String indexHandler(Model model){
         User user = new User();
         model.addAttribute("user", user);
-        return "login";
+        return "home";
     }
 
     @PostMapping(value="loginHandler")
@@ -34,12 +28,11 @@ public class LoginController {
         BankUser bankuser = new BankUser("userBankuser", "pwBankUser", 23, "hoofdMKB");
         SMEUser smeuser = new SMEUser("userSmeuser", "pwSmeUser", 23, 23, "Aliebalie", "baliemedewerker");
         RetailUser retailuser = new RetailUser("userRetailUser", "pwRetailUser",23,
-        23, "Alie", "", "Balie",
+                23, "Alie", "", "Balie",
                 "retailstraat", 23, "",
                 "23", "Retail", 23,
-        23, "oeps", "eigenaar");
-        BankAccount bankaccount = new BankAccount("NL", "retail", 5);
-
+                23, "oeps", "eigenaar");
+        BankAccount bankaccount = new BankAccount("NL", "Retail", 5);
         if (testUser != null && testUser.getUserPassword().equals(user.getUserPassword())) {
             model.addAttribute("name", testUser.getUserName());
             model.addAttribute("bankaccount", bankaccount.getIBAN());
@@ -61,6 +54,3 @@ public class LoginController {
     }
 
 }
-
-
-
