@@ -38,7 +38,8 @@ public class LoginController {
                 "retailstraat", 23, "",
                 "23", "Retail", 23,
         23, "oeps", "eigenaar");
-        BankAccount bankaccount = new BankAccount("NL", "retail", 5);
+        BankAccount bankaccount = new BankAccount("NL"//,"retail"
+                 , 5);
 
         if (testUser != null && testUser.getUserPassword().equals(user.getUserPassword())) {
             model.addAttribute("name", testUser.getUserName());
