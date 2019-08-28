@@ -29,3 +29,6 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### application properties ###
+/Users/alet/Desktop/MiW-Couch/Git-Couch/couch/src/main/resources/application.properties
