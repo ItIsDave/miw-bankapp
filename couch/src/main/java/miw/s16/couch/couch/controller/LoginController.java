@@ -37,11 +37,8 @@ public class LoginController {
 //    Member m = MemberDao.getMemberByName(member.getName());
         if (testUser != null && testUser.getUserPassword().equals(user.getUserPassword())) {
             List<String> eventList = new ArrayList<>();
-            eventList.add("Najaarsborrel");
-            eventList.add("Beginnerscursus");
-            eventList.add("Ballen clinic");
-            eventList.add("Jaarvergadering");
-            eventList.add("Feestavond");
+            eventList.add("Rekening: ");
+            eventList.add("Rekening: ");
             model.addAttribute("name", testUser.getUserName());
             model.addAttribute("allEvents", eventList);
             return "personal_page";

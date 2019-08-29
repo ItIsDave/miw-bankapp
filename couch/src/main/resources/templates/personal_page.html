@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>User Dashboard</title>
+    <title>Persoonlijke pagina</title>
 </head>
 <body>
 <h1>Welkom <span th:text="${name}"/></h1>
-<div th:unless="${lists.isEmpty(allEvents)}">
-    <h2>Overzicht:</h2>
+<div th:unless="${#lists.isEmpty(allEvents)}">
+    <h2>Rekeningen overzicht</h2>
     <table>
-        <tr th:each="event : ${allEvents}}">
+        <tr th:each="event : ${allEvents}">
             <td><span th:text="${event}"/></td>
         </tr>
     </table>
