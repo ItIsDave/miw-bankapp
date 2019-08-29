@@ -1,5 +1,7 @@
 package miw.s16.couch.couch.model;
 
+import miw.s16.couch.couch.model.entity.BankAccount;
+
 import java.util.ArrayList;
 
 public class RetailUser extends User {
