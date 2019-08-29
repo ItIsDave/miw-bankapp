@@ -4,6 +4,7 @@ import miw.s16.couch.couch.model.BankUser;
 import miw.s16.couch.couch.model.RetailUser;
 import miw.s16.couch.couch.model.SMEUser;
 import miw.s16.couch.couch.model.User;
+import miw.s16.couch.couch.model.entity.BankAccount;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -24,10 +25,10 @@ public class LoginController {
     public String indexHandler(Model model){
         User user = new User();
         model.addAttribute("user", user);
-        return "login";
+        return "home";
     }
 
-    @PostMapping(value = "loginHandler")
+    @PostMapping(value="loginHandler")
     public String loginHandler(@ModelAttribute User user, Model model){
         System.out.println("Ingelogd lid: " + user.getUserName() + ", " + user.getUserPassword());
 
