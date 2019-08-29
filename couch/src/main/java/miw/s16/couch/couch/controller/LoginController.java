@@ -8,6 +8,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Controller
 public class LoginController {
 
@@ -24,38 +27,26 @@ public class LoginController {
         return "login";
     }
 
-    @PostMapping(value="loginHandler")
+    @PostMapping(value = "loginHandler")
     public String loginHandler(@ModelAttribute User user, Model model){
         System.out.println("Ingelogd lid: " + user.getUserName() + ", " + user.getUserPassword());
 
         // test user for login functionality
         User testUser = new User("Test", "1234", 140);
-        BankUser bankuser = new BankUser("userBankuser", "pwBankUser", 23, "hoofdMKB");
-        SMEUser smeuser = new SMEUser("userSmeuser", "pwSmeUser", 23, 23, "Aliebalie", "baliemedewerker");
-        RetailUser retailuser = new RetailUser("userRetailUser", "pwRetailUser",23,
-        23, "Alie", "", "Balie",
-                "retailstraat", 23, "",
-                "23", "Retail", 23,
-        23, "oeps", "eigenaar");
 
+//    Member m = MemberDao.getMemberByName(member.getName());
         if (testUser != null && testUser.getUserPassword().equals(user.getUserPassword())) {
+            List<String> eventList = new ArrayList<>();
+            eventList.add("Najaarsborrel");
+            eventList.add("Beginnerscursus");
+            eventList.add("Ballen clinic");
+            eventList.add("Jaarvergadering");
+            eventList.add("Feestavond");
             model.addAttribute("name", testUser.getUserName());
+            model.addAttribute("allEvents", eventList);
             return "personal_page";
         }
-        if (bankuser != null && bankuser.getUserPassword().equals(user.getUserPassword())) {
-            model.addAttribute("name", bankuser.getUserName());
-            return "personal_page";
-        }
-        if (smeuser != null && smeuser.getUserPassword().equals(user.getUserPassword())) {
-            model.addAttribute("name", smeuser.getUserName());
-            return "personal_page";
-        }
-        if (retailuser != null && retailuser.getUserPassword().equals(user.getUserPassword())) {
-            model.addAttribute("name", retailuser.getUserName());
-            return "personal_page";
-        }
-        return"login failed";
-
+        return "login_failed";
     }
 
 }

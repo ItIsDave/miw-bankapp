@@ -1,5 +1,7 @@
 package miw.s16.couch.couch.model;
 
+import java.util.ArrayList;
+
 public class RetailUser extends User {
 
     private int bsn;
@@ -15,6 +17,8 @@ public class RetailUser extends User {
     private int dateOfBirth;
     private String email;
     private String role;
+    private ArrayList <BankAccount> retailRekeningen;
+
 
  //   public RetailUser(String userName, String userPassword, int userId, int bsn//, String firstName, String lastName,
  //                     //String adress, int houseNumber, String zipcode, String city,
@@ -148,6 +152,10 @@ public class RetailUser extends User {
     public void setRole(String role) {
         this.role = role;
     }
+
+    public ArrayList<BankAccount> getRetailRekeningen() { return retailRekeningen; }
+
+    public void setRetailRekeningen(ArrayList<BankAccount> retailRekeningen) { this.retailRekeningen = retailRekeningen; }
 }
 
 

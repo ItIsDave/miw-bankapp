@@ -5,7 +5,14 @@
     <title>User Dashboard</title>
 </head>
 <body>
-<h1>Welkom <span th:text="${name}"></span></h1>
-
+<h1>Welkom <span th:text="${name}"/></h1>
+<div th:unless="${lists.isEmpty(allEvents)}">
+    <h2>Overzicht:</h2>
+    <table>
+        <tr th:each="event : ${allEvents}}">
+            <td><span th:text="${event}"/></td>
+        </tr>
+    </table>
+</div>
 </body>
 </html>
