@@ -4,13 +4,18 @@ import miw.s16.couch.couch.model.BankUser;
 import miw.s16.couch.couch.model.RetailUser;
 import miw.s16.couch.couch.model.SMEUser;
 import miw.s16.couch.couch.model.User;
+import miw.s16.couch.couch.model.dao.UserDao;
 import miw.s16.couch.couch.model.entity.BankAccount;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class LoginController {
+
+    @Autowired
+    UserDao userDao;
 
     @GetMapping
     public String indexHandler(Model model){
