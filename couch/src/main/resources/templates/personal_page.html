@@ -5,16 +5,15 @@
     <title>User Dashboard</title>
 </head>
 <body>
-<h1>Welkom <span th:text="${name}"></span></h1>
-<h2>IBAN <span th:text="${bankaccount}"></span></h2>
-
+<h1>Welkom <span th:text="${name}"/></h1>
+<div th:unless="${lists.isEmpty(allEvents)}">
+    <h2>Overzicht:</h2>
+    <table>
+        <tr th:each="event : ${allEvents}}">
+            <td><span th:text="${event}"/></td>
+        </tr>
+    </table>
+</div>
 </body>
-<form action="#" th:action="@{pageHandler}" th:object="${user}" method="post">
-    <tr>Klik voor een transactie te maken</tr>
-        <input type="submit" value="Nieuwe Transactie">
-</form>
-
-<form>
-    Ga <a href="/">terug</a>
-</form>
 </html>
+
