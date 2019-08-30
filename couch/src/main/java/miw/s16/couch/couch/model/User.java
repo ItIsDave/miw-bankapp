@@ -15,6 +15,9 @@ public class User {
     private String userName;
     private String userPassword;
 
+    @OneToOne(mappedBy="Retail")
+    private Retail retail;
+
 
     public User() {
         this("", "", 100);
