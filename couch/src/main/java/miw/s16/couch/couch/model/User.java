@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 @Entity
 public class User {
@@ -15,8 +16,8 @@ public class User {
     private String userName;
     private String userPassword;
 
-    @OneToOne(mappedBy="Retail")
-    private Retail retail;
+    @OneToOne(mappedBy="RetailUser")
+    private RetailUser retailUser;
 
 
     public User() {
