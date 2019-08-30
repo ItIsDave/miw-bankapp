@@ -40,7 +40,7 @@ public class LoginController {
             model.addAttribute("userName", user.getUserName());
            return "personal_page";
        }
-       return"login failed";
+       return"login_failed";
     }
 
 }
