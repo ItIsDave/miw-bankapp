@@ -1,6 +1,7 @@
 package miw.s16.couch.couch.model;
 
 import org.hibernate.annotations.Table;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
