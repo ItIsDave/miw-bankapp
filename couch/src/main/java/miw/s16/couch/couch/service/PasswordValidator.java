@@ -19,14 +19,14 @@ public class PasswordValidator {
     }
 
     public boolean validateMemberPassword(User formUser) {
-        boolean loginOk = true;
-//       // List<User> dbUsers = userDao.findByName(formUser.getUserName());
-//        if (dbUsers.size() == 1) {
-//            User dbUser = dbUsers.get(0);
-//            loginOk = dbUser.getUserPassword().equals(formUser.getUserPassword());
-//        } else {
-//            loginOk = false;
-//        }
+        boolean loginOk;
+        List<User> dbUsers = userDao.findByUserName(formUser.getUserName());
+        if (dbUsers.size() == 1) {
+            User dbUser = dbUsers.get(0);
+            loginOk = dbUser.getUserPassword().equals(formUser.getUserPassword());
+        } else {
+            loginOk = false;
+        }
         return loginOk;
     }
 
