@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class PageController {
     //user for testing
-    private User testUser = new User("Test", "1234", 140);
+    private User testUser = new User("Test", "1234");
     private BankAccount bankaccount = new BankAccount("NL"//,"retail"
             , 5);
 

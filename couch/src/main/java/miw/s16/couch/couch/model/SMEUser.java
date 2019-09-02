@@ -11,8 +11,8 @@ public class SMEUser extends User {
     private String  roleEmployee;
     private ArrayList<BankAccount> smeRekeningen = new ArrayList<>();
 
-    public SMEUser(String userName, String password, int id, int companyId, String name, String role){
-        super(userName, password, id);
+    public SMEUser(String userName, String password, int companyId, String name, String role){
+        super(userName, password);
         this.chamberOfCommerceId = companyId;
         this.companyName = name;
         this.roleEmployee = role;
