@@ -13,9 +13,6 @@ public class User {
     private String userName;
     private String userPassword;
 
-   // @OneToOne(mappedBy = "user")
-  //  private RetailUser retailUser;
-
     // empty constructor
     public User() {
        super();

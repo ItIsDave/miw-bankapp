@@ -36,7 +36,7 @@ public class HibernateLab {
             User Boudewijn = new User("Boudewijn", "1234");
             User David = new User("David", "1234");
             User Patrick = new User("Patrick", "1234");
-            RetailUser Huub = new RetailUser(987654321, "Huub",  "van", "HvA", "Kalverstraat", 25, "B", "100LA", "Amsterdam", 690000000, "25-10-1900", "huub@hva.nl", "Retail", null);
+            RetailUser Huub = new RetailUser("Huub", "1234", 987654321, "Huub",  "van", "HvA", "Kalverstraat", 25, "B", "100LA", "Amsterdam", 690000000, "25-10-1900", "huub@hva.nl", "Retail");
 
             System.out.println("Creating schema");
 
