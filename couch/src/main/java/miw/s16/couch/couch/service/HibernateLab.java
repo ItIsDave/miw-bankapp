@@ -48,7 +48,7 @@ public class HibernateLab {
             userDao.save(Boudewijn);
             userDao.save(David);
             userDao.save(Patrick);
-            RetailUserDao.save(Huub);
+            retailUserDao.save(Huub);
         }
 
     }
