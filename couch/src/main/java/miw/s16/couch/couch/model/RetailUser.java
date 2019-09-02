@@ -23,7 +23,6 @@ public class RetailUser extends User {
     private ArrayList <BankAccount> retailRekeningen = new ArrayList<>();
 
 
-
     public RetailUser(String userName, String userPassword) {
         super(userName, userPassword);
     }
@@ -47,6 +46,24 @@ public class RetailUser extends User {
         this.dateOfBirth = dateOfBirth;
         this.email = email;
         this.role = role;
+    }
+
+
+    public RetailUser(int bsn, String firstName, String middleName, String lastName, String streetName, int houseNumber, String extension, String zipcode, String city, int phoneNumber, String dateOfBirth, String email, String role, ArrayList<BankAccount> retailRekeningen) {
+        this.bsn = bsn;
+        this.firstName = firstName;
+        this.middleName = middleName;
+        this.lastName = lastName;
+        this.streetName = streetName;
+        this.houseNumber = houseNumber;
+        this.extension = extension;
+        this.zipcode = zipcode;
+        this.city = city;
+        this.phoneNumber = phoneNumber;
+        this.dateOfBirth = dateOfBirth;
+        this.email = email;
+        this.role = role;
+        this.retailRekeningen = retailRekeningen;
     }
 
     public int getBsn() { return bsn;

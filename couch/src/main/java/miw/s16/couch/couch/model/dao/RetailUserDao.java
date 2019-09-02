@@ -8,5 +8,5 @@ import java.util.List;
 
 public interface RetailUserDao extends CrudRepository<RetailUser, Integer> {
 
-    public List<RetailUser> findByRetailUserName(String retailUserName);
+    public List<RetailUser> findByBsn(int bsn);
 }
