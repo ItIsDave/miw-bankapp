@@ -3,10 +3,7 @@ package miw.s16.couch.couch.model;
 import org.hibernate.annotations.Table;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 @Entity
 public class User {
@@ -16,9 +13,13 @@ public class User {
     private String userName;
     private String userPassword;
 
-    @OneToOne(mappedBy="RetailUser")
-    private RetailUser retailUser;
+   // @OneToOne(mappedBy = "user")
+  //  private RetailUser retailUser;
 
+    public User(String userName, String userPassword, RetailUser retailUser) {
+        this.userName = userName;
+        this.userPassword = userPassword;
+    }
 
     public User() {
         this("", "", 100);

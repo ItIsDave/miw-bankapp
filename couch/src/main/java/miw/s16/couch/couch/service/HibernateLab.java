@@ -1,7 +1,9 @@
 package miw.s16.couch.couch.service;
 
+import miw.s16.couch.couch.model.RetailUser;
 import miw.s16.couch.couch.model.User;
 import miw.s16.couch.couch.model.dao.UserDao;
+import org.hibernate.loader.plan.exec.internal.AbstractLoadQueryDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,6 +31,7 @@ public class HibernateLab {
             User Boudewijn = new User("Boudewijn", "1234", 13);
             User David = new User("David", "1234", 14);
             User Patrick = new User("Patrick", "1234", 15);
+            RetailUser TestUser = new RetailUser("Adamantia", "1234",  )
 
             System.out.println("Creating schema");
 

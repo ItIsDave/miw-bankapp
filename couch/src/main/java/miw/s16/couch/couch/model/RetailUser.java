@@ -1,5 +1,10 @@
 package miw.s16.couch.couch.model;
 
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+
+@Entity
 public class RetailUser extends User {
 
     private int bsn;
@@ -16,6 +21,7 @@ public class RetailUser extends User {
     private String email;
     private String role;
 
+
  //   public RetailUser(String userName, String userPassword, int userId, int bsn//, String firstName, String lastName,
  //                     //String adress, int houseNumber, String zipcode, String city,
  //                     //int phoneNumber, int datOfBirth, String email, String role
@@ -24,6 +30,20 @@ public class RetailUser extends User {
  //               //zipcode, city, phoneNumber, datOfBirth, email, role
  //   );
  //   }
+
+
+
+    public RetailUser() {
+    }
+
+    public RetailUser(String userName, String userPassword, int bsn) {
+        super(userName, userPassword);
+        this.bsn = bsn;
+    }
+
+    public RetailUser(String userName, String userPassword, int userId) {
+        super(userName, userPassword, userId);
+    }
 
     public RetailUser(String userName, String userPassword, int userId,
                       int bsn, String firstName, String middleName, String lastName,
