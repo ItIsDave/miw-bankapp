@@ -8,7 +8,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @EnableJpaRepositories("miw.s16.couch.couch")
 @EntityScan("miw.s16.couch.couch.model")
 @SpringBootApplication
-
 public class CouchApplication {
 
     public static void main(String[] args) {
