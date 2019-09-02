@@ -31,10 +31,8 @@ public class LoginController {
     @PostMapping(value="loginHandler")
     public String loginHandler(@ModelAttribute User user, Model model){
         System.out.println("Ingelogd lid: " + user.getUserName() + ", " + user.getUserPassword());
-
         // test user for login functionality
         User testUser = new User("Test", "1234", 140);
-
 //    Member m = MemberDao.getMemberByName(member.getName());
         if (testUser != null && testUser.getUserPassword().equals(user.getUserPassword())) {
             List<String> eventList = new ArrayList<>();
