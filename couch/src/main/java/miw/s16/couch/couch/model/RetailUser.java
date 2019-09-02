@@ -1,11 +1,11 @@
 package miw.s16.couch.couch.model;
-
 import miw.s16.couch.couch.model.entity.BankAccount;
 
 import javax.persistence.Entity;
+
 import java.util.ArrayList;
 
-//@Entity
+@Entity
 public class RetailUser extends User {
 
 
@@ -24,6 +24,7 @@ public class RetailUser extends User {
     private String role;
     private ArrayList <BankAccount> retailRekeningen = new ArrayList<>();
 
+
     public RetailUser(String userName, String userPassword, int userId,
                       int bsn, String firstName, String middleName, String lastName,
                       String streetName, int houseNumber,
@@ -31,6 +32,14 @@ public class RetailUser extends User {
                       String dateOfBirth, String email, String role) {
         this(userName, userPassword, userId, bsn,  firstName, "", lastName,
                 streetName, houseNumber, "", zipcode, city, phoneNumber, dateOfBirth, email, role);
+    }
+
+
+    public RetailUser() {
+    }
+
+    public RetailUser(String userName, String userPassword, int userId) {
+        super(userName, userPassword, userId);
     }
 
     public RetailUser(String userName, String userPassword, int userId,
