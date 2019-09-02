@@ -16,25 +16,17 @@ public class User {
    // @OneToOne(mappedBy = "user")
   //  private RetailUser retailUser;
 
-    public User(String userName, String userPassword, RetailUser retailUser) {
-        this.userName = userName;
-        this.userPassword = userPassword;
-    }
-
+    // empty constructor
     public User() {
-        this("", "", 100);
+       super();
     }
 
     public User(String userName, String userPassword) {
-        this(userName, userPassword, 0);
-    }
-
-    public User(String userName, String userPassword, int userId) {
         super();
         this.userName = userName;
         this.userPassword = userPassword;
-        this.userId = userId;
     }
+
 
     public String getUserName() {
         return userName;

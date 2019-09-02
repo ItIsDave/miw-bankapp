@@ -7,8 +7,6 @@ import java.util.ArrayList;
 
 @Entity
 public class RetailUser extends User {
-
-
     private int bsn;
     private String firstName;
     private String middleName;
@@ -25,29 +23,17 @@ public class RetailUser extends User {
     private ArrayList <BankAccount> retailRekeningen = new ArrayList<>();
 
 
-    public RetailUser(String userName, String userPassword, int userId,
-                      int bsn, String firstName, String middleName, String lastName,
-                      String streetName, int houseNumber,
-                      String zipcode, String city, int phoneNumber,
-                      String dateOfBirth, String email, String role) {
-        this(userName, userPassword, userId, bsn,  firstName, "", lastName,
-                streetName, houseNumber, "", zipcode, city, phoneNumber, dateOfBirth, email, role);
+
+    public RetailUser(String userName, String userPassword) {
+        super(userName, userPassword);
     }
 
-
-    public RetailUser() {
-    }
-
-    public RetailUser(String userName, String userPassword, int userId) {
-        super(userName, userPassword, userId);
-    }
-
-    public RetailUser(String userName, String userPassword, int userId,
+    public RetailUser(String userName, String userPassword,
                       int bsn, String firstName, String middleName, String lastName,
                       String streetName, int houseNumber, String extension,
                       String zipcode, String city, int phoneNumber,
                       String dateOfBirth, String email, String role) {
-        super(userName, userPassword, userId);
+        super(userName, userPassword);
         this.bsn = bsn;
         this.firstName = firstName;
         this.middleName = middleName;

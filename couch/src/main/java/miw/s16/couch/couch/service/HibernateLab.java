@@ -28,15 +28,15 @@ public class HibernateLab {
         // to ensure no data dublication
         if (userDao.findByUserPassword("1").size() == 0) {
             // user info for checking if DB is empty
-            User JohnDoe = new User("John Doe", "1", 10000);
+            User JohnDoe = new User("John Doe", "1");
             // Inserting user data
-            User Adamantia = new User("Adamantia", "1234", 10);
-            User Alet = new User("Alet", "1234", 11);
-            User Arnout = new User("Arnout", "1234", 12);
-            User Boudewijn = new User("Boudewijn", "1234", 13);
-            User David = new User("David", "1234", 14);
-            User Patrick = new User("Patrick", "1234", 15);
-            RetailUser Huub = new RetailUser("Huub", "1234", 200, 987654321, "Huub", "van", "HvA", "Kalverstraat", 25, "100LA", "Amsterdam", 690123456, "10 December 1910", "huub@hva.nl", "Retail");
+            User Adamantia = new User("Adamantia", "1234");
+            User Alet = new User("Alet", "1234");
+            User Arnout = new User("Arnout", "1234");
+            User Boudewijn = new User("Boudewijn", "1234");
+            User David = new User("David", "1234");
+            User Patrick = new User("Patrick", "1234");
+            RetailUser Huub = new RetailUser("Huub", "1234",  987654321, "Huub", "van", "HvA", "Kalverstraat", 25, "100LA", "Amsterdam", 690123456, "10 December 1910", "huub@hva.nl", "Retail");
 
             System.out.println("Creating schema");
 
