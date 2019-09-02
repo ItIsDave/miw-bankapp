@@ -1,8 +1,11 @@
 package miw.s16.couch.couch.model;
+import miw.s16.couch.couch.model.entity.BankAccount;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import miw.s16.couch.couch.model.entity.BankAccount;
+import java.util.ArrayList;
 
 @Entity
 public class RetailUser extends User {
@@ -20,6 +23,8 @@ public class RetailUser extends User {
     private int dateOfBirth;
     private String email;
     private String role;
+    private ArrayList <BankAccount> retailRekeningen;
+
 
 
  //   public RetailUser(String userName, String userPassword, int userId, int bsn//, String firstName, String lastName,
@@ -34,11 +39,6 @@ public class RetailUser extends User {
 
 
     public RetailUser() {
-    }
-
-    public RetailUser(String userName, String userPassword, int bsn) {
-        super(userName, userPassword);
-        this.bsn = bsn;
     }
 
     public RetailUser(String userName, String userPassword, int userId) {
@@ -168,6 +168,10 @@ public class RetailUser extends User {
     public void setRole(String role) {
         this.role = role;
     }
+
+    public ArrayList<BankAccount> getRetailRekeningen() { return retailRekeningen; }
+
+    public void setRetailRekeningen(ArrayList<BankAccount> retailRekeningen) { this.retailRekeningen = retailRekeningen; }
 }
 
 
