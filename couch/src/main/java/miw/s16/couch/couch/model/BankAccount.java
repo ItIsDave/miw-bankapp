@@ -1,4 +1,4 @@
-package miw.s16.couch.couch.model.entity;
+package miw.s16.couch.couch.model;
 
 public class BankAccount {
 

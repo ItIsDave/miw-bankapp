@@ -1,11 +1,16 @@
 package miw.s16.couch.couch.model;
-import miw.s16.couch.couch.model.entity.BankAccount;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.context.annotation.Configuration;
 
 import javax.persistence.Entity;
+import javax.persistence.Table;
 
 import java.util.ArrayList;
-
+@Configuration
+@EnableAutoConfiguration
 @Entity
+@Table( name = "RetailUser" )
+//@PrimaryKeyJoinColumn(name="userId")
 public class RetailUser extends User {
     private int bsn;
     private String firstName;
@@ -23,12 +28,16 @@ public class RetailUser extends User {
     private ArrayList <BankAccount> retailRekeningen = new ArrayList<>();
 
 
-    public RetailUser(String userName, String userPassword) {
+    public RetailUser(){
+
+    }
+
+    public RetailUser(String userName, String userPassword, int roleId) {
         super(userName, userPassword);
     }
 
-    public RetailUser(String userName, String userPassword,
-                      int bsn, String firstName, String middleName, String lastName,
+    public RetailUser(String userName, String userPassword, int bsn, String firstName,
+                      String middleName, String lastName,
                       String streetName, int houseNumber, String extension,
                       String zipcode, String city, int phoneNumber,
                       String dateOfBirth, String email, String role) {

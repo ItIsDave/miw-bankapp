@@ -1,8 +1,5 @@
 package miw.s16.couch.couch.model;
 
-import miw.s16.couch.couch.model.entity.BankAccount;
-import miw.s16.couch.couch.model.entity.Loan;
-
 import java.util.Date;
 
 //@Entity

@@ -20,9 +20,9 @@ public class PasswordValidator {
 
     public boolean validateMemberPassword(User formUser) {
         boolean loginOk;
-        List<User> dbUsers = userDao.findByUserName(formUser.getUserName());
-        if (dbUsers.size() == 1) {
-            User dbUser = dbUsers.get(0);
+        // user name is unique
+        User dbUser = userDao.findByUserName(formUser.getUserName());
+        if (dbUser != null) {
             loginOk = dbUser.getUserPassword().equals(formUser.getUserPassword());
         } else {
             loginOk = false;

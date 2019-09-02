@@ -36,7 +36,8 @@ public class HibernateLab {
             User Boudewijn = new User("Boudewijn", "1234");
             User David = new User("David", "1234");
             User Patrick = new User("Patrick", "1234");
-            RetailUser Huub = new RetailUser("Huub", "1234", 987654321, "Huub",  "van", "HvA", "Kalverstraat", 25, "B", "100LA", "Amsterdam", 690000000, "25-10-1900", "huub@hva.nl", "Retail");
+            RetailUser Bart = new RetailUser("Bart", "1234",  987654321, "Bart",  "", "Simpson", "Kalverstraat", 25, "B", "1011AB", "Amsterdam", 690000000, "25-10-1900", "bart@hva.nl", "Retail");
+            RetailUser Charlotte = new RetailUser("Charlotte", "1234", 987654322, "Charlotte",  "de", "Witte", "Keizersgracht", 40, "A", "1017DS", "Amsterdam", 690000001, "25-10-1999", "cdv@gmail.com", "Retail");
 
             System.out.println("Creating schema");
 
@@ -48,7 +49,8 @@ public class HibernateLab {
             userDao.save(Boudewijn);
             userDao.save(David);
             userDao.save(Patrick);
-            retailUserDao.save(Huub);
+            retailUserDao.save(Bart);
+            retailUserDao.save(Charlotte);
         }
 
     }

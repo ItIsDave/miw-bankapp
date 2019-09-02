@@ -1,32 +1,42 @@
 package miw.s16.couch.couch.model;
 
-import org.hibernate.annotations.Table;
+import javax.persistence.Table;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-
 import javax.persistence.*;
-
+@Configuration
+@EnableAutoConfiguration
 @Entity
+@Table( name = "User" )
 public class User {
+
     @Id
     @GeneratedValue
+    @Column(name = "userId")
     private int userId;
+
+    @Column(nullable = false, unique = true)
     private String userName;
-    private String userPassword;
-    private int roleId;
+    private String userPassword;;
 
     // empty constructor
     public User() {
        super();
     }
 
-    //roleId is 1, 2 oe 3 depending if user is a RetailUser, SMEUser or BankUser respectively
-    public User(String userName, String userPassword, int roleId) {
+
+    public User(String userName, String userPassword) {
         super();
         this.userName = userName;
         this.userPassword = userPassword;
-        this.roleId = roleId;
-    }
 
+    }
 
     public String getUserName() {
         return userName;
@@ -52,11 +62,4 @@ public class User {
         this.userId = userId;
     }
 
-    public int getRoleId() {
-        return roleId;
-    }
-
-    public void setRoleId(int roleId) {
-        this.roleId = roleId;
-    }
 }
