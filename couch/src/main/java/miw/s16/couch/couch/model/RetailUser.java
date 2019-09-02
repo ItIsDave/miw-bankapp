@@ -2,9 +2,12 @@ package miw.s16.couch.couch.model;
 
 import miw.s16.couch.couch.model.entity.BankAccount;
 
+import javax.persistence.Entity;
 import java.util.ArrayList;
 
+//@Entity
 public class RetailUser extends User {
+
 
     private int bsn;
     private String firstName;
