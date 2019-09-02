@@ -12,16 +12,19 @@ public class User {
     private int userId;
     private String userName;
     private String userPassword;
+    private int roleId;
 
     // empty constructor
     public User() {
        super();
     }
 
-    public User(String userName, String userPassword) {
+    //roleId is 1, 2 oe 3 depending if user is a RetailUser, SMEUser or BankUser respectively
+    public User(String userName, String userPassword, int roleId) {
         super();
         this.userName = userName;
         this.userPassword = userPassword;
+        this.roleId = roleId;
     }
 
 
@@ -47,5 +50,13 @@ public class User {
 
     public void setUserId(int userId) {
         this.userId = userId;
+    }
+
+    public int getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(int roleId) {
+        this.roleId = roleId;
     }
 }

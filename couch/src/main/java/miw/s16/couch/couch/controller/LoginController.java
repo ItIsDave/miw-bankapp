@@ -27,8 +27,10 @@ public class LoginController {
     public String indexHandler(Model model){
        lab.dbinit();
        User user = new User();
-        model.addAttribute("user", user);
-        return "home";
+       RetailUser retailUser = new RetailUser(user.getUserName(), user.getUserPassword());
+       model.addAttribute("user", user);
+       model.addAttribute("retailUser", retailUser);
+       return "home";
     }
 
 
