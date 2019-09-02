@@ -1,58 +1,16 @@
 package miw.s16.couch.couch.model;
 
+import miw.s16.couch.couch.model.entity.BankAccount;
+import miw.s16.couch.couch.model.entity.Loan;
+
 import java.util.Date;
-
-//inner class until class BankAccount ready
- class BankAccount {
-    private String IBAN;
-    private double balance;
-    private static final String DEFAULT_IBAN = "NLxx XXXX 000x xxxx xx";
-
-     public BankAccount() {
-         this(DEFAULT_IBAN);
-     }
-
-    public BankAccount(String IBAN) {
-        this(IBAN, 0);
-    }
-
-     public BankAccount(String IBAN, double balance) {
-         this.IBAN = IBAN;
-         this.balance = balance;
-     }
-
-     public String getIBAN() {
-         return IBAN;
-     }
-
-    public double getBalance() {
-        return balance;
-    }
-
-    public void setBalance(double balance) {
-        this.balance = balance;
-    }
-
-    @Override
-    public String toString() {
-        return "BankAccount{" +
-                "IBAN='" + IBAN + '\'' +
-                ", balance=" + balance +
-                '}';
-    }
-}
-
-//idem
-class Loan{
-
-}
 
 //@Entity
 public class Transaction //implements Serializable
  {
 
 //@Id
-    //@GeneratedValue
+//@GeneratedValue
   private int idTransaction;
   private String description;
   private double amount;
@@ -60,9 +18,9 @@ public class Transaction //implements Serializable
   private Date transactionDate;
 //@ManyToOne
   private BankAccount from;//getIBAN, can be internal bank account
-    //@ManyToOne
+//@ManyToOne
   private BankAccount to;//getIBAN, can be internal bank account
-     //@ManyToOne
+//@ManyToOne
      private Loan loan;
      private boolean isPin;
 
@@ -71,7 +29,7 @@ public class Transaction //implements Serializable
     }
 
      public Transaction(int idTransaction, String description, double amount, Date transactionDate, String from, String to, Loan loan, boolean isPin) {
-         this(idTransaction, description, amount, transactionDate, new BankAccount(from), new BankAccount(to), loan, isPin);
+         this(idTransaction, description, amount, transactionDate, new BankAccount(from, 0), new BankAccount(to, 0), loan, isPin);
      }
 
     public Transaction(int idTransaction, String description, double amount, Date transactionDate, BankAccount from, BankAccount to, Loan loan, boolean isPin) {
@@ -90,10 +48,6 @@ public class Transaction //implements Serializable
      public int getIdTransaction() {
          return idTransaction;
      }
-
-//     public void setIdTransaction(long idTransaction) {
-//         this.idTransaction = idTransaction;
-//     }
 
      public String getDescription() {
          return description;

@@ -3,13 +3,16 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Login</title>
+    <title>Index</title>
 </head>
 <body>
-<h1>Login bij Couchbank</h1>
-
+<h1>Welkom bij Couch Bank</h1>
+<br>
+<h3>Login</h3>
 <form action="#" th:action="@{loginHandler}" th:object="${user}" method="post">
     <table>
+
+        <br>
         <tr>
             <td>Naam:</td>
             <td><input type="text" th:field="*{userName}"/></td>
@@ -26,6 +29,9 @@
         </tr>
     </table>
 </form>
-Ga <a href="/">terug</a>
+</form>
+<h3>Nieuw Klant </h3>
+Klik <a href="newUser">hier</a>  voor een account te maken
+</form>
 </body>
 </html>
