@@ -1,18 +1,28 @@
 package miw.s16.couch.couch.model;
 
+import org.hibernate.annotations.Table;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity
 public class User {
-
+    @Id
+    @GeneratedValue
+    private int userId;
     private String userName;
     private String userPassword;
-    private int userId;
-
 
 
     public User() {
         this("", "", 100);
     }
 
+    public User(String userName, String userPassword) {
+        this(userName, userPassword, 0);
+    }
 
     public User(String userName, String userPassword, int userId) {
         super();
