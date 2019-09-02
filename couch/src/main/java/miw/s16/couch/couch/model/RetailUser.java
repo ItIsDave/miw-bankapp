@@ -3,13 +3,16 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Configuration;
 
 import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
 import java.util.ArrayList;
-@Configuration
-@EnableAutoConfiguration
+//@Configuration
+//@EnableAutoConfiguration
 @Entity
-@Table( name = "RetailUser" )
+//@Table( name = "RetailUser" )
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 //@PrimaryKeyJoinColumn(name="userId")
 public class RetailUser extends User {
     private int bsn;
