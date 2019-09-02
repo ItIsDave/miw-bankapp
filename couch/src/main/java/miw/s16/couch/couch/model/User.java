@@ -13,7 +13,7 @@ import javax.persistence.*;
 //@Configuration
 //@EnableAutoConfiguration
 @Entity
-
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class User {
 
     @Id

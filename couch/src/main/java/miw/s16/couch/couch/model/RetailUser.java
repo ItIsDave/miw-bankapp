@@ -12,7 +12,6 @@ import java.util.ArrayList;
 //@EnableAutoConfiguration
 @Entity
 //@Table( name = "RetailUser" )
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 //@PrimaryKeyJoinColumn(name="userId")
 public class RetailUser extends User {
     private int bsn;
