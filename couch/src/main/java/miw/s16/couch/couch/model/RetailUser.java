@@ -1,41 +1,58 @@
 package miw.s16.couch.couch.model;
+import miw.s16.couch.couch.model.entity.BankAccount;
 
+import javax.persistence.Entity;
+
+import java.util.ArrayList;
+
+@Entity
 public class RetailUser extends User {
+
 
     private int bsn;
     private String firstName;
     private String middleName;
     private String lastName;
-    private String adress;
+    private String streetName;
     private int houseNumber;
     private String extension;
     private String zipcode;
     private String city;
     private int phoneNumber;
-    private int dateOfBirth;
+    private String dateOfBirth;
     private String email;
     private String role;
+    private ArrayList <BankAccount> retailRekeningen = new ArrayList<>();
 
- //   public RetailUser(String userName, String userPassword, int userId, int bsn//, String firstName, String lastName,
- //                     //String adress, int houseNumber, String zipcode, String city,
- //                     //int phoneNumber, int datOfBirth, String email, String role
- //                     ) {
- //       this(userName, userPassword, userId, bsn//, firstName, "", lastName, adress,houseNumber, "",
- //               //zipcode, city, phoneNumber, datOfBirth, email, role
- //   );
- //   }
 
     public RetailUser(String userName, String userPassword, int userId,
                       int bsn, String firstName, String middleName, String lastName,
-                      String adress, int houseNumber, String extension,
+                      String streetName, int houseNumber,
                       String zipcode, String city, int phoneNumber,
-                      int dateOfBirth, String email, String role) {
+                      String dateOfBirth, String email, String role) {
+        this(userName, userPassword, userId, bsn,  firstName, "", lastName,
+                streetName, houseNumber, "", zipcode, city, phoneNumber, dateOfBirth, email, role);
+    }
+
+
+    public RetailUser() {
+    }
+
+    public RetailUser(String userName, String userPassword, int userId) {
+        super(userName, userPassword, userId);
+    }
+
+    public RetailUser(String userName, String userPassword, int userId,
+                      int bsn, String firstName, String middleName, String lastName,
+                      String streetName, int houseNumber, String extension,
+                      String zipcode, String city, int phoneNumber,
+                      String dateOfBirth, String email, String role) {
         super(userName, userPassword, userId);
         this.bsn = bsn;
         this.firstName = firstName;
         this.middleName = middleName;
         this.lastName = lastName;
-        this.adress = adress;
+        this.streetName = streetName;
         this.houseNumber = houseNumber;
         this.extension = extension;
         this.zipcode = zipcode;
@@ -77,12 +94,12 @@ public class RetailUser extends User {
         this.lastName = lastName;
     }
 
-    public String getAdress() {
-        return adress;
+    public String getStreetName() {
+        return streetName;
     }
 
-    public void setAdress(String adress) {
-        this.adress = adress;
+    public void setStreetName(String streetName) {
+        this.streetName = streetName;
     }
 
     public int getHouseNumber() {
@@ -125,11 +142,11 @@ public class RetailUser extends User {
         this.phoneNumber = phoneNumber;
     }
 
-    public int getDateOfBirth() {
+    public String getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(int dateOfBirth) {
+    public void setDateOfBirth(String dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
@@ -148,6 +165,13 @@ public class RetailUser extends User {
     public void setRole(String role) {
         this.role = role;
     }
-}
 
+    public ArrayList<BankAccount> getRetailRekeningen() { return retailRekeningen; }
+
+    public void setRetailRekeningen(ArrayList<BankAccount> retailRekeningen) { this.retailRekeningen = retailRekeningen; }
+
+    public void addBankAccount(BankAccount bankAccount){
+      retailRekeningen.add(bankAccount);
+    }
+}
 
