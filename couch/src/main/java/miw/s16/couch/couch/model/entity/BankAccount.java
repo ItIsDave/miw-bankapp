@@ -47,7 +47,7 @@ public class BankAccount {
     //setter for changes in balance, transactions and retailusers
     public void setBalance(double balance) { this.balance = balance; }
 
-//methode for generating IBAN
+//method for generating IBAN
     public static long generateAccount() {
         final long MAX_ACC_NR = 999999999L;
         final long MIN_ACC_NR = 0L;
