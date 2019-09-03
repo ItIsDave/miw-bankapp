@@ -2,6 +2,8 @@ package miw.s16.couch.couch.service;
 
 import miw.s16.couch.couch.model.RetailUser;
 import miw.s16.couch.couch.model.User;
+import miw.s16.couch.couch.model.dao.BankAccountDao;
+import miw.s16.couch.couch.model.dao.RetailUserDao;
 import miw.s16.couch.couch.model.dao.UserDao;
 import org.hibernate.loader.plan.exec.internal.AbstractLoadQueryDetails;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,10 @@ public class HibernateLab {
 
     @Autowired
     UserDao userDao;
+    @Autowired
+    RetailUserDao retailUserDao;
+    @Autowired
+    BankAccountDao bankAccountDao;
 
     public HibernateLab() {
         super();
@@ -28,7 +34,7 @@ public class HibernateLab {
             User Adamantia = new User("Adamantia", "1234", 10);
             User Alet = new User("Alet", "1234", 11);
             User Arnout = new User("Arnout", "1234", 12);
-            User Boudewijn = new User("Boudewijn", "1234", 13);
+            RetailUser Boudewijn = new RetailUser("Boudewijn", "1234", 13);
             User David = new User("David", "1234", 14);
             User Patrick = new User("Patrick", "1234", 15);
 
@@ -39,7 +45,7 @@ public class HibernateLab {
             userDao.save(Adamantia);
             userDao.save(Alet);
             userDao.save(Arnout);
-            userDao.save(Boudewijn);
+            retailUserDao.save(Boudewijn);
             userDao.save(David);
             userDao.save(Patrick);
         }

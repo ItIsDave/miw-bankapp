@@ -22,7 +22,7 @@ public class RetailUser extends User {
     private String dateOfBirth;
     private String email;
     private String role;
-    private ArrayList <BankAccount> retailRekeningen = new ArrayList<>();
+//    private ArrayList <BankAccount> retailRekeningen = new ArrayList<>();
 
 
     public RetailUser(String userName, String userPassword, int userId,
@@ -166,12 +166,12 @@ public class RetailUser extends User {
         this.role = role;
     }
 
-    public ArrayList<BankAccount> getRetailRekeningen() { return retailRekeningen; }
+//    public ArrayList<BankAccount> getRetailRekeningen() { return retailRekeningen; }
 
-    public void setRetailRekeningen(ArrayList<BankAccount> retailRekeningen) { this.retailRekeningen = retailRekeningen; }
+//    public void setRetailRekeningen(ArrayList<BankAccount> retailRekeningen) { this.retailRekeningen = retailRekeningen; }
 
-    public void addBankAccount(BankAccount bankAccount){
-      retailRekeningen.add(bankAccount);
-    }
+//    public void addBankAccount(BankAccount bankAccount){
+//      retailRekeningen.add(bankAccount);
+//    }
 }
 
