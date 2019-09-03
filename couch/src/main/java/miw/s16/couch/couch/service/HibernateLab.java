@@ -3,6 +3,8 @@ package miw.s16.couch.couch.service;
 import miw.s16.couch.couch.model.BankAccount;
 import miw.s16.couch.couch.model.RetailUser;
 import miw.s16.couch.couch.model.User;
+
+import miw.s16.couch.couch.model.dao.BankAccountDao;
 import miw.s16.couch.couch.model.dao.RetailUserDao;
 import miw.s16.couch.couch.model.dao.UserDao;
 import org.hibernate.loader.plan.exec.internal.AbstractLoadQueryDetails;
@@ -16,9 +18,10 @@ public class HibernateLab {
 
     @Autowired
     UserDao userDao;
-
     @Autowired
     RetailUserDao retailUserDao;
+    @Autowired
+    BankAccountDao bankAccountDao;
 
 
     public HibernateLab() {
@@ -31,6 +34,7 @@ public class HibernateLab {
             // user info for checking if DB is empty
             User JohnDoe = new User("John Doe", "1");
             // Inserting user data
+
             User Adamantia = new User("Adamantia", "1234");
             User Alet = new User("Alet", "1234");
             User Arnout = new User("Arnout", "1234");
@@ -39,6 +43,8 @@ public class HibernateLab {
             User Patrick = new User("Patrick", "1234");
             RetailUser Bart = new RetailUser("Bart", "1234",  987654321, "Bart",  "", "Simpson", "Kalverstraat", 25, "B", "1011AB", "Amsterdam", 690000000, "25-10-1900", "bart@hva.nl", "Retail");
             RetailUser Charlotte = new RetailUser("Charlotte", "1234", 987654322, "Charlotte",  "de", "Witte", "Keizersgracht", 40, "A", "1017DS", "Amsterdam", 690000001, "25-10-1999", "cdv@gmail.com", "Retail");
+
+
 
             System.out.println("Creating schema");
 
