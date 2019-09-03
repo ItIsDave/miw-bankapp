@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class HibernateLab {
@@ -42,14 +44,20 @@ public class HibernateLab {
             User David = new User("David", "1234");
             User Patrick = new User("Patrick", "1234");
             RetailUser Bart = new RetailUser("Bart", "1234",  987654321, "Bart",  "", "Simpson", "Kalverstraat", 25, "B", "1011AB", "Amsterdam", 690000000, "25-10-1900", "bart@hva.nl", "Retail");
-            RetailUser Charlotte = new RetailUser("Charlotte", "1234", 987654322, "Charlotte",  "de", "Witte", "Keizersgracht", 40, "A", "1017DS", "Amsterdam", 690000001, "25-10-1999", "cdv@gmail.com", "Retail");
+            //debugging
+            ArrayList<String> accounts = new ArrayList<>();
+            RetailUser Charlotte = new RetailUser("Charlotte", "1234", 987654322,
+                    "Charlotte",  "de", "Witte", "Keizersgracht", 40, "A", "1017DS", "Amsterdam", 690000001, "25-10-1999", "cdv@gmail.com", "Retail", accounts);
 
 
 
             System.out.println("Creating schema");
 
-            BankAccount account1 = new BankAccount("NL123445t345", 100.00);
-            Charlotte.addBankAccount(account1);
+            //BankAccount account1 = new BankAccount("NL123445t345", 100.00);
+          //  Charlotte.addBankAccount("NL123445t345");
+
+            accounts.add("NLtest1");
+            accounts.add("NLtest2");
 
 
             // saving to the db

@@ -12,6 +12,6 @@ import java.util.List;
 
 public interface BankAccountDao extends CrudRepository<BankAccount, Integer> {
 
-    public List<BankAccount> findByIBAN(String iBAN);
+  //  public List<BankAccount> findByIBAN(String IBAN);
 
 }

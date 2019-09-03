@@ -22,7 +22,7 @@ public class BankAccount {
 @Id
 @GeneratedValue
     private int BankAccountId;
-    private String iBAN;
+    private String IBAN;
     private double balance;
 
 //    @OneToMany
@@ -33,15 +33,15 @@ public class BankAccount {
     //constructors
     public BankAccount () {}
 
-    public BankAccount(String iBAN, double balance) {
-        this.iBAN = iBAN;
+    public BankAccount(String IBAN, double balance) {
+        this.IBAN = IBAN;
         this.balance = balance;
 //        this.transactions = new ArrayList<>();
 //        this.retailusers = new ArrayList<>();
     }
 
     //getters
-    public String getIBAN() { return iBAN; }
+    public String getIBAN() { return IBAN; }
     public double getBalance() {return balance;}
 //    public void addTransactions (Transaction transaction) {transactions.add(transaction);}
 //    public void addRetailUser (RetailUser retailuser) {retailusers.add(retailuser);}
@@ -88,9 +88,9 @@ public class BankAccount {
         return iban.toString();
     }
 
-    @Override
-    public String toString() {
-        return iBAN;
-    }
+//    @Override
+//    public String toString() {
+//        return iBAN;
+//    }
 
 }

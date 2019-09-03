@@ -27,7 +27,9 @@ public class RetailUser extends User {
     private String dateOfBirth;
     private String email;
     private String role;
-    private ArrayList <BankAccount> retailRekeningen = new ArrayList<>();
+    // for debugging
+    private ArrayList<String> retailRekeningen = new ArrayList<>();
+    //private ArrayList <BankAccount> retailRekeningen = new ArrayList<>();
 
 
     public RetailUser(){
@@ -60,22 +62,23 @@ public class RetailUser extends User {
     }
 
 
-//    public RetailUser(int bsn, String firstName, String middleName, String lastName, String streetName, int houseNumber, String extension, String zipcode, String city, int phoneNumber, String dateOfBirth, String email, String role, ArrayList<BankAccount> retailRekeningen) {
-//        this.bsn = bsn;
-//        this.firstName = firstName;
-//        this.middleName = middleName;
-//        this.lastName = lastName;
-//        this.streetName = streetName;
-//        this.houseNumber = houseNumber;
-//        this.extension = extension;
-//        this.zipcode = zipcode;
-//        this.city = city;
-//        this.phoneNumber = phoneNumber;
-//        this.dateOfBirth = dateOfBirth;
-//        this.email = email;
-//        this.role = role;
-//        this.retailRekeningen = retailRekeningen;
-//    }
+    public RetailUser(String userName, String userPassword, int bsn, String firstName, String middleName, String lastName, String streetName, int houseNumber, String extension, String zipcode, String city, int phoneNumber, String dateOfBirth, String email, String role, ArrayList<String> retailRekeningen) {
+        super(userName, userPassword);
+        this.bsn = bsn;
+        this.firstName = firstName;
+        this.middleName = middleName;
+        this.lastName = lastName;
+        this.streetName = streetName;
+        this.houseNumber = houseNumber;
+        this.extension = extension;
+        this.zipcode = zipcode;
+        this.city = city;
+        this.phoneNumber = phoneNumber;
+        this.dateOfBirth = dateOfBirth;
+        this.email = email;
+        this.role = role;
+        this.retailRekeningen = retailRekeningen;
+    }
 
     public int getBsn() { return bsn;
     }
@@ -180,12 +183,20 @@ public class RetailUser extends User {
         this.role = role;
     }
 
-    public ArrayList<BankAccount> getRetailRekeningen() { return retailRekeningen; }
+ //   public ArrayList<BankAccount> getRetailRekeningen() { return retailRekeningen; }
 
-    public void setRetailRekeningen(ArrayList<BankAccount> retailRekeningen) { this.retailRekeningen = retailRekeningen; }
+//    public void setRetailRekeningen(ArrayList<BankAccount> retailRekeningen) { this.retailRekeningen = retailRekeningen; }
+//
+//    public void addBankAccount(BankAccount bankAccount){
+//      retailRekeningen.add(bankAccount);
+//    }
 
-    public void addBankAccount(BankAccount bankAccount){
-      retailRekeningen.add(bankAccount);
+    // debugging
+    public ArrayList<String> getRetailRekeningen() { return retailRekeningen; }
+    public void setRetailRekeningen(ArrayList<String> retailRekeningen) { this.retailRekeningen = retailRekeningen; }
+
+    public void addBankAccount(String bankAccount){
+        retailRekeningen.add(bankAccount);
     }
 }
 
