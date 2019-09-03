@@ -1,5 +1,8 @@
 package miw.s16.couch.couch.model;
 
+import javax.persistence.Entity;
+
+@Entity
 public class BankAccount {
 
     //coding by PvdH

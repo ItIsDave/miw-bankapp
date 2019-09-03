@@ -1,5 +1,6 @@
 package miw.s16.couch.couch.service;
 
+import miw.s16.couch.couch.model.BankAccount;
 import miw.s16.couch.couch.model.RetailUser;
 import miw.s16.couch.couch.model.User;
 import miw.s16.couch.couch.model.dao.RetailUserDao;
@@ -40,6 +41,10 @@ public class HibernateLab {
             RetailUser Charlotte = new RetailUser("Charlotte", "1234", 987654322, "Charlotte",  "de", "Witte", "Keizersgracht", 40, "A", "1017DS", "Amsterdam", 690000001, "25-10-1999", "cdv@gmail.com", "Retail");
 
             System.out.println("Creating schema");
+
+            BankAccount account1 = new BankAccount("NL123445t345", 100.00);
+            Charlotte.addBankAccount(account1);
+
 
             // saving to the db
             userDao.save(JohnDoe);
