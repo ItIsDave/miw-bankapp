@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.security.Principal;
 
 @Controller
@@ -30,14 +31,17 @@ public class PageController<retailUser> {
     Transaction transaction = new Transaction();
 
     @PostMapping(value = "transactionRequest")
-    public String pageHandler(@ModelAttribute User user, Model model) {
+    public String pageHandler(@ModelAttribute User user, Model model, HttpServletRequest request) {
+        HttpSession session = request.getSession (true);
+        String userName = (String) session.getAttribute("userName");
+        int userId = (int) session.getAttribute("userId");
         System.out.println("datum - tijd is: " + transaction.getTransactionDate().toString());
         model.addAttribute("transaction", transaction);
         model.addAttribute("date_time", transaction.getTransactionDate().toString());
         transaction.setFrom(bankaccount.getIBAN());
         model.addAttribute("bankaccountFrom", transaction.getFrom());
         //if (principal != null) {
-           model.addAttribute("userName", user.getUserName());
+           model.addAttribute("userName", userName);
             System.out.println("Voordat transaction is gevuld is transaction: " +
                     transaction);
            return "transaction";

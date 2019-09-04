@@ -10,4 +10,6 @@ public interface UserDao extends CrudRepository<User, Integer> {
 
     public User findByUserName(String userName); // username must be unique
     public List<User> findByUserPassword(String userPassword);
+
+
 }

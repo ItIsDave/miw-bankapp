@@ -9,9 +9,8 @@ import java.util.*;
 @Entity
 
 public class BankAccount {
-
-@Id
-@GeneratedValue
+    @Id
+    @GeneratedValue
     private int BankAccountId;
     private String IBAN;
     private double balance;

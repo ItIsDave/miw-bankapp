@@ -9,6 +9,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 @Controller
 public class LoginController {
 
@@ -17,6 +20,7 @@ public class LoginController {
 
     @Autowired
     HibernateLab lab;
+
 
     @GetMapping
     public String indexHandler(Model model){
@@ -31,9 +35,12 @@ public class LoginController {
 
     // depending on user type, user goes to specific overview page
     @PostMapping(value="overview")
-    public String loginHandler(@ModelAttribute User user, Model model){
+    public String loginHandler(@ModelAttribute User user, Model model, HttpServletRequest request){
       boolean loginOk = validator.validateMemberPassword(user);
         if (loginOk) {
+            HttpSession session = request.getSession (true);
+            session.setAttribute("userName", user.getUserName());
+            session.setAttribute("userId", user.getUserId());
             System.out.println("de naam van de current user is: " + user.getUserName() );
             model.addAttribute("userName", user.getUserName());
             model.addAttribute("bankAccount", "NL123456");

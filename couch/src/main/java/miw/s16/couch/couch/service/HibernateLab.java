@@ -34,7 +34,7 @@ public class HibernateLab {
     }
 
     public void dbinit() {
-        // to ensure no data dublication
+        // to ensure no data duplication
         if (userDao.findByUserPassword("1").size() == 0) {
             // user info for checking if DB is empty
             User johnDoe = new User("John Doe", "1");
@@ -81,10 +81,8 @@ public class HibernateLab {
             bankAccountDao.save(account2);
             bankAccountDao.save(account3);
 //
-//            charlotte.getRetailRekeningen().add(account1);
-//            charlotte.getRetailRekeningen().add(account2);
-//            bart.getRetailRekeningen().add(account3);
-//
+//         charlotte.addBankAccount(account1);
+//         bart.addBankAccount(account2);
 //            account1.getRetailusers().add(charlotte);
 //            account2.getRetailusers().add(charlotte);
 
