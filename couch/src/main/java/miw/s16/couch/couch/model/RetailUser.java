@@ -25,6 +25,10 @@ public class RetailUser extends User {
  //   );
  //   }
 
+
+    public RetailUser() {
+    }
+
     public RetailUser(String userName, String userPassword, int userId,
                       int bsn, String firstName, String middleName, String lastName,
                       String adress, int houseNumber, String extension,

@@ -22,7 +22,6 @@ public class LoginController {
     @Autowired
     HibernateLab lab;
 
-
     @GetMapping
     public String indexHandler(Model model){
        lab.dbinit();
@@ -30,7 +29,6 @@ public class LoginController {
         model.addAttribute("user", user);
         return "home";
     }
-
 
     @PostMapping(value="loginHandler")
     public String loginHandler(@ModelAttribute User user, Model model){
@@ -43,4 +41,8 @@ public class LoginController {
        return"login_failed";
     }
 
+    @GetMapping(value = "newUser")
+    public String newUserHandler(){
+        return "new_user_select_type";
+    }
 }
