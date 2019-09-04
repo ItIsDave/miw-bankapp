@@ -14,8 +14,7 @@ public class TransactionController {
 
     @PostMapping(value="transactionHandler")
     public String transactionHandler(@ModelAttribute Transaction transaction,Model model) {
-        model.addAttribute("bankAccountTo", transaction.getTo());
-        System.out.println("De nu ingevulde transactie bevat IBAN naar: " + transaction.getTo());
+        System.out.println("De transactie is ingevuld: " + transaction.toString());
         return "successful_entry";
     }
 
