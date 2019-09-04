@@ -14,6 +14,7 @@ public class TransactionController {
 
     @PostMapping(value="transactionHandler")
     public String transactionHandler() {
+        System.out.println("De nu ingevulde transactie bevat: " );
         return "successful_entry";
     }
 

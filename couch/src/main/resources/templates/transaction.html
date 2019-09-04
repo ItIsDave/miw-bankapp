@@ -7,31 +7,30 @@
 <body>
 <h1>Welkom <span th:text="${name}"></span></h1>
 <h2>IBAN <span th:text="${bankaccount}"></span></h2>
-<h2>Transaction details</h2>
+<h2>Transactie details</h2>
 <form action="#" th:action="@{transactionHandler}" th:object="${transaction}" method="post">
-<!--    <table>-->
+    <table>
+        <tr>
+            <td>transactie datum-tijd:</td>
+            <td><span th:text="${date_time}"></span></td>
+        </tr>
+        <tr>
+            <td>van IBAN:</td>
+            <td><span th:text="${bankaccount}"></span></td>
+        </tr>
+            <td>bedrag in euro's</td>
+            <td><input type="text" th:field="*{amount}"/></td>
+        <tr>
+        <!--<tr>
+            <td>aan IBAN:</td>
+            <td><input type="text" th:field="*{to}"/></td>
+        </tr>-->
+        <tr>
+            <td>omschrijving:</td>
+            <td><input type="text" th:field="*{description}"/></td>
+        </tr>
 <!--        <tr>-->
-<!--            <td>transactionDate:</td>-->
-<!--            <td><input type="text" th:field="*{transactionDate}"/></td>-->
-<!--        </tr>-->
-<!--        <tr>-->
-<!--            <td>from:</td>-->
-<!--            <td><input type="text" th:field="*{from}"/></td>-->
-<!--        </tr>-->
-<!--        <tr>-->
-<!--            <td>to:</td>-->
-<!--            <td><input type="text" th:field="*{to}"/></td>-->
-<!--        </tr>-->
-<!--        <tr>-->
-<!--            <td>amount:</td>-->
-<!--            <td><input type="text" th:field="*{amount}"/></td>-->
-<!--        </tr>-->
-<!--        <tr>-->
-<!--            <td>description:</td>-->
-<!--            <td><input type="text" th:field="*{description}"/></td>-->
-<!--        </tr>-->
-<!--        <tr>-->
-<!--            <td>loan (if any):</td>-->
+<!--            <td>loan (indien van toepassing):</td>-->
 <!--            <td><input type="text" th:field="*{loan}"/></td>-->
 <!--        </tr>-->
 <!--        <tr>-->
@@ -39,7 +38,7 @@
 <!--            <td><input type="text" th:field="*{isPin}"/></td>-->
 <!--        </tr>-->
 <!--        <tr>-->
-            <td><input type="submit" value="Confirm"></td>
+            <td><input type="submit" value="Bevestig"></td>
         </tr>
     </table>
 </form>

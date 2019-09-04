@@ -37,6 +37,7 @@ public class LoginController {
         model.addAttribute("userName", user.getUserName());
       boolean loginOk = validator.validateMemberPassword(user);
         if (loginOk) {
+            System.out.println("de naam van de current user is: " + user.getUserName() );
             model.addAttribute("userName", user.getUserName());
            return "personal_page";
        }
