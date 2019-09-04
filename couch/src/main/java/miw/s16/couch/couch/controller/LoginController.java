@@ -21,7 +21,7 @@ public class LoginController {
     @Autowired
     HibernateLab lab;
 
-
+    // index page
     @GetMapping
     public String indexHandler(Model model){
        lab.dbinit();
@@ -32,8 +32,7 @@ public class LoginController {
        return "index";
     }
 
-
-    // depending on user type, user goes to specific overview page
+    // user log in & user validation and direction to personal page
     @PostMapping(value="overview")
     public String loginHandler(@ModelAttribute User user, Model model, HttpServletRequest request){
       boolean loginOk = validator.validateMemberPassword(user);
@@ -47,6 +46,16 @@ public class LoginController {
            return "personal_page";
        }
        return"login_failed";
+    }
+
+    // user returns to personal page
+    @GetMapping(value = "overview")
+    public String overviewHandler(@ModelAttribute User user, Model model, HttpServletRequest request) {
+        HttpSession session = request.getSession (true);
+        String userName = (String) session.getAttribute("userName");
+        session.setAttribute("userName", userName);
+        model.addAttribute("userName", userName);
+        return "personal_page";
     }
 
 

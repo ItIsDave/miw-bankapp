@@ -7,7 +7,6 @@ import java.util.*;
 //coding by PvdH
 
 @Entity
-
 public class BankAccount {
     @Id
     @GeneratedValue

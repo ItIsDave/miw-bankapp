@@ -48,9 +48,11 @@ public class HibernateLab {
             User patrick = new User("Patrick", "1234");
 
             // Creating Bank account data
-            BankAccount account1 = new BankAccount("NL10100101", 8000.00);
-            BankAccount account2 = new BankAccount("NL100101012", 1000.00);
-            BankAccount account3 = new BankAccount("NL10019128", 50000);
+            BankAccount account1 = new BankAccount("NL10COUC0123456790", 80000.00);
+            BankAccount account2 = new BankAccount("NL10COUC0223456791", 10000.00);
+            BankAccount account3 = new BankAccount("NL10COUC0323456792", 50000.00);
+            BankAccount account4 = new BankAccount("NL10COUC0423456793", 80000.00);
+            BankAccount account5 = new BankAccount("NL10COUC0523456794", 100000.00);
 
             // Creating Retail user data
             RetailUser bart = new RetailUser("Bart", "1234",  987654321, "Bart",
@@ -61,8 +63,9 @@ public class HibernateLab {
             RetailUser karin = new RetailUser("Karin", "1234", 987654325,
                     "Karin",  "van", "Dijk", "Prinsengracht", 200,
                     "A", "1017KS", "Amsterdam", "690000801", "25-10-1990", "kvd@gmail.com", "Retail");
-
-
+            RetailUser jan = new RetailUser("Jan", "1234", 987654326,
+                    "Jan",  "", "Bakken", "Herengracht", 100,
+                    "C", "1018AC", "Amsterdam", "6901230801", "25-10-1989", "jbakker@gmail.com", "Retail");
 
 
             // confirmation that DB is running
@@ -80,15 +83,12 @@ public class HibernateLab {
             bankAccountDao.save(account1);
             bankAccountDao.save(account2);
             bankAccountDao.save(account3);
-//
-//         charlotte.addBankAccount(account1);
-//         bart.addBankAccount(account2);
-//            account1.getRetailusers().add(charlotte);
-//            account2.getRetailusers().add(charlotte);
+
 
             retailUserDao.save(bart);
             retailUserDao.save(karin);
             retailUserDao.save(charlotte);
+            retailUserDao.save(jan);
 
 
 
