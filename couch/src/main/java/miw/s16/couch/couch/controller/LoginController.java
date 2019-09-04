@@ -25,13 +25,12 @@ public class LoginController {
        RetailUser retailUser = new RetailUser();
        model.addAttribute("user", user);
        model.addAttribute("retailUser", retailUser);
-       return "home";
+       return "index";
     }
 
 
     // depending on user type, user goes to specific overview page
-    @PostMapping(value="Overview")
-
+    @PostMapping(value="overview")
     public String loginHandler(@ModelAttribute User user, Model model){
       boolean loginOk = validator.validateMemberPassword(user);
         if (loginOk) {
@@ -43,8 +42,11 @@ public class LoginController {
        return"login_failed";
     }
 
+
     @GetMapping(value = "newUser")
     public String newUserHandler(){
         return "new_user_select_type";
     }
+
+
 }

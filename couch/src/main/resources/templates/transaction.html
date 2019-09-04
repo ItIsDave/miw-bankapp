@@ -5,10 +5,10 @@
     <title>Transaction</title>
 </head>
 <body>
-<h1>Welkom <span th:text="${name}"></span></h1>
+<h1>Welkom <span th:text="${userName}"></span></h1>
 <h2>IBAN <span th:text="${bankaccountFrom}"></span></h2>
 <h2>Transactie details</h2>
-<form action="#" th:action="@{transactionHandler}" th:object="${transaction}" method="post">
+<form action="#" th:action="@{transactionConfirmation}" th:object="${transaction}" method="post">
     <table>
         <tr>
             <td>transactie datum-tijd:</td>

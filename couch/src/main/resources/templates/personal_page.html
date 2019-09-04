@@ -9,12 +9,12 @@
 <h2>IBAN <span th:text="${bankAccount}"></span></h2>
 
 </body>
-<form action="#" th:action="@{pageHandler}" th:object="${user}" method="post">
+<form action="#" th:action="@{transactionRequest}" th:object="${user}" method="post">
     <tr>Klik voor een transactie te maken</tr>
         <input type="submit" value="Nieuwe Transactie">
 </form>
 
 <form>
-    Ga <a href="home">terug</a>
+    <a href="home">Log uit</a>
 </form>
 </html>
