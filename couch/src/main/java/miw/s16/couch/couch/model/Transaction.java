@@ -21,22 +21,22 @@ public class Transaction //implements Serializable
 //@Column(name = "timeStamp")
   private Date transactionDate;
 //@ManyToOne
-  private BankAccount from;//getIBAN, can be internal bank account
+  private String from;//getIBAN, can be internal bank account
 //@ManyToOne
-  private BankAccount to;//getIBAN, can be internal bank account
-//     @ManyToOne
-     private Loan loan;
+  //private BankAccount to;//getIBAN, can be internal bank account
+  private String to;//getIBAN, can be internal bank account
+//@ManyToOne
+     private Loan loan;  //betreft de lening indien van toepassing
+
      private boolean isPin;
 
     public Transaction() {
-        this(0,"unknown",0,new Date(),new BankAccount(), new BankAccount(), new Loan(), false);
+        this(0,"unknown",0,new Date(),"", "" , new Loan(), false);
     }
 
-     public Transaction(int idTransaction, String description, double amount, Date transactionDate, String from, String to, Loan loan, boolean isPin) {
-         this(idTransaction, description, amount, transactionDate, new BankAccount(from, 0), new BankAccount(to, 0), loan, isPin);
-     }
 
-    public Transaction(int idTransaction, String description, double amount, Date transactionDate, BankAccount from, BankAccount to, Loan loan, boolean isPin) {
+    public Transaction(int idTransaction, String description, double amount, Date transactionDate,
+                       String from, String to, Loan loan, boolean isPin) {
         this.idTransaction = idTransaction;
         this.description = description;
         this.amount = amount;
@@ -45,8 +45,6 @@ public class Transaction //implements Serializable
         this.to = to;
         this.loan = loan;
         this.isPin = isPin;
-        this.setBalanceFrom();
-        this.setBalanceTo();
     }
 
      public int getIdTransaction() {
@@ -77,18 +75,20 @@ public class Transaction //implements Serializable
          this.transactionDate = transactionDate;
      }
 
-     public BankAccount getFrom() { return from; }
-
-     public void setFrom(BankAccount from) {
-         this.from = from;
+     public void setTo(String to) {
+         this.to = to;
      }
 
-     public BankAccount getTo() {
+     public String getTo() {
          return to;
      }
 
-     public void setTo(BankAccount to) {
-         this.to = to;
+     public String getFrom() {
+         return from;
+     }
+
+     public void setFrom(String from) {
+         this.from = from;
      }
 
      public boolean isPin() {
@@ -99,24 +99,16 @@ public class Transaction //implements Serializable
          this.isPin = isPin;
      }
 
-     private void setBalanceFrom(){
-        from.setBalance(from.getBalance() - amount);
-     }
-
-     private void setBalanceTo(){
-         to.setBalance(to.getBalance() + amount);
-     }
-
      @Override
      public String toString() {
          return "Transaction{" +
                  "idTransaction=" + idTransaction +
                  ", description='" + description + '\'' +
                  ", amount=" + amount +
-                 ", transactionDate=" + transactionDate +
+                 ", transactionDate=" + transactionDate.toString() +
                  ", from=" + from +
                  ", to=" + to +
-                 ", loan=" + loan +
+                 //", loan=" + loan.toString() +
                  ", isPin=" + isPin +
                  '}';
      }

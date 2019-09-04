@@ -35,6 +35,7 @@ public class LoginController {
     public String loginHandler(@ModelAttribute User user, Model model){
       boolean loginOk = validator.validateMemberPassword(user);
         if (loginOk) {
+            System.out.println("de naam van de current user is: " + user.getUserName() );
             model.addAttribute("userName", user.getUserName());
             model.addAttribute("bankAccount", "NL123456");
            return "personal_page";

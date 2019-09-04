@@ -17,6 +17,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import static miw.s16.couch.couch.model.BankAccount.generateIban;
+
 @Service
 public class HibernateLab {
 
@@ -47,9 +49,9 @@ public class HibernateLab {
             User patrick = new User("Patrick", "1234");
 
             // Creating Bank account data
-            BankAccount account1 = new BankAccount("NL123445t3d5", 8000.00);
-            BankAccount account2 = new BankAccount("NL123445t346", 1000.00);
-            BankAccount account3 = new BankAccount("NL123445t347", 50000);
+            BankAccount account1 = new BankAccount(generateIban(), 8000.00);
+            BankAccount account2 = new BankAccount(generateIban(), 1000.00);
+            BankAccount account3 = new BankAccount(generateIban(), 50000);
 
             // Creating Retail user data
             RetailUser bart = new RetailUser("Bart", "1234",  987654321, "Bart",
