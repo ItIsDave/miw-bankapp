@@ -6,7 +6,7 @@
 </head>
 <body>
 <h1>Welkom <span th:text="${userName}"></span></h1>
-<h2>IBAN <span th:text="${bankaccountFrom}"></span></h2>
+<h2>iban <span th:text="${bankaccountFrom}"></span></h2>
 <h2>Transactie details</h2>
 <form action="#" th:action="@{transactionConfirmation}" th:object="${transaction}" method="post">
     <table>
@@ -15,14 +15,14 @@
             <td><span th:text="${date_time}"></span></td>
         </tr>
         <tr>
-            <td>van IBAN:</td>
+            <td>van iban:</td>
             <td><span th:text="${bankaccountFrom}" th:field="*{fromAccount}">  </span> </td>
         </tr>
             <td>bedrag in euro's</td>
             <td><input type="text" th:field="*{amount}"/></td>
         <tr>
         <tr>
-            <td>naar IBAN:</td>
+            <td>naar iban:</td>
             <td><input type="text" th:field="*{toAccount}"/></td>
         </tr>
         <tr>

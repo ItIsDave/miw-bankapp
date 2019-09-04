@@ -10,18 +10,18 @@ public class Transaction { //implements Serializable {
 
     @Id
     @GeneratedValue
-    private int idTransaction;
+    private int transactionId;
     private String description;
     private double amount;
     //@Column(name = "timeStamp")
     private Date transactionDate;
     @ManyToOne(cascade = CascadeType.ALL)
     //@JoinColumn(name="bankAccountId")
-    private BankAccount bankAccount;//getIBAN, can be internal bank account
+    private BankAccount bankAccount;//getIban, can be internal bank account
 
     // "to" and "from" are reserved key words from MySQL
-    private String fromAccount;//getIBAN, can be internal bank account
-    private String toAccount;//getIBAN, can be internal bank account
+    private String fromAccount;//getIban, can be internal bank account
+    private String toAccount;//getIban, can be internal bank account
     private boolean isPin;
     @ManyToOne(cascade = CascadeType.ALL)
     //@JoinColumn(name= "loanid")
@@ -47,7 +47,7 @@ public class Transaction { //implements Serializable {
     }
 
     public void setIdTransaction(int idTransaction) {
-        this.idTransaction = idTransaction;
+        this.transactionId = idTransaction;
     }
 
     public BankAccount getBankAccount() {
@@ -67,7 +67,7 @@ public class Transaction { //implements Serializable {
     }
 
     public int getIdTransaction() {
-        return idTransaction;
+        return transactionId;
     }
 
     public String getDescription() {
@@ -121,7 +121,7 @@ public class Transaction { //implements Serializable {
     @Override
     public String toString() {
         return "Transaction{" +
-                "idTransaction=" + idTransaction +
+                "idTransaction=" + transactionId +
                 ", description='" + description + '\'' +
                 ", amount=" + amount +
                 ", transactionDate=" + transactionDate.toString() +

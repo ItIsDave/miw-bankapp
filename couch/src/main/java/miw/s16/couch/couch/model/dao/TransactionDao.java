@@ -5,5 +5,6 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface TransactionDao extends CrudRepository<Transaction, Integer> {
 
+    public Transaction findByTransactionId(int transactiontId);
 
 }

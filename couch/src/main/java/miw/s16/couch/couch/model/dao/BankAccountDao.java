@@ -16,5 +16,7 @@ public interface BankAccountDao extends CrudRepository<BankAccount, Integer> {
 
     public BankAccount findByBankAccountId(int bankAccountId);
 
+    public BankAccount findByIban(String iban);
+
 
 }

@@ -13,7 +13,7 @@ public class BankAccount {
     @Id
     @GeneratedValue
     private int bankAccountId;
-    private String IBAN;
+    private String iban;
     private double balance;
     @OneToMany(mappedBy = "bankAccount")
     private List<Transaction> transactions = new ArrayList<Transaction>();
@@ -24,14 +24,14 @@ public class BankAccount {
     public BankAccount() {
     }
 
-    public BankAccount(String IBAN, double balance) {
-        this.IBAN = IBAN;
+    public BankAccount(String iban, double balance) {
+        this.iban = iban;
         this.balance = balance;
     }
 
     //getters
-    public String getIBAN() {
-        return IBAN;
+    public String getIban() {
+        return iban;
     }
 
     public double getBalance() {
@@ -45,7 +45,7 @@ public class BankAccount {
     }
 
 /*
-    IBAN rules: https://nl.wikipedia.org/wiki/International_Bank_Account_Number
+    iban rules: https://nl.wikipedia.org/wiki/International_Bank_Account_Number
     If an account number starts with a 1 it's an internal account, if it starts with a 0 its a customer (SME or Retail) account
     The other starting numbers are never used
 */
@@ -57,11 +57,11 @@ public class BankAccount {
     }
 
     public int generateCheckDigits(long account) {
-        account *= 1000000L;                               //add 'NL' numerical and 00 to end of acc nr according to IBAN rules
+        account *= 1000000L;                               //add 'NL' numerical and 00 to end of acc nr according to iban rules
         account += 232100L;
         BigInteger bigaccount;                              //convert to BigInteger because long is too short
         bigaccount = BigInteger.valueOf(account);
-        bigaccount = bigaccount.add(new BigInteger("122430120000000000000000"));     //add 'COUC' numerical according to IBAN rules
+        bigaccount = bigaccount.add(new BigInteger("122430120000000000000000"));     //add 'COUC' numerical according to iban rules
         return (new BigInteger("98").subtract(bigaccount.mod(new BigInteger("97")))).intValue();        //calculate & return check digits
     }
 
@@ -118,8 +118,8 @@ public class BankAccount {
         this.bankAccountId = bankAccountId;
     }
 
-    public void setIBAN(String IBAN) {
-        this.IBAN = IBAN;
+    public void setIban(String iban) {
+        this.iban = iban;
     }
 
     public List<RetailUser> getRetailusers() {
@@ -136,7 +136,7 @@ public class BankAccount {
 
 
 //    public String generateIban() {
-//        long account = generateAccount();                                 //when database is up, check if IBAN already
+//        long account = generateAccount();                                 //when database is up, check if iban already
 //        boolean duplicateCheck = checkIfIbanAlreadyExists(account);
 //            if (duplicateCheck){
 //                return generateIban();                                      //dangerous code: endless loop if (close to) all possible IBANs are generated
@@ -166,7 +166,7 @@ public class BankAccount {
 
     @Override
     public String toString() {
-        return IBAN;
+        return iban;
     }
 
 }
