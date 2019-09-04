@@ -31,6 +31,7 @@ public class RetailUser extends User {
 
     public RetailUser(String userName, String userPassword, int bsn, String firstName,
                       String middleName, String lastName,
+
                       String streetName, int houseNumber, String extension,
                       String zipcode, String city, String phoneNumber,
                       String dateOfBirth, String email, String role) {

@@ -18,7 +18,6 @@ public class LoginController {
     @Autowired
     HibernateLab lab;
 
-
     @GetMapping
     public String indexHandler(Model model){
        lab.dbinit();
@@ -32,6 +31,7 @@ public class LoginController {
 
     // depending on user type, user goes to specific overview page
     @PostMapping(value="Overview")
+
     public String loginHandler(@ModelAttribute User user, Model model){
       boolean loginOk = validator.validateMemberPassword(user);
         if (loginOk) {
@@ -43,4 +43,8 @@ public class LoginController {
        return"login_failed";
     }
 
+    @GetMapping(value = "newUser")
+    public String newUserHandler(){
+        return "new_user_select_type";
+    }
 }
