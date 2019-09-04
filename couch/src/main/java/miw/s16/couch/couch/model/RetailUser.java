@@ -1,18 +1,9 @@
 package miw.s16.couch.couch.model;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.context.annotation.Configuration;
-
-import javax.persistence.Entity;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.Table;
-
+import javax.persistence.*;
 import java.util.ArrayList;
-//@Configuration
-//@EnableAutoConfiguration
+import java.util.Set;
+
 @Entity
-//@Table( name = "RetailUser" )
-//@PrimaryKeyJoinColumn(name="userId")
 public class RetailUser extends User {
     private int bsn;
     private String firstName;
@@ -27,10 +18,9 @@ public class RetailUser extends User {
     private String dateOfBirth;
     private String email;
     private String role;
-    // for debugging
-    private ArrayList<String> retailRekeningen = new ArrayList<>();
-    //private ArrayList <BankAccount> retailRekeningen = new ArrayList<>();
-
+    @ManyToMany
+    // no dublicate bank accounts
+    private Set<BankAccount> retailRekeningen;
 
     public RetailUser(){
 
@@ -59,10 +49,11 @@ public class RetailUser extends User {
         this.dateOfBirth = dateOfBirth;
         this.email = email;
         this.role = role;
+
     }
 
 
-    public RetailUser(String userName, String userPassword, int bsn, String firstName, String middleName, String lastName, String streetName, int houseNumber, String extension, String zipcode, String city, int phoneNumber, String dateOfBirth, String email, String role, ArrayList<String> retailRekeningen) {
+    public RetailUser(String userName, String userPassword, int bsn, String firstName, String middleName, String lastName, String streetName, int houseNumber, String extension, String zipcode, String city, int phoneNumber, String dateOfBirth, String email, String role, Set<BankAccount> retailRekeningen) {
         super(userName, userPassword);
         this.bsn = bsn;
         this.firstName = firstName;
@@ -183,20 +174,13 @@ public class RetailUser extends User {
         this.role = role;
     }
 
- //   public ArrayList<BankAccount> getRetailRekeningen() { return retailRekeningen; }
+    public Set<BankAccount> getRetailRekeningen() { return retailRekeningen; }
 
-//    public void setRetailRekeningen(ArrayList<BankAccount> retailRekeningen) { this.retailRekeningen = retailRekeningen; }
-//
-//    public void addBankAccount(BankAccount bankAccount){
-//      retailRekeningen.add(bankAccount);
-//    }
+    public void setRetailRekeningen(Set<BankAccount> retailRekeningen) { this.retailRekeningen = retailRekeningen; }
 
-    // debugging
-    public ArrayList<String> getRetailRekeningen() { return retailRekeningen; }
-    public void setRetailRekeningen(ArrayList<String> retailRekeningen) { this.retailRekeningen = retailRekeningen; }
-
-    public void addBankAccount(String bankAccount){
-        retailRekeningen.add(bankAccount);
+    public void addBankAccount(BankAccount bankAccount){
+      retailRekeningen.add(bankAccount);
     }
+
 }
 

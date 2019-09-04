@@ -12,9 +12,13 @@ import java.util.List;
 
 public interface RetailUserDao extends CrudRepository<RetailUser, Integer> {
 
+    public RetailUser findByUserName(String userName);
 
     public List<RetailUser> findByBsn(int bsn);
 
     public List<RetailUser> findByLastName(String lastName);
+
+   // public List<BankAccount> findBankAccountsByUserName(String userName);
+
 
 }

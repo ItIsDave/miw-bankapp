@@ -12,9 +12,9 @@ import javax.persistence.*;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 //coding by PvdH
-
 
 @Entity
 public class BankAccount {
@@ -27,8 +27,8 @@ public class BankAccount {
 
 //    @OneToMany
 //    private List<Transaction> transactions;
-//    @ManyToMany
-//    private List<RetailUser> retailusers;
+    @ManyToMany
+    private Set<RetailUser> retailusers;
 
     //constructors
     public BankAccount () {}
@@ -39,6 +39,7 @@ public class BankAccount {
 //        this.transactions = new ArrayList<>();
 //        this.retailusers = new ArrayList<>();
     }
+
 
     //getters
     public String getIBAN() { return IBAN; }
@@ -88,9 +89,29 @@ public class BankAccount {
         return iban.toString();
     }
 
-//    @Override
-//    public String toString() {
-//        return iBAN;
-//    }
+    public int getBankAccountId() {
+        return BankAccountId;
+    }
+
+    public void setBankAccountId(int bankAccountId) {
+        BankAccountId = bankAccountId;
+    }
+
+    public void setIBAN(String IBAN) {
+        this.IBAN = IBAN;
+    }
+
+    public Set<RetailUser> getRetailusers() {
+        return retailusers;
+    }
+
+    public void setRetailusers(Set<RetailUser> retailusers) {
+        this.retailusers = retailusers;
+    }
+
+    @Override
+    public String toString() {
+        return IBAN;
+    }
 
 }

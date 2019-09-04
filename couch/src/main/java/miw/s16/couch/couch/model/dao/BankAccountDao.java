@@ -7,11 +7,11 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Set;
 
 //coding by PvdH
 
 public interface BankAccountDao extends CrudRepository<BankAccount, Integer> {
 
-  //  public List<BankAccount> findByIBAN(String IBAN);
 
 }

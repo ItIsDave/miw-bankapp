@@ -1,5 +1,6 @@
 package miw.s16.couch.couch.controller;
 
+import miw.s16.couch.couch.model.RetailUser;
 import miw.s16.couch.couch.model.User;
 import miw.s16.couch.couch.service.HibernateLab;
 import miw.s16.couch.couch.service.PasswordValidator;
@@ -22,21 +23,25 @@ public class LoginController {
     public String indexHandler(Model model){
        lab.dbinit();
        User user = new User();
+       RetailUser retailUser = new RetailUser();
        model.addAttribute("user", user);
+       model.addAttribute("retailUser", retailUser);
        return "home";
     }
 
 
     // depending on user type, user goes to specific overview page
     @PostMapping(value="loginHandler")
-    public String loginHandler(@ModelAttribute User user, Model model){
-        model.addAttribute("userName", user.getUserName());
-      boolean loginOk = validator.validateMemberPassword(user);
-        if (loginOk) {
-            model.addAttribute("userName", user.getUserName());
+    public String loginHandler(@ModelAttribute RetailUser retailUser, Model model){
+//        model.addAttribute("userName", user.getUserName());
+//        model.addAttribute("bankAccount", retailUser.getBankAccount());
+//      boolean loginOk = validator.validateMemberPassword(user);
+//        if (loginOk) {
+            model.addAttribute("userName", retailUser.getUserName());
+           // model.addAttribute("bankAccount", retailUser.getBankAccount());
            return "personal_page";
-       }
-       return"login_failed";
+//       }
+//       return"login_failed";
     }
 
 }
