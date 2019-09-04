@@ -1,12 +1,22 @@
 package miw.s16.couch.couch.model;
 
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+
+@Entity
 public class Loan {
 
     //coding by PvdH
     //variables
+    @Id
+    @GeneratedValue
     private int loanID;
     private double initialDebt;
     private String endDate;
+    @OneToMany(mappedBy = "loan")
+    private List<Transaction> loans = new ArrayList<Transaction>();
+
 
     //all args constructor
     public Loan(int loanID, double initialDebt, String endDate) {
@@ -17,6 +27,22 @@ public class Loan {
 
     //no args constructor
     public Loan() {
+    }
+
+    public void setLoanID(int loanID) {
+        this.loanID = loanID;
+    }
+
+    public String getEndDate() {
+        return endDate;
+    }
+
+    public List<Transaction> getLoans() {
+        return loans;
+    }
+
+    public void setLoans(List<Transaction> loans) {
+        this.loans = loans;
     }
 
     //getters

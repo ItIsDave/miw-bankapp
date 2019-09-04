@@ -18,10 +18,10 @@ public class RetailUser extends User {
     private String email;
     private String role;
     @ManyToMany
-    // no dublicate bank account
-    private Set<BankAccount> retailRekeningen;
+    private List<BankAccount> bankAccounts = new ArrayList<BankAccount>();
 
     public RetailUser(){
+        super();
 
     }
 
@@ -53,7 +53,7 @@ public class RetailUser extends User {
     }
 
 
-    public RetailUser(String userName, String userPassword, int bsn, String firstName, String middleName, String lastName, String streetName, int houseNumber, String extension, String zipcode, String city, String phoneNumber, String dateOfBirth, String email, String role, Set<BankAccount> retailRekeningen) {
+    public RetailUser(String userName, String userPassword, int bsn, String firstName, String middleName, String lastName, String streetName, int houseNumber, String extension, String zipcode, String city, String phoneNumber, String dateOfBirth, String email, String role, List<BankAccount> bankAccounts) {
         super(userName, userPassword);
         this.bsn = bsn;
         this.firstName = firstName;
@@ -68,7 +68,7 @@ public class RetailUser extends User {
         this.dateOfBirth = dateOfBirth;
         this.email = email;
         this.role = role;
-        this.retailRekeningen = retailRekeningen;
+        this.bankAccounts = bankAccounts;
     }
 
     public int getBsn() { return bsn;
@@ -174,12 +174,12 @@ public class RetailUser extends User {
         this.role = role;
     }
 
-    public Set<BankAccount> getRetailRekeningen() { return retailRekeningen; }
+    public List<BankAccount> getBankAccounts() { return bankAccounts; }
 
-    public void setRetailRekeningen(Set<BankAccount> retailRekeningen) { this.retailRekeningen = retailRekeningen; }
+    public void setBankAccounts(List<BankAccount> bankAccounts) { this.bankAccounts = bankAccounts; }
 
     public void addBankAccount(BankAccount bankAccount){
-      retailRekeningen.add(bankAccount);
+      bankAccounts.add(bankAccount);
     }
 
 }

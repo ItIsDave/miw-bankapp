@@ -70,7 +70,15 @@ public class HibernateLab {
 
             // confirmation that DB is running
             System.out.println("Creating schema");
+            charlotte.addBankAccount(account2);
+            bart.addBankAccount(account1);
+            jan.addBankAccount(account5);
 
+            bankAccountDao.save(account1);
+            bankAccountDao.save(account2);
+            bankAccountDao.save(account3);
+            bankAccountDao.save(account4);
+            bankAccountDao.save(account5);
 
             // saving to the db
             userDao.save(johnDoe);
@@ -80,15 +88,18 @@ public class HibernateLab {
             userDao.save(boudewijn);
             userDao.save(david);
             userDao.save(patrick);
-            bankAccountDao.save(account1);
-            bankAccountDao.save(account2);
-            bankAccountDao.save(account3);
-
 
             retailUserDao.save(bart);
             retailUserDao.save(karin);
             retailUserDao.save(charlotte);
             retailUserDao.save(jan);
+
+
+
+
+
+
+
 
 
 

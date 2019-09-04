@@ -1,5 +1,6 @@
 package miw.s16.couch.couch.model.dao;
 
+import miw.s16.couch.couch.model.BankAccount;
 import miw.s16.couch.couch.model.RetailUser;
 
 import miw.s16.couch.couch.model.User;
@@ -18,7 +19,7 @@ public interface RetailUserDao extends CrudRepository<RetailUser, Integer> {
 
     public List<RetailUser> findByLastName(String lastName);
 
-   // public List<BankAccount> findBankAccountsByUserName(String userName);
+   public List<BankAccount> findBankAccountsByUserName(String userName);
 
 
 }

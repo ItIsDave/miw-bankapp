@@ -14,6 +14,7 @@ import java.util.Set;
 
 public interface BankAccountDao extends CrudRepository<BankAccount, Integer> {
 
+    public BankAccount findByBankAccountId(int bankAccountId);
 
 
 }

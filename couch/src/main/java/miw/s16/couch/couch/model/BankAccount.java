@@ -1,4 +1,5 @@
 package miw.s16.couch.couch.model;
+
 import javax.persistence.Entity;
 import javax.persistence.*;
 import java.math.BigInteger;
@@ -10,17 +11,17 @@ import java.util.*;
 public class BankAccount {
     @Id
     @GeneratedValue
-    private int BankAccountId;
+    private int bankAccountId;
     private String IBAN;
     private double balance;
-
-//    @OneToMany
-//    private List<Transaction> transactions;
-    @ManyToMany
-    private Set<RetailUser> retailUsers;
+    @OneToMany(mappedBy = "bankAccount")
+    private List<Transaction> transactions = new ArrayList<Transaction>();
+    @ManyToMany(mappedBy = "bankAccounts")
+    private List<RetailUser> retailUsers = new ArrayList<RetailUser>();
 
     //constructors
-    public BankAccount () {}
+    public BankAccount() {
+    }
 
     public BankAccount(String IBAN, double balance) {
         this.IBAN = IBAN;
@@ -28,12 +29,19 @@ public class BankAccount {
     }
 
     //getters
-    public String getIBAN() { return IBAN; }
-    public double getBalance() {return balance;}
+    public String getIBAN() {
+        return IBAN;
+    }
+
+    public double getBalance() {
+        return balance;
+    }
 //    public void addTransactions (Transaction transaction) {transactions.add(transaction);}
 
     //setter for changes in balance, transactions and retailusers
-    public void setBalance(double balance) { this.balance = balance; }
+    public void setBalance(double balance) {
+        this.balance = balance;
+    }
 
 /*
     IBAN rules: https://nl.wikipedia.org/wiki/International_Bank_Account_Number
@@ -56,10 +64,10 @@ public class BankAccount {
         return (new BigInteger("98").subtract(bigaccount.mod(new BigInteger("97")))).intValue();        //calculate & return check digits
     }
 
-    public String generateAccountAs10digitString(long account){
+    public String generateAccountAs10digitString(long account) {
         String accAsString = Long.toString(account);
         StringBuilder tenDigitAccount = new StringBuilder(accAsString);
-        for (int i = 0; i < 10-accAsString.length(); i++){
+        for (int i = 0; i < 10 - accAsString.length(); i++) {
             tenDigitAccount.insert(0, 0);                   //add zero's in front of account number until it's a 10 digit number
         }
         return tenDigitAccount.toString();
@@ -85,35 +93,43 @@ public class BankAccount {
 //        this.transactions = transactions;
 //    }
 
-    public Set<RetailUser> getRetailUsers() {
+    public List<Transaction> getTransactions() {
+        return transactions;
+    }
+
+    public void setTransactions(List<Transaction> transactions) {
+        this.transactions = transactions;
+    }
+
+    public List<RetailUser> getRetailUsers() {
         return retailUsers;
     }
 
-    public void setRetailUsers(Set<RetailUser> retailUsers) {
+    public void setRetailUsers(List<RetailUser> retailUsers) {
         this.retailUsers = retailUsers;
     }
 
     public int getBankAccountId() {
-        return BankAccountId;
+        return bankAccountId;
     }
 
     public void setBankAccountId(int bankAccountId) {
-        BankAccountId = bankAccountId;
+        this.bankAccountId = bankAccountId;
     }
 
     public void setIBAN(String IBAN) {
         this.IBAN = IBAN;
     }
 
-    public Set<RetailUser> getRetailusers() {
+    public List<RetailUser> getRetailusers() {
         return retailUsers;
     }
 
-    public void setRetailusers(Set<RetailUser> retailUsers) {
+    public void setRetailusers(List<RetailUser> retailUsers) {
         this.retailUsers = retailUsers;
     }
 
-    public void addRetailUser(RetailUser retailUser){
+    public void addRetailUser(RetailUser retailUser) {
         retailUsers.add(retailUser);
     }
 
