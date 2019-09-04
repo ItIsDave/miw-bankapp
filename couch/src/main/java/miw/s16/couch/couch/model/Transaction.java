@@ -29,7 +29,6 @@ public class Transaction { //implements Serializable {
 
 
 
-
     public Transaction() {
         this("unknown", 0, new Date(), "", "", new Loan(), false);
     }

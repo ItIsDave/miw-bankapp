@@ -43,8 +43,6 @@ public class PageController<retailUser> {
         model.addAttribute("transaction", transaction);
         model.addAttribute("date_time", transaction.getTransactionDate().toString());
         transaction.setFromAccount(bankaccount.getIban());
-        transactionService.TransactionCalculationTest(accountTest, bankaccount, transaction.getAmount());
-
         model.addAttribute("bankaccountFrom", transaction.getFromAccount());
         //if (principal != null) {
            model.addAttribute("userName", userName);

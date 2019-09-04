@@ -46,17 +46,17 @@ public class TransactionService {
 //        }
 
     //from test data
-    public void TransactionCalculationTest(BankAccount bankAccountTo, BankAccount bankAccount, Double amount) {
+    public String TransactionCalculationTest(BankAccount bankAccountTo, BankAccount bankAccount, Double amount) {
         double balance = bankAccountTo.getBalance();
         bankAccountTo.setBalance(balance + amount);
         double balanceFrom = bankAccount.getBalance();
         double newBalance = balanceFrom - amount;
         if (newBalance < 0) {
-            System.out.println("Not enough money left in your account");
+            return "Not enough money left in your account";
         } else {
             bankAccount.setBalance(balanceFrom - amount);
-            System.out.println("Transaction of " + amount + " successful");
-            System.out.println("Your new balance is " + newBalance);
+            return "\nTransaction of " + amount + " successful. \nYour old balance was: " + balanceFrom +
+                    "\nYour new balance is " + newBalance;
         }
     }
 
