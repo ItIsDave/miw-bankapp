@@ -1,5 +1,12 @@
 package miw.s16.couch.couch.model;
 
+import org.springframework.data.annotation.Id;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.ManyToOne;
+
 import java.util.Date;
 
 //@Entity
@@ -17,7 +24,7 @@ public class Transaction //implements Serializable
   private BankAccount from;//getIBAN, can be internal bank account
 //@ManyToOne
   private BankAccount to;//getIBAN, can be internal bank account
-//@ManyToOne
+//     @ManyToOne
      private Loan loan;
      private boolean isPin;
 

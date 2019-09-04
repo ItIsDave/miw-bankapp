@@ -31,17 +31,15 @@ public class LoginController {
 
 
     // depending on user type, user goes to specific overview page
-    @PostMapping(value="loginHandler")
-    public String loginHandler(@ModelAttribute RetailUser retailUser, Model model){
-//        model.addAttribute("userName", user.getUserName());
-//        model.addAttribute("bankAccount", retailUser.getBankAccount());
-//      boolean loginOk = validator.validateMemberPassword(user);
-//        if (loginOk) {
-            model.addAttribute("userName", retailUser.getUserName());
-           // model.addAttribute("bankAccount", retailUser.getBankAccount());
+    @PostMapping(value="Overview")
+    public String loginHandler(@ModelAttribute User user, Model model){
+      boolean loginOk = validator.validateMemberPassword(user);
+        if (loginOk) {
+            model.addAttribute("userName", user.getUserName());
+            model.addAttribute("bankAccount", "NL123456");
            return "personal_page";
-//       }
-//       return"login_failed";
+       }
+       return"login_failed";
     }
 
 }

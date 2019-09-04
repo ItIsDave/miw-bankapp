@@ -75,6 +75,22 @@ public class BankAccount {
         return iban.toString();
     }
 
+//    public List<Transaction> getTransactions() {
+//        return transactions;
+//    }
+//
+//    public void setTransactions(List<Transaction> transactions) {
+//        this.transactions = transactions;
+//    }
+
+    public Set<RetailUser> getRetailUsers() {
+        return retailUsers;
+    }
+
+    public void setRetailUsers(Set<RetailUser> retailUsers) {
+        this.retailUsers = retailUsers;
+    }
+
     public int getBankAccountId() {
         return BankAccountId;
     }
