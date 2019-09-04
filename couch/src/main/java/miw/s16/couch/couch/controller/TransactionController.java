@@ -13,7 +13,8 @@ public class TransactionController {
 
 
     @PostMapping(value="transactionHandler")
-    public String transactionHandler() {
+    public String transactionHandler(@ModelAttribute Transaction transaction,Model model) {
+        System.out.println("De transactie is ingevuld: " + transaction.toString());
         return "successful_entry";
     }
 

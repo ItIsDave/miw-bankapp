@@ -33,9 +33,10 @@ public class Loan {
         this.endDate = endDate;
     }
 
-//    @Override
-//    public String toString() {
-//        return loadID;
-//    }
+    @Override
+    public String toString() {
+        return "" + loanID;
+    }
+
 
 }
