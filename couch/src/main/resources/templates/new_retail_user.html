@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<html lang="en"  xmlns:="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+​
+<head>
+    <meta charset="UTF-8">
+    <title>Couch Bank nieuwe klant</title>
+</head>
+<body>
+<h2>Welkom nieuwe klant! Vul hieronder uw gegevens in</h2>
+<br><br>
+<form action="#" th:action="@{retailUserHandler}" th:object="${RetailUser}" method="post">
+    <table>
+        <tr><td>User ID: </td>
+            <td><input type="text" name="userId" th:field="*{userId}"/></td></tr>
+        <tr><td>Kies gebruikersnaam: </td>
+            <td><input type="text" name="userName" th:field="*{userName}"/> </td></tr>
+        <tr><td>Kies wachtwoord: </td>
+            <td><input type="text" name="password" th:field="*{userPassword}"/></td></tr>
+        <tr><td>BSN:</td>
+            <td><input type="text" name="bsn" th:field="*{bsn}"/></td></tr>
+        <tr><td>Voornaam:</td>
+            <td><input type="text" name="firstName" th:field="*{firstName}"/></td></tr>
+        <tr><td>Middel namen:</td>
+            <td><input type="text" name="middleName" th:field="*{middleName}"/></td></tr>
+        <tr><td>Achternaam: </td>
+            <td><input type="text" name="lastName" th:field="*{lastName}"/></td></tr>
+        <tr><td>Straat: </td>
+            <td><input type="text" name="adress" th:field="*{adress}"/></td></tr>
+        <tr><td>Huisnummer: </td>
+            <td><input type="text" name="houseNumber" th:field="*{houseNumber}"/></td></tr>
+        <tr><td>Toevoeging: </td>
+            <td><input type="text" name="extension" th:field="*{extension}"/></td></tr>
+        <tr><td>Postcode: </td>
+            <td><input type="text" name="zipcode" th:field="*{zipcode}"/></td></tr>
+        <tr><td>Stad: </td>
+            <td><input type="text" name="city" th:field="*{city}"/></td></tr>
+        <tr><td>Telefoonnummer: </td>
+            <td><input type="text" name="phoneNumber" th:field="*{phoneNumber}"/></td></tr>
+        <tr><td>Geboortedatum: </td>
+            <td><input type="text" name="dateOfBirth" th:field="*{dateOfBirth}"/></td></tr>
+        <tr><td>Email adres: </td>
+            <td><input type="text" name="email" th:field="*{email}"/></td></tr>
+        <tr><td>Rol: </td>
+            <td><input type="text" name="role" th:field="*{role}"/></td></tr>
+    </table>
+    
+        <button name="submit" type="submit" value="0">Verstuur</button>
+
+    
+</form>
+</body>
+</html>
