@@ -2,7 +2,9 @@ package miw.s16.couch.couch.model;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Loan {
@@ -11,16 +13,16 @@ public class Loan {
     //variables
     @Id
     @GeneratedValue
+   // @Column(name="loanid")
     private int loanID;
     private double initialDebt;
     private String endDate;
     @OneToMany(mappedBy = "loan")
-    private List<Transaction> loans = new ArrayList<Transaction>();
+    private List<Transaction> loans = new ArrayList<>();
 
 
     //all args constructor
-    public Loan(int loanID, double initialDebt, String endDate) {
-        this.loanID = loanID;
+    public Loan(double initialDebt, String endDate) {
         this.initialDebt = initialDebt;
         this.endDate = endDate;
     }
@@ -59,10 +61,13 @@ public class Loan {
         this.endDate = endDate;
     }
 
-    @Override
-    public String toString() {
-        return "" + loanID;
+    public void addLoan(Transaction transaction){
+        loans.add(transaction);
     }
-
+//    @Override
+//    public String toString() {
+//        return "" + loanID;
+//    }
+//
 
 }

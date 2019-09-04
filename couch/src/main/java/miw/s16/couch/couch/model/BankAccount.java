@@ -8,6 +8,7 @@ import java.util.*;
 //coding by PvdH
 
 @Entity
+
 public class BankAccount {
     @Id
     @GeneratedValue
@@ -158,6 +159,10 @@ public class BankAccount {
 //
 //     */
 
+    public void addTransaction(Transaction transaction){
+        transactions.add(transaction
+        );
+    }
 
     @Override
     public String toString() {

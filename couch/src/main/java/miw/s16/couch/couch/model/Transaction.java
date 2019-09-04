@@ -1,10 +1,6 @@
 package miw.s16.couch.couch.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.ManyToOne;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -19,30 +15,55 @@ public class Transaction { //implements Serializable {
     private double amount;
     //@Column(name = "timeStamp")
     private Date transactionDate;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
+    //@JoinColumn(name="bankAccountId")
     private BankAccount bankAccount;//getIBAN, can be internal bank account
-    private String from;//getIBAN, can be internal bank account
-    private String to;//getIBAN, can be internal bank account
-    @ManyToOne
-    private Loan loan;  //betreft de lening indien van toepassing
+
+    // "to" and "from" are reserved key words from MySQL
+    private String fromAccount;//getIBAN, can be internal bank account
+    private String toAccount;//getIBAN, can be internal bank account
     private boolean isPin;
+    @ManyToOne(cascade = CascadeType.ALL)
+    //@JoinColumn(name= "loanid")
+    private Loan loan;  //betreft de lening indien van toepassing
+
+
 
 
     public Transaction() {
-        this(0, "unknown", 0, new Date(), "", "", new Loan(), false);
+        this("unknown", 0, new Date(), "", "", new Loan(), false);
     }
 
 
-    public Transaction(int idTransaction, String description, double amount, Date transactionDate,
+    public Transaction(String description, double amount, Date transactionDate,
                        String from, String to, Loan loan, boolean isPin) {
-        this.idTransaction = idTransaction;
         this.description = description;
         this.amount = amount;
         this.transactionDate = transactionDate;
-        this.from = from;
-        this.to = to;
+        this.fromAccount = from;
+        this.toAccount = to;
         this.loan = loan;
         this.isPin = isPin;
+    }
+
+    public void setIdTransaction(int idTransaction) {
+        this.idTransaction = idTransaction;
+    }
+
+    public BankAccount getBankAccount() {
+        return bankAccount;
+    }
+
+    public void setBankAccount(BankAccount bankAccount) {
+        this.bankAccount = bankAccount;
+    }
+
+    public Loan getLoan() {
+        return loan;
+    }
+
+    public void setLoan(Loan loan) {
+        this.loan = loan;
     }
 
     public int getIdTransaction() {
@@ -73,20 +94,20 @@ public class Transaction { //implements Serializable {
         this.transactionDate = transactionDate;
     }
 
-    public void setTo(String to) {
-        this.to = to;
+    public String getFromAccount() {
+        return fromAccount;
     }
 
-    public String getTo() {
-        return to;
+    public void setFromAccount(String fromAccount) {
+        this.fromAccount = fromAccount;
     }
 
-    public String getFrom() {
-        return from;
+    public String getToAccount() {
+        return toAccount;
     }
 
-    public void setFrom(String from) {
-        this.from = from;
+    public void setToAccount(String toAccount) {
+        this.toAccount = toAccount;
     }
 
     public boolean isPin() {
@@ -104,8 +125,8 @@ public class Transaction { //implements Serializable {
                 ", description='" + description + '\'' +
                 ", amount=" + amount +
                 ", transactionDate=" + transactionDate.toString() +
-                ", from=" + from +
-                ", to=" + to +
+                ", from=" + fromAccount +
+                ", to=" + toAccount +
                 //", loan=" + loan.toString() +
                 ", isPin=" + isPin +
                 '}';

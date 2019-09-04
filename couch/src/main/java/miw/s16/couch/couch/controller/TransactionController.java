@@ -14,6 +14,8 @@ public class TransactionController {
     @PostMapping(value="transactionConfirmation")
     public String transactionHandler(@ModelAttribute Transaction transaction, Model model) {
         System.out.println("De transactie is ingevuld: " + transaction.toString());
+
+
         return "successful_entry";
     }
 

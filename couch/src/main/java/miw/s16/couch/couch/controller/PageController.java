@@ -38,8 +38,8 @@ public class PageController<retailUser> {
         System.out.println("datum - tijd is: " + transaction.getTransactionDate().toString());
         model.addAttribute("transaction", transaction);
         model.addAttribute("date_time", transaction.getTransactionDate().toString());
-        transaction.setFrom(bankaccount.getIBAN());
-        model.addAttribute("bankaccountFrom", transaction.getFrom());
+        transaction.setFromAccount(bankaccount.getIBAN());
+        model.addAttribute("bankaccountFrom", transaction.getFromAccount());
         //if (principal != null) {
            model.addAttribute("userName", userName);
             System.out.println("Voordat transaction is gevuld is transaction: " +

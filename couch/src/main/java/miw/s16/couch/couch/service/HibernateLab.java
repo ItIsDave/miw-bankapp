@@ -2,20 +2,19 @@ package miw.s16.couch.couch.service;
 
 import miw.s16.couch.couch.model.BankAccount;
 import miw.s16.couch.couch.model.RetailUser;
+import miw.s16.couch.couch.model.Transaction;
 import miw.s16.couch.couch.model.User;
 
 import miw.s16.couch.couch.model.dao.BankAccountDao;
 import miw.s16.couch.couch.model.dao.RetailUserDao;
+import miw.s16.couch.couch.model.dao.TransactionDao;
 import miw.s16.couch.couch.model.dao.UserDao;
 import org.hibernate.loader.plan.exec.internal.AbstractLoadQueryDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 
 @Service
@@ -23,10 +22,15 @@ public class HibernateLab {
 
     @Autowired
     UserDao userDao;
+
     @Autowired
     RetailUserDao retailUserDao;
+
     @Autowired
     BankAccountDao bankAccountDao;
+
+    @Autowired
+    TransactionDao transactionDao;
 
 
     public HibernateLab() {
@@ -68,17 +72,35 @@ public class HibernateLab {
                     "C", "1018AC", "Amsterdam", "6901230801", "25-10-1989", "jbakker@gmail.com", "Retail");
 
 
+            //Creating transaction data
+            Date d = new Date();
+            // the to and from are strings. For the test we are going to connect each transaction with one of the retail users bank account
+            Transaction t1 = new Transaction("verjaardag",100.0,d,"NL82 INGB 0004 2181 41","NL45 ABNA 0976 0833 96",null,false);
+            Transaction t2 = new Transaction("verjaardag2",10.0,d,"NL82 INGB 0005 2181 41","NL45 ABNA 0976 0833 97",null,false);
+            Transaction t3 = new Transaction("verjaardag3",150.0,d,"NL82 INGB 0006 2181 41","NL45 ABNA 0976 0833 98",null,false);
+            Transaction t4 = new Transaction("verjaardag4",2000.0,d,"NL82 INGB 0007 2181 41","NL45 ABNA 0976 0833 99",null,false);
+
             // confirmation that DB is running
             System.out.println("Creating schema");
             charlotte.addBankAccount(account2);
             bart.addBankAccount(account1);
             jan.addBankAccount(account5);
 
+
             bankAccountDao.save(account1);
             bankAccountDao.save(account2);
             bankAccountDao.save(account3);
             bankAccountDao.save(account4);
             bankAccountDao.save(account5);
+
+            transactionDao.save(t1);
+            transactionDao.save(t2);
+            transactionDao.save(t3);
+            transactionDao.save(t4);
+            account1.addTransaction(t1);
+            account2.addTransaction(t2);
+            account2.addTransaction(t3);
+            account3.addTransaction(t4);
 
             // saving to the db
             userDao.save(johnDoe);
