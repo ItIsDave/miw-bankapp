@@ -73,6 +73,18 @@ public class Transaction //implements Serializable
          this.to = to;
      }
 
+     public String getTo() {
+         return to;
+     }
+
+     public String getFrom() {
+         return from;
+     }
+
+     public void setFrom(String from) {
+         this.from = from;
+     }
+
      public boolean isPin() {
          return isPin;
      }
