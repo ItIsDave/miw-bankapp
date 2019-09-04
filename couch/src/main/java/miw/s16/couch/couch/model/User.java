@@ -18,10 +18,9 @@ public class User {
 
     @Id
     @GeneratedValue
-    @Column(name = "userId", unique = true)
+    @Column(name = "userId")
     private int userId;
 
-    @Column(nullable = false, unique = true)
     private String userName;
     private String userPassword;
 

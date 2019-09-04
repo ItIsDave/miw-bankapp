@@ -1,18 +1,8 @@
 package miw.s16.couch.couch.model;
 import javax.persistence.Entity;
-
-
-import miw.s16.couch.couch.model.RetailUser;
-import miw.s16.couch.couch.model.Transaction;
-import org.hibernate.annotations.Table;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import javax.persistence.*;
-
-
 import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 //coding by PvdH
 
@@ -28,7 +18,7 @@ public class BankAccount {
 //    @OneToMany
 //    private List<Transaction> transactions;
     @ManyToMany
-    private Set<RetailUser> retailusers;
+    private Set<RetailUser> retailUsers;
 
     //constructors
     public BankAccount () {}
@@ -36,16 +26,12 @@ public class BankAccount {
     public BankAccount(String IBAN, double balance) {
         this.IBAN = IBAN;
         this.balance = balance;
-//        this.transactions = new ArrayList<>();
-//        this.retailusers = new ArrayList<>();
     }
-
 
     //getters
     public String getIBAN() { return IBAN; }
     public double getBalance() {return balance;}
 //    public void addTransactions (Transaction transaction) {transactions.add(transaction);}
-//    public void addRetailUser (RetailUser retailuser) {retailusers.add(retailuser);}
 
     //setter for changes in balance, transactions and retailusers
     public void setBalance(double balance) { this.balance = balance; }
@@ -102,11 +88,15 @@ public class BankAccount {
     }
 
     public Set<RetailUser> getRetailusers() {
-        return retailusers;
+        return retailUsers;
     }
 
-    public void setRetailusers(Set<RetailUser> retailusers) {
-        this.retailusers = retailusers;
+    public void setRetailusers(Set<RetailUser> retailUsers) {
+        this.retailUsers = retailUsers;
+    }
+
+    public void addRetailUser(RetailUser retailUser){
+        retailUsers.add(retailUser);
     }
 
     @Override

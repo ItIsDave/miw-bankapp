@@ -36,41 +36,65 @@ public class HibernateLab {
         // to ensure no data dublication
         if (userDao.findByUserPassword("1").size() == 0) {
             // user info for checking if DB is empty
-            User JohnDoe = new User("John Doe", "1");
+            User johnDoe = new User("John Doe", "1");
 
             // Inserting user data
-            User Adamantia = new User("Adamantia", "1234");
-            User Alet = new User("Alet", "1234");
-            User Arnout = new User("Arnout", "1234");
-            User Boudewijn = new User("Boudewijn", "1234");
-            User David = new User("David", "1234");
-            User Patrick = new User("Patrick", "1234");
-            BankAccount account1 = new BankAccount("NL123445t3d5", 800.00);
-            RetailUser Bart = new RetailUser("Bart", "1234",  987654321, "Bart",  "", "Simpson", "Kalverstraat", 25, "B", "1011AB", "Amsterdam", 690000000, "25-10-1900", "bart@hva.nl", "Retail");
+            User adamantia = new User("Adamantia", "1234");
+            User alet = new User("Alet", "1234");
+            User arnout = new User("Arnout", "1234");
+            User boudewijn = new User("Boudewijn", "1234");
+            User david = new User("David", "1234");
+            User patrick = new User("Patrick", "1234");
 
-            // Inserting Bank account data
-            BankAccount account2 = new BankAccount("NL123445t345", 100.00);
-            Set<BankAccount> accounts = new HashSet<>();
-            accounts.add(account1);
-            accounts.add(account2);
-            RetailUser Charlotte = new RetailUser("Charlotte", "1234", 987654322,
-                    "Charlotte",  "de", "Witte", "Keizersgracht", 40, "A", "1017DS", "Amsterdam", 690000001, "25-10-1999", "cdv@gmail.com", "Retail");
+            // Creating Bank account data
+            BankAccount account1 = new BankAccount("NL123445t3d5", 8000.00);
+            BankAccount account2 = new BankAccount("NL123445t346", 1000.00);
+            BankAccount account3 = new BankAccount("NL123445t347", 50000);
 
+            // Creating Retail user data
+            RetailUser bart = new RetailUser("Bart", "1234",  987654321, "Bart",
+                    "", "Simpson", "Kalverstraat", 25, "B", "1011AB", "Amsterdam", "690000000", "25-10-1900", "bart@hva.nl", "Retail");
+            RetailUser charlotte = new RetailUser("Charlotte", "1234", 987654322,
+                    "Charlotte",  "de", "Witte", "Keizersgracht", 40,
+                    "A", "1017DS", "Amsterdam", "690000001", "25-10-1999", "cdv@gmail.com", "Retail");
+            RetailUser karin = new RetailUser("Karin", "1234", 987654325,
+                    "Karin",  "van", "Dijk", "Prinsengracht", 200,
+                    "A", "1017KS", "Amsterdam", "690000801", "25-10-1990", "kvd@gmail.com", "Retail");
+
+
+
+
+            // confirmation that DB is running
             System.out.println("Creating schema");
 
+
             // saving to the db
-            userDao.save(JohnDoe);
-            userDao.save(Adamantia);
-            userDao.save(Alet);
-            userDao.save(Arnout);
-            userDao.save(Boudewijn);
-            userDao.save(David);
-            userDao.save(Patrick);
-            retailUserDao.save(Bart);
+            userDao.save(johnDoe);
+            userDao.save(adamantia);
+            userDao.save(alet);
+            userDao.save(arnout);
+            userDao.save(boudewijn);
+            userDao.save(david);
+            userDao.save(patrick);
             bankAccountDao.save(account1);
             bankAccountDao.save(account2);
-            Charlotte.setRetailRekeningen(accounts);
-            retailUserDao.save(Charlotte);
+            bankAccountDao.save(account3);
+//
+//            charlotte.getRetailRekeningen().add(account1);
+//            charlotte.getRetailRekeningen().add(account2);
+//            bart.getRetailRekeningen().add(account3);
+//
+//            account1.getRetailusers().add(charlotte);
+//            account2.getRetailusers().add(charlotte);
+
+            retailUserDao.save(bart);
+            retailUserDao.save(karin);
+            retailUserDao.save(charlotte);
+
+
+
+
+
         }
 
     }

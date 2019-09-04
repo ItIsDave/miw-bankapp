@@ -1,7 +1,6 @@
 package miw.s16.couch.couch.model;
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 public class RetailUser extends User {
@@ -14,12 +13,12 @@ public class RetailUser extends User {
     private String extension;
     private String zipcode;
     private String city;
-    private int phoneNumber;
+    private String phoneNumber;
     private String dateOfBirth;
     private String email;
     private String role;
     @ManyToMany
-    // no dublicate bank accounts
+    // no dublicate bank account
     private Set<BankAccount> retailRekeningen;
 
     public RetailUser(){
@@ -33,7 +32,7 @@ public class RetailUser extends User {
     public RetailUser(String userName, String userPassword, int bsn, String firstName,
                       String middleName, String lastName,
                       String streetName, int houseNumber, String extension,
-                      String zipcode, String city, int phoneNumber,
+                      String zipcode, String city, String phoneNumber,
                       String dateOfBirth, String email, String role) {
         super(userName, userPassword);
         this.bsn = bsn;
@@ -53,7 +52,7 @@ public class RetailUser extends User {
     }
 
 
-    public RetailUser(String userName, String userPassword, int bsn, String firstName, String middleName, String lastName, String streetName, int houseNumber, String extension, String zipcode, String city, int phoneNumber, String dateOfBirth, String email, String role, Set<BankAccount> retailRekeningen) {
+    public RetailUser(String userName, String userPassword, int bsn, String firstName, String middleName, String lastName, String streetName, int houseNumber, String extension, String zipcode, String city, String phoneNumber, String dateOfBirth, String email, String role, Set<BankAccount> retailRekeningen) {
         super(userName, userPassword);
         this.bsn = bsn;
         this.firstName = firstName;
@@ -142,11 +141,11 @@ public class RetailUser extends User {
         this.city = city;
     }
 
-    public int getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
