@@ -9,6 +9,7 @@ import miw.s16.couch.couch.service.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -29,23 +30,23 @@ public class TransactionController {
     BankAccount accountTo = new BankAccount("NL10COUC0423456793", 5000.00);
 
 
+
     @PostMapping(value="transactionConfirmation")
     public String transactionHandler(@ModelAttribute User user, Transaction transaction, Model model, HttpServletRequest request) {
         HttpSession session = request.getSession (true);
         String userName = (String) session.getAttribute("userName");
         RetailUser retailUser1  = (RetailUser) session.getAttribute("retailUser");
         // bank account from
-        BankAccount bankAccount = retailUser1.getBankAccounts().get(0);
+        BankAccount bankAccountFrom = retailUser1.getBankAccounts().get(0);
         model.addAttribute("transaction", transaction);
         model.addAttribute("date_time", transaction.getTransactionDate().toString());
-        String feedback = transactionService.TransactionCalculationTest(accountTo, bankAccount, transaction.getAmount());
+        String feedback = transactionService.TransactionCalculationTest(accountTo, bankAccountFrom, transaction.getAmount());
         model.addAttribute("feedback", feedback);
-       // model.addAttribute("bankAccountFrom", transaction.getFromAccount());
+        // model.addAttribute("bankAccountFrom", transaction.getFromAccount());
         model.addAttribute("userName", userName);
         System.out.println("Voordat transaction is gevuld is transaction: " +
                 transaction);
         return "successful_entry";
     }
-
 
 }

@@ -11,6 +11,7 @@ import miw.s16.couch.couch.service.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -30,10 +31,7 @@ public class PageController<retailUser> {
     @Autowired
     BankAccountDao bankAccountDao;
 
-//
-//    BankAccount accountTest = new BankAccount("NL10COUC0423456793", 5000.00);
-//
-//    private BankAccount bankaccount = new BankAccount("NL10COUC0423456793",50);
+    public BankAccount bankAccount = new BankAccount();
 
     Transaction transaction = new Transaction();
 
@@ -44,7 +42,7 @@ public class PageController<retailUser> {
         String userName = (String) session.getAttribute("userName");
         RetailUser retailUser1  = (RetailUser) session.getAttribute("retailUser");
         int userId = (int) session.getAttribute("userId");
-        BankAccount bankAccount = retailUser1.getBankAccounts().get(0);
+        BankAccount bankAccountFrom = retailUser1.getBankAccounts().get(0);
 
         transaction.setBankAccount(bankAccount);
         transaction.setFromAccount(bankAccount.getIBAN());
@@ -54,10 +52,38 @@ public class PageController<retailUser> {
         model.addAttribute("bankAccountFrom", transaction.getFromAccount());
         model.addAttribute("userName", userName);
         model.addAttribute("user", user);
+        model.addAttribute("balance", bankAccountFrom.getBalance());
         System.out.println("Voordat transaction is gevuld is transaction: " +
-                    transaction);
+                transaction);
         return "transaction";
 
-       // return "login failed";
+        // return "login failed";
     }
+
+
+    // if user choses to make a new transaction
+    @GetMapping(value = "transactionRequest")
+    public String pageHandlerGet(@ModelAttribute User user, Model model, HttpServletRequest request) {
+        // log in session
+        Transaction transaction = new Transaction();
+        HttpSession session = request.getSession (true);
+        String userName = (String) session.getAttribute("userName");
+        RetailUser retailUser1  = (RetailUser) session.getAttribute("retailUser");
+        int userId = (int) session.getAttribute("userId");
+        BankAccount bankAccountFrom = retailUser1.getBankAccounts().get(0);
+
+        transaction.setBankAccount(bankAccount);
+        transaction.setFromAccount(bankAccount.getIBAN());
+        System.out.println("datum - tijd is: " + transaction.getTransactionDate().toString());
+        model.addAttribute("transaction", transaction);
+        model.addAttribute("date_time", transaction.getTransactionDate().toString());
+        model.addAttribute("bankAccountFrom", transaction.getFromAccount());
+        model.addAttribute("userName", userName);
+        model.addAttribute("user", user);
+        model.addAttribute("balance", bankAccountFrom.getBalance());
+        System.out.println("Voordat transaction is gevuld is transaction: " +
+                transaction);
+        return "transaction";
+    }
+
 }
