@@ -22,7 +22,6 @@ public class LoginController {
     @Autowired
     HibernateLab lab;
 
-
     @GetMapping
     public String indexHandler(Model model){
        lab.dbinit();
@@ -31,16 +30,20 @@ public class LoginController {
         return "home";
     }
 
-
     @PostMapping(value="loginHandler")
     public String loginHandler(@ModelAttribute User user, Model model){
         model.addAttribute("userName", user.getUserName());
       boolean loginOk = validator.validateMemberPassword(user);
         if (loginOk) {
+            System.out.println("de naam van de current user is: " + user.getUserName() );
             model.addAttribute("userName", user.getUserName());
            return "personal_page";
        }
        return"login_failed";
     }
 
+    @GetMapping(value = "newUser")
+    public String newUserHandler(){
+        return "new_user_select_type";
+    }
 }
