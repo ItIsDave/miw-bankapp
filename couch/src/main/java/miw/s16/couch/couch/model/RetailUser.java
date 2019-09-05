@@ -20,13 +20,31 @@ public class RetailUser extends User {
     @ManyToMany
     private List<BankAccount> bankAccounts = new ArrayList<BankAccount>();
 
+
+
+//    public RetailUser(String userName, String userPassword,
+//                      int bsn, String firstName, String middleName, String lastName,
+//                      String streetName, int houseNumber,
+//                      String zipcode, String city, int phoneNumber,
+//                      String dateOfBirth, String email, String role) {
+//        this(userName, userPassword, bsn,  firstName, "", lastName,
+//                streetName, houseNumber, "", zipcode, city, phoneNumber, dateOfBirth, email, role);
+//        this.bankAccounts = new ArrayList<>();
+//    }
+//>>>>>>> 777f207284e041f2c18637b87874e6efda03020d
+
     public RetailUser(){
         super();
 
     }
 
-    public RetailUser(String userName, String userPassword, int roleId) {
+//    public RetailUser(String userName, String userPassword, int roleId) {
+//        super(userName, userPassword);
+
+    public RetailUser(String userName, String userPassword) {
         super(userName, userPassword);
+        this.bankAccounts = new ArrayList<>();
+
     }
 
     public RetailUser(String userName, String userPassword, int bsn, String firstName,
@@ -181,6 +199,7 @@ public class RetailUser extends User {
     public void addBankAccount(BankAccount bankAccount){
       bankAccounts.add(bankAccount);
     }
+
 
 }
 

@@ -1,5 +1,6 @@
 package miw.s16.couch.couch.service;
 
+
 import miw.s16.couch.couch.model.BankAccount;
 import miw.s16.couch.couch.model.RetailUser;
 import miw.s16.couch.couch.model.Transaction;
@@ -9,12 +10,11 @@ import miw.s16.couch.couch.model.dao.BankAccountDao;
 import miw.s16.couch.couch.model.dao.RetailUserDao;
 import miw.s16.couch.couch.model.dao.TransactionDao;
 import miw.s16.couch.couch.model.dao.UserDao;
-import org.hibernate.loader.plan.exec.internal.AbstractLoadQueryDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import javax.transaction.Transactional;
 import java.util.*;
+
 
 
 @Service
@@ -47,7 +47,7 @@ public class HibernateLab {
             User adamantia = new User("Adamantia", "1234");
             User alet = new User("Alet", "1234");
             User arnout = new User("Arnout", "1234");
-            User boudewijn = new User("Boudewijn", "1234");
+           // RetailUser boudewijn = new RetailUser("Boudewijn", "1234");
             User david = new User("David", "1234");
             User patrick = new User("Patrick", "1234");
 
@@ -74,6 +74,8 @@ public class HibernateLab {
 
             //Creating transaction data
             Date d = new Date();
+            RetailUser boudewijn = new RetailUser("Boudewijn", "1234",  987654321, "Boudewijn",
+                    "", "Simpson", "Kalverstraat", 25, "B", "1011AB", "Amsterdam", "690000000", "25-10-1900", "bart@hva.nl", "Retail");
 
             // the to and from are strings. For the test we are going to connect each transaction with one of the retail users bank account
             Transaction t1 = new Transaction(100.0,d,account1, account2, "verjaardag");
@@ -87,25 +89,27 @@ public class HibernateLab {
             bart.addBankAccount(account1);
             jan.addBankAccount(account5);
 
+            // generate Iban method not ready yet
+            BankAccount account6 = new BankAccount("NL10COUC0523456795", 13000);
+            boudewijn.addBankAccount(account6);
 
             bankAccountDao.save(account1);
             bankAccountDao.save(account2);
             bankAccountDao.save(account3);
             bankAccountDao.save(account4);
             bankAccountDao.save(account5);
+            bankAccountDao.save(account6);
 
             transactionDao.save(t1);
             transactionDao.save(t2);
             transactionDao.save(t3);
             transactionDao.save(t4);
 
-
             // saving to the db
             userDao.save(johnDoe);
             userDao.save(adamantia);
             userDao.save(alet);
             userDao.save(arnout);
-            userDao.save(boudewijn);
             userDao.save(david);
             userDao.save(patrick);
 
@@ -113,6 +117,7 @@ public class HibernateLab {
             retailUserDao.save(karin);
             retailUserDao.save(charlotte);
             retailUserDao.save(jan);
+            retailUserDao.save(boudewijn);
 
 
 

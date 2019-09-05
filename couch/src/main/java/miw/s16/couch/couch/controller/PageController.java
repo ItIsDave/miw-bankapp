@@ -36,20 +36,21 @@ public class PageController<retailUser> {
 
     @PostMapping(value = "transactionRequest")
     public String pageHandler(@ModelAttribute User user, Model model, HttpServletRequest request) {
+        // log in session
         HttpSession session = request.getSession (true);
         String userName = (String) session.getAttribute("userName");
-        int userId = (int) session.getAttribute("userId");
+        //int userId = (int) session.getAttribute("userId");
         System.out.println("datum - tijd is: " + transaction.getTransactionDate().toString());
         model.addAttribute("transaction", transaction);
         model.addAttribute("date_time", transaction.getTransactionDate().toString());
         transaction.setFromAccount(bankaccount.getIban());
-        model.addAttribute("bankaccountFrom", transaction.getFromAccount());
-        //if (principal != null) {
-           model.addAttribute("userName", userName);
-            System.out.println("Voordat transaction is gevuld is transaction: " +
+        model.addAttribute("bankAccountFrom", transaction.getFromAccount());
+        model.addAttribute("userName", userName);
+        model.addAttribute("user", user);
+        System.out.println("Voordat transaction is gevuld is transaction: " +
                     transaction);
-           return "transaction";
-        //}
+        return "transaction";
+
        // return "login failed";
     }
 }

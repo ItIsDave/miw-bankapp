@@ -11,12 +11,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class NewUserController {
-
-    @GetMapping(value = "newRetailUser")  //van select type -> new retail user
-    public String newRetailUserHandler(Model model){
-        model.addAttribute("RetailUser", new RetailUser());
-        return "new_retail_user";
-    }
+//
+//    @GetMapping(value = "newRetailUser")  //van select type -> new retail user
+//    public String newRetailUserHandler(Model model){
+//        model.addAttribute("RetailUser", new RetailUser());
+//        return "new_retail_user";
+//    }
 
     @PostMapping(value ="retailUserHandler")
     public String retailUserHandler(@ModelAttribute("RetailUser") RetailUser RetailUser){
