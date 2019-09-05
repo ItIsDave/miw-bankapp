@@ -22,7 +22,7 @@ public class RetailUser extends User {
     private String dateOfBirth;
     private String email;
     private String role;
-//    private ArrayList <BankAccount> retailRekeningen = new ArrayList<>();
+    private ArrayList <BankAccount> retailRekeningen;
 
 
     public RetailUser(String userName, String userPassword, int userId,
@@ -32,6 +32,7 @@ public class RetailUser extends User {
                       String dateOfBirth, String email, String role) {
         this(userName, userPassword, userId, bsn,  firstName, "", lastName,
                 streetName, houseNumber, "", zipcode, city, phoneNumber, dateOfBirth, email, role);
+        this.retailRekeningen = new ArrayList<>();
     }
 
 
@@ -39,7 +40,7 @@ public class RetailUser extends User {
     }
 
     public RetailUser(String userName, String userPassword, int userId) {
-        super(userName, userPassword, userId);
+        super(userName, userPassword, userId); this.retailRekeningen = new ArrayList<>();
     }
 
 
@@ -62,6 +63,7 @@ public class RetailUser extends User {
         this.dateOfBirth = dateOfBirth;
         this.email = email;
         this.role = role;
+        this.retailRekeningen = new ArrayList<>();
     }
 
     public int getBsn() { return bsn;
@@ -167,12 +169,12 @@ public class RetailUser extends User {
         this.role = role;
     }
 
-//    public ArrayList<BankAccount> getRetailRekeningen() { return retailRekeningen; }
+    public ArrayList<BankAccount> getRetailRekeningen() { return retailRekeningen; }
 
-//    public void setRetailRekeningen(ArrayList<BankAccount> retailRekeningen) { this.retailRekeningen = retailRekeningen; }
+    public void setRetailRekeningen(ArrayList<BankAccount> retailRekeningen) { this.retailRekeningen = retailRekeningen; }
 
-//    public void addBankAccount(BankAccount bankAccount){
-//      retailRekeningen.add(bankAccount);
-//    }
+    public void addBankAccount(BankAccount bankAccount){
+        retailRekeningen.add(bankAccount);
+    }
 }
 
