@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import javax.persistence.*;
 
 
+import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,11 +17,11 @@ import java.util.List;
 
 @Entity
 
-public class BankAccount {
+public class BankAccount implements Serializable {
 
 @Id
 @GeneratedValue
-    private int BankAccountId;
+    private int bankAccountId;
     private String iBAN;
     private double balance;
 
@@ -30,9 +31,25 @@ public class BankAccount {
 //    private List<RetailUser> retailusers;
 
     //constructors
-    public BankAccount () {}
+    public BankAccount () {
+        this(0);
+      }
 
-    public BankAccount(String iBAN, double balance) {
+    public BankAccount(double balance){
+        this.iBAN = generateIban();
+        this.bankAccountId = 0;
+        this.balance = balance;
+    }
+
+    public BankAccount(String iBAN, double balance){
+        this.iBAN = iBAN;
+        this.balance = balance;
+        this.bankAccountId = 0;
+    }
+
+      public BankAccount(int bankAccountId, String iBAN, double balance) {
+        super();
+        this.bankAccountId = bankAccountId;
         this.iBAN = iBAN;
         this.balance = balance;
 //        this.transactions = new ArrayList<>();
