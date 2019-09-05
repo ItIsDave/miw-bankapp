@@ -47,4 +47,8 @@ public class LoginController {
        return"login_failed";
     }
 
+    @GetMapping(value = "newUser")
+    public String newUserHandler(){
+        return "new_user_select_type";
+    }
 }

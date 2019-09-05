@@ -43,6 +43,7 @@ public class RetailUser extends User {
         super(userName, userPassword, userId); this.retailRekeningen = new ArrayList<>();
     }
 
+
     public RetailUser(String userName, String userPassword, int userId,
                       int bsn, String firstName, String middleName, String lastName,
                       String streetName, int houseNumber, String extension,
