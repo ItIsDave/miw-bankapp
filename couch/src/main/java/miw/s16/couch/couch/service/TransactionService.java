@@ -30,8 +30,8 @@ public class TransactionService {
 //        BankAccount acountTo = bankAccountDao.findByIBAN("accountTo");
 //
 //        if (accountTo != null ){
-//            double balance = acountTo.getBalance();
-//            acountTo.setBalance(balance + amount);
+//            double balance = accountTo.getBalance();
+//            accountTo.setBalance(balance + amount);
 //            double balanceFrom = bankAccount.getBalance();
 //            double newBalance = balanceFrom - amount;
 //            if (newBalance < 0 ) {
@@ -55,8 +55,8 @@ public class TransactionService {
             return "Not enough money left in your account";
         } else {
             bankAccount.setBalance(balanceFrom - amount);
-            return "\nTransaction of " + amount + " successful. \nYour old balance was: " + balanceFrom +
-                    "\nYour new balance is " + newBalance;
+            return "Transaction of " + amount + " successful. Your old balance was: " + balanceFrom +
+                    "Your new balance is " + newBalance;
         }
     }
 

@@ -74,11 +74,12 @@ public class HibernateLab {
 
             //Creating transaction data
             Date d = new Date();
+
             // the to and from are strings. For the test we are going to connect each transaction with one of the retail users bank account
-            Transaction t1 = new Transaction("verjaardag",100.0,d,"NL82 INGB 0004 2181 41","NL45 ABNA 0976 0833 96",null,false);
-            Transaction t2 = new Transaction("verjaardag2",10.0,d,"NL82 INGB 0005 2181 41","NL45 ABNA 0976 0833 97",null,false);
-            Transaction t3 = new Transaction("verjaardag3",150.0,d,"NL82 INGB 0006 2181 41","NL45 ABNA 0976 0833 98",null,false);
-            Transaction t4 = new Transaction("verjaardag4",2000.0,d,"NL82 INGB 0007 2181 41","NL45 ABNA 0976 0833 99",null,false);
+            Transaction t1 = new Transaction(100.0,d,account1, account2, "verjaardag");
+            Transaction t2 = new Transaction(10.0,d, account1, account3, " ");
+            Transaction t3 = new Transaction(500.0, d, account4, account1, " ");
+            Transaction t4 = new Transaction(1500.0, d, account5, account4, " ");
 
             // confirmation that DB is running
             System.out.println("Creating schema");
@@ -97,10 +98,7 @@ public class HibernateLab {
             transactionDao.save(t2);
             transactionDao.save(t3);
             transactionDao.save(t4);
-            account1.addTransaction(t1);
-            account2.addTransaction(t2);
-            account2.addTransaction(t3);
-            account3.addTransaction(t4);
+
 
             // saving to the db
             userDao.save(johnDoe);

@@ -13,7 +13,6 @@ public class Loan {
     //variables
     @Id
     @GeneratedValue
-   // @Column(name="loanid")
     private int loanID;
     private double initialDebt;
     private String endDate;

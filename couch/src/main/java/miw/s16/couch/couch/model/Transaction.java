@@ -15,10 +15,13 @@ public class Transaction { //implements Serializable {
     private double amount;
     //@Column(name = "timeStamp")
     private Date transactionDate;
+    // one
+
     @ManyToOne(cascade = CascadeType.ALL)
     //@JoinColumn(name="bankAccountId")
     private BankAccount bankAccount;//getIban, can be internal bank account
-
+    @ManyToOne(cascade = CascadeType.ALL)
+    private BankAccount bankAccountTo;
     // "to" and "from" are reserved key words from MySQL
     private String fromAccount;//getIban, can be internal bank account
     private String toAccount;//getIban, can be internal bank account
@@ -26,7 +29,6 @@ public class Transaction { //implements Serializable {
     @ManyToOne(cascade = CascadeType.ALL)
     //@JoinColumn(name= "loanid")
     private Loan loan;  //betreft de lening indien van toepassing
-
 
 
     public Transaction() {
@@ -43,6 +45,42 @@ public class Transaction { //implements Serializable {
         this.toAccount = to;
         this.loan = loan;
         this.isPin = isPin;
+    }
+
+    public Transaction(double amount, Date transactionDate, BankAccount bankAccount, BankAccount bankAccountTo, String description) {
+        this.amount = amount;
+        this.transactionDate = transactionDate;
+        this.bankAccount = bankAccount;
+        this.bankAccountTo = bankAccountTo;
+        this.description = description;
+    }
+
+    public Transaction(String description, double amount, Date transactionDate, BankAccount bankAccount, BankAccount bankAccountTo, String fromAccount, String toAccount, boolean isPin, Loan loan) {
+        this.description = description;
+        this.amount = amount;
+        this.transactionDate = transactionDate;
+        this.bankAccount = bankAccount;
+        this.bankAccountTo = bankAccountTo;
+        this.fromAccount = fromAccount;
+        this.toAccount = toAccount;
+        this.isPin = isPin;
+        this.loan = loan;
+    }
+
+    public int getTransactionId() {
+        return transactionId;
+    }
+
+    public void setTransactionId(int transactionId) {
+        this.transactionId = transactionId;
+    }
+
+    public BankAccount getBankAccountTo() {
+        return bankAccountTo;
+    }
+
+    public void setBankAccountTo(BankAccount bankAccountTo) {
+        this.bankAccountTo = bankAccountTo;
     }
 
     public void setIdTransaction(int idTransaction) {

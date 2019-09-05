@@ -34,8 +34,6 @@ public class TransactionController {
     public String transactionHandler(@ModelAttribute User user, Transaction transaction, Model model, HttpServletRequest request) {
         HttpSession session = request.getSession (true);
         String userName = (String) session.getAttribute("userName");
-        System.out.println("De transactie is ingevuld: " + transaction.toString());
-        System.out.println("datum - tijd is: " + transaction.getTransactionDate().toString());
         model.addAttribute("transaction", transaction);
         model.addAttribute("date_time", transaction.getTransactionDate().toString());
         String feedback = transactionService.TransactionCalculationTest(accountTest, bankaccount, transaction.getAmount());
