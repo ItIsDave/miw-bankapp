@@ -9,6 +9,7 @@
 <h2>IBAN <span th:text="${bankaccountFrom}"></span></h2>
 <h2>Transactie details</h2>
 <form action="#" th:action="@{transactionHandler}" th:object="${transaction}" method="post">
+    <input type="hidden" th:field="*{from}"/>
     <table>
         <tr>
             <td>transactie datum-tijd:</td>
