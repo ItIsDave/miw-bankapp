@@ -5,10 +5,13 @@
     <title>Transaction</title>
 </head>
 <body>
-<h1>Welkom <span th:text="${name}"></span></h1>
-<h2>IBAN <span th:text="${bankaccountFrom}"></span></h2>
+<h1>Hoi <span th:text="${userName}"></span></h1>
+<h2>IBAN <span th:text="${bankAccountFrom}"></span></h2>
 <h2>Transactie details</h2>
-<form action="#" th:action="@{transactionHandler}" th:object="${transaction}" method="post">
+
+<form action="#" th:action="@{transactionConfirmation}" th:object="${transaction}" method="post">
+    <input type="hidden" th:field="*{fromAccount}"/>
+
     <table>
         <tr>
             <td>transactie datum-tijd:</td>
@@ -16,14 +19,14 @@
         </tr>
         <tr>
             <td>van IBAN:</td>
-            <td><span th:text="${bankaccountFrom}" th:field="*{from}">  </span> </td>
+            <td><span th:text="${bankAccountFrom}" th:field="*{fromAccount}">  </span> </td>
         </tr>
             <td>bedrag in euro's</td>
             <td><input type="text" th:field="*{amount}"/></td>
         <tr>
         <tr>
             <td>naar IBAN:</td>
-            <td><input type="text" th:field="*{to}"/></td>
+            <td><input type="text" th:field="*{toAccount}"/></td>
         </tr>
         <tr>
             <td>omschrijving:</td>
@@ -43,6 +46,6 @@
     </table>
 </form>
 <br>
-Ga <a href="/">terug</a> naar het begin...
+Ga <a href="/overview">terug</a> naar uw profiel pagina.
 </body>
 </html>
