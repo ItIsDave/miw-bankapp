@@ -38,8 +38,8 @@ public class HibernateLab {
 
             System.out.println("Creating schema");
 
-            BankAccount account1 = new BankAccount(BankAccount.generateIban(), 13000);
-            Boudewijn.addBankAccount(account1);
+            //BankAccount account1 = new BankAccount(BankAccount.generateIban(), 13000);
+            //Boudewijn.addBankAccount(account1);
 
 
             // saving to the db
