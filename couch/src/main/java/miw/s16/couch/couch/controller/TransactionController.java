@@ -1,6 +1,7 @@
 package miw.s16.couch.couch.controller;
 
 import miw.s16.couch.couch.model.BankAccount;
+import miw.s16.couch.couch.model.RetailUser;
 import miw.s16.couch.couch.model.Transaction;
 import miw.s16.couch.couch.model.User;
 import miw.s16.couch.couch.model.dao.RetailUserDao;
@@ -25,20 +26,21 @@ public class TransactionController {
     @Autowired
     TransactionService transactionService;
 
-    BankAccount accountTest = new BankAccount("NL10COUC0423456793", 5000.00);
-
-    BankAccount bankaccount = new BankAccount("NLXXCOUC0123456789", 1000);
+    BankAccount accountTo = new BankAccount("NL10COUC0423456793", 5000.00);
 
 
     @PostMapping(value="transactionConfirmation")
     public String transactionHandler(@ModelAttribute User user, Transaction transaction, Model model, HttpServletRequest request) {
         HttpSession session = request.getSession (true);
         String userName = (String) session.getAttribute("userName");
+        RetailUser retailUser1  = (RetailUser) session.getAttribute("retailUser");
+        // bank account from
+        BankAccount bankAccount = retailUser1.getBankAccounts().get(0);
         model.addAttribute("transaction", transaction);
         model.addAttribute("date_time", transaction.getTransactionDate().toString());
-        String feedback = transactionService.TransactionCalculationTest(accountTest, bankaccount, transaction.getAmount());
+        String feedback = transactionService.TransactionCalculationTest(accountTo, bankAccount, transaction.getAmount());
         model.addAttribute("feedback", feedback);
-        model.addAttribute("bankaccountFrom", transaction.getFromAccount());
+       // model.addAttribute("bankAccountFrom", transaction.getFromAccount());
         model.addAttribute("userName", userName);
         System.out.println("Voordat transaction is gevuld is transaction: " +
                 transaction);

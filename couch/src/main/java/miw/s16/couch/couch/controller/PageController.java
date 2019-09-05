@@ -30,10 +30,10 @@ public class PageController<retailUser> {
     @Autowired
     BankAccountDao bankAccountDao;
 
-
-    BankAccount accountTest = new BankAccount("NL10COUC0423456793", 5000.00);
-
-    private BankAccount bankaccount = new BankAccount("NL10COUC0423456793",50);
+//
+//    BankAccount accountTest = new BankAccount("NL10COUC0423456793", 5000.00);
+//
+//    private BankAccount bankaccount = new BankAccount("NL10COUC0423456793",50);
 
     Transaction transaction = new Transaction();
 
@@ -42,11 +42,15 @@ public class PageController<retailUser> {
         // log in session
         HttpSession session = request.getSession (true);
         String userName = (String) session.getAttribute("userName");
+        RetailUser retailUser1  = (RetailUser) session.getAttribute("retailUser");
         int userId = (int) session.getAttribute("userId");
+        BankAccount bankAccount = retailUser1.getBankAccounts().get(0);
+
+        transaction.setBankAccount(bankAccount);
+        transaction.setFromAccount(bankAccount.getIBAN());
         System.out.println("datum - tijd is: " + transaction.getTransactionDate().toString());
         model.addAttribute("transaction", transaction);
         model.addAttribute("date_time", transaction.getTransactionDate().toString());
-        transaction.setFromAccount(bankaccount.getIBAN());
         model.addAttribute("bankAccountFrom", transaction.getFromAccount());
         model.addAttribute("userName", userName);
         model.addAttribute("user", user);
