@@ -30,7 +30,6 @@ public class TransactionController {
     BankAccount accountTo = new BankAccount("NL10COUC0423456793", 5000.00);
 
 
-
     @PostMapping(value="transactionConfirmation")
     public String transactionHandler(@ModelAttribute User user, Transaction transaction, Model model, HttpServletRequest request) {
         HttpSession session = request.getSession (true);
@@ -40,7 +39,7 @@ public class TransactionController {
         BankAccount bankAccountFrom = retailUser1.getBankAccounts().get(0);
         model.addAttribute("transaction", transaction);
         model.addAttribute("date_time", transaction.getTransactionDate().toString());
-        String feedback = transactionService.TransactionCalculationTest(accountTo, bankAccountFrom, transaction.getAmount());
+        String feedback = transactionService.TransactionCalculation(transaction.getToAccount(), bankAccountFrom, transaction.getAmount());
         model.addAttribute("feedback", feedback);
         // model.addAttribute("bankAccountFrom", transaction.getFromAccount());
         model.addAttribute("userName", userName);

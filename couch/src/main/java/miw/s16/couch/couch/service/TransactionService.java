@@ -27,9 +27,9 @@ public class TransactionService {
     // from database
     public String TransactionCalculation(String accountTo, BankAccount bankAccount, Double amount) {
 
-        BankAccount bankAccountTo = bankAccountDao.findByIban("accountTo");
+        BankAccount bankAccountTo = bankAccountDao.findByIban(accountTo);
 
-        if (accountTo != null) {
+        if (bankAccountTo != null) {
             double balance = bankAccountTo.getBalance();
             bankAccountTo.setBalance(balance + amount);
             double balanceFrom = bankAccount.getBalance();
@@ -38,8 +38,11 @@ public class TransactionService {
                 return "Not enough money left in your account";
             } else {
                 bankAccount.setBalance(balanceFrom - amount);
-                return " Transaction of " + amount + " successful. Your old balance was: " + balanceFrom +
-                "Your new balance is " + newBalance;
+                // save changed in DB
+                bankAccountDao.save(bankAccountTo);
+                bankAccountDao.save(bankAccount);
+                return "\nTransaction of " + amount + " successful. \nYour old balance was: " + balanceFrom +
+                        "\nYour new balance is " + newBalance;
             }
         } else {
             return "User not found";

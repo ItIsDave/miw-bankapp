@@ -50,18 +50,17 @@ public class PageController<retailUser> {
         model.addAttribute("transaction", transaction);
         model.addAttribute("date_time", transaction.getTransactionDate().toString());
         model.addAttribute("bankAccountFrom", transaction.getFromAccount());
+        model.addAttribute("bankAccountTo", transaction.getToAccount());
         model.addAttribute("userName", userName);
         model.addAttribute("user", user);
         model.addAttribute("balance", bankAccountFrom.getBalance());
         System.out.println("Voordat transaction is gevuld is transaction: " +
                 transaction);
         return "transaction";
-
-        // return "login failed";
     }
 
 
-    // if user choses to make a new transaction
+    // if user chooses to make a new transaction
     @GetMapping(value = "transactionRequest")
     public String pageHandlerGet(@ModelAttribute User user, Model model, HttpServletRequest request) {
         // log in session
@@ -78,6 +77,7 @@ public class PageController<retailUser> {
         model.addAttribute("transaction", transaction);
         model.addAttribute("date_time", transaction.getTransactionDate().toString());
         model.addAttribute("bankAccountFrom", transaction.getFromAccount());
+        model.addAttribute("bankAccountTo", transaction.getToAccount());
         model.addAttribute("userName", userName);
         model.addAttribute("user", user);
         model.addAttribute("balance", bankAccountFrom.getBalance());
