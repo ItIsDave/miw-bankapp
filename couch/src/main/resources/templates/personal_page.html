@@ -8,12 +8,25 @@
 </head>
 <body>
 <h1>Welkom <span th:text="${userName}"></span></h1>
-    <h2>IBAN <a href="bankAccountDetailsHandler" th:object="${user}" method="post"><span th:text="${bankaccount}"></span></a></h2>
+
+<table>
+    <tr>
+        <th>Bankrekening(IBAN)</th>
+        <th>Saldo</th>
+    </tr>
+    <tr>
+
+        <td><span th:text="${bankaccount}"></span></td>
+        <td><span th:text="${balance}"></span></td>
+    </tr>
+</table>
+<br>
 
 <form action="#" th:action="@{pageHandler}" th:object="${user}" method="post">
     <tr>Klik voor een transactie te maken</tr>
         <input type="submit" value="Nieuwe Transactie">
 </form>
+<br>
 
     Ga <a href="/">terug</a>
 
