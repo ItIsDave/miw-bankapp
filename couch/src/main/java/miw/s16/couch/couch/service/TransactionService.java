@@ -25,25 +25,24 @@ public class TransactionService {
     }
 
     // from database
-//    public void TransactionCalculation(String accountTo, BankAccount bankAccount, Double amount){
-//
-//        BankAccount acountTo = bankAccountDao.findByIBAN("accountTo");
-//
-//        if (accountTo != null ){
-//            double balance = accountTo.getBalance();
-//            accountTo.setBalance(balance + amount);
-//            double balanceFrom = bankAccount.getBalance();
-//            double newBalance = balanceFrom - amount;
-//            if (newBalance < 0 ) {
-//                System.out.println("Not enough money left in your account");
-//            }
-//            else {
-//                bankAccount.setBalance(balanceFrom - amount);
-//            }
-//        }
-//        else{
-//            System.out.println("User not found");
-//        }
+    public void TransactionCalculation(String accountTo, BankAccount bankAccount, Double amount) {
+
+        BankAccount bankAccountTo = bankAccountDao.findByIban("accountTo");
+
+        if (accountTo != null) {
+            double balance = bankAccountTo.getBalance();
+            bankAccountTo.setBalance(balance + amount);
+            double balanceFrom = bankAccount.getBalance();
+            double newBalance = balanceFrom - amount;
+            if (newBalance < 0) {
+                System.out.println("Not enough money left in your account");
+            } else {
+                bankAccount.setBalance(balanceFrom - amount);
+            }
+        } else {
+            System.out.println("User not found");
+        }
+    }
 
     //from test data
     public String TransactionCalculationTest(BankAccount bankAccountTo, BankAccount bankAccount, Double amount) {

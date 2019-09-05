@@ -17,8 +17,7 @@ public class Transaction { //implements Serializable {
     private Date transactionDate;
     // one
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    //@JoinColumn(name="bankAccountId")
+    @ManyToOne
     private BankAccount bankAccount;//getIban, can be internal bank account
     @ManyToOne(cascade = CascadeType.ALL)
     private BankAccount bankAccountTo;
