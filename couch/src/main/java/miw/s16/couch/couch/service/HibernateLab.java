@@ -1,15 +1,13 @@
 package miw.s16.couch.couch.service;
 
+import miw.s16.couch.couch.model.entity.BankAccount;
 import miw.s16.couch.couch.model.RetailUser;
 import miw.s16.couch.couch.model.User;
 import miw.s16.couch.couch.model.dao.BankAccountDao;
 import miw.s16.couch.couch.model.dao.RetailUserDao;
 import miw.s16.couch.couch.model.dao.UserDao;
-import org.hibernate.loader.plan.exec.internal.AbstractLoadQueryDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import javax.transaction.Transactional;
 
 @Service
 public class HibernateLab {
@@ -39,6 +37,10 @@ public class HibernateLab {
             User Patrick = new User("Patrick", "1234", 15);
 
             System.out.println("Creating schema");
+
+            BankAccount account1 = new BankAccount(BankAccount.generateIban(), 13000);
+            Boudewijn.addBankAccount(account1);
+
 
             // saving to the db
             userDao.save(JohnDoe);

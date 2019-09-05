@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import javax.persistence.*;
 
 
+import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +16,7 @@ import java.util.List;
 //coding by PvdH
 
 @Entity
-public class BankAccount {
+public class BankAccount implements Serializable {
 
 @Id
 @GeneratedValue
