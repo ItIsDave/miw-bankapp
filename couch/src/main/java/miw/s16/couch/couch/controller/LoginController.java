@@ -54,6 +54,8 @@ public class LoginController {
             session.setAttribute("retailUser", loggedInRetailUser.get(0));
             session.setAttribute("userId", user.getUserId());
             model.addAttribute("userId", user.getUserId());
+            String bankAccount = loggedInRetailUser.get(0).getBankAccounts().get(0).getIBAN();
+            model.addAttribute("bankAccount", bankAccount);
 
 
 

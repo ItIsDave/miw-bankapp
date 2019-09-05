@@ -27,7 +27,7 @@ public class TransactionController {
     @Autowired
     TransactionService transactionService;
 
-    BankAccount accountTo = new BankAccount("NL10COUC0423456793", 5000.00);
+    BankAccount accountTo = new BankAccount();
 
 
     @PostMapping(value="transactionConfirmation")

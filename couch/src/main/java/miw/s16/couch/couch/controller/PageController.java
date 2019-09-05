@@ -49,7 +49,7 @@ public class PageController<retailUser> {
         System.out.println("datum - tijd is: " + transaction.getTransactionDate().toString());
         model.addAttribute("transaction", transaction);
         model.addAttribute("date_time", transaction.getTransactionDate().toString());
-        model.addAttribute("bankAccountFrom", transaction.getFromAccount());
+        model.addAttribute("bankAccountFrom", bankAccountFrom.getIBAN());
         model.addAttribute("bankAccountTo", transaction.getToAccount());
         model.addAttribute("userName", userName);
         model.addAttribute("user", user);
@@ -76,7 +76,7 @@ public class PageController<retailUser> {
         System.out.println("datum - tijd is: " + transaction.getTransactionDate().toString());
         model.addAttribute("transaction", transaction);
         model.addAttribute("date_time", transaction.getTransactionDate().toString());
-        model.addAttribute("bankAccountFrom", transaction.getFromAccount());
+        model.addAttribute("bankAccountFrom", bankAccountFrom.getIBAN());
         model.addAttribute("bankAccountTo", transaction.getToAccount());
         model.addAttribute("userName", userName);
         model.addAttribute("user", user);
