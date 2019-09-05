@@ -35,7 +35,7 @@ public class RetailUser extends User {
     }
 
 
-    public RetailUser() {
+    public RetailUser() { this("","",0);
     }
 
     public RetailUser(String userName, String userPassword, int userId) {

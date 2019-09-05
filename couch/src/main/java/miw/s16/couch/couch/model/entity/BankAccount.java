@@ -88,12 +88,14 @@ public class BankAccount {
         }
     }
 
+     */
+
     public String generateIban() {
         long account = generateAccount();                                 //when database is up, check if IBAN already
-        boolean duplicateCheck = checkIfIbanAlreadyExists(account);
+        /*boolean duplicateCheck = checkIfIbanAlreadyExists(account);
             if (duplicateCheck){
                 return generateIban();                                      //dangerous code: endless loop if (close to) all possible IBANs are generated
-            } else {
+            } else {*/
                 int checkDigits = generateCheckDigits(account);
                 StringBuilder iban = new StringBuilder();
                 iban.append("NL");
@@ -108,9 +110,9 @@ public class BankAccount {
                 iban.append(generateAccountAs10digitString(account));
                 return iban.toString();
             }
-    }
+    //}
 
-     */
+
 
 
     @Override
