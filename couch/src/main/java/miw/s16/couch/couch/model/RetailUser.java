@@ -174,7 +174,7 @@ public class RetailUser extends User {
     public void setRetailRekeningen(ArrayList<BankAccount> retailRekeningen) { this.retailRekeningen = retailRekeningen; }
 
     public void addBankAccount(BankAccount bankAccount){
-      retailRekeningen.add(bankAccount);
+        retailRekeningen.add(bankAccount);
     }
 }
 
