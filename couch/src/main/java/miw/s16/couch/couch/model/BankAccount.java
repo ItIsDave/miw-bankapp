@@ -8,7 +8,6 @@ import java.util.*;
 //coding by PvdH
 
 @Entity
-
 public class BankAccount {
     @Id
     @GeneratedValue
@@ -21,31 +20,42 @@ public class BankAccount {
     private List<RetailUser> retailUsers = new ArrayList<RetailUser>();
 
     //constructors
-    public BankAccount() {
+    public BankAccount () {
+        this(0);
     }
 
-    public BankAccount(String iban, double balance) {
-        this.iban = iban;
+    public BankAccount(double balance){
+        this.iban = generateIban();
+        this.bankAccountId = 0;
         this.balance = balance;
+    }
+
+    public BankAccount(String iBAN, double balance){
+        this.iban = iBAN;
+        this.balance = balance;
+        this.bankAccountId = 0;
+    }
+
+    public BankAccount(int bankAccountId, String iBAN, double balance) {
+        super();
+        this.bankAccountId = bankAccountId;
+        this.iban = iBAN;
+        this.balance = balance;
+//        this.transactions = new ArrayList<>();
+//        this.retailusers = new ArrayList<>();
     }
 
     //getters
-    public String getIban() {
-        return iban;
-    }
-
-    public double getBalance() {
-        return balance;
-    }
+    public String getIBAN() { return iban; }
+    public double getBalance() {return balance;}
 //    public void addTransactions (Transaction transaction) {transactions.add(transaction);}
+//    public void addRetailUser (RetailUser retailuser) {retailusers.add(retailuser);}
 
     //setter for changes in balance, transactions and retailusers
-    public void setBalance(double balance) {
-        this.balance = balance;
-    }
+    public void setBalance(double balance) { this.balance = balance; }
 
 /*
-    iban rules: https://nl.wikipedia.org/wiki/International_Bank_Account_Number
+    IBAN rules: https://nl.wikipedia.org/wiki/International_Bank_Account_Number
     If an account number starts with a 1 it's an internal account, if it starts with a 0 its a customer (SME or Retail) account
     The other starting numbers are never used
 */
@@ -57,18 +67,18 @@ public class BankAccount {
     }
 
     public int generateCheckDigits(long account) {
-        account *= 1000000L;                               //add 'NL' numerical and 00 to end of acc nr according to iban rules
+        account *= 1000000L;                               //add 'NL' numerical and 00 to end of acc nr according to IBAN rules
         account += 232100L;
         BigInteger bigaccount;                              //convert to BigInteger because long is too short
         bigaccount = BigInteger.valueOf(account);
-        bigaccount = bigaccount.add(new BigInteger("122430120000000000000000"));     //add 'COUC' numerical according to iban rules
+        bigaccount = bigaccount.add(new BigInteger("122430120000000000000000"));     //add 'COUC' numerical according to IBAN rules
         return (new BigInteger("98").subtract(bigaccount.mod(new BigInteger("97")))).intValue();        //calculate & return check digits
     }
 
-    public String generateAccountAs10digitString(long account) {
+    public String generateAccountAs10digitString(long account){
         String accAsString = Long.toString(account);
         StringBuilder tenDigitAccount = new StringBuilder(accAsString);
-        for (int i = 0; i < 10 - accAsString.length(); i++) {
+        for (int i = 0; i < 10-accAsString.length(); i++){
             tenDigitAccount.insert(0, 0);                   //add zero's in front of account number until it's a 10 digit number
         }
         return tenDigitAccount.toString();
@@ -84,80 +94,29 @@ public class BankAccount {
         }
     }
 
-*/
+     */
 
-//    public List<Transaction> getTransactions() {
-//        return transactions;
-//    }
-//
-//    public void setTransactions(List<Transaction> transactions) {
-//        this.transactions = transactions;
-//    }
-
-    public List<Transaction> getTransactions() {
-        return transactions;
+    public String generateIban() {
+        long account = generateAccount();                                 //when database is up, check if IBAN already
+        /*boolean duplicateCheck = checkIfIbanAlreadyExists(account);
+            if (duplicateCheck){
+                return generateIban();                                      //dangerous code: endless loop if (close to) all possible IBANs are generated
+            } else {*/
+        int checkDigits = generateCheckDigits(account);
+        StringBuilder iban = new StringBuilder();
+        iban.append("NL");
+        if (checkDigits < 10) {                                              //if checkdigits < 10, add a 0 in front
+            String checkDigitsString = Integer.toString(checkDigits);
+            checkDigitsString = "0" + checkDigitsString;
+            iban.append(checkDigitsString);
+        } else {
+            iban.append(checkDigits);
+        }
+        iban.append("COUC");
+        iban.append(generateAccountAs10digitString(account));
+        return iban.toString();
     }
 
-    public void setTransactions(List<Transaction> transactions) {
-        this.transactions = transactions;
-    }
-
-    public List<RetailUser> getRetailUsers() {
-        return retailUsers;
-    }
-
-    public void setRetailUsers(List<RetailUser> retailUsers) {
-        this.retailUsers = retailUsers;
-    }
-
-    public int getBankAccountId() {
-        return bankAccountId;
-    }
-
-    public void setBankAccountId(int bankAccountId) {
-        this.bankAccountId = bankAccountId;
-    }
-
-    public void setIban(String iban) {
-        this.iban = iban;
-    }
-
-    public List<RetailUser> getRetailusers() {
-        return retailUsers;
-    }
-
-    public void setRetailusers(List<RetailUser> retailUsers) {
-        this.retailUsers = retailUsers;
-    }
-
-    public void addRetailUser(RetailUser retailUser) {
-        retailUsers.add(retailUser);
-    }
-
-
-//    public String generateIban() {
-//        long account = generateAccount();                                 //when database is up, check if iban already
-//        boolean duplicateCheck = checkIfIbanAlreadyExists(account);
-//            if (duplicateCheck){
-//                return generateIban();                                      //dangerous code: endless loop if (close to) all possible IBANs are generated
-//            } else {
-//                int checkDigits = generateCheckDigits(account);
-//                StringBuilder iban = new StringBuilder();
-//                iban.append("NL");
-//                if (checkDigits < 10) {                                              //if checkdigits < 10, add a 0 in front
-//                    String checkDigitsString = Integer.toString(checkDigits);
-//                    checkDigitsString = "0" + checkDigitsString;
-//                    iban.append(checkDigitsString);
-//                } else {
-//                    iban.append(checkDigits);
-//                }
-//                iban.append("COUC");
-//                iban.append(generateAccountAs10digitString(account));
-//                return iban.toString();
-//            }
-//    }
-//
-//     */
 
     public void addTransaction(Transaction transaction){
         transactions.add(transaction

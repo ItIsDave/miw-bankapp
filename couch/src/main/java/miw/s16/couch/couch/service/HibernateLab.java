@@ -89,8 +89,10 @@ public class HibernateLab {
             bart.addBankAccount(account1);
             jan.addBankAccount(account5);
 
+
             // generate Iban method not ready yet
             BankAccount account6 = new BankAccount("NL10COUC0523456795", 13000);
+
             boudewijn.addBankAccount(account6);
 
             bankAccountDao.save(account1);

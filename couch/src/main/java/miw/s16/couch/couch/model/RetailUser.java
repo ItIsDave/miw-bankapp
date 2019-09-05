@@ -33,10 +33,12 @@ public class RetailUser extends User {
 //    }
 //>>>>>>> 777f207284e041f2c18637b87874e6efda03020d
 
-    public RetailUser(){
-        super();
+//    public RetailUser() {
+//        super();
+//    }
 
-    }
+    public RetailUser() { this("","");
+        }
 
 //    public RetailUser(String userName, String userPassword, int roleId) {
 //        super(userName, userPassword);
