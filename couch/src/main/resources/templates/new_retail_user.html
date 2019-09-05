@@ -42,6 +42,7 @@
             <td><input type="text" name="email" th:field="*{RetailUser.email}"/></td></tr>
         <tr><td>Rol: </td>
             <td><input type="text" name="role" th:field="*{RetailUser.role}"/></td></tr>
+        <!--<tr th:if="${#fields.hasErrors('*')}"><td th:each="err: ${#fields.errors('*')}" th:text="${err}">Input is incorrect</td></tr>-->
     </table>
     
         <button name="submit" type="submit" value="0">Verstuur</button>
