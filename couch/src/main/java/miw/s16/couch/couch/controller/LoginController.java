@@ -31,10 +31,6 @@ public class LoginController {
     @Autowired
     RetailUserDao retailUserDao;
 
-    @Autowired
-    BankAccountDao bankAccountDao;
-
-
     @GetMapping
     public String indexHandler(Model model) {
         lab.dbinit();
@@ -50,7 +46,7 @@ public class LoginController {
     public String loginHandler(@ModelAttribute User user, Model model, HttpServletRequest request) {
         boolean loginOk = validator.validateMemberPassword(user);
         List<RetailUser> loggedInRetailUser = retailUserDao.findByUserName(user.getUserName());
-        BankAccount loggedInBankAccount = bankAccountDao.findByBankAccountId(user.getBankaccountId());
+        BankAccount loggedInBankAccount = loggedInRetailUser.get(0).getBankAccounts().get(0);
         if (loginOk) {
             HttpSession session = request.getSession(true);
             // -- for login session ---
@@ -64,7 +60,7 @@ public class LoginController {
 
             if (loggedInRetailUser.get(0) != null) {
             model.addAttribute("userName", loggedInRetailUser.get(0).getUserName());
-            model.addAttribute("bankAccount", loggedInRetailUser.get(0).getBankAccounts().get(0));
+            model.addAttribute("bankAccount", loggedInRetailUser.get(0).getBankAccounts());
             model.addAttribute( "balance", loggedInBankAccount.getBalance());
             } else {
                 model.addAttribute("userName", user.getUserName());
