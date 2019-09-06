@@ -54,8 +54,6 @@ public class PageController<retailUser> {
         model.addAttribute("userName", userName);
         model.addAttribute("user", user);
         model.addAttribute("balance", bankAccountFrom.getBalance());
-        System.out.println("Voordat transaction is gevuld is transaction: " +
-                transaction);
         return "transaction";
     }
 
@@ -81,8 +79,6 @@ public class PageController<retailUser> {
         model.addAttribute("userName", userName);
         model.addAttribute("user", user);
         model.addAttribute("balance", bankAccountFrom.getBalance());
-        System.out.println("Voordat transaction is gevuld is transaction: " +
-                transaction);
         return "transaction";
     }
 

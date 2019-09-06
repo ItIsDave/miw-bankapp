@@ -1,9 +1,6 @@
 package miw.s16.couch.couch.controller;
 
-import miw.s16.couch.couch.model.BankAccount;
-import miw.s16.couch.couch.model.RetailUser;
-import miw.s16.couch.couch.model.Transaction;
-import miw.s16.couch.couch.model.User;
+import miw.s16.couch.couch.model.*;
 import miw.s16.couch.couch.model.dao.RetailUserDao;
 import miw.s16.couch.couch.service.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,14 +34,14 @@ public class TransactionController {
         RetailUser retailUser1  = (RetailUser) session.getAttribute("retailUser");
         // bank account from
         BankAccount bankAccountFrom = retailUser1.getBankAccounts().get(0);
-        model.addAttribute("transaction", transaction);
-        model.addAttribute("date_time", transaction.getTransactionDate().toString());
-        String feedback = transactionService.TransactionCalculation(transaction.getToAccount(), bankAccountFrom, transaction.getAmount());
+        // this transaction is not a loan
+        Loan loan = new Loan();
+        model.addAttribute("date_time", transaction.getTransactionDate().toString());model.addAttribute("transaction", transaction);
+        String feedback = transactionService.TransactionCalculation(transaction.getToAccount(), bankAccountFrom,
+                transaction.getAmount(), transaction.getTransactionDate(), transaction.getDescription(), transaction.getPin());
         model.addAttribute("feedback", feedback);
         // model.addAttribute("bankAccountFrom", transaction.getFromAccount());
         model.addAttribute("userName", userName);
-        System.out.println("Voordat transaction is gevuld is transaction: " +
-                transaction);
         return "successful_entry";
     }
 
