@@ -53,9 +53,15 @@ public class LoginController {
         BankAccount loggedInBankAccount = bankAccountDao.findByBankAccountId(user.getBankaccountId());
         if (loginOk) {
             HttpSession session = request.getSession(true);
-            // for login session
+            // -- for login session ---
             session.setAttribute("userName", user.getUserName());
-            //session.setAttribute("userId", user.getUserId());
+            session.setAttribute("retailUser", loggedInRetailUser.get(0));
+            session.setAttribute("userId", user.getUserId());
+            model.addAttribute("userId", user.getUserId());
+
+
+
+
             if (loggedInRetailUser.get(0) != null) {
             model.addAttribute("userName", loggedInRetailUser.get(0).getUserName());
             model.addAttribute("bankAccount", loggedInRetailUser.get(0).getBankAccounts().get(0));
@@ -63,7 +69,6 @@ public class LoginController {
             } else {
                 model.addAttribute("userName", user.getUserName());
                 model.addAttribute("bankAccount", "NL10COUC0523456797");
-
             }
             return "personal_page";
         }
@@ -75,8 +80,13 @@ public class LoginController {
     public String overviewHandler(@ModelAttribute User user, Model model, HttpServletRequest request) {
         HttpSession session = request.getSession(true);
         String userName = (String) session.getAttribute("userName");
+        RetailUser retailUser1  = (RetailUser) session.getAttribute("retailUser");
+        int userID = (int) session.getAttribute("userId");
+        String bankAccount = retailUser1.getBankAccounts().get(0).getIBAN();
         session.setAttribute("userName", userName);
+        session.setAttribute("bankAccount", bankAccount);
         model.addAttribute("userName", userName);
+        model.addAttribute("bankAccount", bankAccount);
         return "personal_page";
     }
 

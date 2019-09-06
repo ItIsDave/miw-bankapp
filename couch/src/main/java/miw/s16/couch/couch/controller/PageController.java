@@ -1,14 +1,17 @@
 package miw.s16.couch.couch.controller;
 
 
+import miw.s16.couch.couch.model.RetailUser;
 import miw.s16.couch.couch.model.Transaction;
 import miw.s16.couch.couch.model.User;
 import miw.s16.couch.couch.model.BankAccount;
+import miw.s16.couch.couch.model.dao.BankAccountDao;
 import miw.s16.couch.couch.model.dao.RetailUserDao;
 import miw.s16.couch.couch.service.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -25,12 +28,10 @@ public class PageController<retailUser> {
     @Autowired
     TransactionService transactionService;
 
+    @Autowired
+    BankAccountDao bankAccountDao;
 
-    BankAccount accountTest = new BankAccount("NL10COUC0423456793", 5000.00);
-
-
-    private BankAccount bankaccount = new BankAccount("NLXXCOUC0123456789"//,"retail"
-            , 50);
+    public BankAccount bankAccount = new BankAccount();
 
     Transaction transaction = new Transaction();
 
@@ -39,18 +40,50 @@ public class PageController<retailUser> {
         // log in session
         HttpSession session = request.getSession (true);
         String userName = (String) session.getAttribute("userName");
-        //int userId = (int) session.getAttribute("userId");
+        RetailUser retailUser1  = (RetailUser) session.getAttribute("retailUser");
+        int userId = (int) session.getAttribute("userId");
+        BankAccount bankAccountFrom = retailUser1.getBankAccounts().get(0);
+
+        transaction.setBankAccount(bankAccount);
+        transaction.setFromAccount(bankAccount.getIBAN());
         System.out.println("datum - tijd is: " + transaction.getTransactionDate().toString());
         model.addAttribute("transaction", transaction);
         model.addAttribute("date_time", transaction.getTransactionDate().toString());
-        transaction.setFromAccount(bankaccount.getIBAN());
         model.addAttribute("bankAccountFrom", transaction.getFromAccount());
+        model.addAttribute("bankAccountTo", transaction.getToAccount());
         model.addAttribute("userName", userName);
         model.addAttribute("user", user);
+        model.addAttribute("balance", bankAccountFrom.getBalance());
         System.out.println("Voordat transaction is gevuld is transaction: " +
-                    transaction);
+                transaction);
         return "transaction";
-
-       // return "login failed";
     }
+
+
+    // if user chooses to make a new transaction
+    @GetMapping(value = "transactionRequest")
+    public String pageHandlerGet(@ModelAttribute User user, Model model, HttpServletRequest request) {
+        // log in session
+        Transaction transaction = new Transaction();
+        HttpSession session = request.getSession (true);
+        String userName = (String) session.getAttribute("userName");
+        RetailUser retailUser1  = (RetailUser) session.getAttribute("retailUser");
+        int userId = (int) session.getAttribute("userId");
+        BankAccount bankAccountFrom = retailUser1.getBankAccounts().get(0);
+
+        transaction.setBankAccount(bankAccount);
+        transaction.setFromAccount(bankAccount.getIBAN());
+        System.out.println("datum - tijd is: " + transaction.getTransactionDate().toString());
+        model.addAttribute("transaction", transaction);
+        model.addAttribute("date_time", transaction.getTransactionDate().toString());
+        model.addAttribute("bankAccountFrom", transaction.getFromAccount());
+        model.addAttribute("bankAccountTo", transaction.getToAccount());
+        model.addAttribute("userName", userName);
+        model.addAttribute("user", user);
+        model.addAttribute("balance", bankAccountFrom.getBalance());
+        System.out.println("Voordat transaction is gevuld is transaction: " +
+                transaction);
+        return "transaction";
+    }
+
 }
