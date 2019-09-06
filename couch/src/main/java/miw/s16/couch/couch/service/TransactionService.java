@@ -43,8 +43,9 @@ public class TransactionService {
             } else {
                 bankAccount.setBalance(balanceFrom - amount);
                 // save changed in DB
+                Loan loan = new Loan();
 
-                Transaction transaction = new Transaction(description, amount, transactionDate, bankAccount, bankAccountTo, accountTo, bankAccount.getIBAN().toString(), isPin);
+                Transaction transaction = new Transaction(description, amount, transactionDate, bankAccount, bankAccountTo, accountTo, bankAccount.getIBAN().toString(), isPin, loan);
                 bankAccountDao.save(bankAccountTo);
                 bankAccountDao.save(bankAccount);
                 // message for testing
