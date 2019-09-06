@@ -26,19 +26,11 @@ public class BankAccount {
 
     public BankAccount(double balance){
         this.iban = generateIban();
-        this.bankAccountId = 0;
         this.balance = balance;
     }
 
-    public BankAccount(String iBAN, double balance){
-        this.iban = iBAN;
-        this.balance = balance;
-        this.bankAccountId = 0;
-    }
-
-    public BankAccount(int bankAccountId, String iBAN, double balance) {
+    public BankAccount( String iBAN, double balance) {
         super();
-        this.bankAccountId = bankAccountId;
         this.iban = iBAN;
         this.balance = balance;
 //        this.transactions = new ArrayList<>();
@@ -46,6 +38,7 @@ public class BankAccount {
     }
 
     //getters
+    public int getBankAccountId() {return bankAccountId; }
     public String getIBAN() { return iban; }
     public double getBalance() {return balance;}
 //    public void addTransactions (Transaction transaction) {transactions.add(transaction);}

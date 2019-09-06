@@ -23,6 +23,7 @@ public class User  {
 
     private String userName;
     private String userPassword;
+    private int bankAccountId;
 
     // empty constructor
     public User() {
@@ -61,4 +62,6 @@ public class User  {
         this.userId = userId;
     }
 
+    public int getBankaccountId() { return bankAccountId; }
 }
+
