@@ -12,6 +12,7 @@ public class BankAccount {
     @Id
     @GeneratedValue
     private int bankAccountId;
+    @Column(unique = true)
     private String iban;
     private double balance;
     @OneToMany(mappedBy = "bankAccount")

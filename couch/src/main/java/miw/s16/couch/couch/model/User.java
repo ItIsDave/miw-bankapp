@@ -18,9 +18,8 @@ import javax.persistence.*;
 public class User  {
     @Id
     @GeneratedValue
-    @Column(name = "userId", unique = true)
-    private int userId;
-
+     private int userId;
+    @Column(unique = true)
     private String userName;
     private String userPassword;
 
