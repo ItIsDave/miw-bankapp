@@ -20,6 +20,7 @@ import java.util.*;
 @Service
 public class HibernateLab {
 
+
     @Autowired
     UserDao userDao;
 
@@ -38,7 +39,8 @@ public class HibernateLab {
     }
 
     public void dbinit() {
-        // to ensure no data duplication
+
+       // to ensure no data duplication
         if (userDao.findByUserPassword("1").size() == 0) {
             // user info for checking if DB is empty
             User johnDoe = new User("John Doe", "1");
@@ -121,18 +123,8 @@ public class HibernateLab {
             retailUserDao.save(jan);
             retailUserDao.save(boudewijn);
 
-
-
-
-
-
-
-
-
-
-
-
         }
+
 
     }
 
