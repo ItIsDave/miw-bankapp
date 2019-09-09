@@ -53,11 +53,11 @@ public class TransactionService {
                         transaction);
                 transactionDao.save(transaction);
 
-                return "\nTransaction of " + amount + " successful. \nYour old balance was: " + balanceFrom +
+                return "\nBedankt! Transaction of " + amount + " successful. \nYour old balance was: " + balanceFrom +
                         "\nYour new balance is " + newBalance;
             }
         } else {
-            return "User not found";
+            return "User not found, please try again";
         }
     }
 

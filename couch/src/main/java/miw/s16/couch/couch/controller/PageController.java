@@ -43,7 +43,6 @@ public class PageController<retailUser> {
         RetailUser retailUser1  = (RetailUser) session.getAttribute("retailUser");
         int userId = (int) session.getAttribute("userId");
         BankAccount bankAccountFrom = retailUser1.getBankAccounts().get(0);
-
         transaction.setBankAccount(bankAccount);
         transaction.setFromAccount(bankAccount.getIBAN());
         System.out.println("datum - tijd is: " + transaction.getTransactionDate().toString());
