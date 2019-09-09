@@ -31,7 +31,6 @@ public class LoginController {
     @Autowired
     RetailUserDao retailUserDao;
 
-
     @GetMapping
     public String indexHandler(Model model) {
         lab.dbinit();
@@ -47,6 +46,7 @@ public class LoginController {
     public String loginHandler(@ModelAttribute User user, Model model, HttpServletRequest request) {
         boolean loginOk = validator.validateMemberPassword(user);
         List<RetailUser> loggedInRetailUser = retailUserDao.findByUserName(user.getUserName());
+        BankAccount loggedInBankAccount = loggedInRetailUser.get(0).getBankAccounts().get(0);
         if (loginOk) {
             HttpSession session = request.getSession(true);
             // -- for login session ---
@@ -54,13 +54,16 @@ public class LoginController {
             session.setAttribute("retailUser", loggedInRetailUser.get(0));
             session.setAttribute("userId", user.getUserId());
             model.addAttribute("userId", user.getUserId());
+            String bankAccount = loggedInRetailUser.get(0).getBankAccounts().get(0).getIBAN();
+            model.addAttribute("bankAccount", bankAccount);
 
 
 
 
             if (loggedInRetailUser.get(0) != null) {
             model.addAttribute("userName", loggedInRetailUser.get(0).getUserName());
-            model.addAttribute("bankAccount", loggedInRetailUser.get(0).getBankAccounts().get(0));
+            model.addAttribute("bankAccount", loggedInRetailUser.get(0).getBankAccounts());
+            model.addAttribute( "balance", loggedInBankAccount.getBalance());
             } else {
                 model.addAttribute("userName", user.getUserName());
                 model.addAttribute("bankAccount", "NL10COUC0523456797");

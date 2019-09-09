@@ -18,9 +18,9 @@ import javax.persistence.*;
 public class User  {
     @Id
     @GeneratedValue
-    @Column(name = "userId", unique = true)
     private int userId;
 
+    @Column(name = "userName", unique = true)
     private String userName;
     private String userPassword;
 
@@ -60,5 +60,5 @@ public class User  {
     public void setUserId(int userId) {
         this.userId = userId;
     }
-
 }
+

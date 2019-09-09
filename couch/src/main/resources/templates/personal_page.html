@@ -8,13 +8,15 @@
 </head>
 <body>
 <h1>Welkom <span th:text="${userName}"></span></h1>
+
 <table>
     <tr>
         <th>Bankrekening(IBAN)</th>
         <th>Saldo</th>
     </tr>
     <tr>
-        <td><span th:text="${bankaccount}"></span></td>
+
+        <td><span th:text="${bankAccount}"></span></td>
         <td><span th:text="${balance}"></span></td>
     </tr>
 </table>
@@ -24,6 +26,7 @@
     <tr>Klik voor een transactie te maken</tr>
         <input type="submit" value="Nieuwe Transactie">
 </form>
+<br>
 
     Ga <a href="/">terug</a>
 
