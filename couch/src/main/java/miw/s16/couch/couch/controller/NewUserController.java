@@ -1,11 +1,10 @@
 package miw.s16.couch.couch.controller;
 
+import miw.s16.couch.couch.model.BankAccount;
 import miw.s16.couch.couch.model.RetailUser;
-import miw.s16.couch.couch.model.SMEUser;
 import miw.s16.couch.couch.model.User;
 import miw.s16.couch.couch.model.dao.BankAccountDao;
 import miw.s16.couch.couch.model.dao.RetailUserDao;
-import miw.s16.couch.couch.model.entity.BankAccount;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +17,14 @@ import javax.validation.Valid;
 
 @Controller
 public class NewUserController {
+
+//
+//    @GetMapping(value = "newRetailUser")  //van select type -> new retail user
+//    public String newRetailUserHandler(Model model){
+//        model.addAttribute("RetailUser", new RetailUser());
+//        return "new_retail_user";
+//    }
+
 
 @Autowired
     RetailUserDao retailUserDao;
@@ -42,7 +49,6 @@ public class NewUserController {
         retailUser.addBankAccount(bankAccount);             //ba gekoppeld aan user
         bankAccountDao.save(bankAccount);                   //ba opgeslagen in DB
         retailUserDao.save(retailUser);                     //user opgeslagen in DB
-        System.out.println(retailUser.getRetailRekeningen().get(0));
         System.out.println("User ID: " + retailUser.getUserId());
         return "new_retail_user_success";
     }

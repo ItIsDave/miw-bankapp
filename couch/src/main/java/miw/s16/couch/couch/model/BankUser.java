@@ -4,8 +4,8 @@ public class BankUser extends User {
 
     private String role;
 
-    public BankUser(String userName, String password, int id, String role) {
-        super(userName, password, id);
+    public BankUser(String userName, String password, String role) {
+        super(userName, password);
         this.role = role;
     }
 

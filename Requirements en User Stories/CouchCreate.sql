@@ -21,16 +21,16 @@ USE `Couch` ;
 -- Table `Couch`.`Bankaccount`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Couch`.`Bankaccount` (
-  `IBAN` INT(11) NOT NULL,
+  `iban` INT(11) NOT NULL,
   `type` VARCHAR(45) NOT NULL,
   `balance` DOUBLE NOT NULL,
   `interestRate` DOUBLE NOT NULL,
   `Bankaccount_IBAN` INT(11) NOT NULL,
-  PRIMARY KEY (`IBAN`, `Bankaccount_IBAN`),
+  PRIMARY KEY (`iban`, `Bankaccount_IBAN`),
   INDEX `fk_Bankaccount_Bankaccount1_idx` (`Bankaccount_IBAN` ASC) VISIBLE,
   CONSTRAINT `fk_Bankaccount_Bankaccount1`
     FOREIGN KEY (`Bankaccount_IBAN`)
-    REFERENCES `Couch`.`Bankaccount` (`IBAN`)
+    REFERENCES `Couch`.`Bankaccount` (`iban`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -133,7 +133,7 @@ CREATE TABLE IF NOT EXISTS `Couch`.`Transaction` (
   INDEX `fk_Transaction_Loan1_idx` (`Loan_idLoan` ASC) VISIBLE,
   CONSTRAINT `fk_Transaction_Bankaccount1`
     FOREIGN KEY (`Bankaccount_IBAN`)
-    REFERENCES `Couch`.`Bankaccount` (`IBAN`)
+    REFERENCES `Couch`.`Bankaccount` (`iban`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Transaction_Loan1`
@@ -171,7 +171,7 @@ CREATE TABLE IF NOT EXISTS `Couch`.`Bankaccount_has_Retail` (
   INDEX `fk_Bankaccount_has_Retail_Bankaccount1_idx` (`Bankaccount_IBAN` ASC) VISIBLE,
   CONSTRAINT `fk_Bankaccount_has_Retail_Bankaccount1`
     FOREIGN KEY (`Bankaccount_IBAN`)
-    REFERENCES `Couch`.`Bankaccount` (`IBAN`)
+    REFERENCES `Couch`.`Bankaccount` (`iban`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Bankaccount_has_Retail_Retail1`
@@ -199,7 +199,7 @@ CREATE TABLE IF NOT EXISTS `Couch`.`SME_has_Bankaccount` (
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_SME_has_Bankaccount_Bankaccount1`
     FOREIGN KEY (`Bankaccount_IBAN`)
-    REFERENCES `Couch`.`Bankaccount` (`IBAN`)
+    REFERENCES `Couch`.`Bankaccount` (`iban`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -221,7 +221,7 @@ CREATE TABLE IF NOT EXISTS `Couch`.`Bank_has_Bankaccount` (
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Bank_has_Bankaccount_Bankaccount1`
     FOREIGN KEY (`Bankaccount_IBAN`)
-    REFERENCES `Couch`.`Bankaccount` (`IBAN`)
+    REFERENCES `Couch`.`Bankaccount` (`iban`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;

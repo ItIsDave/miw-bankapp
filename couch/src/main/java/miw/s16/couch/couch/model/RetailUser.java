@@ -1,11 +1,12 @@
 package miw.s16.couch.couch.model;
-import miw.s16.couch.couch.model.entity.BankAccount;
-import org.hibernate.validator.constraints.Length;
+
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.validation.constraints.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class RetailUser extends User {
@@ -24,39 +25,50 @@ public class RetailUser extends User {
     private String extension;
     private String zipcode;
     private String city;
-    private int phoneNumber;
+    private String phoneNumber;
     private String dateOfBirth;
     @Email
     private String email;
     private String role;
-    private ArrayList <BankAccount> retailRekeningen;
+    @ManyToMany
+    private List<BankAccount> bankAccounts = new ArrayList<BankAccount>();
 
 
-    public RetailUser(String userName, String userPassword, int userId,
-                      int bsn, String firstName, String middleName, String lastName,
-                      String streetName, int houseNumber,
-                      String zipcode, String city, int phoneNumber,
-                      String dateOfBirth, String email, String role) {
-        this(userName, userPassword, userId, bsn,  firstName, "", lastName,
-                streetName, houseNumber, "", zipcode, city, phoneNumber, dateOfBirth, email, role);
-        this.retailRekeningen = new ArrayList<>();
+
+//    public RetailUser(String userName, String userPassword,
+//                      int bsn, String firstName, String middleName, String lastName,
+//                      String streetName, int houseNumber,
+//                      String zipcode, String city, int phoneNumber,
+//                      String dateOfBirth, String email, String role) {
+//        this(userName, userPassword, bsn,  firstName, "", lastName,
+//                streetName, houseNumber, "", zipcode, city, phoneNumber, dateOfBirth, email, role);
+//        this.bankAccounts = new ArrayList<>();
+//    }
+//>>>>>>> 777f207284e041f2c18637b87874e6efda03020d
+
+//    public RetailUser() {
+//        super();
+//    }
+
+    public RetailUser() { this("","");
+        }
+
+//    public RetailUser(String userName, String userPassword, int roleId) {
+//        super(userName, userPassword);
+
+    public RetailUser(String userName, String userPassword) {
+        super(userName, userPassword);
+        this.bankAccounts = new ArrayList<>();
+
     }
 
+    public RetailUser(String userName, String userPassword, int bsn, String firstName,
+                      String middleName, String lastName,
 
-    public RetailUser() { this("","",0);
-    }
-
-    public RetailUser(String userName, String userPassword, int userId) {
-        super(userName, userPassword, userId); this.retailRekeningen = new ArrayList<>();
-    }
-
-
-    public RetailUser(String userName, String userPassword, int userId,
-                      int bsn, String firstName, String middleName, String lastName,
                       String streetName, int houseNumber, String extension,
-                      String zipcode, String city, int phoneNumber,
+                      String zipcode, String city, String phoneNumber,
                       String dateOfBirth, String email, String role) {
-        super(userName, userPassword, userId);
+        super(userName, userPassword);
         this.bsn = bsn;
         this.firstName = firstName;
         this.middleName = middleName;
@@ -70,7 +82,26 @@ public class RetailUser extends User {
         this.dateOfBirth = dateOfBirth;
         this.email = email;
         this.role = role;
-        this.retailRekeningen = new ArrayList<>();
+
+    }
+
+
+    public RetailUser(String userName, String userPassword, int bsn, String firstName, String middleName, String lastName, String streetName, int houseNumber, String extension, String zipcode, String city, String phoneNumber, String dateOfBirth, String email, String role, List<BankAccount> bankAccounts) {
+        super(userName, userPassword);
+        this.bsn = bsn;
+        this.firstName = firstName;
+        this.middleName = middleName;
+        this.lastName = lastName;
+        this.streetName = streetName;
+        this.houseNumber = houseNumber;
+        this.extension = extension;
+        this.zipcode = zipcode;
+        this.city = city;
+        this.phoneNumber = phoneNumber;
+        this.dateOfBirth = dateOfBirth;
+        this.email = email;
+        this.role = role;
+        this.bankAccounts = bankAccounts;
     }
 
     public int getBsn() { return bsn;
@@ -144,11 +175,11 @@ public class RetailUser extends User {
         this.city = city;
     }
 
-    public int getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
@@ -176,12 +207,14 @@ public class RetailUser extends User {
         this.role = role;
     }
 
-    public ArrayList<BankAccount> getRetailRekeningen() { return retailRekeningen; }
+    public List<BankAccount> getBankAccounts() { return bankAccounts; }
 
-    public void setRetailRekeningen(ArrayList<BankAccount> retailRekeningen) { this.retailRekeningen = retailRekeningen; }
+    public void setBankAccounts(List<BankAccount> bankAccounts) { this.bankAccounts = bankAccounts; }
 
     public void addBankAccount(BankAccount bankAccount){
-        retailRekeningen.add(bankAccount);
+      bankAccounts.add(bankAccount);
     }
+
+
 }
 

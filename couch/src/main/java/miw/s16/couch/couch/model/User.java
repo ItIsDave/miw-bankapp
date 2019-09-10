@@ -1,39 +1,40 @@
 package miw.s16.couch.couch.model;
 
-import org.hibernate.annotations.Table;
+import javax.persistence.Table;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-
 import javax.persistence.*;
-
+//@Configuration
+//@EnableAutoConfiguration
 @Entity
-public class User {
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+public class User  {
     @Id
     @GeneratedValue
     private int userId;
+
+    @Column(name = "userName", unique = true)
     private String userName;
     private String userPassword;
 
-   // @OneToOne(mappedBy = "user")
-  //  private RetailUser retailUser;
-
-    public User(String userName, String userPassword, RetailUser retailUser) {
-        this.userName = userName;
-        this.userPassword = userPassword;
-    }
-
+    // empty constructor
     public User() {
-        this("", "", 100);
+       super();
     }
+
 
     public User(String userName, String userPassword) {
-        this(userName, userPassword, 0);
-    }
-
-    public User(String userName, String userPassword, int userId) {
         super();
         this.userName = userName;
         this.userPassword = userPassword;
-        this.userId = userId;
+
     }
 
     public String getUserName() {
@@ -60,3 +61,4 @@ public class User {
         this.userId = userId;
     }
 }
+

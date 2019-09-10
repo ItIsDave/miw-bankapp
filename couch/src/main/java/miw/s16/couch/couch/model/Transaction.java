@@ -1,109 +1,184 @@
 package miw.s16.couch.couch.model;
 
-import miw.s16.couch.couch.model.entity.BankAccount;
-import miw.s16.couch.couch.model.entity.Loan;
+import javax.persistence.*;
 
+import java.io.Serializable;
 import java.util.Date;
 
-//@Entity
-public class Transaction //implements Serializable
- {
+@Entity
+public class Transaction { //implements Serializable {
 
-//@Id
-//@GeneratedValue
-  private int idTransaction;
-  private String description;
-  private double amount;
-//@Column(name = "timeStamp")
-  private Date transactionDate;
-//@ManyToOne
-  private String from;//getIBAN, can be internal bank account
-//@ManyToOne
-  private String to;//getIBAN, can be internal bank account
-//@ManyToOne
-     private Loan loan;  //betreft de lening indien van toepassing
-     private boolean isPin;
+    @Id
+    @GeneratedValue
+    private int transactionId;
+    private String description;
+    private double amount;
+    //@Column(name = "timeStamp")
+    private Date transactionDate;
+    // one
+
+    @ManyToOne
+    private BankAccount bankAccount;//getIban, can be internal bank account
+    @ManyToOne(cascade = CascadeType.ALL)
+    private BankAccount bankAccountTo;
+    // "to" and "from" are reserved key words from MySQL
+    private String fromAccount;//getIban, can be internal bank account
+    private String toAccount;//getIban, can be internal bank account
+    private boolean isPin;
+    @ManyToOne(cascade = CascadeType.ALL)
+    //@JoinColumn(name= "loanid")
+    private Loan loan;  //betreft de lening indien van toepassing
+
 
     public Transaction() {
-        this(0,"unknown",0,new Date(),"", "" , new Loan(), false);
+        this("unknown", 0, new Date(), "", "", new Loan(), false);
     }
 
 
-    public Transaction(int idTransaction, String description, double amount, Date transactionDate,
+    public Transaction(String description, double amount, Date transactionDate,
                        String from, String to, Loan loan, boolean isPin) {
-        this.idTransaction = idTransaction;
         this.description = description;
         this.amount = amount;
         this.transactionDate = transactionDate;
-        this.from = from;
-        this.to = to;
+        this.fromAccount = from;
+        this.toAccount = to;
         this.loan = loan;
         this.isPin = isPin;
     }
 
-     public int getIdTransaction() {
-         return idTransaction;
-     }
+    public Transaction(double amount, Date transactionDate, BankAccount bankAccount, BankAccount bankAccountTo, String description) {
+        this.amount = amount;
+        this.transactionDate = transactionDate;
+        this.bankAccount = bankAccount;
+        this.bankAccountTo = bankAccountTo;
+        this.description = description;
+    }
 
-     public String getDescription() {
-         return description;
-     }
+    public Transaction(String description, double amount, Date transactionDate, BankAccount bankAccount, BankAccount bankAccountTo, String toAccount, String fromAccount, boolean isPin, Loan loan) {
+        this.description = description;
+        this.amount = amount;
+        this.transactionDate = transactionDate;
+        this.bankAccount = bankAccount;
+        this.bankAccountTo = bankAccountTo;
+        this.fromAccount = fromAccount;
+        this.toAccount = toAccount;
+        this.isPin = isPin;
+        this.loan = loan;
+    }
 
-     public void setDescription(String description) {
-         this.description = description;
-     }
+    // constructror for transactions not needing a loan object
 
-     public double getAmount() {
-         return amount;
-     }
+    public Transaction(String description, double amount, Date transactionDate, BankAccount bankAccount, BankAccount bankAccountTo, String toAccount, String fromAccount, boolean isPin) {
+        this.description = description;
+        this.amount = amount;
+        this.transactionDate = transactionDate;
+        this.bankAccount = bankAccount;
+        this.bankAccountTo = bankAccountTo;
+        this.fromAccount = fromAccount;
+        this.toAccount = toAccount;
+        this.isPin = isPin;
+    }
 
-     public void setAmount(double amount) {
-         this.amount = amount;
-     }
 
-     public Date getTransactionDate() {
-         return transactionDate;
-     }
+    public int getTransactionId() {
+        return transactionId;
+    }
 
-     public void setTransactionDate(Date transactionDate) {
-         this.transactionDate = transactionDate;
-     }
+    public void setTransactionId(int transactionId) {
+        this.transactionId = transactionId;
+    }
 
-     public void setTo(String to) {
-         this.to = to;
-     }
+    public BankAccount getBankAccountTo() {
+        return bankAccountTo;
+    }
 
-     public String getTo() {
-         return to;
-     }
+    public void setBankAccountTo(BankAccount bankAccountTo) {
+        this.bankAccountTo = bankAccountTo;
+    }
 
-     public String getFrom() {
-         return from;
-     }
+    public void setIdTransaction(int idTransaction) {
+        this.transactionId = idTransaction;
+    }
 
-     public void setFrom(String from) {
-         this.from = from;
-     }
+    public BankAccount getBankAccount() {
+        return bankAccount;
+    }
 
-     public boolean isPin() {
-         return isPin;
-     }
+    public void setBankAccount(BankAccount bankAccount) {
+        this.bankAccount = bankAccount;
+    }
 
-     public void setPin(boolean isPin) {
-         this.isPin = isPin;
-     }
+    public Loan getLoan() {
+        return loan;
+    }
 
-     @Override
-     public String toString() {
-         return "Transaction{" +
-                 "idTransaction=" + idTransaction +
-                 ", description='" + description + '\'' +
-                 ", amount=" + amount +
-                 ", transactionDate=" + transactionDate.toString() +
-                 ", from=" + from +
-                 ", to=" + to +
-                 //", loan=" + loan.toString() +
-                 ", isPin=" + isPin +
-                 '}';
-     }
- }
+    public void setLoan(Loan loan) {
+        this.loan = loan;
+    }
+
+    public int getIdTransaction() {
+        return transactionId;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public double getAmount() {
+        return amount;
+    }
+
+    public void setAmount(double amount) {
+        this.amount = amount;
+    }
+
+    public Date getTransactionDate() {
+        return transactionDate;
+    }
+
+    public void setTransactionDate(Date transactionDate) {
+        this.transactionDate = transactionDate;
+    }
+
+    public String getFromAccount() {
+        return fromAccount;
+    }
+
+    public void setFromAccount(String fromAccount) {
+        this.fromAccount = fromAccount;
+    }
+
+    public String getToAccount() {
+        return toAccount;
+    }
+
+    public void setToAccount(String toAccount) {
+        this.toAccount = toAccount;
+    }
+
+    public boolean getPin() {
+        return isPin;
+    }
+
+    public void setPin(boolean isPin) {
+        this.isPin = isPin;
+    }
+
+    @Override
+    public String toString() {
+        return "Transaction{" +
+                "idTransaction=" + transactionId +
+                ", description='" + description + '\'' +
+                ", amount=" + amount +
+                ", transactionDate=" + transactionDate.toString() +
+                ", from=" + fromAccount +
+                ", to=" + toAccount +
+                //", loan=" + loan.toString() +
+                ", isPin=" + isPin +
+                '}';
+    }
+}

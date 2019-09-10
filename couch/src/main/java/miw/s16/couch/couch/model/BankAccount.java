@@ -1,63 +1,45 @@
-package miw.s16.couch.couch.model.entity;
+package miw.s16.couch.couch.model;
 
-
-import miw.s16.couch.couch.model.RetailUser;
-import miw.s16.couch.couch.model.Transaction;
-import org.hibernate.annotations.Table;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import javax.persistence.Entity;
 import javax.persistence.*;
-
-
-import java.io.Serializable;
 import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 //coding by PvdH
 
 @Entity
-
-public class BankAccount implements Serializable {
-
-@Id
-@GeneratedValue
+public class BankAccount {
+    @Id
+    @GeneratedValue
     private int bankAccountId;
-    private String iBAN;
+    @Column(name ="iban", unique = true)
+    private String iban;
     private double balance;
-
-//    @OneToMany
-//    private List<Transaction> transactions;
-//    @ManyToMany
-//    private List<RetailUser> retailusers;
+    @OneToMany(mappedBy = "bankAccount")
+    private List<Transaction> transactions = new ArrayList<Transaction>();
+    @ManyToMany(mappedBy = "bankAccounts")
+    private List<RetailUser> retailUsers = new ArrayList<RetailUser>();
 
     //constructors
     public BankAccount () {
         this(0);
-      }
+    }
 
     public BankAccount(double balance){
-        this.iBAN = generateIban();
-        this.bankAccountId = 0;
+        this.iban = generateIban();
         this.balance = balance;
     }
 
-    public BankAccount(String iBAN, double balance){
-        this.iBAN = iBAN;
-        this.balance = balance;
-        this.bankAccountId = 0;
-    }
-
-      public BankAccount(int bankAccountId, String iBAN, double balance) {
+    public BankAccount( String iBAN, double balance) {
         super();
-        this.bankAccountId = bankAccountId;
-        this.iBAN = iBAN;
+        this.iban = iBAN;
         this.balance = balance;
 //        this.transactions = new ArrayList<>();
 //        this.retailusers = new ArrayList<>();
     }
 
     //getters
-    public String getIBAN() { return iBAN; }
+    public String getIBAN() { return iban; }
     public double getBalance() {return balance;}
 //    public void addTransactions (Transaction transaction) {transactions.add(transaction);}
 //    public void addRetailUser (RetailUser retailuser) {retailusers.add(retailuser);}
@@ -113,28 +95,30 @@ public class BankAccount implements Serializable {
             if (duplicateCheck){
                 return generateIban();                                      //dangerous code: endless loop if (close to) all possible IBANs are generated
             } else {*/
-                int checkDigits = generateCheckDigits(account);
-                StringBuilder iban = new StringBuilder();
-                iban.append("NL");
-                if (checkDigits < 10) {                                              //if checkdigits < 10, add a 0 in front
-                    String checkDigitsString = Integer.toString(checkDigits);
-                    checkDigitsString = "0" + checkDigitsString;
-                    iban.append(checkDigitsString);
-                } else {
-                    iban.append(checkDigits);
-                }
-                iban.append("COUC");
-                iban.append(generateAccountAs10digitString(account));
-                return iban.toString();
-            }
-    //}
+        int checkDigits = generateCheckDigits(account);
+        StringBuilder iban = new StringBuilder();
+        iban.append("NL");
+        if (checkDigits < 10) {                                              //if checkdigits < 10, add a 0 in front
+            String checkDigitsString = Integer.toString(checkDigits);
+            checkDigitsString = "0" + checkDigitsString;
+            iban.append(checkDigitsString);
+        } else {
+            iban.append(checkDigits);
+        }
+        iban.append("COUC");
+        iban.append(generateAccountAs10digitString(account));
+        return iban.toString();
+    }
 
 
-
+    public void addTransaction(Transaction transaction){
+        transactions.add(transaction
+        );
+    }
 
     @Override
     public String toString() {
-        return iBAN;
+        return iban;
     }
 
 }
