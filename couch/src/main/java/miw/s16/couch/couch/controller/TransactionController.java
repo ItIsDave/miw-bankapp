@@ -38,7 +38,7 @@ public class TransactionController {
         Loan loan = new Loan();
         model.addAttribute("date_time", transaction.getTransactionDate().toString());model.addAttribute("transaction", transaction);
         String feedback = transactionService.TransactionCalculation(transaction.getToAccount(), bankAccountFrom,
-                transaction.getAmount(), transaction.getTransactionDate(), transaction.getDescription(), transaction.getPin());
+                transaction.getAmount(), transaction.getTransactionDate(), transaction.getDescription(), transaction.getPin(), transaction.getLoanId());
         model.addAttribute("feedback", feedback);
         // model.addAttribute("bankAccountFrom", transaction.getFromAccount());
         model.addAttribute("userName", userName);
