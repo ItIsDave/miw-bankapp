@@ -17,9 +17,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
-public class PageController<retailUser> {
+public class RetailPersonalPageController<retailUser> {
 
 
     @Autowired
@@ -31,7 +33,7 @@ public class PageController<retailUser> {
     @Autowired
     BankAccountDao bankAccountDao;
 
-    public BankAccount bankAccount = new BankAccount();
+    BankAccount bankAccount = new BankAccount();
 
     Transaction transaction = new Transaction();
 
@@ -80,6 +82,27 @@ public class PageController<retailUser> {
         model.addAttribute("user", user);
         model.addAttribute("balance", bankAccountFrom.getBalance());
         return "transaction";
+    }
+
+    @PostMapping(value = "newAccountRequest")
+    public String newAccountRequestHandler(@ModelAttribute User user, Model model, HttpServletRequest request) {
+        // log in session
+        HttpSession session = request.getSession (true);
+        String userName = (String) session.getAttribute("userName");
+        RetailUser retailUser1  = (RetailUser) session.getAttribute("retailUser");
+        int userId = (int) session.getAttribute("userId");
+
+        //nieuwe IBAN wordt aangemaakt, aan retailuser gekoppeld en in DB opgeslagen
+        BankAccount newBankAccount = new BankAccount();
+        retailUser1.addBankAccount(newBankAccount);
+        bankAccountDao.save(newBankAccount);
+        retailUserDao.save(retailUser1);
+
+        List<BankAccount> bankAccountsList = retailUser1.getBankAccounts();
+        model.addAttribute("userName", userName);
+        model.addAttribute("allBankAccounts", bankAccountsList);
+
+        return "personal_page";
     }
 
 }

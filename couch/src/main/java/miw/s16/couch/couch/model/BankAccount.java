@@ -118,7 +118,7 @@ public class BankAccount {
 
     @Override
     public String toString() {
-        return iban;
+        return iban + " " + balance;
     }
 
 }
