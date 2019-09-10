@@ -35,7 +35,6 @@ public class NewUserController {
     @PostMapping(value ="retailUserHandler")
     public String retailUserHandler(@Valid @ModelAttribute("RetailUser") RetailUser retailUser, BindingResult bindingResult){
        //WIP
-
         if(bindingResult.hasErrors()){
             return "new_retail_user";
         } else {
