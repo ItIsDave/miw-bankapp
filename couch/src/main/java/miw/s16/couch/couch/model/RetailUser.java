@@ -1,7 +1,9 @@
 package miw.s16.couch.couch.model;
 import miw.s16.couch.couch.model.entity.BankAccount;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.Entity;
+import javax.validation.constraints.*;
 
 import java.util.ArrayList;
 
@@ -9,7 +11,11 @@ import java.util.ArrayList;
 public class RetailUser extends User {
 
 
+    @NotEmpty
+    @Positive
+    @Size(min=9, max=9)
     private int bsn;
+    @NotEmpty
     private String firstName;
     private String middleName;
     private String lastName;
@@ -20,6 +26,7 @@ public class RetailUser extends User {
     private String city;
     private int phoneNumber;
     private String dateOfBirth;
+    @Email
     private String email;
     private String role;
     private ArrayList <BankAccount> retailRekeningen;

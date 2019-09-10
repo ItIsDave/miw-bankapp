@@ -9,9 +9,12 @@ import miw.s16.couch.couch.model.entity.BankAccount;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import javax.validation.Valid;
 
 @Controller
 public class NewUserController {
@@ -30,8 +33,12 @@ public class NewUserController {
     }
 
     @PostMapping(value ="retailUserHandler")
-    public String retailUserHandler(@ModelAttribute("RetailUser") RetailUser retailUser){
+    public String retailUserHandler(@Valid @ModelAttribute("RetailUser") RetailUser retailUser, BindingResult bindingResult){
        //WIP
+
+        if(bindingResult.hasErrors()){
+            return "new_retail_user";
+        } else {
         BankAccount bankAccount = new BankAccount();        //bankaccount wordt gegenereerd
         retailUser.addBankAccount(bankAccount);             //ba gekoppeld aan user
         bankAccountDao.save(bankAccount);                   //ba opgeslagen in DB
@@ -40,5 +47,6 @@ public class NewUserController {
         System.out.println("User ID: " + retailUser.getUserId());
         return "new_retail_user_success";
     }
+   }
 }
 
