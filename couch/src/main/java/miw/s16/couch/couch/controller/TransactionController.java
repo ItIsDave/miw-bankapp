@@ -56,7 +56,7 @@ public class TransactionController implements WebMvcConfigurer {
 
 
     @PostMapping(value="transactionConfirmation")
-    public String transactionHandler(@Valid @ModelAttribute(value="transaction") Transaction transaction, Model model, HttpServletRequest request, BindingResult bindingResult) {
+    public String transactionHandler(@Valid @ModelAttribute Transaction transaction, Model model, HttpServletRequest request, BindingResult bindingResult) {
         HttpSession session = request.getSession (true);
         String userName = (String) session.getAttribute("userName");
         RetailUser retailUser1  = (RetailUser) session.getAttribute("retailUser");
@@ -69,9 +69,9 @@ public class TransactionController implements WebMvcConfigurer {
         model.addAttribute("date_time", transaction.getTransactionDate().toString());model.addAttribute("transaction", transaction);
        String feedback = transactionService.TransactionCalculation(transaction.getToAccount(), bankAccountFrom,
                 transaction.getAmount(), transaction.getTransactionDate(), transaction.getDescription(), transaction.getPin());
+
         model.addAttribute("feedback", feedback);
         model.addAttribute("balance", balance);
-        // model.addAttribute("bankAccountFrom", transaction.getFromAccount());
         model.addAttribute("userName", userName);
         return "transaction_feedback";
     }

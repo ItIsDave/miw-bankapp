@@ -26,10 +26,9 @@ public class Transaction { //implements Serializable {
     private BankAccount bankAccountTo;
     // "to" and "from" are reserved key words from MySQL
     private String fromAccount;//getIban, can be internal bank account
+    @NotEmpty
     private String toAccount;//getIban, can be internal bank account
     private boolean isPin;
-
-    private int loanId;  //betreft de leningId indien van toepassing
 
 
 
@@ -43,13 +42,12 @@ public class Transaction { //implements Serializable {
 
 
     public Transaction(String description, double amount, Date transactionDate,
-                       String fromAccount, String toAccount, int loanId, boolean isPin) {
+                       String fromAccount, String toAccount,  boolean isPin) {
         this.description = description;
         this.amount = amount;
         this.transactionDate = transactionDate;
         this.fromAccount = fromAccount;
         this.toAccount = toAccount;
-        this.loanId = loanId;
         this.isPin = isPin;
     }
 
@@ -62,21 +60,6 @@ public class Transaction { //implements Serializable {
     }
 
     //all args constructor
-    public Transaction(String description, double amount, Date transactionDate, BankAccount bankAccount,
-                       BankAccount bankAccountTo, String toAccount, String fromAccount, boolean isPin, int loanId) {
-        this.description = description;
-        this.amount = amount;
-        this.transactionDate = transactionDate;
-        this.bankAccount = bankAccount;
-        this.bankAccountTo = bankAccountTo;
-        this.fromAccount = fromAccount;
-        this.toAccount = toAccount;
-        this.isPin = isPin;
-        this.loanId = loanId;
-    }
-
-    // constructror for transactions not needing a loan object
-
     public Transaction(String description, double amount, Date transactionDate, BankAccount bankAccount,
                        BankAccount bankAccountTo, String toAccount, String fromAccount, boolean isPin) {
         this.description = description;
@@ -170,13 +153,6 @@ public class Transaction { //implements Serializable {
         this.isPin = isPin;
     }
 
-    public int getLoanId() {
-        return loanId;
-    }
-
-    public void setLoanId(int loanId) {
-        this.loanId = loanId;
-    }
 
     @Override
     public String toString() {
@@ -187,7 +163,6 @@ public class Transaction { //implements Serializable {
                 ", transactionDate=" + transactionDate.toString() +
                 ", from=" + fromAccount +
                 ", to=" + toAccount +
-                //", loan=" + loan.toString() +
                 ", isPin=" + isPin +
                 '}';
     }

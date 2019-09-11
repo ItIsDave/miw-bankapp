@@ -28,6 +28,7 @@ public class TransactionService {
 
     }
 
+
     public String TransactionCalculation(String accountTo, BankAccount bankAccount, Double amount,
                                          Date transactionDate, String description, Boolean isPin) {
 
@@ -43,9 +44,7 @@ public class TransactionService {
             } else {
                 bankAccount.setBalance(balanceFrom - amount);
                 // save changed in DB
-                Transaction transaction = new Transaction(description, amount, transactionDate,
-                        bankAccount, bankAccountTo, accountTo, bankAccount.getIBAN().toString(), isPin);
-
+                Transaction transaction = new Transaction(description, amount, transactionDate, bankAccount, bankAccountTo, accountTo, bankAccount.getIBAN(), isPin);
                 bankAccountDao.save(bankAccountTo);
                 bankAccountDao.save(bankAccount);
                 // message for testing
