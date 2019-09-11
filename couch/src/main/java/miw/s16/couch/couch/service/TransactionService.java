@@ -8,6 +8,7 @@ import miw.s16.couch.couch.model.dao.TransactionDao;
 import org.hibernate.boot.model.source.spi.SingularAttributeSourceToOne;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.sql.SQLOutput;
 import java.util.Date;
@@ -39,7 +40,7 @@ public class TransactionService {
             double balanceFrom = bankAccount.getBalance();
             double newBalance = balanceFrom - amount;
             if (newBalance < 0) {
-                return "Not enough money left in your account";
+                return "Mislukt. Not enough money left in your account";
             } else {
                 bankAccount.setBalance(balanceFrom - amount);
                 // save changed in DB
@@ -52,27 +53,11 @@ public class TransactionService {
                 System.out.println("Voordat transaction is gevuld is transaction: " +
                         transaction);
                 transactionDao.save(transaction);
-
-                return "\nTransaction of " + amount + " successful. \nYour old balance was: " + balanceFrom +
+                return "\nBedankt!\nTransaction of " + amount + " successful. \nYour old balance was: " + balanceFrom +
                         "\nYour new balance is " + newBalance;
             }
         } else {
             return "User not found";
-        }
-    }
-
-    //from test data
-    public String TransactionCalculationTest(BankAccount bankAccountTo, BankAccount bankAccount, Double amount) {
-        double balance = bankAccountTo.getBalance();
-        bankAccountTo.setBalance(balance + amount);
-        double balanceFrom = bankAccount.getBalance();
-        double newBalance = balanceFrom - amount;
-        if (newBalance < 0) {
-            return "Not enough money left in your account";
-        } else {
-            bankAccount.setBalance(balanceFrom - amount);
-            return "\nTransaction of " + amount + " successful. \nYour old balance was: " + balanceFrom +
-                    "\nYour new balance is " + newBalance;
         }
     }
 
