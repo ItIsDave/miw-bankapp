@@ -8,12 +8,16 @@ import miw.s16.couch.couch.model.dao.RetailUserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+import javax.validation.Valid;
 
 @Controller
-public class NewUserController {
+public class NewUserController implements WebMvcConfigurer {
 
 //
 //    @GetMapping(value = "newRetailUser")  //van select type -> new retail user
@@ -30,15 +34,17 @@ public class NewUserController {
     BankAccountDao bankAccountDao;
 
    @GetMapping(value = "newRetailUser")  //van select type -> new retail user
-    public String newRetailUserHandler(Model model, User user){
-        model.addAttribute("RetailUser", new RetailUser());
-        model.addAttribute("User", new User());
+    public String newRetailUserHandler(Model model, RetailUser retailUser){
+       model.addAttribute("retailUser", retailUser);
         return "new_retail_user";
     }
 
-    @PostMapping(value ="retailUserHandler")
-    public String retailUserHandler(@ModelAttribute("RetailUser") RetailUser retailUser){
+    @PostMapping(value ="newRetailUser")
+    public String retailUserHandler(@Valid @ModelAttribute(value = "retailUser") RetailUser retailUser, BindingResult bindingResult){
        //WIP
+        if(bindingResult.hasErrors()){
+            return "new_retail_user";
+        } else {
         BankAccount bankAccount = new BankAccount();        //bankaccount wordt gegenereerd
         retailUser.addBankAccount(bankAccount);             //ba gekoppeld aan user
         bankAccountDao.save(bankAccount);                   //ba opgeslagen in DB
@@ -46,5 +52,6 @@ public class NewUserController {
         System.out.println("User ID: " + retailUser.getUserId());
         return "new_retail_user_success";
     }
+   }
 }
 

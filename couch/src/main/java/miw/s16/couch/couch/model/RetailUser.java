@@ -1,20 +1,48 @@
 package miw.s16.couch.couch.model;
-import javax.persistence.*;
-import java.util.*;
+
+
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.Range;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
+import javax.validation.constraints.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class RetailUser extends User {
+
+
+    @NotNull
+    @Min(value = 100000000)
+    @Max(value = 999999999)
     private int bsn;
+    @NotEmpty
     private String firstName;
     private String middleName;
+    @NotEmpty
     private String lastName;
+    @NotEmpty
     private String streetName;
+    @NotNull
+    @Positive
     private int houseNumber;
     private String extension;
+    @NotEmpty
     private String zipcode;
+    @NotEmpty
     private String city;
+    @NotEmpty
+    @Size(min= 9, max=10)
     private String phoneNumber;
+    @NotEmpty
+    //omdat de date als string wordt ingegeven kan ik geen date validatie toepasssen
     private String dateOfBirth;
+    @NotEmpty
+    @Email
     private String email;
     private String role;
     @ManyToMany
@@ -37,7 +65,8 @@ public class RetailUser extends User {
 //        super();
 //    }
 
-    public RetailUser() { this("","");
+    public RetailUser() {
+        this("","");
         }
 
 //    public RetailUser(String userName, String userPassword, int roleId) {
@@ -46,7 +75,6 @@ public class RetailUser extends User {
     public RetailUser(String userName, String userPassword) {
         super(userName, userPassword);
         this.bankAccounts = new ArrayList<>();
-
     }
 
     public RetailUser(String userName, String userPassword, int bsn, String firstName,
@@ -201,7 +229,5 @@ public class RetailUser extends User {
     public void addBankAccount(BankAccount bankAccount){
       bankAccounts.add(bankAccount);
     }
-
-
 }
 
