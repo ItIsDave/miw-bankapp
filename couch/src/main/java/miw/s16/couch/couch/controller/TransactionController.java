@@ -26,7 +26,7 @@ public class TransactionController {
 
     BankAccount accountTo = new BankAccount();
 
-
+//Arnout heeft loanId verwijderd uit TransactionCalculation
     @PostMapping(value="transactionConfirmation")
     public String transactionHandler(@ModelAttribute User user, Transaction transaction, Model model, HttpServletRequest request) {
         HttpSession session = request.getSession (true);
@@ -38,7 +38,8 @@ public class TransactionController {
         Loan loan = new Loan();
         model.addAttribute("date_time", transaction.getTransactionDate().toString());model.addAttribute("transaction", transaction);
         String feedback = transactionService.TransactionCalculation(transaction.getToAccount(), bankAccountFrom,
-                transaction.getAmount(), transaction.getTransactionDate(), transaction.getDescription(), transaction.getPin(), transaction.getLoanId());
+                transaction.getAmount(), transaction.getTransactionDate(), transaction.getDescription(),
+                transaction.getPin());
         model.addAttribute("feedback", feedback);
         // model.addAttribute("bankAccountFrom", transaction.getFromAccount());
         model.addAttribute("userName", userName);
