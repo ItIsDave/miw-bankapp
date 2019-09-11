@@ -23,7 +23,7 @@
             <td><span th:text="${bankAccountFrom}" th:field="*{fromAccount}">  </span> </td>
         </tr>
             <td>bedrag in euro's</td>
-            <td><input type="text" th:field="*{amount}"/></td>
+            <td><input type=number th:field="*{amount}" step="any" min="0" max="${balance}"/></td>
         <tr>
         <tr>
             <td>naar IBAN:</td>
@@ -33,15 +33,6 @@
             <td>omschrijving:</td>
             <td><input type="text" th:field="*{description}"/></td>
         </tr>
-<!--        <tr>-->
-<!--            <td>loan (indien van toepassing):</td>-->
-<!--            <td><input type="text" th:field="*{loan}"/></td>-->
-<!--        </tr>-->
-<!--        <tr>-->
-<!--            <td>pin (y/n):</td>-->
-<!--            <td><input type="text" th:field="*{isPin}"/></td>-->
-<!--        </tr>-->
-<!--        <tr>-->
             <td><input type="submit" value="Bevestig"></td>
         </tr>
     </table>

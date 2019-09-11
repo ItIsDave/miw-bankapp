@@ -37,6 +37,7 @@ public class RetailPersonalPageController<retailUser> {
 
     Transaction transaction = new Transaction();
 
+
     @PostMapping(value = "transactionRequest")
     public String pageHandler(@ModelAttribute User user, Model model, HttpServletRequest request) {
         // log in session

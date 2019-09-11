@@ -31,7 +31,7 @@ public class Transaction { //implements Serializable {
 
 
     public Transaction() {
-       // this("unknown", 0, new Date(), "", "", new Loan(), false); uitgezet om te voorkomen dat
+        // this("unknown", 0, new Date(), "", "", new Loan(), false); uitgezet om te voorkomen dat
         // altijd een loan object wordt gemaakt
         super();
         this.transactionDate = new Date();
@@ -57,6 +57,7 @@ public class Transaction { //implements Serializable {
         this.bankAccountTo = bankAccountTo;
         this.description = description;
     }
+
     //all args constructor
     public Transaction(String description, double amount, Date transactionDate, BankAccount bankAccount,
                        BankAccount bankAccountTo, String toAccount, String fromAccount, boolean isPin, int loanId) {
