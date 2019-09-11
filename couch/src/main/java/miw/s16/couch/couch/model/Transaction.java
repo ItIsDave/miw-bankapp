@@ -1,10 +1,8 @@
 package miw.s16.couch.couch.model;
 
 import javax.persistence.*;
-import javax.validation.Constraint;
 import javax.validation.constraints.*;
 
-import java.io.Serializable;
 import java.util.Date;
 
 @Entity
@@ -29,7 +27,6 @@ public class Transaction { //implements Serializable {
     @Size(min = 15, max = 20)
     private String toAccount;//getIban, can be internal bank account
     private boolean isPin;
-
 
 
     public Transaction() {
@@ -151,6 +148,10 @@ public class Transaction { //implements Serializable {
 
     public void setPin(boolean isPin) {
         this.isPin = isPin;
+    }
+
+    public double getBalance(BankAccount bankAccount){
+        return bankAccount.getBalance();
     }
 
 

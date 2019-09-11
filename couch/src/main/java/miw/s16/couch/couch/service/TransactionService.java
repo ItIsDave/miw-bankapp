@@ -31,15 +31,17 @@ public class TransactionService {
     public String TransactionCalculation(String accountTo, BankAccount bankAccount, Double amount,
                                          Date transactionDate, String description, Boolean isPin) {
 
+        if (accountTo.equals(bankAccount.getIBAN())){
+            return "U kunt geen geld overmaken naar uw eigen bankrekening";
+        }
         BankAccount bankAccountTo = bankAccountDao.findByIban(accountTo);
-
         if (bankAccountTo != null) {
             double balance = bankAccountTo.getBalance();
             bankAccountTo.setBalance(balance + amount);
             double balanceFrom = bankAccount.getBalance();
             double newBalance = balanceFrom - amount;
             if (newBalance < 0) {
-                return "Mislukt. Not enough money left in your account";
+                return "Overboeking mislukt. Saldo niet toereikend.";
             } else {
                 bankAccount.setBalance(balanceFrom - amount);
                 // save changed in DB
@@ -50,12 +52,23 @@ public class TransactionService {
                 System.out.println("Voordat transaction is gevuld is transaction: " +
                         transaction);
                 transactionDao.save(transaction);
-                return "\nBedankt!\nTransaction of " + amount + " successful. \nYour old balance was: " + balanceFrom +
-                        "\nYour new balance is " + newBalance;
+                return "\nBedankt!\n<small>Uw transactie van " + amount + " euro was succesvol. \nUw saldo was: " + balanceFrom +
+                        "\nUw huidige saldo is " + newBalance + " euro.</small>";
             }
         } else {
-            return "User not found";
+            return "Overboeking mislukt. Bank rekening niet gevonden.";
         }
     }
+
+    // in progress
+    // check if transaction bankaccount to is the same as the account from
+//
+//    public boolean isUnique(String accountTo, BankAccount bankAccount){
+//        if (accountTo.equals(bankAccount.getIBAN())){
+//            return false;
+//        } else {
+//            return true;
+//        }
+//    }
 
 }
