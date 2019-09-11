@@ -1,6 +1,8 @@
 package miw.s16.couch.couch.model;
 
 import javax.persistence.*;
+import javax.validation.Constraint;
+import javax.validation.constraints.*;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -12,11 +14,12 @@ public class Transaction { //implements Serializable {
     @GeneratedValue
     private int transactionId;
     private String description;
+    @NotNull
+    @Positive
     private double amount;
     //@Column(name = "timeStamp")
     private Date transactionDate;
     // one
-
     @ManyToOne
     private BankAccount bankAccount;//getIban, can be internal bank account
     @ManyToOne(cascade = CascadeType.ALL)
@@ -26,8 +29,8 @@ public class Transaction { //implements Serializable {
     private String toAccount;//getIban, can be internal bank account
     private boolean isPin;
 
-
     private int loanId;  //betreft de leningId indien van toepassing
+
 
 
     public Transaction() {
@@ -40,12 +43,12 @@ public class Transaction { //implements Serializable {
 
 
     public Transaction(String description, double amount, Date transactionDate,
-                       String from, String to, int loanId, boolean isPin) {
+                       String fromAccount, String toAccount, int loanId, boolean isPin) {
         this.description = description;
         this.amount = amount;
         this.transactionDate = transactionDate;
-        this.fromAccount = from;
-        this.toAccount = to;
+        this.fromAccount = fromAccount;
+        this.toAccount = toAccount;
         this.loanId = loanId;
         this.isPin = isPin;
     }
@@ -188,4 +191,14 @@ public class Transaction { //implements Serializable {
                 ", isPin=" + isPin +
                 '}';
     }
+
+//    // check if user fills in same from and to account in transaction screen
+//    @AssertTrue
+//    private boolean isOk() {
+//        boolean trOk = false;
+//        if (fromAccount != toAccount) {
+//            trOk = true;
+//        }
+//        return trOk;
+//    }
 }

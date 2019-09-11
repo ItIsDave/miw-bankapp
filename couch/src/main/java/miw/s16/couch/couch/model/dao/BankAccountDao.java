@@ -18,5 +18,4 @@ public interface BankAccountDao extends CrudRepository<BankAccount, Integer> {
 
     public BankAccount findByIban(String iban);
 
-
 }

@@ -41,7 +41,7 @@ public class LoginController {
         return "index";
     }
 
-    // user log in & user validation and direction to personal page
+    // user log in & user validation and direction to personal page (coding by AT)
     @PostMapping(value = "overview")
     public String loginHandler(@ModelAttribute User user, Model model, HttpServletRequest request) {
         boolean loginOk = validator.validateMemberPassword(user);
@@ -63,7 +63,7 @@ public class LoginController {
         return "login_failed";
     }
 
-    // user returns to personal page
+    // user returns to personal page (coding by AT)
     @GetMapping(value = "overview")
     public String overviewHandler(@ModelAttribute User user, Model model, HttpServletRequest request) {
         HttpSession session = request.getSession(true);

@@ -28,9 +28,8 @@ public class TransactionService {
 
     }
 
-    // from database
     public String TransactionCalculation(String accountTo, BankAccount bankAccount, Double amount,
-                                         Date transactionDate, String description, Boolean isPin, int loanId) {
+                                         Date transactionDate, String description, Boolean isPin) {
 
         BankAccount bankAccountTo = bankAccountDao.findByIban(accountTo);
 
@@ -44,9 +43,9 @@ public class TransactionService {
             } else {
                 bankAccount.setBalance(balanceFrom - amount);
                 // save changed in DB
-
                 Transaction transaction = new Transaction(description, amount, transactionDate,
-                        bankAccount, bankAccountTo, accountTo, bankAccount.getIBAN().toString(), isPin, loanId);
+                        bankAccount, bankAccountTo, accountTo, bankAccount.getIBAN().toString(), isPin);
+
                 bankAccountDao.save(bankAccountTo);
                 bankAccountDao.save(bankAccount);
                 // message for testing
