@@ -8,7 +8,7 @@
 <body>
 <h1>Hoi <span th:text="${userName}"></span></h1>
 <h2>IBAN <span th:text="${bankAccountFrom}"></span></h2>
-<h2>Saldo <span th:text="${balance}" th:field="*{balance}"> </span> euros </h2>
+<h2>Saldo <span th:text="${balance}" th:field="*{balance}"> </span> euro </h2>
 <h2>Transactie details</h2>
 
 <form action="#" th:action="@{transactionConfirmation}" th:object="${transaction}" method="post">
@@ -30,7 +30,8 @@
         <tr>
             <td>naar IBAN:</td>
             <td><input type="text" name="toAccount" required th:field="*{toAccount}"/></td>
-            <td th:if="${#fields.hasErrors('toAccount')}">IBAN ongeldig</td>
+            <td th:if="*{toAccount}==${bankAccountFrom}"> Van en naar rekening mogen niet gelijk zijn.</td>
+            <td th:if="${#fields.hasErrors('toAccount')}"> IBAN ongeldig</td>
         </tr>
         <tr>
             <td>omschrijving:</td>

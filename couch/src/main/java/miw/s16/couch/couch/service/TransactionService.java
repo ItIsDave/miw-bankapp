@@ -60,15 +60,5 @@ public class TransactionService {
         }
     }
 
-    // in progress
-    // check if transaction bankaccount to is the same as the account from
-//
-//    public boolean isUnique(String accountTo, BankAccount bankAccount){
-//        if (accountTo.equals(bankAccount.getIBAN())){
-//            return false;
-//        } else {
-//            return true;
-//        }
-//    }
 
 }
