@@ -17,16 +17,17 @@
         <th>Saldo</th>
     </tr>
     <tr th:each="bankAccount : ${allBankAccounts}">
-        <td><span th:text="${bankAccount}"></span></td>
+        <td><a href="/bankAccountDetails"><span th:text="${bankAccount}"></span></a></td>
+<!--            <a href="@{bankAccountDetails(id=${bankAccount.bankAccountId})}"><span th:text="${bankAccount}"></span></a>-->
     </tr>
 </table>
 <br>
 </div>
 
-<form action="#" th:action="@{transactionRequest}" th:object="${user}" method="post">
-    <tr>Klik om een overboeking te maken</tr>
-        <input type="submit" value="Overboeking maken">
-</form>
+<!--<form action="#" th:action="@{transactionRequest}" th:object="${user}" method="post">-->
+<!--    <tr>Klik om een overboeking te maken</tr>-->
+<!--        <input type="submit" value="Overboeking maken">-->
+<!--</form>-->
 <br>
 <form action="#" th:action="@{newAccountRequest}" th:object="${user}" method="post">
     <tr>Klik om een nieuwe rekening te openen</tr>
@@ -34,7 +35,7 @@
 </form>
 <br>
 
-    Ga <a href="/">terug</a>
+<a href="/">Uitloggen</a>
 
 </body>
 </html>

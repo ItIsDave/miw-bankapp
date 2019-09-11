@@ -1,10 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Rekeningoverzicht</title>
 </head>
 <body>
-PSV!!!!!!
+<h1>Welkom <span th:text="${userName}"></span></h1>
+
+
+
+
+<table>
+    <form action="#" th:action="@{transactionRequest}" th:object="${user}" method="post">
+    <input type="submit" value="Overboeking maken">
+</form>
+    <form action="#" th:action="@{newAccountRequest}" th:object="${user}" method="post">
+        <input type="submit" value="Rekening openen">
+    </form>
+</table>
+
+<br>
+
+Ga <a href="/overview">terug</a> naar uw persoonlijke pagina.
 </body>
 </html>

@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -103,6 +104,26 @@ public class RetailPersonalPageController<retailUser> {
         model.addAttribute("allBankAccounts", bankAccountsList);
 
         return "personal_page";
+    }
+
+    //@GetMapping(value = "bankAccountDetails")
+    //public String testHandler(@RequestParam(name = "id") int id, Model model){
+    //    return test
+    //}
+    //coding AV & PH
+    @GetMapping(value = "bankAccountDetails")
+    public String bankAccountDetailsHandler(@ModelAttribute User user, Model model, HttpServletRequest request) {
+        // log in session
+        HttpSession session = request.getSession (true);
+        String userName = (String) session.getAttribute("userName");
+        //RetailUser retailUser1  = (RetailUser) session.getAttribute("retailUser");
+        //int userId = (int) session.getAttribute("userId");
+        //geclickte Iban incl saldo (overzicht transacties) ophalen uit DB en in scherm BankAccountDetails laat zien
+        //List<BankAccount> bankAccountsList = retailUser1.getBankAccounts();
+        model.addAttribute("userName", userName);
+       // model.addAttribute("allBankAccounts", bankAccountsList);
+
+        return "bank_account_details";
     }
 
 }
