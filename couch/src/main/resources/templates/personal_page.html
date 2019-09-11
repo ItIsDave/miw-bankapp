@@ -9,22 +9,28 @@
 <body>
 <h1>Welkom <span th:text="${userName}"></span></h1>
 
+<div th:unless="${#lists.isEmpty(allBankAccounts)}">
+
 <table>
     <tr>
         <th>Bankrekening(IBAN)</th>
         <th>Saldo</th>
     </tr>
-    <tr>
-
+    <tr th:each="bankAccount : ${allBankAccounts}">
         <td><span th:text="${bankAccount}"></span></td>
-        <td><span th:text="${balance}"></span></td>
     </tr>
 </table>
 <br>
+</div>
 
 <form action="#" th:action="@{transactionRequest}" th:object="${user}" method="post">
-    <tr>Klik voor een transactie te maken</tr>
-        <input type="submit" value="Nieuwe Transactie">
+    <tr>Klik om een overboeking te maken</tr>
+        <input type="submit" value="Overboeking maken">
+</form>
+<br>
+<form action="#" th:action="@{newAccountRequest}" th:object="${user}" method="post">
+    <tr>Klik om een nieuwe rekening te openen</tr>
+    <input type="submit" value="Rekening openen">
 </form>
 <br>
 
