@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:="http://www.w3.org/1999/xhtml"
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
@@ -24,12 +24,13 @@
             <td><span th:text="${bankAccountFrom}" th:field="*{fromAccount}">  </span> </td>
         </tr>
             <td>bedrag in euro's</td>
-            <td><input type=number th:field="*{amount}" step="any" min="0"/></td>
-            <td th:if="${#fields.hasErrors('amount')}">Amount ongeldig.</td>
+            <td><input type=number name="amount" th:field="*{amount}" step="any" min="0" required/></td>
+            <td th:if="${#fields.hasErrors('amount')}">Amount moet groter dan 0 zijn.</td>
         <tr>
         <tr>
             <td>naar IBAN:</td>
-            <td><input type="text" th:field="*{toAccount}"/></td>
+            <td><input type="text" name="toAccount" required th:field="*{toAccount}"/></td>
+            <td th:if="${#fields.hasErrors('toAccount')}">IBAN ongeldig</td>
         </tr>
         <tr>
             <td>omschrijving:</td>

@@ -28,7 +28,6 @@ public class TransactionService {
 
     }
 
-
     public String TransactionCalculation(String accountTo, BankAccount bankAccount, Double amount,
                                          Date transactionDate, String description, Boolean isPin) {
 

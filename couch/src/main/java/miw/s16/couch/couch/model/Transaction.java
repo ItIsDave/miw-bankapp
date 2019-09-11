@@ -26,7 +26,7 @@ public class Transaction { //implements Serializable {
     private BankAccount bankAccountTo;
     // "to" and "from" are reserved key words from MySQL
     private String fromAccount;//getIban, can be internal bank account
-    @NotEmpty
+    @Size(min = 15, max = 20)
     private String toAccount;//getIban, can be internal bank account
     private boolean isPin;
 
@@ -167,13 +167,4 @@ public class Transaction { //implements Serializable {
                 '}';
     }
 
-//    // check if user fills in same from and to account in transaction screen
-//    @AssertTrue
-//    private boolean isOk() {
-//        boolean trOk = false;
-//        if (fromAccount != toAccount) {
-//            trOk = true;
-//        }
-//        return trOk;
-//    }
 }
