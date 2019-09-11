@@ -27,7 +27,8 @@ public class Transaction { //implements Serializable {
     private boolean isPin;
 
 
-    private int loanId;  //betreft de leningId indien van toepassing
+    //private int loanId;  //verwijderd omdat de koppeling in de db wordt gemaakt door Hybernate, terug te zien
+    //in de koppeltabel loan_transactions
 
 
     public Transaction() {
@@ -40,13 +41,13 @@ public class Transaction { //implements Serializable {
 
 
     public Transaction(String description, double amount, Date transactionDate,
-                       String from, String to, int loanId, boolean isPin) {
+                       String from, String to, boolean isPin) {
         this.description = description;
         this.amount = amount;
         this.transactionDate = transactionDate;
         this.fromAccount = from;
         this.toAccount = to;
-        this.loanId = loanId;
+        //this.loanId = loanId;
         this.isPin = isPin;
     }
 
@@ -59,21 +60,6 @@ public class Transaction { //implements Serializable {
     }
     //all args constructor
     public Transaction(String description, double amount, Date transactionDate, BankAccount bankAccount,
-                       BankAccount bankAccountTo, String toAccount, String fromAccount, boolean isPin, int loanId) {
-        this.description = description;
-        this.amount = amount;
-        this.transactionDate = transactionDate;
-        this.bankAccount = bankAccount;
-        this.bankAccountTo = bankAccountTo;
-        this.fromAccount = fromAccount;
-        this.toAccount = toAccount;
-        this.isPin = isPin;
-        this.loanId = loanId;
-    }
-
-    // constructror for transactions not needing a loan object
-
-    public Transaction(String description, double amount, Date transactionDate, BankAccount bankAccount,
                        BankAccount bankAccountTo, String toAccount, String fromAccount, boolean isPin) {
         this.description = description;
         this.amount = amount;
@@ -84,6 +70,8 @@ public class Transaction { //implements Serializable {
         this.toAccount = toAccount;
         this.isPin = isPin;
     }
+
+
 
 
     public int getTransactionId() {
@@ -166,13 +154,6 @@ public class Transaction { //implements Serializable {
         this.isPin = isPin;
     }
 
-    public int getLoanId() {
-        return loanId;
-    }
-
-    public void setLoanId(int loanId) {
-        this.loanId = loanId;
-    }
 
     @Override
     public String toString() {

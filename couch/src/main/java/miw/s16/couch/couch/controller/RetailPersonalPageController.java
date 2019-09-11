@@ -36,10 +36,11 @@ public class RetailPersonalPageController<retailUser> {
 
     BankAccount bankAccount = new BankAccount();
 
-    Transaction transaction = new Transaction();
+
 
     @PostMapping(value = "transactionRequest")
     public String pageHandler(@ModelAttribute User user, Model model, HttpServletRequest request) {
+        Transaction transaction = new Transaction();
         // log in session
         HttpSession session = request.getSession (true);
         String userName = (String) session.getAttribute("userName");
