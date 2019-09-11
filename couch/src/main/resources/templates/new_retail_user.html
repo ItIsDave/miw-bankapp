@@ -10,41 +10,82 @@
 <body>
 <h2>Welkom nieuwe klant! Vul hieronder uw gegevens in</h2>
 <br><br>
-<form action="#" th:action="@{retailUserHandler}" method="post">
+<form action="#" th:action="@{newRetailUser}" th:object="${retailUser}" method="post">
     <table>
-        <tr><td>Kies gebruikersnaam: </td>
-            <td><input type="text" name="userName" th:field="*{User.userName}"/> </td></tr>
-        <tr><td>Kies wachtwoord: </td>
-            <td><input type="text" name="password" th:field="*{User.userPassword}"/></td></tr>
-        <tr><td>BSN:</td>
-            <td><input type="text" name="bsn" th:field="*{RetailUser.bsn}"/></td></tr>
-        <tr><td>Voornaam:</td>
-            <td><input type="text" name="firstName" th:field="*{RetailUser.firstName}"/></td></tr>
+        <tr>
+            <td>Kies gebruikersnaam: </td>
+            <td><input type="text" name="userName" th:field="*{userName}"/> </td>
+<!--
+            <td th:if="${#fields.hasErrors('userName')}">Username ongeldig.</td>
+-->
+        </tr>
+        <tr>
+            <td>Kies wachtwoord: </td>
+            <td><input type="text" name="password" th:field="*{userPassword}"/></td>
+<!--
+            <td th:if="${#fields.hasErrors('password')}">Wachtwoord ongeldig.</td>
+-->
+        </tr>
+        <tr>
+            <td>BSN:</td>
+            <td><input type="text" name="bsn" th:field="*{bsn}"/></td>
+            <td th:if="${#fields.hasErrors('bsn')}">Bsn ongeldig.</td>
+        </tr>
+        <tr>
+            <td>Voornaam:</td>
+            <td><input type="text" name="firstName" th:field="*{firstName}"/></td>
+            <td th:if="${#fields.hasErrors('firstName')}">Voornaam ongeldig.</td>
+        </tr>
         <tr><td>Middel namen:</td>
-            <td><input type="text" name="middleName" th:field="*{RetailUser.middleName}"/></td></tr>
-        <tr><td>Achternaam: </td>
-            <td><input type="text" name="lastName" th:field="*{RetailUser.lastName}"/></td></tr>
-        <tr><td>Straat: </td>
-            <td><input type="text" name="streetName" th:field="*{RetailUser.streetName}"/></td></tr>
-        <tr><td>Huisnummer: </td>
-            <td><input type="text" name="houseNumber" th:field="*{RetailUser.houseNumber}"/></td></tr>
-        <tr><td>Toevoeging: </td>
-            <td><input type="text" name="extension" th:field="*{RetailUser.extension}"/></td></tr>
-        <tr><td>Postcode: </td>
-            <td><input type="text" name="zipcode" th:field="*{RetailUser.zipcode}"/></td></tr>
-        <tr><td>Stad: </td>
-            <td><input type="text" name="city" th:field="*{RetailUser.city}"/></td></tr>
-        <tr><td>Telefoonnummer: </td>
-            <td><input type="text" name="phoneNumber" th:field="*{RetailUser.phoneNumber}"/></td></tr>
-        <tr><td>Geboortedatum: </td>
-            <td><input type="text" name="dateOfBirth" th:field="*{RetailUser.dateOfBirth}"/></td></tr>
-        <tr><td>Email adres: </td>
-            <td><input type="text" name="email" th:field="*{RetailUser.email}"/></td></tr>
-        <tr><td>Rol: </td>
-            <td><input type="text" name="role" th:field="*{RetailUser.role}"/></td></tr>
-        <tr th:if="${#fields.hasErrors('*')}"><td th:each="err: ${#fields.errors('*')}" th:text="${err}">Input is incorrect</td></tr>
+            <td><input type="text" name="middleName" th:field="*{middleName}"/></td>
+            <td th:if="${#fields.hasErrors('middleName')}">Middel namen ongeldig.</td>
+        </tr>
+        <tr>
+            <td>Achternaam: </td>
+            <td><input type="text" name="lastName" th:field="*{lastName}"/></td>
+            <td th:if="${#fields.hasErrors('lastName')}">Achternaam ongeldig.</td>
+        </tr>
+        <tr>
+            <td>Straat: </td>
+            <td><input type="text" name="streetName" th:field="*{streetName}"/></td>
+        <td th:if="${#fields.hasErrors('streetName')}">Straatnaam ongeldig.</td>
+        </tr>
+        <tr>
+            <td>Huisnummer: </td>
+            <td><input type="text" name="houseNumber" th:field="*{houseNumber}"/></td>
+            <td th:if="${#fields.hasErrors('houseNumber')}">Huisnummer ongeldig.</td>
+        </tr>
+        <tr>
+            <td>Toevoeging: </td>
+            <td><input type="text" name="extension" th:field="*{extension}"/></td>
+            <td th:if="${#fields.hasErrors('extension')}">Toevoeging ongeldig.</td></tr>
+        <tr>
+            <td>Postcode: </td>
+            <td><input type="text" name="zipcode" th:field="*{zipcode}"/></td>
+            <td th:if="${#fields.hasErrors('zipcode')}">Postcode ongeldig.</td>
+        </tr>
+        <tr>
+            <td>Stad: </td>
+            <td><input type="text" name="city" th:field="*{city}"/></td>
+            <td th:if="${#fields.hasErrors('city')}">Stad ongeldig.</td>
+        </tr>
+        <tr>
+            <td>Telefoonnummer: </td>
+            <td><input type="text" name="phoneNumber" th:field="*{phoneNumber}"/></td>
+            <td th:if="${#fields.hasErrors('phoneNumber')}">Telefoonnummer ongeldig.</td>
+        </tr>
+        <tr>
+            <td>Geboortedatum: </td>
+            <td><input type="text" name="dateOfBirth" th:field="*{dateOfBirth}"/></td>
+            <td th:if="${#fields.hasErrors('dateOfBirth')}">Geboortedatum ongeldig.</td>
+        </tr>
+        <tr>
+            <td>Email adres: </td>
+            <td><input type="text" name="email" th:field="*{email}"/></td>
+            <td th:if="${#fields.hasErrors('email')}">Email ongeldig.</td>
+        </tr>
+       <!--<tr th:if="${#fields.hasErrors('*')}"><td th:each="err: ${#fields.errors('*')}" th:text="${err}">Input is incorrect</td></tr>-->
     </table>
-    
         <button name="submit" type="submit" value="0">Verstuur</button>
 
     

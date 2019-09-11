@@ -12,11 +12,12 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import javax.validation.Valid;
 
 @Controller
-public class NewUserController {
+public class NewUserController implements WebMvcConfigurer {
 
 //
 //    @GetMapping(value = "newRetailUser")  //van select type -> new retail user
@@ -33,14 +34,12 @@ public class NewUserController {
     BankAccountDao bankAccountDao;
 
    @GetMapping(value = "newRetailUser")  //van select type -> new retail user
-    public String newRetailUserHandler(Model model, User user){
-        model.addAttribute("RetailUser", new RetailUser());
-        model.addAttribute("User", new User());
+    public String newRetailUserHandler(RetailUser retailUser){
         return "new_retail_user";
     }
 
-    @PostMapping(value ="retailUserHandler")
-    public String retailUserHandler(@Valid @ModelAttribute("RetailUser") RetailUser retailUser, BindingResult bindingResult){
+    @PostMapping(value ="newRetailUser")
+    public String retailUserHandler(@Valid RetailUser retailUser, BindingResult bindingResult){
        //WIP
         if(bindingResult.hasErrors()){
             return "new_retail_user";
