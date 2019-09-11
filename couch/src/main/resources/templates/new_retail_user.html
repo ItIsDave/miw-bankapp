@@ -15,16 +15,12 @@
         <tr>
             <td>Kies gebruikersnaam: </td>
             <td><input type="text" name="userName" th:field="*{userName}"/> </td>
-<!--
             <td th:if="${#fields.hasErrors('userName')}">Username ongeldig.</td>
--->
         </tr>
         <tr>
             <td>Kies wachtwoord: </td>
-            <td><input type="text" name="password" th:field="*{userPassword}"/></td>
-<!--
-            <td th:if="${#fields.hasErrors('password')}">Wachtwoord ongeldig.</td>
--->
+            <td><input type="text" name="userPassword" th:field="*{userPassword}"/></td>
+            <td th:if="${#fields.hasErrors('userPassword')}">Wachtwoord ongeldig.</td>
         </tr>
         <tr>
             <td>BSN:</td>

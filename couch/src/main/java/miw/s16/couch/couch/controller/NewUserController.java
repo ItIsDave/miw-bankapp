@@ -34,12 +34,13 @@ public class NewUserController implements WebMvcConfigurer {
     BankAccountDao bankAccountDao;
 
    @GetMapping(value = "newRetailUser")  //van select type -> new retail user
-    public String newRetailUserHandler(RetailUser retailUser){
+    public String newRetailUserHandler(Model model, RetailUser retailUser){
+       model.addAttribute("retailUser", retailUser);
         return "new_retail_user";
     }
 
     @PostMapping(value ="newRetailUser")
-    public String retailUserHandler(@Valid RetailUser retailUser, BindingResult bindingResult){
+    public String retailUserHandler(@Valid @ModelAttribute(value = "retailUser") RetailUser retailUser, BindingResult bindingResult){
        //WIP
         if(bindingResult.hasErrors()){
             return "new_retail_user";
