@@ -40,8 +40,9 @@ public class BankAccount {
 
     //getters
     public String getIBAN() { return iban; }
-    public double getBalance() {return balance;}
-//    public void addTransactions (Transaction transaction) {transactions.add(transaction);}
+    public double getBalance() {return balance; }
+    public int getBankAccountId() { return bankAccountId; }
+    //    public void addTransactions (Transaction transaction) {transactions.add(transaction);}
 //    public void addRetailUser (RetailUser retailuser) {retailusers.add(retailuser);}
 
     //setter for changes in balance, transactions and retailusers
