@@ -24,7 +24,7 @@ public class Transaction { //implements Serializable {
     private BankAccount bankAccountTo;
     // "to" and "from" are reserved key words from MySQL
     private String fromAccount;//getIban, can be internal bank account
-    @Size(min = 15, max = 20)
+    @Size(min = 18, max = 18) // temp  to be changed (AT)
     private String toAccount;//getIban, can be internal bank account
     private boolean isPin;
 
