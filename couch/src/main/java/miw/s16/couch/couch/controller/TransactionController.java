@@ -6,16 +6,19 @@ import miw.s16.couch.couch.service.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 
 @Controller
-public class TransactionController {
+public class TransactionController implements WebMvcConfigurer {
 
 
     @Autowired
@@ -26,24 +29,58 @@ public class TransactionController {
 
     BankAccount accountTo = new BankAccount();
 
-//Arnout heeft loanId verwijderd uit TransactionCalculation
+
+    // if user chooses to make a new transaction
+    @GetMapping(value = "transactionRequest")
+    public String pageHandlerGet(@ModelAttribute User user, Model model, HttpServletRequest request) {
+        // log in session
+        Transaction transaction = new Transaction();
+        HttpSession session = request.getSession (true);
+        String userName = (String) session.getAttribute("userName");
+        RetailUser retailUser  = (RetailUser) session.getAttribute("retailUser");
+        BankAccount bankAccountFrom = retailUser.getBankAccounts().get(0);
+        transaction.setBankAccount(accountTo);
+        transaction.setFromAccount(accountTo.getIBAN());
+        System.out.println("datum - tijd is: " + transaction.getTransactionDate().toString());
+        model.addAttribute("transaction", transaction);
+        model.addAttribute("date_time", transaction.getTransactionDate().toString());
+        model.addAttribute("bankAccountFrom", bankAccountFrom.getIBAN());
+        model.addAttribute("bankAccountTo", transaction.getToAccount());
+        model.addAttribute("userName", userName);
+        model.addAttribute("balance", bankAccountFrom.getBalance());
+        return "transaction";
+    }
+
+
     @PostMapping(value="transactionConfirmation")
-    public String transactionHandler(@ModelAttribute User user, Transaction transaction, Model model, HttpServletRequest request) {
+    public String transactionHandler(@Valid @ModelAttribute(value = "transaction")Transaction transaction, BindingResult bindingResult, Model model, HttpServletRequest request) {
+        boolean error = false;
         HttpSession session = request.getSession (true);
         String userName = (String) session.getAttribute("userName");
         RetailUser retailUser1  = (RetailUser) session.getAttribute("retailUser");
         // bank account from
         BankAccount bankAccountFrom = retailUser1.getBankAccounts().get(0);
-        // this transaction is not a loan
-        Loan loan = new Loan();
-        model.addAttribute("date_time", transaction.getTransactionDate().toString());model.addAttribute("transaction", transaction);
-        String feedback = transactionService.TransactionCalculation(transaction.getToAccount(), bankAccountFrom,
-                transaction.getAmount(), transaction.getTransactionDate(), transaction.getDescription(),
-                transaction.getPin());
-        model.addAttribute("feedback", feedback);
-        // model.addAttribute("bankAccountFrom", transaction.getFromAccount());
-        model.addAttribute("userName", userName);
-        return "successful_entry";
+        //check for duplicate account to and from IBAN
+        if(transaction.getToAccount().equals(bankAccountFrom.getIBAN())){
+            error = true;
+        }
+        // check for error in user input
+        if(bindingResult.hasErrors()) {
+            error = true;
+        }
+        if (error) {
+            model.addAttribute("transaction", transaction);
+            model.addAttribute("date_time", transaction.getTransactionDate().toString());
+            model.addAttribute("bankAccountFrom", bankAccountFrom.getIBAN());
+            model.addAttribute("bankAccountTo", transaction.getToAccount());
+            model.addAttribute("userName", userName);
+            model.addAttribute("balance", bankAccountFrom.getBalance());
+            return "transaction";
+        } else {
+            String feedback = transactionService.TransactionCalculation(transaction.getToAccount(), bankAccountFrom,
+                    transaction.getAmount(), transaction.getTransactionDate(), transaction.getDescription(), transaction.getPin());
+            model.addAttribute("feedback", feedback);
+            return "transaction_feedback";
+        }
     }
-
 }
