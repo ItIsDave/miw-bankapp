@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
 import java.util.List;
 
 //coding by PH & AV
@@ -48,16 +50,15 @@ public class LoginController {
         List<RetailUser> loggedInRetailUser = retailUserDao.findByUserName(user.getUserName());
         //ophalen & opslaan alle bankaccounts die bij deze user horen
         List <BankAccount> loggedInBankAccounts = loggedInRetailUser.get(0).getBankAccounts();
+
         if (loginOk) {
             HttpSession session = request.getSession(true);
             // -- for login session ---
             session.setAttribute("userName", user.getUserName());
             session.setAttribute("retailUser", loggedInRetailUser.get(0));
             session.setAttribute("userId", user.getUserId());
-
             model.addAttribute("userName", loggedInRetailUser.get(0).getUserName());
             model.addAttribute("allBankAccounts", loggedInBankAccounts);
-
             return "personal_page";
         }
         return "login_failed";
@@ -69,8 +70,8 @@ public class LoginController {
         HttpSession session = request.getSession(true);
         String userName = (String) session.getAttribute("userName");
         RetailUser retailUser1  = (RetailUser) session.getAttribute("retailUser");
+
         List <BankAccount> loggedInBankAccounts = retailUser1.getBankAccounts();
-        int userID = (int) session.getAttribute("userId");
         String bankAccount = retailUser1.getBankAccounts().get(0).getIBAN();
         session.setAttribute("userName", userName);
         session.setAttribute("bankAccount", bankAccount);

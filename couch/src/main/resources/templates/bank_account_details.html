@@ -5,11 +5,21 @@
     <title>Rekeningoverzicht</title>
 </head>
 <body>
-<h1>Welkom <span th:text="${userName}"></span></h1>
-
-
-
-
+<h1>Transactie overzicht van <span th:text="${userName}"></span></h1>
+<br>
+<table>
+    <tr>
+        <th>Bankrekening(IBAN)</th>
+        <th></th>
+        <th>Saldo</th>
+    </tr>
+    <tr>
+        <td th:text="${iban}"></td>
+        <td></td>
+        <td th:text="${balance}"></td>
+    </tr>
+</table>
+<br>
 <table>
     <form action="#" th:action="@{transactionRequest}" th:object="${user}" method="post">
     <input type="submit" value="Overboeking maken">
