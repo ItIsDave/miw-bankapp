@@ -4,7 +4,6 @@ import miw.s16.couch.couch.model.BankAccount;
 import miw.s16.couch.couch.model.RetailUser;
 import miw.s16.couch.couch.model.User;
 
-import miw.s16.couch.couch.model.dao.BankAccountDao;
 import miw.s16.couch.couch.model.dao.RetailUserDao;
 import miw.s16.couch.couch.service.HibernateLab;
 import miw.s16.couch.couch.service.PasswordValidator;
@@ -13,8 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
-
-//coding by PH & AV
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -40,7 +37,7 @@ public class LoginController {
         model.addAttribute("retailUser", retailUser);
         return "index";
     }
-
+    // coding PH & AV
     // user log in & user validation and direction to personal page
     @PostMapping(value = "overview")
     public String loginHandler(@ModelAttribute User user, Model model, HttpServletRequest request) {
@@ -63,7 +60,7 @@ public class LoginController {
         return "login_failed";
     }
 
-    // user returns to personal page
+     //user returns to personal page
     @GetMapping(value = "overview")
     public String overviewHandler(@ModelAttribute User user, Model model, HttpServletRequest request) {
         HttpSession session = request.getSession(true);
