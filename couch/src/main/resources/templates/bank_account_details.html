@@ -1,3 +1,5 @@
+<!--coding by PH & AV-->
+
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
@@ -5,17 +7,16 @@
     <title>Rekeningoverzicht</title>
 </head>
 <body>
-<h1>Transactie overzicht van <span th:text="${userName}"></span></h1>
+<h1>Welkom <span th:text="${userName}"></span></h1>
+
 <br>
 <table>
     <tr>
-        <th>Bankrekening(IBAN)</th>
-        <th></th>
+        <th>Bankrekeningnummer</th>
         <th>Saldo</th>
     </tr>
     <tr>
         <td th:text="${iban}"></td>
-        <td></td>
         <td th:text="${balance}"></td>
     </tr>
 </table>
@@ -31,6 +32,6 @@
 
 <br>
 
-Ga <a href="/overview">terug</a> naar uw persoonlijke pagina.
+Ga <a href="overview">terug</a> naar uw persoonlijke pagina.
 </body>
 </html>

@@ -4,7 +4,6 @@ import miw.s16.couch.couch.model.BankAccount;
 import miw.s16.couch.couch.model.RetailUser;
 import miw.s16.couch.couch.model.User;
 
-import miw.s16.couch.couch.model.dao.BankAccountDao;
 import miw.s16.couch.couch.model.dao.RetailUserDao;
 import miw.s16.couch.couch.service.HibernateLab;
 import miw.s16.couch.couch.service.PasswordValidator;
@@ -15,8 +14,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
-
-//coding by PH & AV
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -42,8 +39,8 @@ public class LoginController {
         model.addAttribute("retailUser", retailUser);
         return "index";
     }
-
-    // user log in & user validation and direction to personal page (coding by AT)
+    // coding PH & AV
+    // user log in & user validation and direction to personal page
     @PostMapping(value = "overview")
     public String loginHandler(@ModelAttribute User user, Model model, HttpServletRequest request) {
         boolean loginOk = validator.validateMemberPassword(user);

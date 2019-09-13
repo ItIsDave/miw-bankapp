@@ -34,8 +34,6 @@ public class RetailPersonalPageController<retailUser> {
     BankAccount bankAccount = new BankAccount();
 
 
-
-
     @PostMapping(value = "transactionRequest")
     public String pageHandler(@ModelAttribute User user, Model model, HttpServletRequest request) {
         Transaction transaction = new Transaction();
@@ -59,16 +57,18 @@ public class RetailPersonalPageController<retailUser> {
         return "transaction";
     }
 
+
     // if user chooses to make a new transaction
     @GetMapping(value = "transactionRequest")
     public String pageHandlerGet(@ModelAttribute User user, Model model, HttpServletRequest request) {
         // log in session
         Transaction transaction = new Transaction();
-        HttpSession session = request.getSession (true);
+        HttpSession session = request.getSession(true);
         String userName = (String) session.getAttribute("userName");
-        RetailUser retailUser1  = (RetailUser) session.getAttribute("retailUser");
+        RetailUser retailUser1 = (RetailUser) session.getAttribute("retailUser");
         int userId = (int) session.getAttribute("userId");
         BankAccount bankAccountFrom = retailUser1.getBankAccounts().get(0);
+
         transaction.setBankAccount(bankAccount);
         transaction.setFromAccount(bankAccount.getIBAN());
         System.out.println("datum - tijd is: " + transaction.getTransactionDate().toString());
@@ -82,36 +82,42 @@ public class RetailPersonalPageController<retailUser> {
         return "transaction";
     }
 
+    //coding by PH & AV
     @PostMapping(value = "newAccountRequest")
     public String newAccountRequestHandler(@ModelAttribute User user, Model model, HttpServletRequest request) {
         // log in session
-        HttpSession session = request.getSession (true);
+        HttpSession session = request.getSession(true);
         String userName = (String) session.getAttribute("userName");
-        RetailUser retailUser1  = (RetailUser) session.getAttribute("retailUser");
+        RetailUser retailUser1 = (RetailUser) session.getAttribute("retailUser");
+
         //nieuwe IBAN wordt aangemaakt, aan retailuser gekoppeld en in DB opgeslagen
         BankAccount newBankAccount = new BankAccount();
         retailUser1.addBankAccount(newBankAccount);
         bankAccountDao.save(newBankAccount);
         retailUserDao.save(retailUser1);
+
         List<BankAccount> bankAccountsList = retailUser1.getBankAccounts();
         model.addAttribute("userName", userName);
         model.addAttribute("allBankAccounts", bankAccountsList);
+
         return "personal_page";
     }
 
-
-    //coding AV & PH
+    //coding by PH & AV
     @GetMapping(value = "/bankAccountDetails")
     public String bankAccountDetailsHandler(@RequestParam("id") int bankAccountId, Model model, HttpServletRequest request) {
-        HttpSession session = request.getSession (true);
+        // log in session
+        HttpSession session = request.getSession(true);
         String userName = (String) session.getAttribute("userName");
-
         //geclickte Iban incl saldo (overzicht transacties) ophalen uit DB en in scherm BankAccountDetails laat zien
         BankAccount clickedBankAccount = bankAccountDao.findByBankAccountId(bankAccountId);
+        model.addAttribute("userName", userName);
         model.addAttribute("iban", clickedBankAccount.getIBAN());
         model.addAttribute("balance", clickedBankAccount.getBalance());
-        model.addAttribute("userName", userName);
+
         return "bank_account_details";
     }
 
 }
+
+

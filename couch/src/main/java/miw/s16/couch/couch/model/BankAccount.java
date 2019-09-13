@@ -5,7 +5,7 @@ import javax.persistence.*;
 import java.math.BigInteger;
 import java.util.*;
 
-//coding by PvdH
+//coding by PH
 
 @Entity
 public class BankAccount {
