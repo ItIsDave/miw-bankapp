@@ -31,8 +31,8 @@ public class TransactionController implements WebMvcConfigurer {
 
 
     // if user chooses to make a new transaction
-    @GetMapping(value = "transactionRequest")
-    public String pageHandlerGet(@ModelAttribute User user, Model model, HttpServletRequest request) {
+    @GetMapping(value = "transactionConfirmation")
+    public String transactionHandlerGet(@ModelAttribute User user, Model model, HttpServletRequest request) {
         // log in session
         Transaction transaction = new Transaction();
         HttpSession session = request.getSession (true);
