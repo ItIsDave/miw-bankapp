@@ -70,7 +70,6 @@ public class LoginController {
         HttpSession session = request.getSession(true);
         String userName = (String) session.getAttribute("userName");
         RetailUser retailUser1  = (RetailUser) session.getAttribute("retailUser");
-
         List <BankAccount> loggedInBankAccounts = retailUser1.getBankAccounts();
         String bankAccount = retailUser1.getBankAccounts().get(0).getIBAN();
         session.setAttribute("userName", userName);
