@@ -1,5 +1,6 @@
 package miw.s16.couch.couch.model.dao;
 
+import miw.s16.couch.couch.model.SMEUser;
 import miw.s16.couch.couch.model.User;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;

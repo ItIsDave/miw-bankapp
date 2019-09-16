@@ -10,7 +10,6 @@ import java.util.List;
 @Entity
 public class SMEUser extends User {
 
-
     private int chamberOfCommerceId;
     private String companyName;
     private String  roleEmployee;
@@ -19,7 +18,7 @@ public class SMEUser extends User {
     // company employees that need sign in
     @OneToMany(mappedBy = "company")
     private List<User> employees = new ArrayList<>();
-    //
+
 
     public SMEUser() {
         this("","");

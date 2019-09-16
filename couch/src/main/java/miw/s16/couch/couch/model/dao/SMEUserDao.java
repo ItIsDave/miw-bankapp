@@ -12,13 +12,12 @@ public interface SMEUserDao extends CrudRepository<SMEUser, Integer> {
 
     public List<SMEUser> findByChamberOfCommerceId(int chamberOfCommerceId);
 
-    public List<SMEUser> findByLastName(String lastName);
+    public List<SMEUser> findByCompanyName(String lastName);
 
     public SMEUser findByUserId(int userId);
 
     public List<BankAccount> findBankAccountsByCompanyName(String companyName);
 
-    public List<User> findByCompanyName(String companyName);
 
 
 }

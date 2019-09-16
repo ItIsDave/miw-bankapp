@@ -24,6 +24,7 @@ public class User  {
     private String userName;
     @NotEmpty
     private String userPassword;
+    // work in progress (AT)
     @ManyToOne
     private SMEUser company; // many users can belong to one SME company
 

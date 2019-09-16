@@ -19,10 +19,10 @@ import javax.validation.Valid;
 public class NewUserController implements WebMvcConfigurer {
 
 
-@Autowired
+    @Autowired
     RetailUserDao retailUserDao;
 
-@Autowired
+    @Autowired
     BankAccountDao bankAccountDao;
 
    @GetMapping(value = "newRetailUser")  //van select type -> new retail user
@@ -45,12 +45,6 @@ public class NewUserController implements WebMvcConfigurer {
         return "new_retail_user_success";
     }
    }
-
-    @GetMapping(value = "couch-zakelijk")  //van select type -> new prive user
-    public String newSMEUserHandler(Model model, SMEUser smeUser){
-        model.addAttribute("SMEUser", smeUser);
-        return "new_prive_user";
-    }
 
 }
 
