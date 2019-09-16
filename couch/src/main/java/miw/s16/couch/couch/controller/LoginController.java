@@ -39,7 +39,6 @@ public class LoginController {
         model.addAttribute("retailUser", retailUser);
         return "index";
     }
-    // coding PH & AV
     // user log in & user validation and direction to personal page
     @PostMapping(value = "overview")
     public String loginHandler(@ModelAttribute User user, Model model, HttpServletRequest request) {
