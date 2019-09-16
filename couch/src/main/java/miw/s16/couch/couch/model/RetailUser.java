@@ -17,8 +17,8 @@ public class RetailUser extends User {
 
 
     @NotNull
-    @Min(value = 100000000)
-    @Max(value = 999999999)
+    @Min(value = 100000000, message = "BSN moet 9 cijfers zijn, zonder punten.")
+    @Max(value = 999999999, message = "BSN moet 9 cijfers zijn, zonder punten.")
     private int bsn;
     @NotEmpty
     private String firstName;
@@ -65,7 +65,6 @@ public class RetailUser extends User {
 
     public RetailUser(String userName, String userPassword, int bsn, String firstName,
                       String middleName, String lastName,
-
                       String streetName, int houseNumber, String extension,
                       String zipcode, String city, String phoneNumber,
                       String dateOfBirth, String email, String role) {

@@ -1,16 +1,12 @@
 package miw.s16.couch.couch.model;
 
-import javax.persistence.Table;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 
 import miw.s16.couch.couch.model.constraints.UsernameDoesNotExistConstraint;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 

@@ -23,16 +23,16 @@
             <td th:if="${#fields.hasErrors('userPassword')}">Wachtwoord ongeldig.</td>
         </tr>
         <tr>
-            <td>BSN:</td>
+            <td>BSN: </td>
             <td><input type="text" name="bsn" th:field="*{bsn}"/></td>
-            <td th:if="${#fields.hasErrors('bsn')}">Bsn ongeldig.</td>
+            <td th:if="${#fields.hasErrors('bsn')}" th:errors="*{bsn}">Bsn ongeldig.</td>
         </tr>
         <tr>
-            <td>Voornaam:</td>
+            <td>Voornaam: </td>
             <td><input type="text" name="firstName" th:field="*{firstName}"/></td>
             <td th:if="${#fields.hasErrors('firstName')}">Voornaam ongeldig.</td>
         </tr>
-        <tr><td>Middel namen:</td>
+        <tr><td>Tussenvoegsel: </td>
             <td><input type="text" name="middleName" th:field="*{middleName}"/></td>
             <td th:if="${#fields.hasErrors('middleName')}">Middel namen ongeldig.</td>
         </tr>
