@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Transaction</title>
@@ -7,7 +8,7 @@
 <body>
 <h1>Hoi <span th:text="${userName}"></span></h1>
 <h2>IBAN <span th:text="${bankAccountFrom}"></span></h2>
-<h2>Saldo <span th:text="${balance}" th:field="*{balance}"> </span> euros </h2>
+<h2>Saldo <span th:text="${balance}" th:field="*{balance}"> </span> euro </h2>
 <h2>Transactie details</h2>
 
 <form action="#" th:action="@{transactionConfirmation}" th:object="${transaction}" method="post">
@@ -23,25 +24,19 @@
             <td><span th:text="${bankAccountFrom}" th:field="*{fromAccount}">  </span> </td>
         </tr>
             <td>bedrag in euro's</td>
-            <td><input type="text" th:field="*{amount}"/></td>
+            <td><input type=number name="amount" th:field="*{amount}" step="any" min="0" th:attr="max=${balance}" required/></td>
+            <td th:if="${#fields.hasErrors('amount')}">Amount moet groter dan 0 zijn.</td>
         <tr>
         <tr>
             <td>naar IBAN:</td>
-            <td><input type="text" th:field="*{toAccount}"/></td>
+            <td><input type="text" name="toAccount" required pattern="[a-zA-Z]{2}[0-9]{2}[a-zA-Z0-9]+" th:field="*{toAccount}" /></td>
+            <td th:if="*{toAccount}==${bankAccountFrom}"> Van en naar rekening mogen niet gelijk zijn.</td>
+            <td th:if="${#fields.hasErrors('toAccount')}"> IBAN ongeldig</td>
         </tr>
         <tr>
             <td>omschrijving:</td>
             <td><input type="text" th:field="*{description}"/></td>
         </tr>
-<!--        <tr>-->
-<!--            <td>loan (indien van toepassing):</td>-->
-<!--            <td><input type="text" th:field="*{loan}"/></td>-->
-<!--        </tr>-->
-<!--        <tr>-->
-<!--            <td>pin (y/n):</td>-->
-<!--            <td><input type="text" th:field="*{isPin}"/></td>-->
-<!--        </tr>-->
-<!--        <tr>-->
             <td><input type="submit" value="Bevestig"></td>
         </tr>
     </table>

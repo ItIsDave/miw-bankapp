@@ -11,23 +11,20 @@
 
 <div th:unless="${#lists.isEmpty(allBankAccounts)}">
 
-<table>
-    <tr>
-        <th>Bankrekening(IBAN)</th>
-        <th>Saldo</th>
-    </tr>
-    <tr th:each="bankAccount : ${allBankAccounts}">
-        <td><a href="/bankAccountDetails"><span th:text="${bankAccount}"></span></a></td>
-<!--            <a href="@{bankAccountDetails(id=${bankAccount.bankAccountId})}"><span th:text="${bankAccount}"></span></a>-->
-    </tr>
-</table>
+    <table>
+        <tr>
+            <th>Bankrekening(IBAN)</th>
+            <th>Saldo</th>
+        </tr>
+        <tr th:each="bankAccount: ${allBankAccounts}">
+            <td><a href="/bankAccountDetails" th:href="@{/bankAccountDetails(id=${bankAccount.bankAccountId})}"
+                   th:text="${bankAccount.iBAN}"></a></td>
+            <td th:text="${bankAccount.balance}"></td>
+        </tr>
+    </table>
 <br>
 </div>
 
-<!--<form action="#" th:action="@{transactionRequest}" th:object="${user}" method="post">-->
-<!--    <tr>Klik om een overboeking te maken</tr>-->
-<!--        <input type="submit" value="Overboeking maken">-->
-<!--</form>-->
 <br>
 <form action="#" th:action="@{newAccountRequest}" th:object="${user}" method="post">
     <tr>Klik om een nieuwe rekening te openen</tr>
