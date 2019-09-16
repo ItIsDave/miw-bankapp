@@ -1,16 +1,35 @@
 package miw.s16.couch.couch.model;
 
+import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
+import java.util.List;
 
+@Entity
 public class SMEUser extends User {
+
 
     private int chamberOfCommerceId;
     private String companyName;
     private String  roleEmployee;
-    private ArrayList<BankAccount> smeRekeningen = new ArrayList<>();
+    @ManyToMany
+    private List<BankAccount> smeAccounts = new ArrayList<>();
 
     public SMEUser() {
-        super();
+        this("","");
+    }
+
+    public SMEUser(String userName, String userPassword) {
+        super(userName, userPassword);
+        this.smeAccounts = new ArrayList<>();
+    }
+
+    public SMEUser(int chamberOfCommerceId, String companyName, String roleEmployee, ArrayList<BankAccount> smeAccounts) {
+        this.chamberOfCommerceId = chamberOfCommerceId;
+        this.companyName = companyName;
+        this.roleEmployee = roleEmployee;
+        this.smeAccounts = smeAccounts;
     }
 
     public SMEUser(String userName, String password, int companyId, String name, String role){
@@ -18,9 +37,8 @@ public class SMEUser extends User {
         this.chamberOfCommerceId = companyId;
         this.companyName = name;
         this.roleEmployee = role;
-        BankAccount iban = new BankAccount("NL82 INGB 0004 2181 41", 3300 );
-        smeRekeningen.add(iban);
     }
+
 
     public int getChamberOfCommerceId() { return chamberOfCommerceId; }
 
@@ -36,16 +54,11 @@ public class SMEUser extends User {
 
     public void setRoleEmployee(String roleEmployee) { this.roleEmployee = roleEmployee; }
 
-    public ArrayList<BankAccount> getSmeRekeningen() { return smeRekeningen; }
+    public List<BankAccount> getSmeAccounts() { return smeAccounts; }
 
-    public void setSmeRekeningen(ArrayList<BankAccount> smeRekeningen) { this.smeRekeningen = smeRekeningen; }
+    public void setSmeAccounts(List<BankAccount> smeAccounts) { this.smeAccounts = smeAccounts; }
 
-    @Override
-    public String toString() {
-        return "SMEUser{" +
-                "chamberOfCommerceId=" + chamberOfCommerceId +
-                ", companyName='" + companyName + '\'' +
-                ", roleEmployee='" + roleEmployee + '\'' +
-                '}';
+    public void addBankAccount(BankAccount bankAccount){
+        smeAccounts.add(bankAccount);
     }
 }
