@@ -17,8 +17,8 @@ public class RetailUser extends User {
 
 
     @NotNull
-    @Min(value = 100000000)
-    @Max(value = 999999999)
+    @Min(value = 10000000, message = "BSN moet 8 of 9 cijfers zijn, zonder punten.")  //AMS: aantal posities mag zijn: 8
+    @Max(value = 999999999, message = "BSN moet 8 of 9 cijfers zijn, zonder punten.") //AMS: 8 of 9 posities voldoen
     private int bsn;
     @NotEmpty
     private String firstName;
@@ -36,7 +36,7 @@ public class RetailUser extends User {
     @NotEmpty
     private String city;
     @NotEmpty
-    @Size(min= 9, max=11) //in de testdata 11 posities nodig
+    @Size(min= 9, max=11) //AMS: in de testdata 11 posities nodig
     private String phoneNumber;
     @NotEmpty
     //omdat de date als string wordt ingegeven kan ik geen date validatie toepasssen
@@ -65,7 +65,6 @@ public class RetailUser extends User {
 
     public RetailUser(String userName, String userPassword, int bsn, String firstName,
                       String middleName, String lastName,
-
                       String streetName, int houseNumber, String extension,
                       String zipcode, String city, String phoneNumber,
                       String dateOfBirth, String email, String role) {

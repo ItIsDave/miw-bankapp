@@ -29,7 +29,6 @@ public class TransactionController implements WebMvcConfigurer {
 
     BankAccount accountTo = new BankAccount();
 
-
     // if user chooses to make a new transaction
     @GetMapping(value = "transactionRequest")
     public String pageHandlerGet(@ModelAttribute User user, Model model, HttpServletRequest request) {
@@ -37,8 +36,10 @@ public class TransactionController implements WebMvcConfigurer {
         Transaction transaction = new Transaction();
         HttpSession session = request.getSession (true);
         String userName = (String) session.getAttribute("userName");
-        RetailUser retailUser  = (RetailUser) session.getAttribute("retailUser");
-        BankAccount bankAccountFrom = retailUser.getBankAccounts().get(0);
+        RetailUser retailUser1  = (RetailUser) session.getAttribute("retailUser");
+        int userId = (int) session.getAttribute("userId");
+        BankAccount bankAccountFrom = retailUser1.getBankAccounts().get(0);
+
         transaction.setBankAccount(accountTo);
         transaction.setFromAccount(accountTo.getIBAN());
         System.out.println("datum - tijd is: " + transaction.getTransactionDate().toString());
@@ -47,6 +48,7 @@ public class TransactionController implements WebMvcConfigurer {
         model.addAttribute("bankAccountFrom", bankAccountFrom.getIBAN());
         model.addAttribute("bankAccountTo", transaction.getToAccount());
         model.addAttribute("userName", userName);
+        model.addAttribute("user", user);
         model.addAttribute("balance", bankAccountFrom.getBalance());
         return "transaction";
     }

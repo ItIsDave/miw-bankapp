@@ -13,7 +13,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-
+//AMS: Service gemaakt door Arnout
 @Service
 public class TestdataCreator {
 
@@ -67,7 +67,7 @@ public class TestdataCreator {
         Scanner reader;
         retailUserList = new ArrayList<>();
         try {
-            File retailCSVFile = new File("couch/resources/testdata2.csv");
+            File retailCSVFile = new File("couch/resources/testdata.csv");
             reader = new Scanner(retailCSVFile);
             //variant waarbij de bestand grootte niet bekend:
             while (reader.hasNextLine()) {
@@ -110,7 +110,7 @@ public class TestdataCreator {
             if(bankAccountDao== null){
                 System.out.println("doe verder niks");
             } else {
-                System.out.println("opslag naar de db start..");
+                //System.out.println("opslag naar de db start..");
                 bankAccountDao.save(bankAccount);
                 //System.out.println("nieuw bankaccount gemaakt en opgeslagen.");
             }

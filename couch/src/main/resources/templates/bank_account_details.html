@@ -1,3 +1,5 @@
+<!--coding by PH & AV-->
+
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
@@ -7,9 +9,35 @@
 <body>
 <h1>Welkom <span th:text="${userName}"></span></h1>
 
-
-
-
+<br>
+<table>
+    <tr>
+        <th>Bankrekeningnummer</th>
+        <th>Saldo</th>
+    </tr>
+    <tr>
+        <td th:text="${iban}"></td>
+        <td th:text="${balance}"></td>
+    </tr>
+</table>
+<br>
+<table>
+    <tr>
+        <th>Datum</th>
+        <th>Van</th>
+        <th>Naar</th>
+        <th>Omschrijving</th>
+        <th>Bedrag</th>
+    </tr>
+    <tr th:each="transaction: ${allTransactions}">
+        <td th:text="${transaction.transactionDate}"></td>
+        <td></td>
+        <td th:text="${transaction.bankAccountTo}"></td>
+        <td th:text="${transaction.description}"></td>
+        <td th:text="${transaction.amount}"></td>
+    </tr>
+</table>
+<br>
 <table>
     <form action="#" th:action="@{transactionRequest}" th:object="${user}" method="post">
     <input type="submit" value="Overboeking maken">
@@ -21,6 +49,6 @@
 
 <br>
 
-Ga <a href="/overview">terug</a> naar uw persoonlijke pagina.
+Ga <a href="overview">terug</a> naar uw persoonlijke pagina.
 </body>
 </html>

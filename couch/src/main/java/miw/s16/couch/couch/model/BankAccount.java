@@ -5,7 +5,7 @@ import javax.persistence.*;
 import java.math.BigInteger;
 import java.util.*;
 
-//coding by PvdH
+//coding by PH
 
 @Entity
 public class BankAccount {
@@ -16,7 +16,7 @@ public class BankAccount {
     private String iban;
     private double balance;
     @OneToMany(mappedBy = "bankAccount")
-    private List<Transaction> transactions = new ArrayList<Transaction>();
+    private List<Transaction> transactions;
     @ManyToMany(mappedBy = "bankAccounts")
     private List<RetailUser> retailUsers = new ArrayList<RetailUser>();
 
@@ -28,13 +28,14 @@ public class BankAccount {
     public BankAccount(double balance){
         this.iban = generateIban();
         this.balance = balance;
+        this.transactions = new ArrayList<>();
     }
 
     public BankAccount( String iBAN, double balance) {
         super();
         this.iban = iBAN;
         this.balance = balance;
-//        this.transactions = new ArrayList<>();
+        this.transactions = new ArrayList<>();
 //        this.retailusers = new ArrayList<>();
     }
 
@@ -42,8 +43,9 @@ public class BankAccount {
     public String getIBAN() { return iban; }
     public double getBalance() {return balance; }
     public int getBankAccountId() { return bankAccountId; }
-    //    public void addTransactions (Transaction transaction) {transactions.add(transaction);}
-//    public void addRetailUser (RetailUser retailuser) {retailusers.add(retailuser);}
+    public List<Transaction> getTransactions() {
+        return transactions;
+    }
 
     //setter for changes in balance, transactions and retailusers
     public void setBalance(double balance) { this.balance = balance; }
@@ -113,13 +115,14 @@ public class BankAccount {
 
 
     public void addTransaction(Transaction transaction){
-        transactions.add(transaction
-        );
+        transactions.add(transaction);
     }
+
+    //    public void addRetailUser (RetailUser retailuser) {retailusers.add(retailuser);}
 
     @Override
     public String toString() {
-        return iban + " " + balance;
+        return iban;
     }
 
 }

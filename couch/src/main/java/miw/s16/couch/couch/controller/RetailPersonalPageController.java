@@ -11,10 +11,7 @@ import miw.s16.couch.couch.service.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -35,8 +32,6 @@ public class RetailPersonalPageController<retailUser> {
     BankAccountDao bankAccountDao;
 
     BankAccount bankAccount = new BankAccount();
-
-
 
 
     @PostMapping(value = "transactionRequest")
@@ -63,14 +58,13 @@ public class RetailPersonalPageController<retailUser> {
     }
 
 
-
+    //coding by PH & AV
     @PostMapping(value = "newAccountRequest")
     public String newAccountRequestHandler(@ModelAttribute User user, Model model, HttpServletRequest request) {
         // log in session
-        HttpSession session = request.getSession (true);
+        HttpSession session = request.getSession(true);
         String userName = (String) session.getAttribute("userName");
-        RetailUser retailUser1  = (RetailUser) session.getAttribute("retailUser");
-        int userId = (int) session.getAttribute("userId");
+        RetailUser retailUser1 = (RetailUser) session.getAttribute("retailUser");
 
         //nieuwe IBAN wordt aangemaakt, aan retailuser gekoppeld en in DB opgeslagen
         BankAccount newBankAccount = new BankAccount();
@@ -85,24 +79,22 @@ public class RetailPersonalPageController<retailUser> {
         return "personal_page";
     }
 
-    //@GetMapping(value = "bankAccountDetails")
-    //public String testHandler(@RequestParam(name = "id") int id, Model model){
-    //    return test
-    //}
-    //coding AV & PH
-    @GetMapping(value = "bankAccountDetails")
-    public String bankAccountDetailsHandler(@ModelAttribute User user, Model model, HttpServletRequest request) {
+    //coding by PH & AV
+    @GetMapping(value = "/bankAccountDetails")
+    public String bankAccountDetailsHandler(@RequestParam("id") int bankAccountId, Model model, HttpServletRequest request) {
         // log in session
-        HttpSession session = request.getSession (true);
+        HttpSession session = request.getSession(true);
         String userName = (String) session.getAttribute("userName");
-        //RetailUser retailUser1  = (RetailUser) session.getAttribute("retailUser");
-        //int userId = (int) session.getAttribute("userId");
         //geclickte Iban incl saldo (overzicht transacties) ophalen uit DB en in scherm BankAccountDetails laat zien
-        //List<BankAccount> bankAccountsList = retailUser1.getBankAccounts();
+        BankAccount clickedBankAccount = bankAccountDao.findByBankAccountId(bankAccountId);
+        List <Transaction> transactionList = clickedBankAccount.getTransactions();
         model.addAttribute("userName", userName);
-       // model.addAttribute("allBankAccounts", bankAccountsList);
+        model.addAttribute("iban", clickedBankAccount.getIBAN());
+        model.addAttribute("balance", clickedBankAccount.getBalance());
+        model.addAttribute("allTransactions", transactionList);
 
         return "bank_account_details";
     }
-
 }
+
+

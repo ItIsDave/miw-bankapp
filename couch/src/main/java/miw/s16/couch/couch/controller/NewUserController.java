@@ -40,16 +40,16 @@ public class NewUserController implements WebMvcConfigurer {
     }
 
     @PostMapping(value ="newRetailUser")
-    public String retailUserHandler(@Valid @ModelAttribute(value = "retailUser") RetailUser retailUser, BindingResult bindingResult){
-       //WIP
+    public String retailUserHandler(@Valid RetailUser retailUser, BindingResult bindingResult){
         if(bindingResult.hasErrors()){
             return "new_retail_user";
         } else {
-        BankAccount bankAccount = new BankAccount();        //bankaccount wordt gegenereerd
-        retailUser.addBankAccount(bankAccount);             //ba gekoppeld aan user
-        bankAccountDao.save(bankAccount);                   //ba opgeslagen in DB
-        retailUserDao.save(retailUser);                     //user opgeslagen in DB
-        System.out.println("User ID: " + retailUser.getUserId());
+            BankAccount bankAccount = new BankAccount();        //bankaccount wordt gegenereerd
+            retailUser.addBankAccount(bankAccount);             //ba gekoppeld aan user
+            retailUser.setRole("Retail");
+            bankAccountDao.save(bankAccount);                   //ba opgeslagen in DB
+            retailUserDao.save(retailUser);                     //user opgeslagen in DB
+            System.out.println("User ID: " + retailUser.getUserId());
         return "new_retail_user_success";
     }
    }
