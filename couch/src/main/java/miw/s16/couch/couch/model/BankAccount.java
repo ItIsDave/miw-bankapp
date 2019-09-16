@@ -17,6 +17,9 @@ public class BankAccount {
     private double balance;
     @OneToMany(mappedBy = "bankAccount")
     private List<Transaction> transactions;
+    //iaw Boudewijn added, both depraciation and deposit amounts are now collected from db
+    @OneToMany(mappedBy = "bankAccountTo")
+    private List<Transaction> transactionsTo;
     @ManyToMany(mappedBy = "bankAccounts")
     private List<RetailUser> retailUsers = new ArrayList<RetailUser>();
 
@@ -29,6 +32,7 @@ public class BankAccount {
         this.iban = generateIban();
         this.balance = balance;
         this.transactions = new ArrayList<>();
+        this.transactionsTo = new ArrayList<>();
     }
 
     public BankAccount( String iBAN, double balance) {
@@ -36,6 +40,7 @@ public class BankAccount {
         this.iban = iBAN;
         this.balance = balance;
         this.transactions = new ArrayList<>();
+        this.transactionsTo = new ArrayList<>();
 //        this.retailusers = new ArrayList<>();
     }
 
@@ -43,9 +48,8 @@ public class BankAccount {
     public String getIBAN() { return iban; }
     public double getBalance() {return balance; }
     public int getBankAccountId() { return bankAccountId; }
-    public List<Transaction> getTransactions() {
-        return transactions;
-    }
+    public List<Transaction> getTransactions() { return transactions; }
+    public List<Transaction> getTransactionsTo() { return transactionsTo; }
 
     //setter for changes in balance, transactions and retailusers
     public void setBalance(double balance) { this.balance = balance; }
@@ -114,10 +118,8 @@ public class BankAccount {
     }
 
 
-    public void addTransaction(Transaction transaction){
-        transactions.add(transaction);
-    }
-
+    public void addTransaction(Transaction transaction){ transactions.add(transaction); }
+    public void addTransactionTo(Transaction transaction){ transactionsTo.add(transaction); }
     //    public void addRetailUser (RetailUser retailuser) {retailusers.add(retailuser);}
 
     @Override
