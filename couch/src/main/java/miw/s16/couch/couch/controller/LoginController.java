@@ -8,6 +8,7 @@ import miw.s16.couch.couch.model.dao.RetailUserDao;
 import miw.s16.couch.couch.model.dao.UserDao;
 import miw.s16.couch.couch.service.HibernateLab;
 import miw.s16.couch.couch.service.PasswordValidator;
+import miw.s16.couch.couch.service.TestdataCreator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,6 +30,9 @@ public class LoginController {
     HibernateLab lab;
 
     @Autowired
+    TestdataCreator testData;
+
+    @Autowired
     RetailUserDao retailUserDao;
 
     @Autowired
@@ -37,6 +41,9 @@ public class LoginController {
     @GetMapping
     public String indexHandler(Model model) {
         lab.dbinit();
+        testData.makeRetailUserList();                          //AMS: haalt retail data op uit CSV file
+        testData.retailUserListSplitAddBankaccountAndSave();    //AMS: verwerken testdata
+        System.out.println("testdata klaar..");
         User user = new User();
         RetailUser retailUser = new RetailUser();
         model.addAttribute("user", user);
