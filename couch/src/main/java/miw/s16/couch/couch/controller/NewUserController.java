@@ -51,5 +51,6 @@ public class NewUserController implements WebMvcConfigurer {
         model.addAttribute("SMEUser", smeUser);
         return "new_prive_user";
     }
+
 }
 
