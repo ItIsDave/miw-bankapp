@@ -1,15 +1,9 @@
 package miw.s16.couch.couch.service;
 
 
-import miw.s16.couch.couch.model.BankAccount;
-import miw.s16.couch.couch.model.RetailUser;
-import miw.s16.couch.couch.model.Transaction;
-import miw.s16.couch.couch.model.User;
+import miw.s16.couch.couch.model.*;
 
-import miw.s16.couch.couch.model.dao.BankAccountDao;
-import miw.s16.couch.couch.model.dao.RetailUserDao;
-import miw.s16.couch.couch.model.dao.TransactionDao;
-import miw.s16.couch.couch.model.dao.UserDao;
+import miw.s16.couch.couch.model.dao.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,6 +26,9 @@ public class HibernateLab {
 
     @Autowired
     TransactionDao transactionDao;
+
+    @Autowired
+    SMEUserDao smeUserDao;
 
 
     public HibernateLab() {
@@ -72,6 +69,9 @@ public class HibernateLab {
             RetailUser jan = new RetailUser("Jan", "1234", 987654326,
                     "Jan",  "", "Bakken", "Herengracht", 100,
                     "C", "1018AC", "Amsterdam", "6901230801", "25-10-1989", "jbakker@gmail.com", "Retail");
+
+            SMEUser hva = new SMEUser("hva", "1234");
+            smeUserDao.save(hva);
 
 
             //Creating transaction data
