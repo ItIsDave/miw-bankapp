@@ -2,7 +2,8 @@ package miw.s16.couch.couch.model;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
-import javax.validation.constraints.NotNull;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +16,10 @@ public class SMEUser extends User {
     private String  roleEmployee;
     @ManyToMany
     private List<BankAccount> smeAccounts = new ArrayList<>();
+    // company employees that need sign in
+    @OneToMany(mappedBy = "company")
+    private List<User> employees = new ArrayList<>();
+    //
 
     public SMEUser() {
         this("","");
@@ -23,6 +28,7 @@ public class SMEUser extends User {
     public SMEUser(String userName, String userPassword) {
         super(userName, userPassword);
         this.smeAccounts = new ArrayList<>();
+        this.employees = new ArrayList<>();
     }
 
     public SMEUser(int chamberOfCommerceId, String companyName, String roleEmployee, ArrayList<BankAccount> smeAccounts) {
@@ -32,13 +38,20 @@ public class SMEUser extends User {
         this.smeAccounts = smeAccounts;
     }
 
+    public SMEUser(int chamberOfCommerceId, String companyName, String roleEmployee, List<BankAccount> smeAccounts, List<User> employees) {
+        this.chamberOfCommerceId = chamberOfCommerceId;
+        this.companyName = companyName;
+        this.roleEmployee = roleEmployee;
+        this.smeAccounts = smeAccounts;
+        this.employees = employees;
+    }
+
     public SMEUser(String userName, String password, int companyId, String name, String role){
         super(userName, password);
         this.chamberOfCommerceId = companyId;
         this.companyName = name;
         this.roleEmployee = role;
     }
-
 
     public int getChamberOfCommerceId() { return chamberOfCommerceId; }
 
@@ -61,4 +74,15 @@ public class SMEUser extends User {
     public void addBankAccount(BankAccount bankAccount){
         smeAccounts.add(bankAccount);
     }
+
+    public List<User> getEmployees() {
+        return employees;
+    }
+
+    public void setEmployees(List<User> employees) {
+        this.employees = employees;
+    }
+
+    public void addMember(User user){
+        employees.add(user); }
 }

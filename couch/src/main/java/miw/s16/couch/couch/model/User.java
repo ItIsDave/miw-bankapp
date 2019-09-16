@@ -24,6 +24,8 @@ public class User  {
     private String userName;
     @NotEmpty
     private String userPassword;
+    @ManyToOne
+    private SMEUser company; // many users can belong to one SME company
 
     // empty constructor
     public User() {
@@ -35,7 +37,14 @@ public class User  {
         super();
         this.userName = userName;
         this.userPassword = userPassword;
+        this.company = null;
+    }
 
+
+    public User(@NotEmpty String userName, @NotEmpty String userPassword, SMEUser company) {
+        this.userName = userName;
+        this.userPassword = userPassword;
+        this.company = company;
     }
 
     public String getUserName() {
@@ -60,6 +69,14 @@ public class User  {
 
     public void setUserId(int userId) {
         this.userId = userId;
+    }
+
+    public SMEUser getCompany() {
+        return company;
+    }
+
+    public void setCompany(SMEUser company) {
+        this.company = company;
     }
 }
 
