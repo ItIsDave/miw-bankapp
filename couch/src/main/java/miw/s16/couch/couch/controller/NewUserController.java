@@ -40,8 +40,7 @@ public class NewUserController implements WebMvcConfigurer {
     }
 
     @PostMapping(value ="newRetailUser")
-    public String retailUserHandler(@Valid @ModelAttribute(value = "retailUser") RetailUser retailUser, BindingResult bindingResult){
-       //WIP
+    public String retailUserHandler(@Valid RetailUser retailUser, BindingResult bindingResult){
         if(bindingResult.hasErrors()){
             return "new_retail_user";
         } else {

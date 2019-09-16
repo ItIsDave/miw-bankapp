@@ -5,6 +5,7 @@ import miw.s16.couch.couch.model.RetailUser;
 import miw.s16.couch.couch.model.User;
 
 import miw.s16.couch.couch.model.dao.RetailUserDao;
+import miw.s16.couch.couch.model.dao.UserDao;
 import miw.s16.couch.couch.service.HibernateLab;
 import miw.s16.couch.couch.service.PasswordValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,9 @@ public class LoginController {
 
     @Autowired
     RetailUserDao retailUserDao;
+
+    @Autowired
+    UserDao userDao;
 
     @GetMapping
     public String indexHandler(Model model) {

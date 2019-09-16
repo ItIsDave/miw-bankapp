@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 
+import miw.s16.couch.couch.model.constraints.UsernameDoesNotExistConstraint;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration;
 import org.springframework.context.annotation.Configuration;
@@ -23,6 +24,7 @@ public class User  {
     private int userId;
     @Column(name = "userName", unique = true)
     @NotEmpty
+    @UsernameDoesNotExistConstraint(message = "Gebruikersnaam is al in gebruik.")
     private String userName;
     @NotEmpty
     private String userPassword;

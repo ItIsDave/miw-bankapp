@@ -38,6 +38,7 @@ public class HibernateLab {
         super();
     }
 
+
     public void dbinit() {
 
        // to ensure no data duplication
@@ -129,3 +130,4 @@ public class HibernateLab {
     }
 
 }
+

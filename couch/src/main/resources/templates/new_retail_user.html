@@ -15,7 +15,7 @@
         <tr>
             <td>Kies gebruikersnaam: </td>
             <td><input type="text" name="userName" th:field="*{userName}"/> </td>
-            <td th:if="${#fields.hasErrors('userName')}">Username ongeldig.</td>
+            <td th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}">Username ongeldig.</td>
         </tr>
         <tr>
             <td>Kies wachtwoord: </td>
