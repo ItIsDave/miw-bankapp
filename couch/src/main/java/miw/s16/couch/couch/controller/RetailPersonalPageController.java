@@ -87,13 +87,14 @@ public class RetailPersonalPageController<retailUser> {
         String userName = (String) session.getAttribute("userName");
         //geclickte Iban incl saldo (overzicht transacties) ophalen uit DB en in scherm BankAccountDetails laat zien
         BankAccount clickedBankAccount = bankAccountDao.findByBankAccountId(bankAccountId);
+        List <Transaction> transactionList = clickedBankAccount.getTransactions();
         model.addAttribute("userName", userName);
         model.addAttribute("iban", clickedBankAccount.getIBAN());
         model.addAttribute("balance", clickedBankAccount.getBalance());
+        model.addAttribute("allTransactions", transactionList);
 
         return "bank_account_details";
     }
-
 }
 
 
