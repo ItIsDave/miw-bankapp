@@ -5,6 +5,7 @@ import miw.s16.couch.couch.model.RetailUser;
 import miw.s16.couch.couch.model.User;
 
 import miw.s16.couch.couch.model.dao.RetailUserDao;
+import miw.s16.couch.couch.model.dao.UserDao;
 import miw.s16.couch.couch.service.HibernateLab;
 import miw.s16.couch.couch.service.PasswordValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,9 @@ public class LoginController {
     @Autowired
     RetailUserDao retailUserDao;
 
+    @Autowired
+    UserDao userDao;
+
     @GetMapping
     public String indexHandler(Model model) {
         lab.dbinit();
@@ -39,7 +43,6 @@ public class LoginController {
         model.addAttribute("retailUser", retailUser);
         return "index";
     }
-    // coding PH & AV
     // user log in & user validation and direction to personal page
     @PostMapping(value = "overview")
     public String loginHandler(@ModelAttribute User user, Model model, HttpServletRequest request) {
