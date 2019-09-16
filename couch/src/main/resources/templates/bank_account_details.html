@@ -31,7 +31,7 @@
     </tr>
     <tr th:each="transaction: ${allTransactions}">
         <td th:text="${transaction.transactionDate}"></td>
-        <td th:text="${transaction.bankAccount}}"></td>
+        <td th:text="${transaction.bankAccount}"></td>
         <td th:text="${transaction.bankAccountTo}"></td>
         <td th:text="${transaction.description}"></td>
         <td th:text="${transaction.amount}"></td>
