@@ -15,15 +15,16 @@ import java.util.List;
 import java.util.Scanner;
 
 @Service
-public abstract class TestdataCreator {
+public class TestdataCreator {
 
     @Autowired
-    static RetailUserDao retailUserDao;
+    private RetailUserDao retailUserDao;
 
     @Autowired
-    static BankAccountDao bankAccountDao;
+    private BankAccountDao bankAccountDao;
 
     final static int BESTAND_GROOTTE = 816;  //is het aantal gegenereerde retailUsers in CSVbestand
+    final static int MAX_INIT_BALANCE = 100000; //honderduizend centen als maximum initieel saldo
     private static List<String> retailUserList;
     @NotEmpty
     private static String userName;
@@ -58,11 +59,15 @@ public abstract class TestdataCreator {
     @Email
     private static String email;
 
+    public TestdataCreator(){
+        super();
+    }
+
     public static void makeRetailUserList() {
         Scanner reader;
         retailUserList = new ArrayList<>();
         try {
-            File retailCSVFile = new File("resources/testdata.csv");
+            File retailCSVFile = new File("couch/resources/testdata2.csv");
             reader = new Scanner(retailCSVFile);
             //variant waarbij de bestand grootte niet bekend:
             while (reader.hasNextLine()) {
@@ -74,9 +79,11 @@ public abstract class TestdataCreator {
         }
     }
 
-    public static void retailUserListSplitAndSave() {
-        for (int index = 0; index < BESTAND_GROOTTE; index++) {
-            String[] recordSplit = retailUserList.get(index).split(",");  //er zijn 14 kolommen
+    public void retailUserListSplitAddBankaccountAndSave() {        //de methode mag niet static zijn,
+                                                                    // omdat de dao niet static mag zijn
+        for (int index = 0; index < BESTAND_GROOTTE-1; index++) {
+            //System.out.println("aantal records is: " + retailUserList.size());
+            String[] recordSplit = retailUserList.get(index).split(";");  //er zijn 14 kolommen
             // per attribuut van User en retailUserClient de strings toekennen
             userName = recordSplit[0];
             userPassword = recordSplit[1];
@@ -96,18 +103,18 @@ public abstract class TestdataCreator {
                 bsn = Integer.parseInt(bsnString);
             RetailUser retailUser = new RetailUser(userName,userPassword,bsn,firstName,middleName,lastName,streetName,houseNumber,
                     extension,zipcode,city,phoneNumber,dateOfBirth,email,"");
-            retailUserDao.save(retailUser);
-        }
-    }
-
-    public static void makeBankAccountsTestData() {
-        //maak testdata
-        for (int index = 0; index <BESTAND_GROOTTE-1 ; index++) {
-            final int MAX_INIT_BALANCE = 100000; //honderduizend
+            //maak eerst een bankaccount
             Double balance =  Math.round(Math.random() * MAX_INIT_BALANCE) / 100.0;  //bedrag met 2 decimalen
             BankAccount bankAccount = new BankAccount(balance);
-            System.out.println("nieuw bankaccount gemaakt.");
-            bankAccountDao.save(bankAccount);
+            retailUser.addBankAccount(bankAccount);
+            if(bankAccountDao== null){
+                System.out.println("doe verder niks");
+            } else {
+                System.out.println("opslag naar de db start..");
+                bankAccountDao.save(bankAccount);
+                //System.out.println("nieuw bankaccount gemaakt en opgeslagen.");
+            }
+            retailUserDao.save(retailUser);
         }
     }
 }

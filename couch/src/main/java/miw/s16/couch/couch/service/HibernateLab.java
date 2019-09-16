@@ -123,9 +123,6 @@ public class HibernateLab {
             retailUserDao.save(jan);
             retailUserDao.save(boudewijn);
 
-            TestdataCreator.makeRetailUserList();
-            TestdataCreator.retailUserListSplitAndSave();
-            TestdataCreator.makeBankAccountsTestData();
         }
 
 

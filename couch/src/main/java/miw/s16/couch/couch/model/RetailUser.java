@@ -36,7 +36,7 @@ public class RetailUser extends User {
     @NotEmpty
     private String city;
     @NotEmpty
-    @Size(min= 9, max=10)
+    @Size(min= 9, max=11) //in de testdata 11 posities nodig
     private String phoneNumber;
     @NotEmpty
     //omdat de date als string wordt ingegeven kan ik geen date validatie toepasssen
