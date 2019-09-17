@@ -33,6 +33,9 @@ public class HibernateLab {
     @Autowired
     TransactionDao transactionDao;
 
+    @Autowired
+    TestdataCreator testData;
+
 
     public HibernateLab() {
         super();
@@ -123,6 +126,8 @@ public class HibernateLab {
             retailUserDao.save(jan);
             retailUserDao.save(boudewijn);
 
+            testData.makeRetailUserList();                          //AMS: haalt retail data op uit CSV file
+            testData.retailUserListSplitAddBankaccountAndSave();    //AMS: verwerken testdata
         }
 
 
