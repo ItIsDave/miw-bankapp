@@ -28,11 +28,10 @@ public class HibernateLab {
     TransactionDao transactionDao;
 
     @Autowired
-<<<<<<< HEAD
     TestdataCreator testData;
-=======
+
+    @Autowired
     SMEUserDao smeUserDao;
->>>>>>> prive
 
 
     public HibernateLab() {
