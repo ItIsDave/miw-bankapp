@@ -41,8 +41,6 @@ public class LoginController {
     @GetMapping
     public String indexHandler(Model model) {
         lab.dbinit();
-        testData.makeRetailUserList();                          //AMS: haalt retail data op uit CSV file
-        testData.retailUserListSplitAddBankaccountAndSave();    //AMS: verwerken testdata
         System.out.println("testdata klaar..");
         User user = new User();
         RetailUser retailUser = new RetailUser();
