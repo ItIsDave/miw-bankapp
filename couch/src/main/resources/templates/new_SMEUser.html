@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<html lang="en"  xmlns:="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+​
+<head>
+    <meta charset="UTF-8">
+    <title> Couch Bank nieuwe zakelijke klant</title>
+</head>
+<body>
+<h1>Couch Bank nieuwe zakelijke klant</h1>
+
+<h2>U staat op de het punt te beginnen et het aanvragen van een zakelijke rekening. Vul hieronder uw bedrijfsgegevens in</h2>
+<br><br>
+<form action="#" th:action="@{newSMEUser}" th:object="${SMEUser}" method="post">
+    <table>
+            <td>Wat is de ondernemingsvorm van uw bedrijf?</td>
+            <td>
+            <select>
+                <option value=""> -- </option>
+                <option th:each="t: ${companyForm}" th:value = "${t.toString()}" th:utext = "${t.toString()}" ></option>
+            </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Ben je de eigenaar van het bedrijf?
+            <input type="radio" name="eigenaar" value="yes" checked> Yes
+            <input type="radio" name="eigenaar" value="no" onclick="alert('Sorry not supported')"  > No
+            </td>
+        </tr>
+<!--        <tr>-->
+<!--            <td>KvK nummer: </td>-->
+<!--            <td><input type="text" data-toggle="dropdown" name="chamberOfCommerceId" th:field="*{chamberOfCommerceId}"/></td>-->
+<!--            <td th:if="${#fields.hasErrors('chamberOfCommerceId')}" th:errors="*{chamberOfCommerceId}">KvK-nummer ongeldig.</td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--            <td>Naam: </td>-->
+<!--            <td><input type="text" name="companyName" th:field="*{companyName}"/></td>-->
+<!--            <td th:if="${#fields.hasErrors('companyName')}" th:errors="*{companyName}">Naam ongeldig.</td>-->
+<!--        </tr>-->
+        <tr>
+            <td>Kies gebruikersnaam: </td>
+            <td><input type="text" name="userName" th:field="*{userName}"/> </td>
+            <td th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}">Username ongeldig.</td>
+        </tr>
+        <tr>
+            <td>Kies wachtwoord: </td>
+            <td><input type="text" name="userPassword" th:field="*{userPassword}"/></td>
+            <td th:if="${#fields.hasErrors('userPassword')}">Wachtwoord ongeldig.</td>
+        </tr>
+    </table>
+    <button name="submit" type="submit" value="0">Verstuur</button>
+
+</form>
+</body>
+</html>

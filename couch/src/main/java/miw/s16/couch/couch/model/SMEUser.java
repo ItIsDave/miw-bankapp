@@ -1,47 +1,66 @@
 package miw.s16.couch.couch.model;
 
-import java.util.ArrayList;
+import org.apache.tomcat.util.digester.ArrayStack;
 
+import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import java.util.ArrayList;
+import java.util.List;
+
+@Entity
 public class SMEUser extends User {
 
-    private int chamberOfCommerceId;
-    private String companyName;
-    private String  roleEmployee;
-    private ArrayList<BankAccount> smeRekeningen = new ArrayList<>();
+    private String roleEmployee;
+    @ManyToMany
+    private List<BankAccount> companyAccounts = new ArrayList<>();
+    // company employees that need sign in
+    @ManyToMany
+    private List<Company> companies = new ArrayList<>(); // many companies have many employees
 
-    public SMEUser(String userName, String password, int companyId, String name, String role){
-        super(userName, password);
-        this.chamberOfCommerceId = companyId;
-        this.companyName = name;
-        this.roleEmployee = role;
-        BankAccount iban = new BankAccount("NL82 INGB 0004 2181 41", 3300 );
-        smeRekeningen.add(iban);
+
+    public SMEUser() {
+        this("","");
+        this.companies = new ArrayList<>();
     }
 
-    public int getChamberOfCommerceId() { return chamberOfCommerceId; }
-
-    public void setChamberOfCommerceId(int chamberOfCommerceId) {
-        this.chamberOfCommerceId = chamberOfCommerceId;
+    public SMEUser(String userName, String userPassword) {
+        super(userName, userPassword);
+        this.companies = new ArrayList<>();
+        this.companyAccounts = new ArrayList<>();
     }
 
-    public String getCompanyName() { return companyName; }
+    public SMEUser(String userName, String userPassword, String roleEmployee, List<BankAccount> companyAccounts, List<Company> companies) {
+        super(userName, userPassword);
+        this.roleEmployee = roleEmployee;
+        this.companyAccounts = companyAccounts;
+        this.companies = companies;
+    }
 
-    public void setCompanyName(String companyName) { this.companyName = companyName; }
+    public String getRoleEmployee() {
+        return roleEmployee;
+    }
 
-    public String getRoleEmployee() { return roleEmployee; }
+    public void setRoleEmployee(String roleEmployee) {
+        this.roleEmployee = roleEmployee;
+    }
 
-    public void setRoleEmployee(String roleEmployee) { this.roleEmployee = roleEmployee; }
+    public List<BankAccount> getCompanyAccounts() {
+        return companyAccounts;
+    }
 
-    public ArrayList<BankAccount> getSmeRekeningen() { return smeRekeningen; }
+    public void setCompanyAccounts(List<BankAccount> companyAccounts) {
+        this.companyAccounts = companyAccounts;
+    }
 
-    public void setSmeRekeningen(ArrayList<BankAccount> smeRekeningen) { this.smeRekeningen = smeRekeningen; }
+    public List<Company> getCompanies() {
+        return companies;
+    }
 
-    @Override
-    public String toString() {
-        return "SMEUser{" +
-                "chamberOfCommerceId=" + chamberOfCommerceId +
-                ", companyName='" + companyName + '\'' +
-                ", roleEmployee='" + roleEmployee + '\'' +
-                '}';
+    public void setCompanies(List<Company> companies) {
+        this.companies = companies;
+    }
+
+    public void addCompany(Company company){
+        companies.add(company);
     }
 }

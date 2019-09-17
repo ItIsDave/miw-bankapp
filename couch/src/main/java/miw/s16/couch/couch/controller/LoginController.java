@@ -2,9 +2,11 @@ package miw.s16.couch.couch.controller;
 
 import miw.s16.couch.couch.model.BankAccount;
 import miw.s16.couch.couch.model.RetailUser;
+import miw.s16.couch.couch.model.SMEUser;
 import miw.s16.couch.couch.model.User;
 
 import miw.s16.couch.couch.model.dao.RetailUserDao;
+import miw.s16.couch.couch.model.dao.SMEUserDao;
 import miw.s16.couch.couch.model.dao.UserDao;
 import miw.s16.couch.couch.service.HibernateLab;
 import miw.s16.couch.couch.service.PasswordValidator;
@@ -36,6 +38,9 @@ public class LoginController {
     RetailUserDao retailUserDao;
 
     @Autowired
+    SMEUserDao smeUserDao;
+
+    @Autowired
     UserDao userDao;
 
     @GetMapping
@@ -44,10 +49,13 @@ public class LoginController {
         System.out.println("testdata klaar..");
         User user = new User();
         RetailUser retailUser = new RetailUser();
+        SMEUser smeUser = new SMEUser();
         model.addAttribute("user", user);
         model.addAttribute("retailUser", retailUser);
+        model.addAttribute("smeUser", smeUser);
         return "index";
     }
+
     // user log in & user validation and direction to personal page
     @PostMapping(value = "overview")
     public String loginHandler(@ModelAttribute User user, Model model, HttpServletRequest request) {
@@ -69,25 +77,29 @@ public class LoginController {
         return "login_failed";
     }
 
-    // user returns to personal page (coding by AT)
-    @GetMapping(value = "overview")
-    public String overviewHandler(@ModelAttribute User user, Model model, HttpServletRequest request) {
-        HttpSession session = request.getSession(true);
-        String userName = (String) session.getAttribute("userName");
-        RetailUser retailUser1  = (RetailUser) session.getAttribute("retailUser");
-        List <BankAccount> loggedInBankAccounts = retailUser1.getBankAccounts();
-        String bankAccount = retailUser1.getBankAccounts().get(0).getIBAN();
-        session.setAttribute("userName", userName);
-        session.setAttribute("bankAccount", bankAccount);
-        model.addAttribute("userName", userName);
-        model.addAttribute("bankAccount", bankAccount);
-        model.addAttribute("allBankAccounts", loggedInBankAccounts);
-        return "personal_page";
-    }
+    // user returns to personal page
 
 
-    @GetMapping(value = "newUser")
-    public String newUserHandler() {
-        return "new_user_select_type";
+
+        // user returns to personal page (coding by AT)
+        @GetMapping(value = "overview")
+        public String overviewHandler (@ModelAttribute User user, Model model, HttpServletRequest request){
+            HttpSession session = request.getSession(true);
+            String userName = (String) session.getAttribute("userName");
+            RetailUser retailUser1 = (RetailUser) session.getAttribute("retailUser");
+            List<BankAccount> loggedInBankAccounts = retailUser1.getBankAccounts();
+            String bankAccount = retailUser1.getBankAccounts().get(0).getIBAN();
+            session.setAttribute("userName", userName);
+            session.setAttribute("bankAccount", bankAccount);
+            model.addAttribute("userName", userName);
+            model.addAttribute("bankAccount", bankAccount);
+            model.addAttribute("allBankAccounts", loggedInBankAccounts);
+            return "personal_page";
+        }
+
+
+        @GetMapping(value = "newUser")
+        public String newUserHandler () {
+            return "new_user_select_type";
+        }
     }
-}

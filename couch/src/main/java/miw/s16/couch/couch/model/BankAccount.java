@@ -22,8 +22,9 @@ public class BankAccount {
     private List<Transaction> transactionsTo;
     @ManyToMany(mappedBy = "bankAccounts")
     private List<RetailUser> retailUsers = new ArrayList<RetailUser>();
+    @ManyToMany(mappedBy = "companyAccounts")
+    private List<SMEUser> smeUsers = new ArrayList<>();
 
-    //constructors
     public BankAccount () {
         this(0);
     }
@@ -44,12 +45,54 @@ public class BankAccount {
 //        this.retailusers = new ArrayList<>();
     }
 
+    public BankAccount(String iban, double balance, List<Transaction> transactions, List<RetailUser> retailUsers, List<SMEUser> smeUsers) {
+        this.iban = iban;
+        this.balance = balance;
+        this.transactions = transactions;
+        this.retailUsers = retailUsers;
+        this.smeUsers = smeUsers;
+    }
+
+
+
     //getters
     public String getIBAN() { return iban; }
     public double getBalance() {return balance; }
     public int getBankAccountId() { return bankAccountId; }
     public List<Transaction> getTransactions() { return transactions; }
     public List<Transaction> getTransactionsTo() { return transactionsTo; }
+
+    public void setBankAccountId(int bankAccountId) {
+        this.bankAccountId = bankAccountId;
+    }
+
+    public String getIban() {
+        return iban;
+    }
+
+    public void setIban(String iban) {
+        this.iban = iban;
+    }
+
+    public void setTransactions(List<Transaction> transactions) {
+        this.transactions = transactions;
+    }
+
+    public List<RetailUser> getRetailUsers() {
+        return retailUsers;
+    }
+
+    public void setRetailUsers(List<RetailUser> retailUsers) {
+        this.retailUsers = retailUsers;
+    }
+
+    public List<SMEUser> getSmeUsers() {
+        return smeUsers;
+    }
+
+    public void setSmeUsers(List<SMEUser> smeUsers) {
+        this.smeUsers = smeUsers;
+    }
 
     //setter for changes in balance, transactions and retailusers
     public void setBalance(double balance) { this.balance = balance; }
