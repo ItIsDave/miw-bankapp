@@ -1,6 +1,7 @@
 package miw.s16.couch.couch.controller;
 
 import miw.s16.couch.couch.model.BankAccount;
+import miw.s16.couch.couch.model.Company;
 import miw.s16.couch.couch.model.SMEUser;
 import miw.s16.couch.couch.model.dao.BankAccountDao;
 import miw.s16.couch.couch.model.dao.SMEUserDao;
@@ -28,6 +29,8 @@ public class NewSMEUserController {
 
     private List<String> companyForm = new ArrayList<>();
 
+    private Company company1 = new Company();
+
 
     @GetMapping(value = "couch-zakelijk")  //van select type -> new zakelijk user
     public String newSMEUserHandler(Model model, SMEUser smeUser){
@@ -38,14 +41,13 @@ public class NewSMEUserController {
     }
 
     @PostMapping(value ="couch-zakelijk")
-    public String newSMEUserHandler(@Valid SMEUser company, BindingResult bindingResult, Model model){
+    public String newSMEUserHandler(@Valid SMEUser smeUser, BindingResult bindingResult, Model model){
         if(bindingResult.hasErrors()){
             return "new_SMEUser";
         } else {
             BankAccount bankAccount = new BankAccount();
-            company.addBankAccount(bankAccount);
-            bankAccountDao.save(bankAccount);
-            smeUserDao.save(company);
+         //   bankAccountDao.save(bankAccount);
+            smeUserDao.save(smeUser);
             return "new_SMEUser_success";
         }
     }

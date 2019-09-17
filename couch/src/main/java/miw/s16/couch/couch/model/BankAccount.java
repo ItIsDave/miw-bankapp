@@ -22,10 +22,9 @@ public class BankAccount {
     private List<Transaction> transactionsTo;
     @ManyToMany(mappedBy = "bankAccounts")
     private List<RetailUser> retailUsers = new ArrayList<RetailUser>();
-    @ManyToMany(mappedBy = "smeAccounts")
+    @ManyToMany(mappedBy = "companyAccounts")
     private List<SMEUser> smeUsers = new ArrayList<>();
 
-    //constructors
     public BankAccount () {
         this(0);
     }

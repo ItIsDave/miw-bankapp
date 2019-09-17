@@ -1,87 +1,66 @@
 package miw.s16.couch.couch.model;
 
-import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import org.apache.tomcat.util.digester.ArrayStack;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 public class SMEUser extends User {
 
-    private int chamberOfCommerceId;
-    private String companyName;
-    private String  roleEmployee;
+    private String roleEmployee;
     @ManyToMany
-    private List<BankAccount> smeAccounts = new ArrayList<>();
+    private List<BankAccount> companyAccounts = new ArrayList<>();
     // company employees that need sign in
-    @OneToMany(mappedBy = "company")
-    private List<User> employees = new ArrayList<>();
+    @ManyToMany
+    private List<Company> companies = new ArrayList<>(); // many companies have many employees
 
 
     public SMEUser() {
         this("","");
+        this.companies = new ArrayList<>();
     }
 
     public SMEUser(String userName, String userPassword) {
         super(userName, userPassword);
-        this.smeAccounts = new ArrayList<>();
-        this.employees = new ArrayList<>();
+        this.companies = new ArrayList<>();
+        this.companyAccounts = new ArrayList<>();
     }
 
-    public SMEUser(int chamberOfCommerceId, String companyName, String roleEmployee, ArrayList<BankAccount> smeAccounts) {
-        this.chamberOfCommerceId = chamberOfCommerceId;
-        this.companyName = companyName;
+    public SMEUser(String userName, String userPassword, String roleEmployee, List<BankAccount> companyAccounts, List<Company> companies) {
+        super(userName, userPassword);
         this.roleEmployee = roleEmployee;
-        this.smeAccounts = smeAccounts;
+        this.companyAccounts = companyAccounts;
+        this.companies = companies;
     }
 
-    public SMEUser(int chamberOfCommerceId, String companyName, String roleEmployee, List<BankAccount> smeAccounts, List<User> employees) {
-        this.chamberOfCommerceId = chamberOfCommerceId;
-        this.companyName = companyName;
+    public String getRoleEmployee() {
+        return roleEmployee;
+    }
+
+    public void setRoleEmployee(String roleEmployee) {
         this.roleEmployee = roleEmployee;
-        this.smeAccounts = smeAccounts;
-        this.employees = employees;
     }
 
-    public SMEUser(String userName, String password, int companyId, String name, String role){
-        super(userName, password);
-        this.chamberOfCommerceId = companyId;
-        this.companyName = name;
-        this.roleEmployee = role;
+    public List<BankAccount> getCompanyAccounts() {
+        return companyAccounts;
     }
 
-    public int getChamberOfCommerceId() { return chamberOfCommerceId; }
-
-    public void setChamberOfCommerceId(int chamberOfCommerceId) {
-        this.chamberOfCommerceId = chamberOfCommerceId;
+    public void setCompanyAccounts(List<BankAccount> companyAccounts) {
+        this.companyAccounts = companyAccounts;
     }
 
-    public String getCompanyName() { return companyName; }
-
-    public void setCompanyName(String companyName) { this.companyName = companyName; }
-
-    public String getRoleEmployee() { return roleEmployee; }
-
-    public void setRoleEmployee(String roleEmployee) { this.roleEmployee = roleEmployee; }
-
-    public List<BankAccount> getSmeAccounts() { return smeAccounts; }
-
-    public void setSmeAccounts(List<BankAccount> smeAccounts) { this.smeAccounts = smeAccounts; }
-
-    public void addBankAccount(BankAccount bankAccount){
-        smeAccounts.add(bankAccount);
+    public List<Company> getCompanies() {
+        return companies;
     }
 
-    public List<User> getEmployees() {
-        return employees;
+    public void setCompanies(List<Company> companies) {
+        this.companies = companies;
     }
 
-    public void setEmployees(List<User> employees) {
-        this.employees = employees;
+    public void addCompany(Company company){
+        companies.add(company);
     }
-
-    public void addMember(User user){
-        employees.add(user); }
 }

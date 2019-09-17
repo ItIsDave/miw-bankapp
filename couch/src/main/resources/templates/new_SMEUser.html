@@ -28,16 +28,16 @@
             <input type="radio" name="eigenaar" value="no" onclick="alert('Sorry not supported')"  > No
             </td>
         </tr>
-        <tr>
-            <td>KvK nummer: </td>
-            <td><input type="text" data-toggle="dropdown" name="chamberOfCommerceId" th:field="*{chamberOfCommerceId}"/></td>
-            <td th:if="${#fields.hasErrors('chamberOfCommerceId')}" th:errors="*{chamberOfCommerceId}">KvK-nummer ongeldig.</td>
-        </tr>
-        <tr>
-            <td>Naam: </td>
-            <td><input type="text" name="companyName" th:field="*{companyName}"/></td>
-            <td th:if="${#fields.hasErrors('companyName')}" th:errors="*{companyName}">Naam ongeldig.</td>
-        </tr>
+<!--        <tr>-->
+<!--            <td>KvK nummer: </td>-->
+<!--            <td><input type="text" data-toggle="dropdown" name="chamberOfCommerceId" th:field="*{chamberOfCommerceId}"/></td>-->
+<!--            <td th:if="${#fields.hasErrors('chamberOfCommerceId')}" th:errors="*{chamberOfCommerceId}">KvK-nummer ongeldig.</td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--            <td>Naam: </td>-->
+<!--            <td><input type="text" name="companyName" th:field="*{companyName}"/></td>-->
+<!--            <td th:if="${#fields.hasErrors('companyName')}" th:errors="*{companyName}">Naam ongeldig.</td>-->
+<!--        </tr>-->
         <tr>
             <td>Kies gebruikersnaam: </td>
             <td><input type="text" name="userName" th:field="*{userName}"/> </td>
