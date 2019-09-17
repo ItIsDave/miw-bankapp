@@ -14,26 +14,25 @@ public class SMEUser extends User {
     @ManyToMany
     private List<BankAccount> companyAccounts = new ArrayList<>();
     // company employees that need sign in
-    @ManyToMany
-    private List<Company> companies = new ArrayList<>(); // many companies have many employees
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Company company = new Company(); // many companies have many employees
 
 
     public SMEUser() {
-        this("","");
-        this.companies = new ArrayList<>();
+        this("", "");
     }
 
     public SMEUser(String userName, String userPassword) {
         super(userName, userPassword);
-        this.companies = new ArrayList<>();
+        this.company = new Company();
         this.companyAccounts = new ArrayList<>();
     }
 
-    public SMEUser(String userName, String userPassword, String roleEmployee, List<BankAccount> companyAccounts, List<Company> companies) {
+    public SMEUser(String userName, String userPassword, String roleEmployee, List<BankAccount> companyAccounts, Company company) {
         super(userName, userPassword);
         this.roleEmployee = roleEmployee;
         this.companyAccounts = companyAccounts;
-        this.companies = companies;
+        this.company = company;
     }
 
     public String getRoleEmployee() {
@@ -52,15 +51,12 @@ public class SMEUser extends User {
         this.companyAccounts = companyAccounts;
     }
 
-    public List<Company> getCompanies() {
-        return companies;
+    public Company getCompany() {
+        return company;
     }
 
-    public void setCompanies(List<Company> companies) {
-        this.companies = companies;
-    }
-
-    public void addCompany(Company company){
-        companies.add(company);
+    public void setCompany(Company company) {
+        this.company = company;
     }
 }
+

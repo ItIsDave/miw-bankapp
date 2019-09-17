@@ -73,9 +73,6 @@ public class HibernateLab {
                     "Jan",  "", "Bakken", "Herengracht", 100,
                     "C", "1018AC", "Amsterdam", "6901230801", "25-10-1989", "jbakker@gmail.com", "Retail");
 
-//            SMEUser hva = new SMEUser("hva", "1234");
-//            smeUserDao.save(hva);
-
 
             //Creating transaction data
             Date d = new Date();

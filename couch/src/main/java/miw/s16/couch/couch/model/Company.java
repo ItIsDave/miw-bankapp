@@ -12,8 +12,8 @@ public class Company {
     private int companyId;
     private int chamberOfCommerceId;
     private String companyName;
-    @ManyToMany(mappedBy="companies")
-    private List<SMEUser> employees = new ArrayList<>(); // many users can be employees in many companies
+    @OneToMany(mappedBy="company")
+    private List<SMEUser> employees = new ArrayList<>(); // many users can be employees in a company
 
     public Company() {
         super();
