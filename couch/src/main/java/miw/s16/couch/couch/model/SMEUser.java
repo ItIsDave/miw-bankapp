@@ -58,5 +58,9 @@ public class SMEUser extends User {
     public void setCompany(Company company) {
         this.company = company;
     }
+
+    public void addCompanyAccount(BankAccount bankAccount){
+        companyAccounts.add(bankAccount);
+    }
 }
 

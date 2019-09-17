@@ -46,7 +46,8 @@ public class NewSMEUserController {
             return "new_SMEUser";
         } else {
             BankAccount bankAccount = new BankAccount();
-         //   bankAccountDao.save(bankAccount);
+            bankAccountDao.save(bankAccount);
+            smeUser.addCompanyAccount(bankAccount);
             smeUserDao.save(smeUser);
             return "new_SMEUser_success";
         }
