@@ -1,9 +1,6 @@
 package miw.s16.couch.couch.controller;
 
-import miw.s16.couch.couch.model.BankAccount;
-import miw.s16.couch.couch.model.RetailUser;
-import miw.s16.couch.couch.model.SMEUser;
-import miw.s16.couch.couch.model.User;
+import miw.s16.couch.couch.model.*;
 
 import miw.s16.couch.couch.model.dao.RetailUserDao;
 import miw.s16.couch.couch.model.dao.SMEUserDao;
@@ -49,8 +46,10 @@ public class LoginController {
         User user = new User();
         RetailUser retailUser = new RetailUser();
         SMEUser smeUser = new SMEUser();
+        Company company = new Company();
         model.addAttribute("user", user);
         model.addAttribute("retailUser", retailUser);
+        model.addAttribute("company", company);
         model.addAttribute("smeUser", smeUser);
         return "index";
     }
@@ -96,6 +95,11 @@ public class LoginController {
             return "personal_page";
         }
 
+
+        @GetMapping(value = "zakelijk-klant")
+        public String newCompanyHandler () {
+        return "company_login";
+    }
 
         @GetMapping(value = "newUser")
         public String newUserHandler () {

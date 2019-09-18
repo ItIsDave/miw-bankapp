@@ -50,6 +50,7 @@ public class RetailUser extends User {
 
 
 
+
 //    public RetailUser() {
 //        super();
 //    }

@@ -39,7 +39,6 @@ public class SMEUser extends User {
         this.roleEmployee = roleEmployee;
     }
 
-
     public Company getCompany() {
         return company;
     }

@@ -2,7 +2,9 @@ package miw.s16.couch.couch.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,9 +14,13 @@ public class Company {
     @Id
     @GeneratedValue
     private int companyId;
+    @Column(name = "kvkNr", unique = true)
+    @NotNull
+    @Size(min=8, max=8) // kvk nummer is a unique 8 digit number
     private int chamberOfCommerceId;
     @NotEmpty
     private String companyName;
+    @NotEmpty
     private String sector;
     @Positive
     private int pinCode;
@@ -24,6 +30,8 @@ public class Company {
     private List<SMEUser> employees = new ArrayList<>();
     @ManyToMany
     private List<BankAccount> companyAccounts = new ArrayList<>();
+    @ManyToOne(cascade = CascadeType.ALL)
+    private BankUser accountManager = new BankUser();
 
     public Company() {
         super();

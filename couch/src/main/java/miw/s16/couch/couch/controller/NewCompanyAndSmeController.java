@@ -19,7 +19,7 @@ import java.util.Collections;
 import java.util.List;
 
 @Controller
-public class NewSMEUserController {
+public class NewCompanyAndSmeController {
 
     @Autowired
     SMEUserDao smeUserDao;
@@ -32,7 +32,7 @@ public class NewSMEUserController {
     private Company company1 = new Company();
 
 
-    @GetMapping(value = "couch-zakelijk")  //van select type -> new zakelijk user
+    @GetMapping(value ="couch-zakelijk")  //van select type -> new zakelijk user
     public String newSMEUserHandler(Model model, SMEUser smeUser){
         model.addAttribute("SMEUser", smeUser);
         Collections.addAll(companyForm, "B.V.","Eenmanszaak","Vereniging of Stichting","V.O.F","Andere ondernemingsvorm");
