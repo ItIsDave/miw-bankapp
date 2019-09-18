@@ -45,12 +45,8 @@ public class LoginController {
         lab.dbinit();
         User user = new User();
         RetailUser retailUser = new RetailUser();
-        SMEUser smeUser = new SMEUser();
-        Company company = new Company();
         model.addAttribute("user", user);
         model.addAttribute("retailUser", retailUser);
-        model.addAttribute("company", company);
-        model.addAttribute("smeUser", smeUser);
         return "index";
     }
 
@@ -77,8 +73,6 @@ public class LoginController {
 
     // user returns to personal page
 
-
-
         // user returns to personal page (coding by AT)
         @GetMapping(value = "overview")
         public String overviewHandler (@ModelAttribute User user, Model model, HttpServletRequest request){
@@ -97,7 +91,11 @@ public class LoginController {
 
 
         @GetMapping(value = "zakelijk-klant")
-        public String newCompanyHandler () {
+        public String newCompanyHandler (Model model) {
+            SMEUser smeUser = new SMEUser();
+            Company company = new Company();
+            model.addAttribute("company", company);
+            model.addAttribute("smeUser", smeUser);
         return "company_login";
     }
 
