@@ -46,7 +46,6 @@ public class LoginController {
     @GetMapping
     public String indexHandler(Model model) {
         lab.dbinit();
-        System.out.println("testdata klaar..");
         User user = new User();
         RetailUser retailUser = new RetailUser();
         SMEUser smeUser = new SMEUser();

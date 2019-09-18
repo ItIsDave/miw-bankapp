@@ -125,6 +125,7 @@ public class HibernateLab {
 
             testData.makeRetailUserList();                          //AMS: haalt retail data op uit CSV file
             testData.retailUserListSplitAddBankaccountAndSave();    //AMS: verwerken testdata
+            System.out.println("testdata klaar..");
         }
 
 

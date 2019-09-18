@@ -23,7 +23,7 @@ public class BankAccount {
     @ManyToMany(mappedBy = "bankAccounts")
     private List<RetailUser> retailUsers = new ArrayList<RetailUser>();
     @ManyToMany(mappedBy = "companyAccounts")
-    private List<SMEUser> smeUsers = new ArrayList<>();
+    private List<Company> companies = new ArrayList<>();
 
     public BankAccount () {
         this(0);
@@ -45,12 +45,12 @@ public class BankAccount {
 //        this.retailusers = new ArrayList<>();
     }
 
-    public BankAccount(String iban, double balance, List<Transaction> transactions, List<RetailUser> retailUsers, List<SMEUser> smeUsers) {
+    public BankAccount(String iban, double balance, List<Transaction> transactions, List<RetailUser> retailUsers, List<Company> companies) {
         this.iban = iban;
         this.balance = balance;
         this.transactions = transactions;
         this.retailUsers = retailUsers;
-        this.smeUsers = smeUsers;
+        this.companies = companies;
     }
 
 
@@ -86,12 +86,16 @@ public class BankAccount {
         this.retailUsers = retailUsers;
     }
 
-    public List<SMEUser> getSmeUsers() {
-        return smeUsers;
+    public void setTransactionsTo(List<Transaction> transactionsTo) {
+        this.transactionsTo = transactionsTo;
     }
 
-    public void setSmeUsers(List<SMEUser> smeUsers) {
-        this.smeUsers = smeUsers;
+    public List<Company> getCompanies() {
+        return companies;
+    }
+
+    public void setCompanies(List<Company> companies) {
+        this.companies = companies;
     }
 
     //setter for changes in balance, transactions and retailusers

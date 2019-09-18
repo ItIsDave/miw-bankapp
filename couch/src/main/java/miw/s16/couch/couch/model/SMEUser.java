@@ -11,11 +11,9 @@ import java.util.List;
 public class SMEUser extends User {
 
     private String roleEmployee;
-    @ManyToMany
-    private List<BankAccount> companyAccounts = new ArrayList<>();
-    // company employees that need sign in
+    // one employee belongs to one company
     @ManyToOne(cascade = CascadeType.ALL)
-    private Company company = new Company(); // many companies have many employees
+    private Company company = new Company();
 
 
     public SMEUser() {
@@ -25,13 +23,11 @@ public class SMEUser extends User {
     public SMEUser(String userName, String userPassword) {
         super(userName, userPassword);
         this.company = new Company();
-        this.companyAccounts = new ArrayList<>();
     }
 
-    public SMEUser(String userName, String userPassword, String roleEmployee, List<BankAccount> companyAccounts, Company company) {
+    public SMEUser(String userName, String userPassword, String roleEmployee,  Company company) {
         super(userName, userPassword);
         this.roleEmployee = roleEmployee;
-        this.companyAccounts = companyAccounts;
         this.company = company;
     }
 
@@ -43,13 +39,6 @@ public class SMEUser extends User {
         this.roleEmployee = roleEmployee;
     }
 
-    public List<BankAccount> getCompanyAccounts() {
-        return companyAccounts;
-    }
-
-    public void setCompanyAccounts(List<BankAccount> companyAccounts) {
-        this.companyAccounts = companyAccounts;
-    }
 
     public Company getCompany() {
         return company;
@@ -59,8 +48,6 @@ public class SMEUser extends User {
         this.company = company;
     }
 
-    public void addCompanyAccount(BankAccount bankAccount){
-        companyAccounts.add(bankAccount);
-    }
+
 }
 

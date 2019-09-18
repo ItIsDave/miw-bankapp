@@ -37,17 +37,20 @@ public class NewSMEUserController {
         model.addAttribute("SMEUser", smeUser);
         Collections.addAll(companyForm, "B.V.","Eenmanszaak","Vereniging of Stichting","V.O.F","Andere ondernemingsvorm");
         model.addAttribute("companyForm", companyForm);
+        model.addAttribute("company", company1);
         return "new_SMEUser";
     }
 
     @PostMapping(value ="couch-zakelijk")
-    public String newSMEUserHandler(@Valid SMEUser smeUser, BindingResult bindingResult, Model model){
+    public String newSMEUserHandler(@Valid SMEUser smeUser, BindingResult bindingResult, Model model, Company company){
         if(bindingResult.hasErrors()){
             return "new_SMEUser";
         } else {
             BankAccount bankAccount = new BankAccount();
             bankAccountDao.save(bankAccount);
-            smeUser.addCompanyAccount(bankAccount);
+            company.addCompanyAccount(bankAccount);
+            smeUser.setCompany(company);
+            smeUser.setRoleEmployee("Owner");
             smeUserDao.save(smeUser);
             return "new_SMEUser_success";
         }
