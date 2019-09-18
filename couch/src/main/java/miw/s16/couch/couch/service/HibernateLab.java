@@ -36,6 +36,8 @@ public class HibernateLab {
     @Autowired
     TestdataCreator testData;
 
+    @Autowired
+    BalanceTopTenQuery balanceTopTenQuery;
 
     public HibernateLab() {
         super();
@@ -130,6 +132,9 @@ public class HibernateLab {
             testData.retailUserListSplitAddBankaccountAndSave();    //AMS: verwerken testdata
         }
 
+        else {
+            balanceTopTenQuery.printBalanceTopTen();
+        }
 
     }
 

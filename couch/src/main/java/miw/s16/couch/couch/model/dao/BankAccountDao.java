@@ -20,4 +20,5 @@ public interface BankAccountDao extends CrudRepository<BankAccount, Integer> {
     BankAccount findIbanByBankAccountId (int id);
 //added by BvB due to conversion error message of the related method in RetailUserDao
     List<BankAccount> findBankAccountsByRetailUsers(RetailUser retailUser);
+    List<BankAccount> findTop10ByBalanceOrderByBalanceDesc();
 }

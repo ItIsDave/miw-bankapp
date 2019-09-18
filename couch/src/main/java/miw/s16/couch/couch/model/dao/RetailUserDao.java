@@ -20,6 +20,8 @@ public interface RetailUserDao extends CrudRepository<RetailUser, Integer> {
 
 //BvB    ConverterNotFoundException: No converter found capable of converting from type [miw.s16.couch.couch.model.RetailUser] to type [miw.s16.couch.couch.model.BankAccount]
     public List<BankAccount> findBankAccountsByUserName(String userName);
+    //bvB - added for service BalanceTopTenQuery
+    public List<RetailUser> findRetailUsersByBankAccounts(List<BankAccount> bankAccounts);
 
     public List<RetailUser> findByUserName(String userName);
 
