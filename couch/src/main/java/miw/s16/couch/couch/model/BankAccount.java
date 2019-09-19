@@ -3,6 +3,7 @@ package miw.s16.couch.couch.model;
 import javax.persistence.Entity;
 import javax.persistence.*;
 import java.math.BigInteger;
+import java.text.DecimalFormat;
 import java.util.*;
 
 //coding by PH
@@ -41,7 +42,7 @@ public class BankAccount {
         this.balance = balance;
         this.transactions = new ArrayList<>();
         this.transactionsTo = new ArrayList<>();
-//        this.retailusers = new ArrayList<>();
+        //this.retailusers = new ArrayList<>();
     }
 
     //getters
@@ -50,6 +51,7 @@ public class BankAccount {
     public int getBankAccountId() { return bankAccountId; }
     public List<Transaction> getTransactions() { return transactions; }
     public List<Transaction> getTransactionsTo() { return transactionsTo; }
+    public List<RetailUser> getRetailUsers() { return retailUsers; }
 
     //setter for changes in balance, transactions and retailusers
     public void setBalance(double balance) { this.balance = balance; }
@@ -117,7 +119,6 @@ public class BankAccount {
         return iban.toString();
     }
 
-
     public void addTransaction(Transaction transaction){ transactions.add(transaction); }
     public void addTransactionTo(Transaction transaction){ transactionsTo.add(transaction); }
     //    public void addRetailUser (RetailUser retailuser) {retailusers.add(retailuser);}
@@ -126,5 +127,4 @@ public class BankAccount {
     public String toString() {
         return iban;
     }
-
 }
