@@ -10,14 +10,15 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Set;
 
-//coding by PvdH / Bvb
+//coding by PvdH
 
 public interface BankAccountDao extends CrudRepository<BankAccount, Integer> {
 
     public BankAccount findByBankAccountId(int bankAccountId);
 
     public BankAccount findByIban(String iban);
-    BankAccount findIbanByBankAccountId (int id);
-//added by BvB due to conversion error message of the related method in RetailUserDao
-    List<BankAccount> findBankAccountsByRetailUsers(RetailUser retailUser);
+
+//added BvB
+    public List<BankAccount> findTop10ByOrderByBalanceDesc();
+
 }

@@ -13,7 +13,7 @@
 <table>
     <tr>
         <th>Bankrekeningnummer</th>
-        <th>Saldo</th>
+        <th>Actueel Saldo</th>
     </tr>
     <tr>
         <td th:text="${iban}"></td>
@@ -24,16 +24,16 @@
 <table>
     <tr>
         <th>Datum</th>
-        <th>Van</th>
-        <th>Naar</th>
+        <th>Tegenrekening</th>
         <th>Omschrijving</th>
+        <th>Bij- of afschrijving</th>
         <th>Bedrag</th>
     </tr>
     <tr th:each="transaction: ${allTransactions}">
         <td th:text="${transaction.transactionDate}"></td>
-        <td th:text="${transaction.bankAccount}"></td>
-        <td th:text="${transaction.bankAccountTo}"></td>
+        <td th:text="${transaction.bankAccount.IBAN == iban} ? ${transaction.bankAccountTo} : ${transaction.bankAccount}"></td>
         <td th:text="${transaction.description}"></td>
+        <td th:text="${transaction.bankAccount.IBAN == iban} ? 'Af': 'Bij'"></td>
         <td th:text="${transaction.amount}"></td>
     </tr>
 </table>
@@ -55,5 +55,11 @@
 <br>
 
 Ga <a href="overview">terug</a> naar uw persoonlijke pagina.
+
+<br>
+<br>
+
+<a href="/">Uitloggen</a>
+
 </body>
 </html>

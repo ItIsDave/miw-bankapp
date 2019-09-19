@@ -23,4 +23,6 @@ public interface RetailUserDao extends CrudRepository<RetailUser, Integer> {
 
     public List<RetailUser> findByUserName(String userName);
 
+    public List<RetailUser> findRetailUsersByBankAccounts(List<BankAccount> bankAccountList);
+
 }
