@@ -12,7 +12,7 @@ import miw.s16.couch.couch.model.dao.TransactionDao;
 import miw.s16.couch.couch.model.dao.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import javax.transaction.Transactional;
+
 import java.util.*;
 
 
@@ -33,11 +33,13 @@ public class HibernateLab {
     @Autowired
     TransactionDao transactionDao;
 
+    @Autowired
+    TestdataCreator testData;
+
 
     public HibernateLab() {
         super();
     }
-
 
     public void dbinit() {
 
@@ -124,10 +126,11 @@ public class HibernateLab {
             retailUserDao.save(jan);
             retailUserDao.save(boudewijn);
 
+            testData.makeRetailUserList();                          //AMS: haalt retail data op uit CSV file
+            testData.retailUserListSplitAddBankaccountAndSave();    //AMS: verwerken testdata
         }
 
 
     }
 
 }
-
