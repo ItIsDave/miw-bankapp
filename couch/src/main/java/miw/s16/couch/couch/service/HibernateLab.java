@@ -1,15 +1,9 @@
 package miw.s16.couch.couch.service;
 
 
-import miw.s16.couch.couch.model.BankAccount;
-import miw.s16.couch.couch.model.RetailUser;
-import miw.s16.couch.couch.model.Transaction;
-import miw.s16.couch.couch.model.User;
+import miw.s16.couch.couch.model.*;
 
-import miw.s16.couch.couch.model.dao.BankAccountDao;
-import miw.s16.couch.couch.model.dao.RetailUserDao;
-import miw.s16.couch.couch.model.dao.TransactionDao;
-import miw.s16.couch.couch.model.dao.UserDao;
+import miw.s16.couch.couch.model.dao.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,7 +31,10 @@ public class HibernateLab {
     TestdataCreator testData;
 
     @Autowired
-    BalanceTopTenQuery balanceTopTenQuery;
+    BalanceTopTen balanceTopTen;
+
+    @Autowired
+    BankUserDao bankUserDao;
 
     public HibernateLab() {
         super();
@@ -130,11 +127,19 @@ public class HibernateLab {
 
             testData.makeRetailUserList();                          //AMS: haalt retail data op uit CSV file
             testData.retailUserListSplitAddBankaccountAndSave();    //AMS: verwerken testdata
-        }
+            System.out.println("testdata is ingelezen.");
 
-        else {
-            balanceTopTenQuery.printBalanceTopTen();
+            //bankmedewerkers voor HoofdMKB en HoofdParticulieren
+            BankUser bankUser1 = new BankUser("piet", "pietgeheim", "Hoofd MKB");
+            BankUser bankUser2 = new BankUser("marie", "mariegeheim", "Hoofd Particulieren");
+
+            bankUserDao.save(bankUser1);
+            bankUserDao.save(bankUser2);
         }
+        balanceTopTen.printBalanceTopTen();
+        System.out.println("dbinit klaar.");
+
+
 
     }
 
