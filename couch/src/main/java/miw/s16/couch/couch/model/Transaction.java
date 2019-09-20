@@ -6,7 +6,7 @@ import javax.validation.constraints.*;
 import java.util.Date;
 
 @Entity
-public class Transaction { //implements Serializable {
+public class Transaction implements Comparable<Transaction> { //implements Serializable {
 
     @Id
     @GeneratedValue
@@ -68,7 +68,6 @@ public class Transaction { //implements Serializable {
         this.toAccount = toAccount;
         this.isPin = isPin;
     }
-
 
     public int getTransactionId() {
         return transactionId;
@@ -167,5 +166,8 @@ public class Transaction { //implements Serializable {
                 ", isPin=" + isPin +
                 '}';
     }
-
+    @Override
+    public int compareTo(Transaction o) {
+        return getTransactionDate().compareTo(o.getTransactionDate());
+    }
 }
