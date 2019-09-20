@@ -136,7 +136,7 @@ public class HibernateLab {
             bankUserDao.save(bankUser1);
             bankUserDao.save(bankUser2);
         }
-        balanceTopTen.printBalanceTopTen();
+//        balanceTopTen.printBalanceTopTen();
         System.out.println("dbinit klaar.");
 
 

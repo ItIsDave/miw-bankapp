@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -20,7 +21,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-@Controller
+ @Controller
 public class RetailPersonalPageController<retailUser> {
 
 
@@ -36,28 +37,28 @@ public class RetailPersonalPageController<retailUser> {
     BankAccount bankAccount = new BankAccount();
 
 
-    @PostMapping(value = "transactionRequest")
-    public String pageHandler(@ModelAttribute User user, Model model, HttpServletRequest request) {
-        Transaction transaction = new Transaction();
-        // log in session
-        HttpSession session = request.getSession (true);
-        String userName = (String) session.getAttribute("userName");
-        RetailUser retailUser1  = (RetailUser) session.getAttribute("retailUser");
-        int userId = (int) session.getAttribute("userId");
-        BankAccount bankAccountFrom = retailUser1.getBankAccounts().get(0);
-
-        transaction.setBankAccount(bankAccount);
-        transaction.setFromAccount(bankAccount.getIBAN());
-        System.out.println("datum - tijd is: " + transaction.getTransactionDate().toString());
-        model.addAttribute("transaction", transaction);
-        model.addAttribute("date_time", transaction.getTransactionDate().toString());
-        model.addAttribute("bankAccountFrom", bankAccountFrom.getIBAN());
-        model.addAttribute("bankAccountTo", transaction.getToAccount());
-        model.addAttribute("userName", userName);
-        model.addAttribute("user", user);
-        model.addAttribute("balance", bankAccountFrom.getBalance());
-        return "transaction";
-    }
+//    @PostMapping(value = "transactionRequest")
+//    public String pageHandler(@ModelAttribute User user, Model model, HttpServletRequest request) {
+//        Transaction transaction = new Transaction();
+//        // log in session
+//        HttpSession session = request.getSession (true);
+//        String userName = (String) session.getAttribute("userName");
+//        RetailUser retailUser1  = (RetailUser) session.getAttribute("retailUser");
+//        int userId = (int) session.getAttribute("userId");
+//        BankAccount bankAccountFrom = retailUser1.getBankAccounts().get(0);
+//
+//        transaction.setBankAccount(bankAccount);
+//        transaction.setFromAccount(bankAccount.getIBAN());
+//        System.out.println("datum - tijd is: " + transaction.getTransactionDate().toString());
+//        model.addAttribute("transaction", transaction);
+//        model.addAttribute("date_time", transaction.getTransactionDate().toString());
+//        model.addAttribute("bankAccountFrom", bankAccountFrom.getIBAN());
+//        model.addAttribute("bankAccountTo", transaction.getToAccount());
+//        model.addAttribute("userName", userName);
+//        model.addAttribute("user", user);
+//        model.addAttribute("balance", bankAccountFrom.getBalance());
+//        return "transaction";
+//    }
 
 
     //coding by PH & AV
