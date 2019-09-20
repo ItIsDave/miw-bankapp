@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Inlogscherm bankmedewerker</title>
+</head>
+<body>
+<h3>Login</h3>
+<form action="#" th:action="@{overview_bankemployee}" th:object="${user}" method="post">
+    <table>
+        <br>
+        <tr>
+            <td>Gebruikersnaam:</td>
+            <td><input type="text" th:field="*{userName}"/></td>
+        </tr>
+        <tr>
+            <td>Wachtwoord:</td>
+            <td><label>
+                <input type="text" th:field="*{userPassword}"/>
+            </label>
+            <td>
+        </tr>
+        <tr>
+            <td><input type="submit" value="Login"></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

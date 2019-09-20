@@ -5,10 +5,13 @@ import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.Entity;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 public class BankUser extends User {
 
+    @NotEmpty
     private String role;
     @OneToMany(mappedBy = "bankAccountTo")
     private List<Transaction> transactionsTo;
@@ -17,9 +20,7 @@ public class BankUser extends User {
     private List<Company> companies = new ArrayList<>();
 
 
-
-    public BankUser() {
-    }
+    public BankUser(){ super(); }
 
     public BankUser(String userName, String password, String role) {
         super(userName, password);

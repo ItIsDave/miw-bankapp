@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Controller
@@ -94,6 +96,10 @@ public class RetailPersonalPageController<retailUser> {
         List <Transaction> transactionList = clickedBankAccount.getTransactions();
         List <Transaction> transactionToList = clickedBankAccount.getTransactionsTo();
         for (Transaction t:transactionToList) { transactionList.add(t); }
+
+        Collections.sort(transactionList);
+        Collections.reverse(transactionList);
+
         model.addAttribute("userName", userName);
         model.addAttribute("iban", clickedBankAccount.getIBAN());
         model.addAttribute("balance", clickedBankAccount.getBalance());
