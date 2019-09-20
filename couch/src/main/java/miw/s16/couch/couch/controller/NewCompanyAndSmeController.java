@@ -33,12 +33,16 @@ public class NewCompanyAndSmeController {
     private List<String> companyForm = new ArrayList<>();
 
 
+
     @GetMapping(value = "couch-zakelijk")  //van select type -> new zakelijk user
-    public String newSMEUserHandler(Model model, SMEUser smeUser, Company company) {
-        model.addAttribute("SMEUser", smeUser);
+    public String newSMEUserHandler(Model model) {
+        SMEUser smeUser = new SMEUser();
+        smeUser.setRoleEmployee("employee");
+        Company company = new Company();
         Collections.addAll(companyForm, "B.V.", "Eenmanszaak", "Vereniging of Stichting", "V.O.F", "Andere ondernemingsvorm");
         model.addAttribute("companyForm", companyForm);
-        model.addAttribute("company", company);
+        model.addAttribute("smeUser", smeUser);
+        model.addAttribute("company",company);
         return "new_SMEUser";
     }
 
@@ -47,18 +51,19 @@ public class NewCompanyAndSmeController {
 //        if (bindingResult.hasErrors()) {
 //            return "new_SMEUser";
 //        } else {
-        BankAccount bankAccount = new BankAccount();
-        bankAccountDao.save(bankAccount);
-        company.addCompanyAccount(bankAccount);
-        company.addCompanyEmployee(smeUser);
-
-        // getting the info from the form
-        smeUser.setCompany(company);
+//        BankAccount bankAccount = new BankAccount();
+//        bankAccountDao.save(bankAccount);
+//        company.addCompanyAccount(bankAccount);
+//        company.addCompanyEmployee(smeUser);
+//
+//        // getting the info from the form
+//        smeUser.setCompany(company);
         // get the number of employees and loop
 //
 //        companyDao.save(company);
 //        smeUserDao.save(smeUser);
-
+        model.addAttribute(company);
+        model.addAttribute(smeUser);
         return "new_SMEUser_success";
     }
 }

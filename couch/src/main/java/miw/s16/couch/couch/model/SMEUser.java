@@ -24,7 +24,13 @@ public class SMEUser extends User {
         super(userName, userPassword);
     }
 
-    public SMEUser(String userName, String userPassword, String roleEmployee,  Company company) {
+
+    public SMEUser(String userName, String userPassword, String roleEmployee) {
+        super(userName, userPassword);
+        this.roleEmployee = roleEmployee;
+    }
+
+    public SMEUser(String userName, String userPassword, String roleEmployee, Company company) {
         super(userName, userPassword);
         this.roleEmployee = roleEmployee;
         this.company = company;

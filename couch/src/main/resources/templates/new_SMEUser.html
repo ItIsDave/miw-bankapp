@@ -32,24 +32,29 @@
 <!--            <td th:if="${#fields.hasErrors('chamberOfCommerceId')}" th:errors="*{chamberOfCommerceId}">KvK-nummer ongeldig.</td>-->
         </tr>
         <tr>
-            <td>Naam: </td>
-            <td><input type="text" th:value="${company.companyName}" name="companyName"/></td>
+            <td><label for="companyName">Naam: </td>
+            <td><input type="text" th:value="${company.companyName}" id="companyName" name="companyName"/></td>
 <!--            <td th:if="${#fields.hasErrors('companyName')}" th:errors="*{companyName}">Naam ongeldig.</td>-->
         </tr>
-<!--        <tr>-->
-<!--            <td>Kies Role: </td>-->
-<!--            <td><input type="text" th:value="${smeUser.roleEmployee}" name="roleEmployee"/></td>-->
+
+        <tr>
+            <td>Sector: </td>
+            <td><input type="text" th:value="${company.sector}" name="companyName"/></td>
 <!--        </tr>-->
-<!--        <tr>-->
-<!--            <td>Kies gebruikersnaam: </td>-->
-<!--            <td><input type="text"  th:value="${smeUser.userName}" name="userName"/> </td>-->
-<!--&lt;!&ndash;            <td th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}">Username ongeldig.</td>&ndash;&gt;-->
-<!--        </tr>-->
-<!--        <tr>-->
-<!--            <td>Kies wachtwoord: </td>-->
-<!--            <td><input type="text" th:value="${smeUser.userPassword}" name="userPassword"/></td>-->
-<!--&lt;!&ndash;            <td th:if="${#fields.hasErrors('userPassword')}">Wachtwoord ongeldig.</td>&ndash;&gt;-->
-<!--        </tr>-->
+        <tr>         <td>Kies Role: </td>-->
+                        <td><input type="text" th:value="${smeUser.roleEmployee}" name="roleEmployee"/></td>
+                    </tr>
+                    <tr>
+                        <td>Kies gebruikersnaam: </td>
+                        <td><input type="text"  th:value="${smeUser.userName}" name="userName" placeholder="name"/> </td>
+            <!--            <td th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}">Username ongeldig.</td>-->
+                    </tr>
+                    <tr>
+                        <td>Kies wachtwoord: </td>
+                        <td><input type="text" th:value="${smeUser.userPassword}" name="userPassword" placeholder="password"/></td>
+<!--            <            <td th:if="${#fields.hasErrors('userPassword')}">Wachtwoord ongeldig.</td>-->
+<!---->
+        </tr>
     </table>
 </form>
 </body>

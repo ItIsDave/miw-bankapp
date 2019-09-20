@@ -29,7 +29,7 @@ public class TransactionController implements WebMvcConfigurer {
 
     BankAccount accountTo = new BankAccount();
 
-    // if user chooses to make a new transaction
+//    // if user chooses to make a new transaction
     @GetMapping(value = "transactionRequest")
     public String pageHandlerGet(@ModelAttribute User user, Model model, HttpServletRequest request) {
         // log in session
