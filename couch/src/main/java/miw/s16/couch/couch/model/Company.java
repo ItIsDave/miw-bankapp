@@ -10,13 +10,12 @@ import java.util.List;
 
 @Entity
 public class Company {
-
     @Id
     @GeneratedValue
     private int companyId;
-    @Column(name = "kvkNr", unique = true)
-    @NotNull
-    @Size(min=8, max=8) // kvk nummer is a unique 8 digit number
+//    @Column(unique = true)
+//    @Positive
+//    @Size(min=8, max=8) // kvk nummer is a unique 8 digit number
     private int chamberOfCommerceId;
     @NotEmpty
     private String companyName;
