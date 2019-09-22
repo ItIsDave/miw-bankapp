@@ -44,7 +44,7 @@ public class TransactionController implements WebMvcConfigurer {
         RetailUser retailUser1  = (RetailUser) session.getAttribute("retailUser");
         BankAccount bankAccountFrom = bankAccountDao.findByIban(ibanId);
 
-        transaction.setBankAccount(bankAccountFrom);
+        transaction.setBankAccount(accountTo);
         transaction.setFromAccount(bankAccountFrom.getIBAN());
         System.out.println("datum - tijd is: " + transaction.getTransactionDate().toString());
         model.addAttribute("transaction", transaction);

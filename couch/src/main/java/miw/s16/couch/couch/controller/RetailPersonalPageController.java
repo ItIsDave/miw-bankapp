@@ -33,25 +33,21 @@ public class RetailPersonalPageController<retailUser> {
     @Autowired
     BankAccountDao bankAccountDao;
 
-
-    //coding by PH & AV
-    @GetMapping(value = "/bankAccountDetails")
-    public String bankAccountDetailsHandler(@RequestParam("id") int bankAccountId, Model model, HttpServletRequest request) {
-        // log in session
+    // user returns to personal page (coding by AT)
+    @GetMapping(value = "overview")
+    public String overviewHandler(@ModelAttribute User user, Model model, HttpServletRequest request) {
         HttpSession session = request.getSession(true);
         String userName = (String) session.getAttribute("userName");
-        //chosen Iban incl balance & transactions collected from DB
-        BankAccount clickedBankAccount = bankAccountDao.findByBankAccountId(bankAccountId);
-        List <Transaction> transactionList = clickedBankAccount.getTransactions();
-        List <Transaction> transactionToList = clickedBankAccount.getTransactionsTo();
-        for (Transaction t:transactionToList) { transactionList.add(t); }
-        Collections.sort(transactionList);
-        Collections.reverse(transactionList);
+        RetailUser retailUser1  = (RetailUser) session.getAttribute("retailUser");
+
+        List <BankAccount> loggedInBankAccounts = retailUser1.getBankAccounts();
+//        String bankAccount = retailUser1.getBankAccounts().get(0).getIBAN();
+        session.setAttribute("userName", userName);
+//        session.setAttribute("bankAccount", bankAccount);
         model.addAttribute("userName", userName);
-        model.addAttribute("iban", clickedBankAccount.getIBAN());
-        model.addAttribute("balance", clickedBankAccount.getBalance());
-        model.addAttribute("allTransactions", transactionList);
-        return "bank_account_details";
+//        model.addAttribute("bankAccount", bankAccount);
+        model.addAttribute("allBankAccounts", loggedInBankAccounts);
+        return "personal_page";
     }
 
     //coding by PH & AV

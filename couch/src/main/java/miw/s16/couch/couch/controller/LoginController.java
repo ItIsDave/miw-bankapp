@@ -68,24 +68,6 @@ public class LoginController {
         return "login_failed";
     }
 
-    // user returns to personal page (coding by AT)
-    @GetMapping(value = "overview")
-    public String overviewHandler(@ModelAttribute User user, Model model, HttpServletRequest request) {
-        HttpSession session = request.getSession(true);
-        String userName = (String) session.getAttribute("userName");
-        RetailUser retailUser1  = (RetailUser) session.getAttribute("retailUser");
-
-        List <BankAccount> loggedInBankAccounts = retailUser1.getBankAccounts();
-        String bankAccount = retailUser1.getBankAccounts().get(0).getIBAN();
-        session.setAttribute("userName", userName);
-        session.setAttribute("bankAccount", bankAccount);
-        model.addAttribute("userName", userName);
-        model.addAttribute("bankAccount", bankAccount);
-        model.addAttribute("allBankAccounts", loggedInBankAccounts);
-        return "personal_page";
-    }
-
-
     @GetMapping(value = "newUser")
     public String newUserHandler() {
         return "new_user_select_type";

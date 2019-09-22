@@ -32,8 +32,26 @@ public class BankAccountDetailsController {
     @Autowired
     BankAccountDao bankAccountDao;
 
-    BankAccount bankAccount = new BankAccount();
 
+    //coding by PH & AV
+    @GetMapping(value = "/bankAccountDetails")
+    public String bankAccountDetailsHandler(@RequestParam("id") int bankAccountId, Model model, HttpServletRequest request) {
+        // log in session
+        HttpSession session = request.getSession(true);
+        String userName = (String) session.getAttribute("userName");
+        //chosen Iban incl balance & transactions collected from DB
+        BankAccount clickedBankAccount = bankAccountDao.findByBankAccountId(bankAccountId);
+        List <Transaction> transactionList = clickedBankAccount.getTransactions();
+        List <Transaction> transactionToList = clickedBankAccount.getTransactionsTo();
+        for (Transaction t:transactionToList) { transactionList.add(t); }
+        Collections.sort(transactionList);
+        Collections.reverse(transactionList);
+        model.addAttribute("userName", userName);
+        model.addAttribute("iban", clickedBankAccount.getIBAN());
+        model.addAttribute("balance", clickedBankAccount.getBalance());
+        model.addAttribute("allTransactions", transactionList);
+        return "bank_account_details";
+    }
 
     @PostMapping(value = "transactionRequest")
     public String pageHandler(@ModelAttribute User user, Model model, HttpServletRequest request, @RequestParam("id") String ibanId) {
