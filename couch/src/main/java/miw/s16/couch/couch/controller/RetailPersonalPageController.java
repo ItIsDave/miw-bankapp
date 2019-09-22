@@ -33,53 +33,6 @@ public class RetailPersonalPageController<retailUser> {
     @Autowired
     BankAccountDao bankAccountDao;
 
-    BankAccount bankAccount = new BankAccount();
-
-
-    @PostMapping(value = "transactionRequest")
-    public String pageHandler(@ModelAttribute User user, Model model, HttpServletRequest request) {
-        Transaction transaction = new Transaction();
-        // log in session
-        HttpSession session = request.getSession (true);
-        String userName = (String) session.getAttribute("userName");
-        RetailUser retailUser1  = (RetailUser) session.getAttribute("retailUser");
-        int userId = (int) session.getAttribute("userId");
-        BankAccount bankAccountFrom = retailUser1.getBankAccounts().get(0);
-
-        transaction.setBankAccount(bankAccount);
-        transaction.setFromAccount(bankAccount.getIBAN());
-        System.out.println("datum - tijd is: " + transaction.getTransactionDate().toString());
-        model.addAttribute("transaction", transaction);
-        model.addAttribute("date_time", transaction.getTransactionDate().toString());
-        model.addAttribute("bankAccountFrom", bankAccountFrom.getIBAN());
-        model.addAttribute("bankAccountTo", transaction.getToAccount());
-        model.addAttribute("userName", userName);
-        model.addAttribute("user", user);
-        model.addAttribute("balance", bankAccountFrom.getBalance());
-        return "transaction";
-    }
-
-
-    //coding by PH & AV
-    @PostMapping(value = "newAccountRequest")
-    public String newAccountRequestHandler(@ModelAttribute User user, Model model, HttpServletRequest request) {
-        // log in session
-        HttpSession session = request.getSession(true);
-        String userName = (String) session.getAttribute("userName");
-        RetailUser retailUser1 = (RetailUser) session.getAttribute("retailUser");
-
-        //nieuwe IBAN wordt aangemaakt, aan retailuser gekoppeld en in DB opgeslagen
-        BankAccount newBankAccount = new BankAccount();
-        retailUser1.addBankAccount(newBankAccount);
-        bankAccountDao.save(newBankAccount);
-        retailUserDao.save(retailUser1);
-
-        List<BankAccount> bankAccountsList = retailUser1.getBankAccounts();
-        model.addAttribute("userName", userName);
-        model.addAttribute("allBankAccounts", bankAccountsList);
-
-        return "personal_page";
-    }
 
     //coding by PH & AV
     @GetMapping(value = "/bankAccountDetails")
@@ -94,13 +47,30 @@ public class RetailPersonalPageController<retailUser> {
         for (Transaction t:transactionToList) { transactionList.add(t); }
         Collections.sort(transactionList);
         Collections.reverse(transactionList);
-
         model.addAttribute("userName", userName);
         model.addAttribute("iban", clickedBankAccount.getIBAN());
         model.addAttribute("balance", clickedBankAccount.getBalance());
         model.addAttribute("allTransactions", transactionList);
-
         return "bank_account_details";
+    }
+
+    //coding by PH & AV
+    @PostMapping(value = "newAccountRequest")
+    public String newAccountRequestHandler(@ModelAttribute User user, Model model, HttpServletRequest request) {
+        // log in session
+        HttpSession session = request.getSession(true);
+        String userName = (String) session.getAttribute("userName");
+        RetailUser retailUser1 = (RetailUser) session.getAttribute("retailUser");
+        //nieuwe IBAN wordt aangemaakt, aan retailuser gekoppeld en in DB opgeslagen
+        BankAccount newBankAccount = new BankAccount();
+        retailUser1.addBankAccount(newBankAccount);
+        bankAccountDao.save(newBankAccount);
+        retailUserDao.save(retailUser1);
+        //collect all bankaccounts in 1 list
+        List<BankAccount> bankAccountsList = retailUser1.getBankAccounts();
+        model.addAttribute("userName", userName);
+        model.addAttribute("allBankAccounts", bankAccountsList);
+        return "personal_page";
     }
 }
 
