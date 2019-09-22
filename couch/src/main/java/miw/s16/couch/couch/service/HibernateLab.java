@@ -56,11 +56,11 @@ public class HibernateLab {
             User patrick = new User("Patrick", "1234");
 
             // Creating Bank account data
-            BankAccount account1 = new BankAccount("NL10COUC0123456790", 80000.00);
-            BankAccount account2 = new BankAccount("NL10COUC0223456791", 10000.00);
-            BankAccount account3 = new BankAccount("NL10COUC0323456792", 50000.00);
-            BankAccount account4 = new BankAccount("NL10COUC0423456793", 80000.00);
-            BankAccount account5 = new BankAccount("NL10COUC0523456794", 100000.00);
+            BankAccount account1 = new BankAccount("NL10COUC0123456790", 80.00);
+            BankAccount account2 = new BankAccount("NL10COUC0223456791", 10.00);
+            BankAccount account3 = new BankAccount("NL10COUC0323456792", 50.00);
+            BankAccount account4 = new BankAccount("NL10COUC0423456793", 80.00);
+            BankAccount account5 = new BankAccount("NL10COUC0523456794", 100.00);
 
             // Creating Retail user data
             RetailUser bart = new RetailUser("Bart", "1234",  987654321, "Bart",
@@ -136,7 +136,7 @@ public class HibernateLab {
             bankUserDao.save(bankUser1);
             bankUserDao.save(bankUser2);
         }
-        balanceTopTen.printBalanceTopTen();
+        balanceTopTen.balanceTopTen_IBAN();
         System.out.println("dbinit klaar.");
 
 
