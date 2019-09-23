@@ -35,7 +35,7 @@ public class NewCompanyAndSmeController implements WebMvcConfigurer {
     private List<String> companyForm = new ArrayList<>();
     private List<String> sectors = new ArrayList<>();
     private List<String> roles = new ArrayList<>();
-    private SMEUser newSmeUser = new SMEUser();
+    private SMEUser newSMEuser = new SMEUser();
     private BankAccount bankAccount = new BankAccount();
     private Company newCompany = new Company();
     // for testing
@@ -70,48 +70,35 @@ public class NewCompanyAndSmeController implements WebMvcConfigurer {
             return "new_company";
         } else {
             bankAccountDao.save(bankAccount);
-
-            bankUser.setRole("account manager");
-            newCompany.setAccountManager(bankUser);
-            newCompany.addCompanyAccount(bankAccount);
-            newCompany.setCompanyName(company.getCompanyName());
-            newCompany.setChamberOfCommerceId(company.getChamberOfCommerceId());
-            newCompany.setStreetName(company.getStreetName());
-            newCompany.set
             // To do -- enter validation of unique kvk nummer
-
-            newCompany.setCompanyType(company.getCompanyType());
             // for testing
-            newCompany.setPinCode(1234);
-            newCompany.setSector(company.getSector());
-            newCompany.addCompanyEmployee(newSmeUser);
-            companyDao.save(newCompany);
+            bankUser.setRole("account manager");
+            company.setAccountManager(bankUser);
+            company.addCompanyAccount(bankAccount);
+            company.setPinCode(1234);
+            company.addCompanyEmployee(newSMEuser);
+            companyDao.save(company);
+            newCompany = company;
             model.addAttribute("roles", roles);
             model.addAttribute("role", "");
-            model.addAttribute("company", newCompany);
-            model.addAttribute("smeUser", newSmeUser);
+            model.addAttribute("smeUser", newSMEuser);
             model.addAttribute("companySector", "");
             return "new_SMEUser";
         }
     }
 
     @PostMapping(value = "newSMEUser")
-    public String newSMEUserHandler(@Valid @ModelAttribute("smeUser") @RequestBody SMEUser smeUser, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return "new_SMEUser";
-        } else {
-            // To do -- make it prettier / check if user already exists as a client
+    public String newSMEUserHandler(@ModelAttribute("smeUser") @RequestBody SMEUser smeUser) {
+//        if (bindingResult.hasErrors()) {
+//            return "new_SMEUser";
+//        } else {
+            // To do -- check if user already exists as a client
             RetailUser existingRetailUser = new RetailUser();
-
-
-            newSmeUser.setUserName(smeUser.getUserName());
-            newSmeUser.setUserPassword(smeUser.getUserPassword());
-            newSmeUser.setRoleEmployee(smeUser.getRoleEmployee());
-            smeUserDao.save(newSmeUser);
-
+            smeUser.setCompany(newCompany);
+            smeUserDao.save(smeUser);
             return "new_SMEUser_success";
-        }
+        //}
     }
-
 }
+
 

@@ -12,7 +12,7 @@ public class SMEUser extends User {
 
     private String roleEmployee;
     // one employee belongs to one company
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.MERGE)
     private Company company = new Company();
 
 

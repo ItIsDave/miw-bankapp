@@ -101,14 +101,6 @@ public class Company {
         this.streetName = streetName;
     }
 
-    public int getHouseNumber() {
-        return streetNumber;
-    }
-
-    public void setHouseNumber(int houseNumber) {
-        this.streetNumber = houseNumber;
-    }
-
     public String getZipcode() {
         return zipcode;
     }
@@ -119,6 +111,14 @@ public class Company {
 
     public String getCity() {
         return city;
+    }
+
+    public int getStreetNumber() {
+        return streetNumber;
+    }
+
+    public void setStreetNumber(int streetNumber) {
+        this.streetNumber = streetNumber;
     }
 
     public String getEmail() {

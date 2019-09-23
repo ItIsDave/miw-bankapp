@@ -26,12 +26,10 @@
         <tr>
             <td><label for="userName"> Kies gebruikersnaam: </label>
             <td><input id="userName" type="text" th:value="${userName}" name="userName" required/></td>
-            <!--                        <td th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}">Username ongeldig.</td>-->
         </tr>
         <tr>
             <td><label for="userPassword">Kies wachtwoord:</label>
             <td><input id="userPassword" type="text" th:value="${userPassword}" name="userPassword" required/></td>
-            <!--                        <td th:if="${#fields.hasErrors('userPassword')}">Wachtwoord ongeldig.</td>-->
         </tr>
         <td><input type="submit" value="Volgende"></td>
     </table>
