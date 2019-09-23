@@ -22,6 +22,21 @@ public class Company {
     private String companyType;
     @NotEmpty
     private String sector;
+    @NotEmpty
+    private String streetName;
+    @NotNull
+    @Positive
+    private int houseNumber;
+    @NotEmpty
+    private String zipcode;
+    @NotEmpty
+    private String city;
+    @NotEmpty
+    @Size(min= 9, max=11)
+    private String phoneNumber;
+    @NotEmpty
+    @Email
+    private String email;
     private int pinCode;
     private boolean hasPin;
     // company has many employees
@@ -60,16 +75,70 @@ public class Company {
         this.companyAccounts = companyAccounts;
     }
 
-    public Company(int chamberOfCommerceId, @NotEmpty String companyName, @NotEmpty String companyLegalName, @NotEmpty String sector, @Positive int pinCode, boolean hasPin, List<SMEUser> employees, List<BankAccount> companyAccounts, BankUser accountManager) {
+    public Company(@NotNull @Positive @Min(value = 10000000, message = "KvK-nummer moet 8 cijfers zijn zonder punten.") @Max(value = 99999999, message = "KvK-nummer moet 8 cijfers zijn zonder punten.") int chamberOfCommerceId, @NotEmpty String companyName, @NotEmpty String companyType, @NotEmpty String sector, @NotEmpty String streetName, @NotNull @Positive int houseNumber, @NotEmpty String zipcode, @NotEmpty String city, @NotEmpty @Size(min = 9, max = 11) String phoneNumber, int pinCode, boolean hasPin, List<SMEUser> employees, List<BankAccount> companyAccounts, BankUser accountManager, String email) {
         this.chamberOfCommerceId = chamberOfCommerceId;
         this.companyName = companyName;
-        this.companyType = companyLegalName;
+        this.companyType = companyType;
         this.sector = sector;
+        this.streetName = streetName;
+        this.houseNumber = houseNumber;
+        this.zipcode = zipcode;
+        this.city = city;
+        this.phoneNumber = phoneNumber;
         this.pinCode = pinCode;
         this.hasPin = hasPin;
         this.employees = employees;
         this.companyAccounts = companyAccounts;
         this.accountManager = accountManager;
+        this.email = email;
+    }
+
+    public String getStreetName() {
+        return streetName;
+    }
+
+    public void setStreetName(String streetName) {
+        this.streetName = streetName;
+    }
+
+    public int getHouseNumber() {
+        return houseNumber;
+    }
+
+    public void setHouseNumber(int houseNumber) {
+        this.houseNumber = houseNumber;
+    }
+
+    public String getZipcode() {
+        return zipcode;
+    }
+
+    public void setZipcode(String zipcode) {
+        this.zipcode = zipcode;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public int getCompanyId() {

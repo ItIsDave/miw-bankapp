@@ -14,20 +14,23 @@
          <tr>
             <td><label for="role">Kies Role:</label>
             <td>
-             <select id="role" th:field="*{roleEmployee}" name="roleEmployee">
+             <select id="role" th:field="*{roleEmployee}" name="roleEmployee" required>
              <option value=""> -- </option>
              <option  th:each="role: ${roles}" th:value = "${role}" th:utext = "${role}" ></option>
              </select>
         </tr>
         <tr>
+            <td><label for="bsn"> Uw BSN: </label>
+            <td><input id="bsn" type="text" th:value="${bsn}" name="bsn" required/></td>
+        </tr>
+        <tr>
             <td><label for="userName"> Kies gebruikersnaam: </label>
-            <td><input id="userName" type="text" th:value="${userName}" name="userName" placeholder="name"/></td>
+            <td><input id="userName" type="text" th:value="${userName}" name="userName" required/></td>
             <!--                        <td th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}">Username ongeldig.</td>-->
         </tr>
         <tr>
             <td><label for="userPassword">Kies wachtwoord:</label>
-            <td><input id="userPassword" type="text" th:value="${userPassword}" name="userPassword"
-                       placeholder="password"/></td>
+            <td><input id="userPassword" type="text" th:value="${userPassword}" name="userPassword" required/></td>
             <!--                        <td th:if="${#fields.hasErrors('userPassword')}">Wachtwoord ongeldig.</td>-->
         </tr>
         <td><input type="submit" value="Volgende"></td>

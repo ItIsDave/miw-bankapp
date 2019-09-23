@@ -1,9 +1,6 @@
 package miw.s16.couch.couch.controller;
 
-import miw.s16.couch.couch.model.BankAccount;
-import miw.s16.couch.couch.model.BankUser;
-import miw.s16.couch.couch.model.Company;
-import miw.s16.couch.couch.model.SMEUser;
+import miw.s16.couch.couch.model.*;
 import miw.s16.couch.couch.model.dao.BankAccountDao;
 import miw.s16.couch.couch.model.dao.BankUserDao;
 import miw.s16.couch.couch.model.dao.CompanyDao;
@@ -79,6 +76,8 @@ public class NewCompanyAndSmeController implements WebMvcConfigurer {
             newCompany.addCompanyAccount(bankAccount);
             newCompany.setCompanyName(company.getCompanyName());
             newCompany.setChamberOfCommerceId(company.getChamberOfCommerceId());
+            newCompany.setStreetName(company.getStreetName());
+            newCompany.set
             // To do -- enter validation of unique kvk nummer
 
             newCompany.setCompanyType(company.getCompanyType());
@@ -101,11 +100,15 @@ public class NewCompanyAndSmeController implements WebMvcConfigurer {
         if (bindingResult.hasErrors()) {
             return "new_SMEUser";
         } else {
+            // To do -- make it prettier / check if user already exists as a client
+            RetailUser existingRetailUser = new RetailUser();
+
+
             newSmeUser.setUserName(smeUser.getUserName());
             newSmeUser.setUserPassword(smeUser.getUserPassword());
             newSmeUser.setRoleEmployee(smeUser.getRoleEmployee());
             smeUserDao.save(newSmeUser);
-            // To do -- check if user already exists as a client
+
             return "new_SMEUser_success";
         }
     }
