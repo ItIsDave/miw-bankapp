@@ -13,23 +13,23 @@
     <table>
         <td><label for="companyForm">Wat is de ondernemingsvorm van uw bedrijf?</label></td>
         <td>
-            <select id="companyForm" th:field="*{companyType}">
+            <select id="companyForm" th:field="*{companyType}" required >
                 <option value=""> -- </option>
                 <option th:each="t: ${companyForm}" th:value = "${t}" th:text = "${t}" ></option>
             </select>
         </td>
         <tr>
             <td><label for="kvk">KvK nummer: </label> </td>
-            <td><input type="number"  th:field="*{chamberOfCommerceId}"  id="kvk" name="chamberOfCommerceId"/></td>
+            <td><input type="number"  th:field="*{chamberOfCommerceId}"  id="kvk" name="chamberOfCommerceId" required/></td>
             <td th:if="${#fields.hasErrors('chamberOfCommerceId')}">KvK-nummer ongeldig.</td>
         </tr>
         <tr>
             <td><label for="companyName">Handelsnaam:</td>
-            <td><input type="text" th:field="*{companyName}" id="companyName" name="companyName"/></td>
+            <td><input type="text" th:field="*{companyName}" id="companyName" name="companyName" required/></td>
         <tr>
             <td><label for="sector">Kies bedrijf branche: </td>
         <td>
-        <select id="sector" th:field="*{sector}">
+        <select id="sector" th:field="*{sector}" required>
         <option value=""> -- </option>
         <option  th:each="sector: ${sectors}" th:value = "${sector}" th:utext = "${sector}" ></option>
         </select>
