@@ -23,16 +23,15 @@ public class BalanceTopTen {
     private List<BankAccount> reportedBankAccounts = new ArrayList<>();//to get the retail user(s) per bank account - BvB
     private List<RetailUser> retailUsers;
 
-    public void printBalanceTopTen() {
-
+    public ArrayList<String> balanceTopTen_IBAN() {
+        ArrayList<String> top10List = new ArrayList<>();
         bankAccounts = bankAccountDao.findTop10ByOrderByBalanceDesc();
-
-        System.out.println("10 klanten met hoogste rekeningsaldo:");
-        System.out.println("N.B. bij meerdere rekeninghouders wordt eerste r.h. getoond");
-        System.out.println("iban     balance    Achternaam");
-
-            for ( BankAccount bankAccount : bankAccounts ) {
-                System.out.print("\n" + bankAccount.getIBAN() + " " + bankAccount.getBalance() + " ");
+        for (BankAccount b: bankAccounts) {
+            top10List.add(b.getIBAN());
+            System.out.println("iban is: " +  b.getIBAN());
+        }
+            /*for ( BankAccount bankAccount : bankAccounts ) {
+                //System.out.print("\n" + bankAccount.getIBAN() + " " + bankAccount.getBalance() + " ");
                 reportedBankAccounts.clear();
                 reportedBankAccounts.add(bankAccount);
                 retailUsers = retailUserDao.findRetailUsersByBankAccounts(reportedBankAccounts);
@@ -42,8 +41,10 @@ public class BalanceTopTen {
                 else {
                     System.out.print(retailUsers.get(0).getLastName());
                 }
-            }
+            }*/
 
+            return top10List;
     }
+
 
 }
