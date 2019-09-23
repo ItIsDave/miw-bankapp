@@ -2,6 +2,9 @@ package miw.s16.couch.couch.model;
 
 import javax.persistence.Entity;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.math.BigInteger;
 import java.text.DecimalFormat;
 import java.util.*;
@@ -16,13 +19,10 @@ public class BankAccount {
     @Column(name ="iban", unique = true)
     private String iban;
     private double balance;
-
-
-
-
-
-    //@Pattern(regexp="^(0|[1-9][0-9]*)$")        //enkel integers als input
-    //@Column(length = 5)
+    @Pattern(regexp = "^\\d+$")
+    //@Pattern(regexp="([0-9])")        //enkel integers als input
+    @Size(min=5, max=5)
+    @NotNull
     private String koppelcode;
     @OneToMany(mappedBy = "bankAccount")
     private List<Transaction> transactions;

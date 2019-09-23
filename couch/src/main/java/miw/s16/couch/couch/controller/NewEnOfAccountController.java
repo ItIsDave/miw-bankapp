@@ -22,27 +22,29 @@ public class NewEnOfAccountController {
     @Autowired
     BankAccountDao bankAccountDao;
 
+
+
+
     @GetMapping(value = "new_enof_account")
     public String newEnOfAccountHandler(@RequestParam("id") int bankAccountId, Model model) {
+        System.out.println("bank acc id is " + bankAccountId);
         BankAccount bankAccount = bankAccountDao.findByBankAccountId(bankAccountId);
         model.addAttribute("bankAccount", bankAccount);
-        System.out.println(bankAccountId);
+        model.addAttribute("bankAccountId", bankAccountId);
         return "new_enof_account";
     }
 
     @PostMapping(value = "new_enof_account")
-    public String addUserToAccountHandler(@RequestParam("iban") String iban, @Valid BankAccount bankAccount, BindingResult bindingResult){
+    public String addUserToAccountHandler(@Valid BankAccount bankAccount, BindingResult bindingResult){
         if(bindingResult.hasErrors()){
+
             return "new_enof_account";
         } else {
-
-            return "";
+            System.out.println("iban is "+ bankAccount.getIBAN());
+            System.out.println("koppelcode is "+ bankAccount.getKoppelcode());
+            bankAccountDao.save(bankAccount);
+            return "overview";
         }
     }
-
-
-
-
-
 }
 
