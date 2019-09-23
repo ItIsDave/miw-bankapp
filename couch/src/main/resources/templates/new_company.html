@@ -7,13 +7,13 @@
 <body>
 <h1>Couch Bank nieuwe zakelijke klant</h1>
 
-<label for="company"><h2>Vul hieronder uw bedrijfsgegevens in</h2></label>
+<label for="company"><h2>1. Vul hieronder uw bedrijfsgegevens in</h2></label>
 <br><br>
 <form id="company" action="#" th:action="@{newCompany}"  method="post">
     <table>
         <td><label for="companyForm">Wat is de ondernemingsvorm van uw bedrijf?</label></td>
         <td>
-            <select id="companyForm">
+            <select id="companyForm" th:field="*{company.companyType}">
                 <option value=""> -- </option>
                 <option th:each="t: ${companyForm}" th:value = "${t.toString()}" th:utext = "${t.toString()}" ></option>
             </select>
@@ -21,12 +21,12 @@
         <tr>
             <td><label for="kvk">KvK nummer: </label> </td>
             <td><input type="number"  th:value="${company.chamberOfCommerceId}"  id="kvk" name="chamberOfCommerceId"/></td>
-            <td th:if="${#fields.hasErrors('chamberOfCommerceId')}" th:errors="*{chamberOfCommerceId}">KvK-nummer ongeldig.</td>
+<!--            <td th:if="${#fields.hasErrors('chamberOfCommerceId')}" th:errors="*{chamberOfCommerceId}">KvK-nummer ongeldig.</td>-->
         </tr>
         <tr>
             <td><label for="companyName">Handelsnaam:</td>
             <td><input type="text" th:value="${company.companyName}" id="companyName" name="companyName"/></td>
-            <td th:if="${#fields.hasErrors('companyName')}" th:errors="*{companyName}">Naam ongeldig.</td>
+<!--            <td th:if="${#fields.hasErrors('companyName')}" th:errors="*{companyName}">Naam ongeldig.</td>-->
 <!--        </tr>-->
 <!--        <tr>-->
 <!--            <td><label for="handelsnaam"> Maakt u gebruik van andere handlesnaam?</label>-->
@@ -42,9 +42,9 @@
         <tr>
             <td><label for="sector">Kies bedrijf branche: </td>
         <td>
-        <select id="sector">
+        <select id="sector" th:field="*{company.sector}">
         <option value=""> -- </option>
-        <option  th:each="t: ${companySector}" th:value = "${t.toString()}" th:utext = "${t.toString()}" ></option>
+        <option  th:each="sector: ${sectors}" th:value = "${sector}" th:utext = "${sector}" ></option>
         </select>
         </td>
     </tr>

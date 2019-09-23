@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
-<html lang="en"  xmlns:="http://www.w3.org/1999/xhtml"
+<html lang="en" xmlns:="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <title> Couch Bank nieuwe zakelijke klant</title>
@@ -8,32 +7,34 @@
 <body>
 <h1>Couch Bank nieuwe zakelijke klant</h1>
 
-<h2>Vul hieronder uw bedrijfsgegevens in</h2>
+<h2><label for="smeUser">2. Vul hieronder uw gegevens in</label></h2>
 <br><br>
-<form action="#" th:action="@{newSMEUser}"  method="post">
+<form id="smeUser" action="#" th:action="@{newSMEUser}" th:object="${smeUser}" method="post">
     <table>
         <tr>
-            <td>Ben je de eigenaar van het bedrijf?
-            <input type="radio" name="eigenaar" value="yes" checked> Yes
-            <input type="radio" name="eigenaar" value="no"  > No
+            <td><label for="client">Are you an exisitng client?</label>
+                <input id="client" type="radio" name="eigenaar" value="yes" checked> Yes
+                <input type="radio" name="eigenaar" value="no"> No
             </td>
-        <tr>         <td>Kies Role: </td>-->
-                        <td><input type="text" th:value="${smeUser.roleEmployee}" name="roleEmployee"/></td>
-                    </tr>
-                    <tr>
-                        <td>Kies gebruikersnaam: </td>
-                        <td><input type="text"  th:value="${smeUser.userName}" name="userName" placeholder="name"/> </td>
-                        <td th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}">Username ongeldig.</td>
-                    </tr>
-                    <tr>
-                        <td>Kies wachtwoord: </td>
-                        <td><input type="text" th:value="${smeUser.userPassword}" name="userPassword" placeholder="password"/></td>
-                        <td th:if="${#fields.hasErrors('userPassword')}">Wachtwoord ongeldig.</td>
         </tr>
+
+        <tr>
+            <td><label for="role">Kies Role:</label>
+            <td><input id="role" type="text" th:value="${roleEmployee}" name="roleEmployee"/></td>
+        </tr>
+        <tr>
+            <td><label for="userName"> Kies gebruikersnaam: </label>
+            <td><input id="userName" type="text" th:value="${userName}" name="userName" placeholder="name"/></td>
+            <!--                        <td th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}">Username ongeldig.</td>-->
+        </tr>
+        <tr>
+            <td><label for="userPassword">Kies wachtwoord:</label>
+            <td><input id="userPassword" type="text" th:value="${userPassword}" name="userPassword"
+                       placeholder="password"/></td>
+            <!--                        <td th:if="${#fields.hasErrors('userPassword')}">Wachtwoord ongeldig.</td>-->
         </tr>
         <td><input type="submit" value="Volgende"></td>
-        </tr>
     </table>
 </form>
 </body>
-</html>j
+</html>

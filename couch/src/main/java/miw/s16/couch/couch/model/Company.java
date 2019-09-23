@@ -2,9 +2,7 @@ package miw.s16.couch.couch.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
-import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,17 +11,17 @@ public class Company {
     @Id
     @GeneratedValue
     private int companyId;
-    @Column(unique = true)
-    @Positive
-    @Size(min=8, max=8, message = "KvK nummer moet 8 cijfers zijn, zonder punten.")
+//    @Column(unique = true)
+//    @Positive
+//    @Size(min=8, max=8)
     private int chamberOfCommerceId;
-    @NotEmpty
+//    @NotEmpty
     private String companyName;
-    @NotEmpty
-    private String companyLegalName;
-    @NotEmpty
+//    @NotEmpty
+    private String companyType;
+   // @NotEmpty
     private String sector;
-    @Positive
+    //@Positive
     private int pinCode;
     private boolean hasPin;
     // company has many employees
@@ -36,8 +34,6 @@ public class Company {
 
     public Company() {
         super();
-        this.employees = new ArrayList<>();
-        this.companyAccounts = new ArrayList<>();
     }
 
     public Company(int chamberOfCommerceId, String companyName, List<SMEUser> employees) {
@@ -67,7 +63,7 @@ public class Company {
     public Company(int chamberOfCommerceId, @NotEmpty String companyName, @NotEmpty String companyLegalName, @NotEmpty String sector, @Positive int pinCode, boolean hasPin, List<SMEUser> employees, List<BankAccount> companyAccounts, BankUser accountManager) {
         this.chamberOfCommerceId = chamberOfCommerceId;
         this.companyName = companyName;
-        this.companyLegalName = companyLegalName;
+        this.companyType = companyLegalName;
         this.sector = sector;
         this.pinCode = pinCode;
         this.hasPin = hasPin;
@@ -148,12 +144,12 @@ public class Company {
         companyAccounts.add(bankAccount);
     }
 
-    public String getCompanyLegalName() {
-        return companyLegalName;
+    public String getCompanyType() {
+        return companyType;
     }
 
-    public void setCompanyLegalName(String companyLegalName) {
-        this.companyLegalName = companyLegalName;
+    public void setCompanyType(String companyType) {
+        this.companyType = companyType;
     }
 
     public BankUser getAccountManager() {
