@@ -50,6 +50,7 @@ public class BankAccountDetailsController {
         model.addAttribute("iban", clickedBankAccount.getIBAN());
         model.addAttribute("balance", clickedBankAccount.getBalance());
         model.addAttribute("allTransactions", transactionList);
+        model.addAttribute("id", bankAccountId);
         return "bank_account_details";
     }
 

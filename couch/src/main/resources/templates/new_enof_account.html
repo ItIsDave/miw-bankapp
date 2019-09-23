@@ -8,13 +8,13 @@
 <body>
 <div><span th:text="${session.retailUser.getFirstName()}"></span>, je hebt aangegeven een en/of rekening te willen openen.
     Kies in onderstaand formulier een 5-cijferige koppelcode. Met deze code kan de persoon met wie je de rekening wilt delen
-    zich aanmelden voor deze en/of rekening.</div>
+    zich aanmelden voor deze en/of rekening:</div>
 <span th:text="${bankAccount.getIBAN()}"></span>
 <form action="#" th:action="@{new_enof_account}" th:object="${bankAccount}" method="post">
     <table>
         <tr>
             <td>Kies een 5 cijferige bevestigingscode: </td>
-            <td><input type="text" name="koppelcode" th:field="*{getKoppelcode()}"/> </td>
+            <td><input type="text" name="koppelcode" th:field="*{koppelcode}"/> </td>
         </tr>
     </table>
 </form>

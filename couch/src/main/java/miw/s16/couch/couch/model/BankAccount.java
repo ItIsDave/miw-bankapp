@@ -16,6 +16,14 @@ public class BankAccount {
     @Column(name ="iban", unique = true)
     private String iban;
     private double balance;
+
+
+
+
+
+    //@Pattern(regexp="^(0|[1-9][0-9]*)$")        //enkel integers als input
+    //@Column(length = 5)
+    private String koppelcode;
     @OneToMany(mappedBy = "bankAccount")
     private List<Transaction> transactions;
     //iaw Boudewijn added, both depraciation and deposit amounts are now collected from db
@@ -34,6 +42,7 @@ public class BankAccount {
         this.balance = balance;
         this.transactions = new ArrayList<>();
         this.transactionsTo = new ArrayList<>();
+        this.koppelcode = "00000";
     }
 
     public BankAccount( String iBAN, double balance) {
@@ -43,6 +52,7 @@ public class BankAccount {
         this.transactions = new ArrayList<>();
         this.transactionsTo = new ArrayList<>();
         //this.retailusers = new ArrayList<>();
+        this.koppelcode = "00000";
     }
 
     //getters
@@ -52,9 +62,15 @@ public class BankAccount {
     public List<Transaction> getTransactions() { return transactions; }
     public List<Transaction> getTransactionsTo() { return transactionsTo; }
     public List<RetailUser> getRetailUsers() { return retailUsers; }
+    public String getKoppelcode() {
+        return koppelcode;
+    }
 
     //setter for changes in balance, transactions and retailusers
     public void setBalance(double balance) { this.balance = balance; }
+    public void setKoppelcode(String koppelcode) {
+        this.koppelcode = koppelcode;
+    }
 
 /*
     IBAN rules: https://nl.wikipedia.org/wiki/International_Bank_Account_Number
