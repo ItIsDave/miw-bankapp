@@ -9,18 +9,15 @@
 
 <h2><label for="smeUser">2. Vul hieronder uw gegevens in</label></h2>
 <br><br>
-<form id="smeUser" action="#" th:action="@{newSMEUser}" th:object="${smeUser}" method="post">
+<form id="smeUser" action="#" th:action="@{newSMEUser}" th:object="${smeUser}" method="post" >
     <table>
-        <tr>
-            <td><label for="client">Are you an exisitng client?</label>
-                <input id="client" type="radio" name="eigenaar" value="yes" checked> Yes
-                <input type="radio" name="eigenaar" value="no"> No
-            </td>
-        </tr>
-
-        <tr>
+         <tr>
             <td><label for="role">Kies Role:</label>
-            <td><input id="role" type="text" th:value="${roleEmployee}" name="roleEmployee"/></td>
+            <td>
+             <select id="role" th:field="*{roleEmployee}" name="roleEmployee">
+             <option value=""> -- </option>
+             <option  th:each="role: ${roles}" th:value = "${role}" th:utext = "${role}" ></option>
+             </select>
         </tr>
         <tr>
             <td><label for="userName"> Kies gebruikersnaam: </label>
@@ -36,5 +33,7 @@
         <td><input type="submit" value="Volgende"></td>
     </table>
 </form>
+
+
 </body>
 </html>

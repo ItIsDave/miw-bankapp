@@ -11,7 +11,7 @@ import javax.validation.constraints.NotEmpty;
 @Entity
 public class BankUser extends User {
 
-    @NotEmpty
+    //@NotEmpty
     private String role;
     @OneToMany(mappedBy = "bankAccountTo")
     private List<Transaction> transactionsTo;
@@ -20,11 +20,15 @@ public class BankUser extends User {
     private List<Company> companies = new ArrayList<>();
 
 
-   // public BankUser(){ super(); }
+    public BankUser(){ super(); }
 
-    // changed because of 'cannot be empty violation' errors
-    public BankUser(){
-     this("admin", "admin", "admin");
+    // temp - changed because of 'cannot be empty violation' errors
+//    public BankUser(){
+//     this(" ", " ");
+//    }
+
+    public BankUser(@NotEmpty String userName, @NotEmpty String userPassword) {
+        super(userName, userPassword);
     }
 
     public BankUser(String userName, String password, String role) {
@@ -38,8 +42,6 @@ public class BankUser extends User {
         this.companies = companies;
     }
 
-    public BankUser(String s, String s1) {
-    }
 
     public List<Transaction> getTransactionsTo() {
         return transactionsTo;

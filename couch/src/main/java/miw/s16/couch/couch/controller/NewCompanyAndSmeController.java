@@ -36,9 +36,11 @@ public class NewCompanyAndSmeController {
     private List<String> sectors = new ArrayList<>();
     private List<String> roles = new ArrayList<>();
     private SMEUser newSmeUser = new SMEUser();
-    private BankUser bankUser = new BankUser();
     private BankAccount bankAccount = new BankAccount();
     private Company newCompany = new Company();
+    // for testing
+    private BankUser bankUser = new BankUser();
+
 
 
     @GetMapping(value = "couch-zakelijk")  //van select type -> new zakelijk user
@@ -59,14 +61,17 @@ public class NewCompanyAndSmeController {
         return "new_company";
     }
 
-    @PostMapping(value = "newCompany")
+    @PostMapping(value = "couch-zakelijk")
     public String newCompanyHandler(@ModelAttribute("company") @RequestBody Company company, Model model) {
 //        if (bindingResult.hasErrors()) {
 //            return "new_company";
 //        } else {
-        // for testing
-        // TEMP - adding a default bankuser
+        if (roles.size() == 0 ){
+            Collections.addAll(roles, "Eigenaar", "Medewerker", "Admin");
+        }
         bankAccountDao.save(bankAccount);
+
+        bankUser.setRole("account manager");
         newCompany.setAccountManager(bankUser);
         newCompany.addCompanyAccount(bankAccount);
         newCompany.setCompanyName(company.getCompanyName());
@@ -76,6 +81,8 @@ public class NewCompanyAndSmeController {
         newCompany.setSector(company.getSector());
         newCompany.addCompanyEmployee(newSmeUser);
         companyDao.save(newCompany);
+        model.addAttribute("roles", roles);
+        model.addAttribute("role", "");
         model.addAttribute("company", newCompany);
         model.addAttribute("smeUser", newSmeUser);
         model.addAttribute("companySector", "");
@@ -84,10 +91,11 @@ public class NewCompanyAndSmeController {
     }
 
     @PostMapping(value = "newSMEUser")
-    public String newSMEUserHandler(SMEUser smeUser, Model model) {
+    public String newSMEUserHandler(@ModelAttribute("smeUser") @RequestBody SMEUser smeUser, Model model) {
 //        if (bindingResult.hasErrors()) {
 //            return "new_company";
 //        } else {
+
         newSmeUser.setUserName(smeUser.getUserName());
         newSmeUser.setUserPassword(smeUser.getUserPassword());
         newSmeUser.setRoleEmployee(smeUser.getRoleEmployee());

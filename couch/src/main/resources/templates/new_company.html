@@ -9,7 +9,7 @@
 
 <label for="company"><h2>1. Vul hieronder uw bedrijfsgegevens in</h2></label>
 <br><br>
-<form id="company" action="#" th:action="@{newCompany}"  method="post">
+<form id="company" action="#" th:action="@{couch-zakelijk}"  method="post">
     <table>
         <td><label for="companyForm">Wat is de ondernemingsvorm van uw bedrijf?</label></td>
         <td>
@@ -26,19 +26,6 @@
         <tr>
             <td><label for="companyName">Handelsnaam:</td>
             <td><input type="text" th:value="${company.companyName}" id="companyName" name="companyName"/></td>
-<!--            <td th:if="${#fields.hasErrors('companyName')}" th:errors="*{companyName}">Naam ongeldig.</td>-->
-<!--        </tr>-->
-<!--        <tr>-->
-<!--            <td><label for="handelsnaam"> Maakt u gebruik van andere handlesnaam?</label>-->
-<!--                <input type="radio" id="handelsnaam" name="eigenaar" value="yes" > Ja-->
-<!--                <input type="radio" name="eigenaar" value="no"  checked> Nee-->
-<!--            </td>-->
-<!--        </tr>-->
-<!--&lt;!&ndash;        <tr>&ndash;&gt;-->
-<!--&lt;!&ndash;            <td><label for="companyLegalName">Naam: </td>&ndash;&gt;-->
-<!--&lt;!&ndash;            <td><input type="text" th:value="${company.companyLegalName}" id="companyLegalName" name="companyLegalName"/></td>&ndash;&gt;-->
-<!--&lt;!&ndash;            <td th:if="${#fields.hasErrors('companyLegalName')}" th:errors="*{companyLegalName}">Naam ongeldig.</td>&ndash;&gt;-->
-<!--&lt;!&ndash;        </tr>&ndash;&gt;-->
         <tr>
             <td><label for="sector">Kies bedrijf branche: </td>
         <td>
@@ -48,10 +35,8 @@
         </select>
         </td>
     </tr>
-        </tr>
-        <td><input type="submit" value="Volgende"></td>
-        </tr>
     </table>
+    <input type="submit" value="Volgende">
 </form>
 </body>
 </html>
