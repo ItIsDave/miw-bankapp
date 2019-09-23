@@ -12,12 +12,12 @@
 <p>
     N.B. bij meerdere rekeninghouders wordt eerste rekeninghouder getoond.
 </p>
-De lengte van de lijst is ingesteld op:
-<div th:text="*{listSize}"></div>
+De lengte van de lijst is ingesteld op: <span th:text="*{listSize}"></span>
 <table>
-    <div th:unless="${#lists.isEmpty(top10_IBAN_List)}">
-      <tr th:each="iban : ${top10_IBAN_List}">
-            <td><span th:text="${iban}"/></td>
+    <tr>Hier komen de headers</tr>
+    <div th:unless="${#lists.isEmpty(top10_Client_List)}">
+      <tr th:each="item : ${top10_Client_List}">
+            <td><span th:text="${item}"/></td>
 
       </tr>
     </div>

@@ -25,23 +25,24 @@ public class BalanceTopTen {
 
     public ArrayList<String> balanceTopTen_IBAN() {
         ArrayList<String> top10List = new ArrayList<>();
+        String top10Line = "";
         bankAccounts = bankAccountDao.findTop10ByOrderByBalanceDesc();
         for (BankAccount b: bankAccounts) {
-            top10List.add(b.getIBAN());
-            System.out.println("iban is: " +  b.getIBAN());
+            //hier komt een opzoekmethode met een bankaccount om de retailUser te vinden
+            top10Line = b.getIBAN() + " " + b.getBalance();
+            reportedBankAccounts.clear();
+            reportedBankAccounts.add(b);
+            System.out.println("b is:" + reportedBankAccounts.get(0).getBankAccountId());  //verwacht 6
+            retailUsers = retailUserDao.findRetailUsersByBankAccounts(reportedBankAccounts);
+            if (retailUsers.size() == 0){
+                top10Line += " bankaccount not assigned";//for example NL10COUC0423456793 + NL10COUC0323456792
+            }
+            else {
+                top10Line += " " + retailUsers.get(0).getUserId() +  " " + retailUsers.get(0).getFirstName() +  " " + retailUsers.get(0).getLastName();
+            }
+            top10List.add(top10Line);
+
         }
-            /*for ( BankAccount bankAccount : bankAccounts ) {
-                //System.out.print("\n" + bankAccount.getIBAN() + " " + bankAccount.getBalance() + " ");
-                reportedBankAccounts.clear();
-                reportedBankAccounts.add(bankAccount);
-                retailUsers = retailUserDao.findRetailUsersByBankAccounts(reportedBankAccounts);
-                if (retailUsers.size() == 0){
-                    System.out.print("test bank account not assigned to customer");//f.e. NL10COUC0423456793 + NL10COUC0323456792
-                     }
-                else {
-                    System.out.print(retailUsers.get(0).getLastName());
-                }
-            }*/
 
             return top10List;
     }

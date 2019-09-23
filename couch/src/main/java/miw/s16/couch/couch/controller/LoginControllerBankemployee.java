@@ -59,9 +59,10 @@ public class LoginControllerBankemployee {
             model.addAttribute("userName", loggedInBankUser.get(0).getUserName());
             model.addAttribute("role", loggedInBankUser.get(0).getRole());
             //model.addAttribute("allEvents", eventList); hier komt arrayList van strings
-            ArrayList<String> top10IBANList = balanceTopTen.balanceTopTen_IBAN();
-            model.addAttribute("top10_IBAN_List",top10IBANList);
-            model.addAttribute("listSize", top10IBANList.size());
+            //service aftrap hier:
+            ArrayList<String> top10ClientList = balanceTopTen.balanceTopTen_IBAN();
+            model.addAttribute("top10_Client_List",top10ClientList);
+            model.addAttribute("listSize", top10ClientList.size());
             //model.addAttribute("allBankAccounts", loggedInBankAccounts);
             return "personal_page_bankemployee";
         }
