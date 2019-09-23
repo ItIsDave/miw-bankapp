@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Bankmedewerker dashboard</title>
+</head>
+<body>
+<h1>Hoofdparticulieren</h1>
+<h2>
+    Overzicht top <span th:text="*{listSize}"></span> particulieren met hoogste saldo:
+</h2>
+<p>
+    N.B. bij meerdere rekeninghouders wordt eerste rekeninghouder getoond.
+</p>
+De lengte van de lijst is ingesteld op:
+<div th:text="*{listSize}"></div>
+<table>
+    <div th:unless="${#lists.isEmpty(top10_IBAN_List)}">
+      <tr th:each="iban : ${top10_IBAN_List}">
+            <td><span th:text="${iban}"/></td>
+
+      </tr>
+    </div>
+</table>
+</body>
+</html>
