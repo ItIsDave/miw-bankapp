@@ -31,40 +31,45 @@ public class NewCompanyAndSmeController {
     CompanyDao companyDao;
 
     private List<String> companyForm = new ArrayList<>();
-
+    private List<String> companySector = new ArrayList<>();
 
 
     @GetMapping(value = "couch-zakelijk")  //van select type -> new zakelijk user
-    public String newSMEUserHandler(Model model) {
+    public String newCompanyHandler(Model model) {
         SMEUser smeUser = new SMEUser();
-        smeUser.setRoleEmployee("employee");
         Company company = new Company();
         Collections.addAll(companyForm, "B.V.", "Eenmanszaak", "Vereniging of Stichting", "V.O.F", "Andere ondernemingsvorm");
+        // branch-informatie van KvK
+        Collections.addAll(companySector, "ICT", "Advies en Consultancy", "Bouw, installatie en infra", "Energie",
+                "Financiële dienstverlening", "Water en afval", "Industrie", "Groothandel", "Agrosector", "Horeca", "Onderwijs en training",
+        "Persoonlijke dienstverlening en not-for-profit", "Gezondheidszorg", "Vervoer, post en opslag");
         model.addAttribute("companyForm", companyForm);
+        model.addAttribute("companySector", companySector);
         model.addAttribute("smeUser", smeUser);
         model.addAttribute("company",company);
-        return "new_SMEUser";
+        return "new_company";
     }
 
-    @PostMapping(value = "couch-zakelijk")
-    public String newSMEUserHandler(SMEUser smeUser, Company company, Model model) {
-//        if (bindingResult.hasErrors()) {
-//            return "new_SMEUser";
-//        } else {
-//        BankAccount bankAccount = new BankAccount();
-//        bankAccountDao.save(bankAccount);
-//        company.addCompanyAccount(bankAccount);
-//        company.addCompanyEmployee(smeUser);
-//
-//        // getting the info from the form
-//        smeUser.setCompany(company);
-        // get the number of employees and loop
-//
-//        companyDao.save(company);
-//        smeUserDao.save(smeUser);
-        model.addAttribute(company);
-        model.addAttribute(smeUser);
-        return "new_SMEUser_success";
+    @PostMapping(value = "newCompany")
+    public String newCompanyHandler(SMEUser smeUser, @Valid Company company, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            return "new_company";
+        } else {
+            BankAccount bankAccount = new BankAccount();
+            Company newCompany = new Company();
+            bankAccountDao.save(bankAccount);
+            newCompany.addCompanyAccount(bankAccount);
+            newCompany.setCompanyName(company.getCompanyName());
+            newCompany.setChamberOfCommerceId(company.getChamberOfCommerceId());
+            newCompany.setSector("companySector");
+            // for testing
+            newCompany.setCompanyLegalName(company.getCompanyName() + "B.V");
+            newCompany.setPinCode(1234);
+            companyDao.save(newCompany);
+            model.addAttribute("company", newCompany);
+            model.addAttribute("smeUser", smeUser);
+        }
+        return "new_SMEUser";
     }
 }
 

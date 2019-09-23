@@ -63,11 +63,7 @@ public class TransactionController implements WebMvcConfigurer {
         // bank account from
         BankAccount bankAccountFrom = retailUser1.getBankAccounts().get(0);
         //check for duplicate account to and from IBAN
-        if(transaction.getToAccount().equals(bankAccountFrom.getIBAN())){
-            error = true;
-        }
-        // check for error in user input
-        if(bindingResult.hasErrors()) {
+        if(transaction.getToAccount().equals(bankAccountFrom.getIBAN()) || bindingResult.hasErrors()){
             error = true;
         }
         if (error) {

@@ -13,12 +13,14 @@ public class Company {
     @Id
     @GeneratedValue
     private int companyId;
-//    @Column(unique = true)
-//    @Positive
-//    @Size(min=8, max=8) // kvk nummer is a unique 8 digit number
+    @Column(unique = true)
+    @Positive
+    @Size(min=8, max=8, message = "KvK nummer moet 8 cijfers zijn, zonder punten.")
     private int chamberOfCommerceId;
     @NotEmpty
     private String companyName;
+    @NotEmpty
+    private String companyLegalName;
     @NotEmpty
     private String sector;
     @Positive
@@ -60,6 +62,18 @@ public class Company {
         this.hasPin = hasPin;
         this.employees = employees;
         this.companyAccounts = companyAccounts;
+    }
+
+    public Company(int chamberOfCommerceId, @NotEmpty String companyName, @NotEmpty String companyLegalName, @NotEmpty String sector, @Positive int pinCode, boolean hasPin, List<SMEUser> employees, List<BankAccount> companyAccounts, BankUser accountManager) {
+        this.chamberOfCommerceId = chamberOfCommerceId;
+        this.companyName = companyName;
+        this.companyLegalName = companyLegalName;
+        this.sector = sector;
+        this.pinCode = pinCode;
+        this.hasPin = hasPin;
+        this.employees = employees;
+        this.companyAccounts = companyAccounts;
+        this.accountManager = accountManager;
     }
 
     public int getCompanyId() {
@@ -132,5 +146,21 @@ public class Company {
 
     public void addCompanyAccount(BankAccount bankAccount){
         companyAccounts.add(bankAccount);
+    }
+
+    public String getCompanyLegalName() {
+        return companyLegalName;
+    }
+
+    public void setCompanyLegalName(String companyLegalName) {
+        this.companyLegalName = companyLegalName;
+    }
+
+    public BankUser getAccountManager() {
+        return accountManager;
+    }
+
+    public void setAccountManager(BankUser accountManager) {
+        this.accountManager = accountManager;
     }
 }

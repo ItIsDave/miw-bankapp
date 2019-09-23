@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title> Couch Bank nieuwe zakelijke klant</title>
+</head>
+<body>
+<h1>Couch Bank nieuwe zakelijke klant</h1>
+
+<label for="company"><h2>Vul hieronder uw bedrijfsgegevens in</h2></label>
+<br><br>
+<form id="company" action="#" th:action="@{newCompany}"  method="post">
+    <table>
+        <td><label for="companyForm">Wat is de ondernemingsvorm van uw bedrijf?</label></td>
+        <td>
+            <select id="companyForm">
+                <option value=""> -- </option>
+                <option th:each="t: ${companyForm}" th:value = "${t.toString()}" th:utext = "${t.toString()}" ></option>
+            </select>
+        </td>
+        <tr>
+            <td><label for="kvk">KvK nummer: </label> </td>
+            <td><input type="number"  th:value="${company.chamberOfCommerceId}"  id="kvk" name="chamberOfCommerceId"/></td>
+            <td th:if="${#fields.hasErrors('chamberOfCommerceId')}" th:errors="*{chamberOfCommerceId}">KvK-nummer ongeldig.</td>
+        </tr>
+        <tr>
+            <td><label for="companyName">Handelsnaam:</td>
+            <td><input type="text" th:value="${company.companyName}" id="companyName" name="companyName"/></td>
+            <td th:if="${#fields.hasErrors('companyName')}" th:errors="*{companyName}">Naam ongeldig.</td>
+<!--        </tr>-->
+<!--        <tr>-->
+<!--            <td><label for="handelsnaam"> Maakt u gebruik van andere handlesnaam?</label>-->
+<!--                <input type="radio" id="handelsnaam" name="eigenaar" value="yes" > Ja-->
+<!--                <input type="radio" name="eigenaar" value="no"  checked> Nee-->
+<!--            </td>-->
+<!--        </tr>-->
+<!--&lt;!&ndash;        <tr>&ndash;&gt;-->
+<!--&lt;!&ndash;            <td><label for="companyLegalName">Naam: </td>&ndash;&gt;-->
+<!--&lt;!&ndash;            <td><input type="text" th:value="${company.companyLegalName}" id="companyLegalName" name="companyLegalName"/></td>&ndash;&gt;-->
+<!--&lt;!&ndash;            <td th:if="${#fields.hasErrors('companyLegalName')}" th:errors="*{companyLegalName}">Naam ongeldig.</td>&ndash;&gt;-->
+<!--&lt;!&ndash;        </tr>&ndash;&gt;-->
+        <tr>
+            <td><label for="sector">Kies bedrijf branche: </td>
+        <td>
+        <select id="sector">
+        <option value=""> -- </option>
+        <option  th:each="t: ${companySector}" th:value = "${t.toString()}" th:utext = "${t.toString()}" ></option>
+        </select>
+        </td>
+    </tr>
+        </tr>
+        <td><input type="submit" value="Volgende"></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>
