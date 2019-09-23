@@ -11,14 +11,17 @@ import miw.s16.couch.couch.model.dao.SMEUserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 @Controller
-public class NewCompanyAndSmeController {
+public class NewCompanyAndSmeController implements WebMvcConfigurer {
 
     @Autowired
     SMEUserDao smeUserDao;
@@ -45,7 +48,6 @@ public class NewCompanyAndSmeController {
 
     @GetMapping(value = "couch-zakelijk")  //van select type -> new zakelijk user
     public String newCompanyHandler(Model model) {
-        SMEUser smeUser = new SMEUser();
         Company company = new Company();
         if (companyForm.size() == 0 && sectors.size() == 0) {
             Collections.addAll(companyForm, "B.V.", "Eenmanszaak", "Vereniging of Stichting", "V.O.F", "Andere ondernemingsvorm");
@@ -56,54 +58,57 @@ public class NewCompanyAndSmeController {
         }
         model.addAttribute("companyForm", companyForm);
         model.addAttribute("sectors", sectors);
-        model.addAttribute("smeUser", smeUser);
         model.addAttribute("company",company);
         return "new_company";
     }
 
     @PostMapping(value = "couch-zakelijk")
-    public String newCompanyHandler(@ModelAttribute("company") @RequestBody Company company, Model model) {
-//        if (bindingResult.hasErrors()) {
-//            return "new_company";
-//        } else {
+    public String newSMEUserHandler(@Valid @ModelAttribute("company") @RequestBody Company company, BindingResult bindingResult, Model model) {
         if (roles.size() == 0 ){
-            Collections.addAll(roles, "Eigenaar", "Medewerker", "Admin");
-        }
-        bankAccountDao.save(bankAccount);
+            Collections.addAll(roles, "Eigenaar", "Medewerker", "Admin"); }
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("companyForm", companyForm);
+            model.addAttribute("sectors", sectors);
+            model.addAttribute("company",company);
+            return "new_company";
+        } else {
+            bankAccountDao.save(bankAccount);
 
-        bankUser.setRole("account manager");
-        newCompany.setAccountManager(bankUser);
-        newCompany.addCompanyAccount(bankAccount);
-        newCompany.setCompanyName(company.getCompanyName());
-        newCompany.setChamberOfCommerceId(company.getChamberOfCommerceId());
-        newCompany.setCompanyType(company.getCompanyType());
-        newCompany.setPinCode(1234);
-        newCompany.setSector(company.getSector());
-        newCompany.addCompanyEmployee(newSmeUser);
-        companyDao.save(newCompany);
-        model.addAttribute("roles", roles);
-        model.addAttribute("role", "");
-        model.addAttribute("company", newCompany);
-        model.addAttribute("smeUser", newSmeUser);
-        model.addAttribute("companySector", "");
-//        }
-        return "new_SMEUser";
+            bankUser.setRole("account manager");
+            newCompany.setAccountManager(bankUser);
+            newCompany.addCompanyAccount(bankAccount);
+            newCompany.setCompanyName(company.getCompanyName());
+            newCompany.setChamberOfCommerceId(company.getChamberOfCommerceId());
+            // To do -- enter validation of unique kvk nummer
+
+            newCompany.setCompanyType(company.getCompanyType());
+            // for testing
+            newCompany.setPinCode(1234);
+            newCompany.setSector(company.getSector());
+            newCompany.addCompanyEmployee(newSmeUser);
+            companyDao.save(newCompany);
+            model.addAttribute("roles", roles);
+            model.addAttribute("role", "");
+            model.addAttribute("company", newCompany);
+            model.addAttribute("smeUser", newSmeUser);
+            model.addAttribute("companySector", "");
+            return "new_SMEUser";
+        }
     }
 
     @PostMapping(value = "newSMEUser")
-    public String newSMEUserHandler(@ModelAttribute("smeUser") @RequestBody SMEUser smeUser, Model model) {
-//        if (bindingResult.hasErrors()) {
-//            return "new_company";
-//        } else {
-
-        newSmeUser.setUserName(smeUser.getUserName());
-        newSmeUser.setUserPassword(smeUser.getUserPassword());
-        newSmeUser.setRoleEmployee(smeUser.getRoleEmployee());
-        smeUserDao.save(newSmeUser);
-       //}
-        return "new_SMEUser_success";
+    public String newSMEUserHandler(@Valid @ModelAttribute("smeUser") @RequestBody SMEUser smeUser, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "new_SMEUser";
+        } else {
+            newSmeUser.setUserName(smeUser.getUserName());
+            newSmeUser.setUserPassword(smeUser.getUserPassword());
+            newSmeUser.setRoleEmployee(smeUser.getRoleEmployee());
+            smeUserDao.save(newSmeUser);
+            // To do -- check if user already exists as a client
+            return "new_SMEUser_success";
+        }
     }
-
 
 }
 

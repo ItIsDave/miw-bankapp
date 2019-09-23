@@ -138,9 +138,11 @@ public class HibernateLab {
             //bankmedewerkers voor HoofdMKB en HoofdParticulieren
             BankUser bankUser1 = new BankUser("piet", "pietgeheim", "Hoofd MKB");
             BankUser bankUser2 = new BankUser("marie", "mariegeheim", "Hoofd Particulieren");
+            BankUser bankUser3 = new BankUser("ralph", "1234", "Account Manager");
 
             bankUserDao.save(bankUser1);
             bankUserDao.save(bankUser2);
+            bankUserDao.save(bankUser3);
 
             balanceTopTen.balanceTopTen_IBAN();
             System.out.println("dbinit klaar.");

@@ -1,8 +1,7 @@
 package miw.s16.couch.couch.model;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Positive;
+import javax.validation.constraints.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,17 +10,18 @@ public class Company {
     @Id
     @GeneratedValue
     private int companyId;
-//    @Column(unique = true)
-//    @Positive
-//    @Size(min=8, max=8)
+    @Column(name = "kvkNr", unique = true)
+    @NotNull
+    @Positive
+    @Min(value = 10000000, message  = "KvK-nummer moet 8 cijfers zijn zonder punten.")
+    @Max(value = 99999999,  message  = "KvK-nummer moet 8 cijfers zijn zonder punten.")
     private int chamberOfCommerceId;
-//    @NotEmpty
+    @NotEmpty
     private String companyName;
-//    @NotEmpty
+    @NotEmpty
     private String companyType;
-   // @NotEmpty
+    @NotEmpty
     private String sector;
-    //@Positive
     private int pinCode;
     private boolean hasPin;
     // company has many employees
@@ -50,7 +50,7 @@ public class Company {
         this.companyAccounts = companyAccounts;
     }
 
-    public Company(int chamberOfCommerceId, @NotEmpty String companyName, String sector, @Positive int pinCode, boolean hasPin, List<SMEUser> employees, List<BankAccount> companyAccounts) {
+    public Company(int chamberOfCommerceId, @NotEmpty String companyName, String sector, int pinCode, boolean hasPin, List<SMEUser> employees, List<BankAccount> companyAccounts) {
         this.chamberOfCommerceId = chamberOfCommerceId;
         this.companyName = companyName;
         this.sector = sector;
