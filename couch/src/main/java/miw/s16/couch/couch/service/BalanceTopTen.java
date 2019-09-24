@@ -32,7 +32,6 @@ public class BalanceTopTen {
             top10Line = b.getIBAN() + " " + b.getBalance();
             reportedBankAccounts.clear();
             reportedBankAccounts.add(b);
-            System.out.println("b is:" + reportedBankAccounts.get(0).getBankAccountId());  //verwacht 6
             retailUsers = retailUserDao.findRetailUsersByBankAccounts(reportedBankAccounts);
             if (retailUsers.size() == 0){
                 top10Line += " bankaccount not assigned";//for example NL10COUC0423456793 + NL10COUC0323456792
