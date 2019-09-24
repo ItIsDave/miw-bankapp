@@ -12,7 +12,8 @@
 <p>
     N.B. bij meerdere rekeninghouders wordt eerste rekeninghouder getoond.
 </p>
-De lengte van de lijst is ingesteld op: <span th:text="*{listSize}"></span>
+<p>
+De lengte van de lijst is ingesteld op: <span th:text="*{listSize}"></span></p>
 <table>
     <tr>Hier komen de headers</tr>
     <div th:unless="${#lists.isEmpty(top10_Client_List)}">

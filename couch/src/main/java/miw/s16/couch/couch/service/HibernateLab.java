@@ -44,8 +44,9 @@ public class HibernateLab {
 
        // to ensure no data duplication
         if (userDao.findByUserPassword("1").size() == 0) {
-            // user info for checking if DB is empty
             User johnDoe = new User("John Doe", "1");
+            // user info for checking if DB is empty
+          /*  User johnDoe = new User("John Doe", "1");
 
             // Inserting user data
             User adamantia = new User("Adamantia", "1234");
@@ -123,8 +124,9 @@ public class HibernateLab {
             retailUserDao.save(karin);
             retailUserDao.save(charlotte);
             retailUserDao.save(jan);
-            retailUserDao.save(boudewijn);
+            retailUserDao.save(boudewijn);*/
 
+            userDao.save(johnDoe);
             testData.makeRetailUserList();                          //AMS: haalt retail data op uit CSV file
             testData.retailUserListSplitAddBankaccountAndSave();    //AMS: verwerken testdata
             System.out.println("testdata is ingelezen.");
@@ -136,7 +138,7 @@ public class HibernateLab {
             bankUserDao.save(bankUser1);
             bankUserDao.save(bankUser2);
         }
-        balanceTopTen.balanceTopTen_IBAN();
+        balanceTopTen.balanceTopTen_Client();
         System.out.println("dbinit klaar.");
 
 

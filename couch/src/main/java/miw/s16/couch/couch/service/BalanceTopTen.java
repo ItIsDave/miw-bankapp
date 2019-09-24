@@ -23,7 +23,7 @@ public class BalanceTopTen {
     private List<BankAccount> reportedBankAccounts = new ArrayList<>();//to get the retail user(s) per bank account - BvB
     private List<RetailUser> retailUsers;
 
-    public ArrayList<String> balanceTopTen_IBAN() {
+    public ArrayList<String> balanceTopTen_Client() {
         ArrayList<String> top10List = new ArrayList<>();
         String top10Line = "";
         bankAccounts = bankAccountDao.findTop10ByOrderByBalanceDesc();

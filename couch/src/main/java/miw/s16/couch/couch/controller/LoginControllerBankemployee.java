@@ -36,9 +36,9 @@ public class LoginControllerBankemployee {
     @GetMapping(value = "bankemployee")
     public String indexHandler(Model model) {
         User user = new User();
-        BankUser bankUser = new BankUser();
+        //BankUser bankUser = new BankUser();
         model.addAttribute("user", user);
-        model.addAttribute("bankUser", bankUser);
+        //model.addAttribute("bankUser", bankUser);
         return "index_bankemployee";
     }
 
@@ -60,7 +60,7 @@ public class LoginControllerBankemployee {
             model.addAttribute("role", loggedInBankUser.get(0).getRole());
             //model.addAttribute("allEvents", eventList); hier komt arrayList van strings
             //service aftrap hier:
-            ArrayList<String> top10ClientList = balanceTopTen.balanceTopTen_IBAN();
+            ArrayList<String> top10ClientList = balanceTopTen.balanceTopTen_Client();
             model.addAttribute("top10_Client_List",top10ClientList);
             model.addAttribute("listSize", top10ClientList.size());
             //model.addAttribute("allBankAccounts", loggedInBankAccounts);
