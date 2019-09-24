@@ -1,20 +1,48 @@
 package miw.s16.couch.couch.model;
-import javax.persistence.*;
-import java.util.*;
+
+
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.Range;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
+import javax.validation.constraints.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class RetailUser extends User {
+
+
+    @NotNull
+    @Min(value = 10000000, message = "BSN moet 8 of 9 cijfers zijn, zonder punten.")  //AMS: aantal posities mag zijn: 8
+    @Max(value = 999999999, message = "BSN moet 8 of 9 cijfers zijn, zonder punten.") //AMS: 8 of 9 posities voldoen
     private int bsn;
+    @NotEmpty
     private String firstName;
     private String middleName;
+    @NotEmpty
     private String lastName;
+    @NotEmpty
     private String streetName;
+    @NotNull
+    @Positive
     private int houseNumber;
     private String extension;
+    @NotEmpty
     private String zipcode;
+    @NotEmpty
     private String city;
+    @NotEmpty
+    @Size(min= 9, max=11) //AMS: in de testdata 11 posities nodig
     private String phoneNumber;
+    @NotEmpty
+    //omdat de date als string wordt ingegeven kan ik geen date validatie toepasssen
     private String dateOfBirth;
+    @NotEmpty
+    @Email
     private String email;
     private String role;
     @ManyToMany
@@ -22,36 +50,21 @@ public class RetailUser extends User {
 
 
 
-//    public RetailUser(String userName, String userPassword,
-//                      int bsn, String firstName, String middleName, String lastName,
-//                      String streetName, int houseNumber,
-//                      String zipcode, String city, int phoneNumber,
-//                      String dateOfBirth, String email, String role) {
-//        this(userName, userPassword, bsn,  firstName, "", lastName,
-//                streetName, houseNumber, "", zipcode, city, phoneNumber, dateOfBirth, email, role);
-//        this.bankAccounts = new ArrayList<>();
-//    }
-//>>>>>>> 777f207284e041f2c18637b87874e6efda03020d
-
 //    public RetailUser() {
 //        super();
 //    }
 
-    public RetailUser() { this("","");
+    public RetailUser() {
+        this("","");
         }
-
-//    public RetailUser(String userName, String userPassword, int roleId) {
-//        super(userName, userPassword);
 
     public RetailUser(String userName, String userPassword) {
         super(userName, userPassword);
         this.bankAccounts = new ArrayList<>();
-
     }
 
     public RetailUser(String userName, String userPassword, int bsn, String firstName,
                       String middleName, String lastName,
-
                       String streetName, int houseNumber, String extension,
                       String zipcode, String city, String phoneNumber,
                       String dateOfBirth, String email, String role) {
@@ -201,7 +214,5 @@ public class RetailUser extends User {
     public void addBankAccount(BankAccount bankAccount){
       bankAccounts.add(bankAccount);
     }
-
-
 }
 

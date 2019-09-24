@@ -9,26 +9,30 @@
 <body>
 <h1>Welkom <span th:text="${userName}"></span></h1>
 
-<table>
-    <tr>
-        <th>Bankrekening(IBAN)</th>
-        <th>Saldo</th>
-    </tr>
-    <tr>
+<div th:unless="${#lists.isEmpty(allBankAccounts)}">
 
-        <td><span th:text="${bankAccount}"></span></td>
-        <td><span th:text="${balance}"></span></td>
-    </tr>
-</table>
+    <table>
+        <tr>
+            <th>Bankrekening(IBAN)</th>
+            <th>Saldo</th>
+        </tr>
+        <tr th:each="bankAccount: ${allBankAccounts}">
+            <td><a href="/bankAccountDetails" th:href="@{/bankAccountDetails(id=${bankAccount.bankAccountId})}"
+                   th:text="${bankAccount.iBAN}"></a></td>
+            <td th:text="${bankAccount.balance}"></td>
+        </tr>
+    </table>
 <br>
+</div>
 
-<form action="#" th:action="@{pageHandler}" th:object="${user}" method="post">
-    <tr>Klik voor een transactie te maken</tr>
-        <input type="submit" value="Nieuwe Transactie">
+<br>
+<form action="#" th:action="@{newAccountRequest}" th:object="${user}" method="post">
+    <tr>Klik om een nieuwe rekening te openen</tr>
+    <input type="submit" value="Rekening openen">
 </form>
 <br>
 
-    Ga <a href="/">terug</a>
+<a href="/">Uitloggen</a>
 
 </body>
 </html>

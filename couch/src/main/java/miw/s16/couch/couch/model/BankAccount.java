@@ -3,9 +3,10 @@ package miw.s16.couch.couch.model;
 import javax.persistence.Entity;
 import javax.persistence.*;
 import java.math.BigInteger;
+import java.text.DecimalFormat;
 import java.util.*;
 
-//coding by PvdH
+//coding by PH
 
 @Entity
 public class BankAccount {
@@ -16,7 +17,10 @@ public class BankAccount {
     private String iban;
     private double balance;
     @OneToMany(mappedBy = "bankAccount")
-    private List<Transaction> transactions = new ArrayList<Transaction>();
+    private List<Transaction> transactions;
+    //iaw Boudewijn added, both depraciation and deposit amounts are now collected from db
+    @OneToMany(mappedBy = "bankAccountTo")
+    private List<Transaction> transactionsTo;
     @ManyToMany(mappedBy = "bankAccounts")
     private List<RetailUser> retailUsers = new ArrayList<RetailUser>();
 
@@ -28,21 +32,26 @@ public class BankAccount {
     public BankAccount(double balance){
         this.iban = generateIban();
         this.balance = balance;
+        this.transactions = new ArrayList<>();
+        this.transactionsTo = new ArrayList<>();
     }
 
     public BankAccount( String iBAN, double balance) {
         super();
         this.iban = iBAN;
         this.balance = balance;
-//        this.transactions = new ArrayList<>();
-//        this.retailusers = new ArrayList<>();
+        this.transactions = new ArrayList<>();
+        this.transactionsTo = new ArrayList<>();
+        //this.retailusers = new ArrayList<>();
     }
 
     //getters
     public String getIBAN() { return iban; }
-    public double getBalance() {return balance;}
-//    public void addTransactions (Transaction transaction) {transactions.add(transaction);}
-//    public void addRetailUser (RetailUser retailuser) {retailusers.add(retailuser);}
+    public double getBalance() {return balance; }
+    public int getBankAccountId() { return bankAccountId; }
+    public List<Transaction> getTransactions() { return transactions; }
+    public List<Transaction> getTransactionsTo() { return transactionsTo; }
+    public List<RetailUser> getRetailUsers() { return retailUsers; }
 
     //setter for changes in balance, transactions and retailusers
     public void setBalance(double balance) { this.balance = balance; }
@@ -110,15 +119,12 @@ public class BankAccount {
         return iban.toString();
     }
 
-
-    public void addTransaction(Transaction transaction){
-        transactions.add(transaction
-        );
-    }
+    public void addTransaction(Transaction transaction){ transactions.add(transaction); }
+    public void addTransactionTo(Transaction transaction){ transactionsTo.add(transaction); }
+    //    public void addRetailUser (RetailUser retailuser) {retailusers.add(retailuser);}
 
     @Override
     public String toString() {
         return iban;
     }
-
 }

@@ -1,18 +1,12 @@
 package miw.s16.couch.couch.service;
 
 
-import miw.s16.couch.couch.model.BankAccount;
-import miw.s16.couch.couch.model.RetailUser;
-import miw.s16.couch.couch.model.Transaction;
-import miw.s16.couch.couch.model.User;
+import miw.s16.couch.couch.model.*;
 
-import miw.s16.couch.couch.model.dao.BankAccountDao;
-import miw.s16.couch.couch.model.dao.RetailUserDao;
-import miw.s16.couch.couch.model.dao.TransactionDao;
-import miw.s16.couch.couch.model.dao.UserDao;
+import miw.s16.couch.couch.model.dao.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import javax.transaction.Transactional;
+
 import java.util.*;
 
 
@@ -33,6 +27,14 @@ public class HibernateLab {
     @Autowired
     TransactionDao transactionDao;
 
+    @Autowired
+    TestdataCreator testData;
+
+    @Autowired
+    BalanceTopTen balanceTopTen;
+
+    @Autowired
+    BankUserDao bankUserDao;
 
     public HibernateLab() {
         super();
@@ -54,11 +56,11 @@ public class HibernateLab {
             User patrick = new User("Patrick", "1234");
 
             // Creating Bank account data
-            BankAccount account1 = new BankAccount("NL10COUC0123456790", 80000.00);
-            BankAccount account2 = new BankAccount("NL10COUC0223456791", 10000.00);
-            BankAccount account3 = new BankAccount("NL10COUC0323456792", 50000.00);
-            BankAccount account4 = new BankAccount("NL10COUC0423456793", 80000.00);
-            BankAccount account5 = new BankAccount("NL10COUC0523456794", 100000.00);
+            BankAccount account1 = new BankAccount("NL10COUC0123456790", 80.00);
+            BankAccount account2 = new BankAccount("NL10COUC0223456791", 10.00);
+            BankAccount account3 = new BankAccount("NL10COUC0323456792", 50.00);
+            BankAccount account4 = new BankAccount("NL10COUC0423456793", 80.00);
+            BankAccount account5 = new BankAccount("NL10COUC0523456794", 100.00);
 
             // Creating Retail user data
             RetailUser bart = new RetailUser("Bart", "1234",  987654321, "Bart",
@@ -123,7 +125,20 @@ public class HibernateLab {
             retailUserDao.save(jan);
             retailUserDao.save(boudewijn);
 
+           // testData.makeRetailUserList();                          //AMS: haalt retail data op uit CSV file
+            //testData.retailUserListSplitAddBankaccountAndSave();    //AMS: verwerken testdata
+            System.out.println("testdata is ingelezen.");
+
+            //bankmedewerkers voor HoofdMKB en HoofdParticulieren
+            BankUser bankUser1 = new BankUser("piet", "pietgeheim", "Hoofd MKB");
+            BankUser bankUser2 = new BankUser("marie", "mariegeheim", "Hoofd Particulieren");
+
+            bankUserDao.save(bankUser1);
+            bankUserDao.save(bankUser2);
         }
+        balanceTopTen.balanceTopTen_IBAN();
+        System.out.println("dbinit klaar.");
+
 
 
     }

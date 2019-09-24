@@ -1,48 +1,50 @@
 package miw.s16.couch.couch.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 
-import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-public class Transaction { //implements Serializable {
+public class Transaction implements Comparable<Transaction> { //implements Serializable {
 
     @Id
     @GeneratedValue
     private int transactionId;
     private String description;
+    @NotNull
+    @Positive
     private double amount;
     //@Column(name = "timeStamp")
     private Date transactionDate;
     // one
-
     @ManyToOne
     private BankAccount bankAccount;//getIban, can be internal bank account
     @ManyToOne(cascade = CascadeType.ALL)
     private BankAccount bankAccountTo;
     // "to" and "from" are reserved key words from MySQL
     private String fromAccount;//getIban, can be internal bank account
+    @Size(min = 18, max = 18) // temp  to be changed (AT)
     private String toAccount;//getIban, can be internal bank account
     private boolean isPin;
-    @ManyToOne(cascade = CascadeType.ALL)
-    //@JoinColumn(name= "loanid")
-    private Loan loan;  //betreft de lening indien van toepassing
 
 
     public Transaction() {
-        this("unknown", 0, new Date(), "", "", new Loan(), false);
+        // this("unknown", 0, new Date(), "", "", new Loan(), false); uitgezet om te voorkomen dat
+        // altijd een loan object wordt gemaakt
+        super();
+        this.transactionDate = new Date();
+
     }
 
 
     public Transaction(String description, double amount, Date transactionDate,
-                       String from, String to, Loan loan, boolean isPin) {
+                       String fromAccount, String toAccount,  boolean isPin) {
         this.description = description;
         this.amount = amount;
         this.transactionDate = transactionDate;
-        this.fromAccount = from;
-        this.toAccount = to;
-        this.loan = loan;
+        this.fromAccount = fromAccount;
+        this.toAccount = toAccount;
         this.isPin = isPin;
     }
 
@@ -54,21 +56,9 @@ public class Transaction { //implements Serializable {
         this.description = description;
     }
 
-    public Transaction(String description, double amount, Date transactionDate, BankAccount bankAccount, BankAccount bankAccountTo, String toAccount, String fromAccount, boolean isPin, Loan loan) {
-        this.description = description;
-        this.amount = amount;
-        this.transactionDate = transactionDate;
-        this.bankAccount = bankAccount;
-        this.bankAccountTo = bankAccountTo;
-        this.fromAccount = fromAccount;
-        this.toAccount = toAccount;
-        this.isPin = isPin;
-        this.loan = loan;
-    }
-
-    // constructror for transactions not needing a loan object
-
-    public Transaction(String description, double amount, Date transactionDate, BankAccount bankAccount, BankAccount bankAccountTo, String toAccount, String fromAccount, boolean isPin) {
+    //all args constructor
+    public Transaction(String description, double amount, Date transactionDate, BankAccount bankAccount,
+                       BankAccount bankAccountTo, String toAccount, String fromAccount, boolean isPin) {
         this.description = description;
         this.amount = amount;
         this.transactionDate = transactionDate;
@@ -78,7 +68,6 @@ public class Transaction { //implements Serializable {
         this.toAccount = toAccount;
         this.isPin = isPin;
     }
-
 
     public int getTransactionId() {
         return transactionId;
@@ -106,14 +95,6 @@ public class Transaction { //implements Serializable {
 
     public void setBankAccount(BankAccount bankAccount) {
         this.bankAccount = bankAccount;
-    }
-
-    public Loan getLoan() {
-        return loan;
-    }
-
-    public void setLoan(Loan loan) {
-        this.loan = loan;
     }
 
     public int getIdTransaction() {
@@ -168,6 +149,11 @@ public class Transaction { //implements Serializable {
         this.isPin = isPin;
     }
 
+    public double getBalance(BankAccount bankAccount){
+        return bankAccount.getBalance();
+    }
+
+
     @Override
     public String toString() {
         return "Transaction{" +
@@ -177,8 +163,11 @@ public class Transaction { //implements Serializable {
                 ", transactionDate=" + transactionDate.toString() +
                 ", from=" + fromAccount +
                 ", to=" + toAccount +
-                //", loan=" + loan.toString() +
                 ", isPin=" + isPin +
                 '}';
+    }
+    @Override
+    public int compareTo(Transaction o) {
+        return getTransactionDate().compareTo(o.getTransactionDate());
     }
 }

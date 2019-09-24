@@ -5,9 +5,7 @@
     <title>Welkom</title>
 </head>
 <body>
-<h3>
-<div><span th:text="${feedback}"></span></div>
-</h3>
+<h1 th:utext="${#strings.unescapeJava(#strings.replace(#strings.escapeJava(feedback),'\n','&lt;br /&gt;'))}"></h1>
 <br>
 Klik <a href="/transactionRequest">hier</a> voor een nieuwe transactie te maken.
 <br>
