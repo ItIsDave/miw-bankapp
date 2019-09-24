@@ -33,14 +33,7 @@ public class LoginControllerBankemployee {
     @Autowired
     BalanceTopTen balanceTopTen;
 
-//    @GetMapping(value = "bankemployee")
-//    public String indexHandler(Model model) {
-//        User user = new User();
-//        BankUser bankUser = new BankUser();
-//        model.addAttribute("user", user);
-//        model.addAttribute("bankUser", bankUser);
-//        return "index_bankemployee";
-//    }
+
 
 
     @PostMapping(value = "overview_bankemployee")
