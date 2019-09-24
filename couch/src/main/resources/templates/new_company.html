@@ -20,7 +20,7 @@
         </td>
         <tr>
             <td><label for="kvk">KvK nummer: </label> </td>
-            <td><input type="number"  th:field="*{chamberOfCommerceId}"  id="kvk" name="chamberOfCommerceId" required/></td>
+            <td><input type="number"  th:field="*{chamberOfCommerceId}"  id="kvk" name="chamberOfCommerceId" min ="10000000" required/></td>
             <td th:if="${#fields.hasErrors('chamberOfCommerceId')}">KvK-nummer ongeldig.</td>
         </tr>
         <tr>
@@ -35,7 +35,7 @@
         </select>
         </td>
         <tr>
-            <td><label for="streetName">Straat:</td>
+            <td><label for="streetName">Straat: </td>
             <td><input type="text" th:field="*{streetName}" id="streetName" name="streetName" required/></td>
         <tr>
         <tr>

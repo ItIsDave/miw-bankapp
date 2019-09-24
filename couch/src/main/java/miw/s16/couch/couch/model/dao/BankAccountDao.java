@@ -21,4 +21,6 @@ public interface BankAccountDao extends CrudRepository<BankAccount, Integer> {
 //added BvB
     public List<BankAccount> findTop10ByOrderByBalanceDesc();
 
+    public List<BankAccount> findByAccountType (String accountType);
+
 }

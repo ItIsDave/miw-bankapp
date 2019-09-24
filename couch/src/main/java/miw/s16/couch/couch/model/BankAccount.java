@@ -25,6 +25,7 @@ public class BankAccount {
     private List<RetailUser> retailUsers = new ArrayList<RetailUser>();
     @ManyToMany(mappedBy = "companyAccounts")
     private List<Company> companies = new ArrayList<>();
+    private String accountType;
 
     public BankAccount () {
         this(0);
@@ -54,7 +55,15 @@ public class BankAccount {
         this.companies = companies;
     }
 
-
+    public BankAccount(String iban, double balance, List<Transaction> transactions, List<Transaction> transactionsTo, List<RetailUser> retailUsers, List<Company> companies, String accountType) {
+        this.iban = iban;
+        this.balance = balance;
+        this.transactions = transactions;
+        this.transactionsTo = transactionsTo;
+        this.retailUsers = retailUsers;
+        this.companies = companies;
+        this.accountType = accountType;
+    }
 
     //getters
     public String getIBAN() { return iban; }
@@ -99,6 +108,14 @@ public class BankAccount {
 
     //setter for changes in balance, transactions and retailusers
     public void setBalance(double balance) { this.balance = balance; }
+
+    public String getAccountType() {
+        return accountType;
+    }
+
+    public void setAccountType(String accountType) {
+        this.accountType = accountType;
+    }
 
 /*
     IBAN rules: https://nl.wikipedia.org/wiki/International_Bank_Account_Number

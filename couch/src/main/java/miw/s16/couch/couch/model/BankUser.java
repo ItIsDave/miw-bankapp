@@ -15,7 +15,7 @@ public class BankUser extends User {
     private String role;
     @OneToMany(mappedBy = "bankAccountTo")
     private List<Transaction> transactionsTo;
-    @OneToMany(mappedBy = "accountManager")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "accountManager")
     // bank user is responsible for many companies
     private List<Company> companies = new ArrayList<>();
 

@@ -1,10 +1,7 @@
 package miw.s16.couch.couch.controller;
 
 import miw.s16.couch.couch.model.*;
-import miw.s16.couch.couch.model.dao.BankAccountDao;
-import miw.s16.couch.couch.model.dao.BankUserDao;
-import miw.s16.couch.couch.model.dao.CompanyDao;
-import miw.s16.couch.couch.model.dao.SMEUserDao;
+import miw.s16.couch.couch.model.dao.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +19,9 @@ public class NewCompanyAndSmeController implements WebMvcConfigurer {
 
     @Autowired
     SMEUserDao smeUserDao;
+
+    @Autowired
+    RetailUserDao retailUserDao;
 
     @Autowired
     BankAccountDao bankAccountDao;
@@ -42,8 +42,7 @@ public class NewCompanyAndSmeController implements WebMvcConfigurer {
     private BankUser bankUser = new BankUser();
 
 
-
-    @GetMapping(value = "couch-zakelijk")  //van select type -> new zakelijk user
+    @GetMapping(value = "couch-zakelijk")
     public String newCompanyHandler(Model model) {
         Company company = new Company();
         if (companyForm.size() == 0 && sectors.size() == 0) {
@@ -55,23 +54,26 @@ public class NewCompanyAndSmeController implements WebMvcConfigurer {
         }
         model.addAttribute("companyForm", companyForm);
         model.addAttribute("sectors", sectors);
-        model.addAttribute("company",company);
+        model.addAttribute("company", company);
         return "new_company";
     }
 
+    // create a new company
     @PostMapping(value = "couch-zakelijk")
     public String newSMEUserHandler(@Valid @ModelAttribute("company") @RequestBody Company company, BindingResult bindingResult, Model model) {
-        if (roles.size() == 0 ){
-            Collections.addAll(roles, "Eigenaar", "Medewerker", "Admin"); }
+        if (roles.size() == 0) {
+            Collections.addAll(roles, "Eigenaar", "Medewerker", "Admin");
+        }
         if (bindingResult.hasErrors()) {
             model.addAttribute("companyForm", companyForm);
             model.addAttribute("sectors", sectors);
-            model.addAttribute("company",company);
+            model.addAttribute("company", company);
             return "new_company";
         } else {
+            bankAccount.setAccountType("Zakelijk");
             bankAccountDao.save(bankAccount);
             // To do -- enter validation of unique kvk nummer
-            // for testing
+
             bankUser.setRole("account manager");
             company.setAccountManager(bankUser);
             company.addCompanyAccount(bankAccount);
@@ -87,17 +89,39 @@ public class NewCompanyAndSmeController implements WebMvcConfigurer {
         }
     }
 
+    // create a new SME User
     @PostMapping(value = "newSMEUser")
-    public String newSMEUserHandler(@ModelAttribute("smeUser") @RequestBody SMEUser smeUser) {
-//        if (bindingResult.hasErrors()) {
-//            return "new_SMEUser";
-//        } else {
-            // To do -- check if user already exists as a client
-            RetailUser existingRetailUser = new RetailUser();
+    public String newSMEUserHandler(@Valid @ModelAttribute("smeUser") @RequestBody SMEUser smeUser, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("roles", roles);
+            model.addAttribute("role", "");
+            model.addAttribute("smeUser", newSMEuser);
+            model.addAttribute("companySector", "");
+            return "new_SMEUser";
+//
+        } else {
+//            // Check if user already exists as a client
+//            List<RetailUser> existingUsers = new ArrayList<>();
+//            existingUsers = retailUserDao.findByBsn(smeUser.getBsn());
+//            if (existingUsers != null) {
+//                RetailUser existingUser = existingUsers.get(0); // bsn should be unique -- to check
+//                List<BankAccount> accounts = retailUserDao.findBankAccountsByUserName(existingUser.getUserName());
+//
+//                // && check if user already has another business account
+//                for (BankAccount account : accounts)
+//                    if (account.getAccountType().equals("Zakelijk")) {
+//                        return "account_overflow";
+//                    }
+//                // if its the first zakelijk account, add it to the list of their existing accounts
+//                // work in progress ---
+//                existingUser.addBankAccount(bankAccount);
+//            }
+
             smeUser.setCompany(newCompany);
             smeUserDao.save(smeUser);
             return "new_SMEUser_success";
-        //}
+//
+        }
     }
 }
 
