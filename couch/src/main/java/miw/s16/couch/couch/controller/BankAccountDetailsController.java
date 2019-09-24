@@ -51,23 +51,4 @@ public class BankAccountDetailsController {
         return "bank_account_details";
     }
 
-    @RequestMapping(value = "transactionRequest")
-    public String pageHandler(@ModelAttribute User user, Model model, HttpServletRequest request, @RequestParam("id") String ibanId) {
-        Transaction transaction = new Transaction();
-        // log in session
-        HttpSession session = request.getSession (true);
-        String userName = (String) session.getAttribute("userName");
-        BankAccount bankAccountFrom = bankAccountDao.findByIban(ibanId);
-        transaction.setBankAccount(bankAccountFrom);
-        transaction.setFromAccount(bankAccountFrom.getIBAN());
-        System.out.println("datum - tijd is: " + transaction.getTransactionDate().toString());
-        model.addAttribute("transaction", transaction);
-        model.addAttribute("date_time", transaction.getTransactionDate().toString());
-        model.addAttribute("bankAccountFrom", bankAccountFrom.getIBAN());
-        model.addAttribute("bankAccountTo", transaction.getToAccount());
-        model.addAttribute("userName", userName);
-        model.addAttribute("user", user);
-        model.addAttribute("balance", bankAccountFrom.getBalance());
-        return "transaction";
-    }
 }
