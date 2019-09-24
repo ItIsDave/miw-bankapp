@@ -53,8 +53,9 @@ public class TransactionService {
                 System.out.println("Voordat transaction is gevuld is transaction: " +
                         transaction);
                 transactionDao.save(transaction);
-                return "\nBedankt!\n<small>Uw transactie van " + amount + " euro was succesvol. \nUw saldo was: " + balanceFrom +
-                        "\nUw huidige saldo is " + newBalance + " euro.</small>";
+                return "\nBedankt!\n<small>Uw transactie van " + String.format("%.2f", amount) + " euro was succesvol. \nUw saldo was: " +
+                        String.format("%.2f", balanceFrom) +
+                        "\nUw huidige saldo is " + String.format("%.2f", newBalance) + " euro.</small>";
             }
         } else {
             return "Overboeking mislukt. Bank rekening niet gevonden.";
