@@ -42,26 +42,30 @@ public class LoginController {
     public String indexHandler(Model model) {
         lab.dbinit();
         User user = new User();
-        RetailUser retailUser = new RetailUser();
+//        RetailUser retailUser = new RetailUser(); not needed (found while working on Bank User login controller which was a copy) - BvB
         model.addAttribute("user", user);
-        model.addAttribute("retailUser", retailUser);
+//        model.addAttribute("retailUser", retailUser);
         return "index";
     }
+
     // user log in & user validation and direction to personal page
     @PostMapping(value = "overview")
     public String loginHandler(@ModelAttribute User user, Model model, HttpServletRequest request) {
         boolean loginOk = validator.validateMemberPassword(user);
-        List<RetailUser> loggedInRetailUser = retailUserDao.findByUserName(user.getUserName());
+        String userName = user.getUserName();
+        List<RetailUser> loggedInRetailUser = retailUserDao.findByUserName(userName);
         //ophalen & opslaan alle bankaccounts die bij deze user horen
-        List <BankAccount> loggedInBankAccounts = loggedInRetailUser.get(0).getBankAccounts();
+        RetailUser retailUser = loggedInRetailUser.get(0);//BvB
+        List <BankAccount> loggedInBankAccounts = retailUser.getBankAccounts();//loggedInRetailUser.get(0).getBankAccounts();
 
         if (loginOk) {
             HttpSession session = request.getSession(true);
             // -- for login session ---
-            session.setAttribute("userName", user.getUserName());
-            session.setAttribute("retailUser", loggedInRetailUser.get(0));
+            session.setAttribute("userName", userName);//user.getUserName();
+            session.setAttribute("retailUser", retailUser);//loggedInRetailUser.get(0)); - BvB
             session.setAttribute("userId", user.getUserId());
-            model.addAttribute("userName", loggedInRetailUser.get(0).getUserName());
+            model.addAttribute("userName", retailUser.getUserName());//loggedInRetailUser.get(0).getUserName()); - BvB
+            model.addAttribute( "retailUserFullName", retailUser.getFullName());//BvB
             model.addAttribute("allBankAccounts", loggedInBankAccounts);
             return "personal_page";
         }

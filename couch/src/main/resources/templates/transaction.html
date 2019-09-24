@@ -6,7 +6,8 @@
     <title>Transaction</title>
 </head>
 <body>
-<h1>Hoi <span th:text="${userName}"></span></h1>
+<!--<h1>Hoi <span th:text="${userName}"></span></h1>bvB-->
+<h1>Dag <span th:text="${retailUserFullName}"></span></h1>
 <h2>IBAN <span th:text="${bankAccountFrom}"></span></h2>
 <h2>Saldo <span th:text="${balance}" th:field="*{balance}"> </span> euro </h2>
 <h2>Transactie details</h2>
@@ -16,8 +17,10 @@
 
     <table>
         <tr>
-            <td>transactie datum-tijd:</td>
-            <td><span th:text="${date_time}"></span></td>
+<!--            <td>transactie datum-tijd:</td>
+            <td><span th:text="${date_time}"></span></td>-->
+            <td>transactie datum:</td>
+            <td><span th:text="${date}"></span></td>
         </tr>
         <tr>
             <td>van IBAN:</td>

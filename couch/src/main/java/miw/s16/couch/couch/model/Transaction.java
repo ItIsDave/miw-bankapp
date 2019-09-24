@@ -153,6 +153,14 @@ public class Transaction implements Comparable<Transaction> { //implements Seria
         return bankAccount.getBalance();
     }
 
+    //added by BvB
+    public String getDay(){
+        final int NULLYEAR = 1900;
+        int year = transactionDate.getYear() + NULLYEAR
+        ,   month = transactionDate.getMonth() + 1 //month is like array index (0-11)
+        ,   day = transactionDate.getDate();
+        return year + "-" + ((month < 10) ? '0' : "") + month + "-" + day;
+    }
 
     @Override
     public String toString() {
@@ -161,6 +169,7 @@ public class Transaction implements Comparable<Transaction> { //implements Seria
                 ", description='" + description + '\'' +
                 ", amount=" + amount +
                 ", transactionDate=" + transactionDate.toString() +
+                ", transactionDay=" +  this.getDay() +
                 ", from=" + fromAccount +
                 ", to=" + toAccount +
                 ", isPin=" + isPin +

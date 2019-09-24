@@ -57,16 +57,19 @@ public class BankAccountDetailsController {
         // log in session
         HttpSession session = request.getSession (true);
         String userName = (String) session.getAttribute("userName");
+        RetailUser retailUser = (RetailUser)session.getAttribute("retailUser");//BvB
         BankAccount bankAccountFrom = bankAccountDao.findByIban(ibanId);
         transaction.setBankAccount(bankAccountFrom);
         transaction.setFromAccount(bankAccountFrom.getIBAN());
         System.out.println("datum - tijd is: " + transaction.getTransactionDate().toString());
         model.addAttribute("transaction", transaction);
-        model.addAttribute("date_time", transaction.getTransactionDate().toString());
+//        model.addAttribute("date_time", transaction.getTransactionDate().toString());
+        model.addAttribute("date", transaction.getDay());//BvB
         model.addAttribute("bankAccountFrom", bankAccountFrom.getIBAN());
         model.addAttribute("bankAccountTo", transaction.getToAccount());
         model.addAttribute("userName", userName);
         model.addAttribute("user", user);
+        model.addAttribute("retailUserFullName", retailUser.getFullName());//BvB
         model.addAttribute("balance", bankAccountFrom.getBalance());
         return "transaction";
     }
