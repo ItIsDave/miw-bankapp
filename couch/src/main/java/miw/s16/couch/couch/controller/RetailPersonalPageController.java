@@ -86,6 +86,7 @@ public class RetailPersonalPageController<retailUser> {
     //coding by PH & AV
     @GetMapping(value = "/bankAccountDetails")
     public String bankAccountDetailsHandler(@RequestParam("id") int bankAccountId, Model model, HttpServletRequest request) {
+
         // log in session
         HttpSession session = request.getSession(true);
         String userName = (String) session.getAttribute("userName");

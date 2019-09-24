@@ -74,8 +74,6 @@ public class NewCompanyAndSmeController implements WebMvcConfigurer {
             bankAccountDao.save(bankAccount);
             // To do -- enter validation of unique kvk nummer
 
-            bankUser.setRole("account manager");
-            company.setAccountManager(bankUser);
             company.addCompanyAccount(bankAccount);
             company.setPinCode(1234);
             company.addCompanyEmployee(newSMEuser);

@@ -44,7 +44,7 @@ public class Company {
     private List<SMEUser> employees = new ArrayList<>();
     @ManyToMany
     private List<BankAccount> companyAccounts = new ArrayList<>();
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade = CascadeType.ALL)
     private BankUser accountManager = new BankUser();
 
     public Company() {
