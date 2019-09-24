@@ -1,5 +1,7 @@
 package miw.s16.couch.couch.model;
 
+import miw.s16.couch.couch.model.constraints.kvkNumberDoesNotExistConstraint;
+
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.util.ArrayList;
@@ -12,9 +14,9 @@ public class Company {
     private int companyId;
     @Column(name = "kvkNr", unique = true)
     @NotNull
-    @Positive
     @Min(value = 10000000, message  = "KvK-nummer moet 8 cijfers zijn zonder punten.")
     @Max(value = 99999999,  message  = "KvK-nummer moet 8 cijfers zijn zonder punten.")
+    @kvkNumberDoesNotExistConstraint(message = "KvK is al in gebruik.")
     private int chamberOfCommerceId;
     @NotEmpty
     private String companyName;
@@ -49,6 +51,11 @@ public class Company {
 
     public Company() {
         super();
+    }
+
+    public Company(@NotNull @Min(value = 10000000, message = "KvK-nummer moet 8 cijfers zijn zonder punten.") @Max(value = 99999999, message = "KvK-nummer moet 8 cijfers zijn zonder punten.") int chamberOfCommerceId, @NotEmpty String companyName) {
+        this.chamberOfCommerceId = chamberOfCommerceId;
+        this.companyName = companyName;
     }
 
     public Company(int chamberOfCommerceId, String companyName, List<SMEUser> employees) {

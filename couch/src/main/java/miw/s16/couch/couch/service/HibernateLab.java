@@ -40,6 +40,9 @@ public class HibernateLab {
     @Autowired
     BankUserDao bankUserDao;
 
+    @Autowired
+    CompanyDao companyDao;
+
 
     public HibernateLab() {
         super();
@@ -130,24 +133,37 @@ public class HibernateLab {
             retailUserDao.save(jan);
             retailUserDao.save(boudewijn);
 
-            testData.makeRetailUserList();                          //AMS: haalt retail data op uit CSV file
-            testData.retailUserListSplitAddBankaccountAndSave();    //AMS: verwerken testdata
+            //  testData.makeRetailUserList();                          //AMS: haalt retail data op uit CSV file
+            //  testData.retailUserListSplitAddBankaccountAndSave();    //AMS: verwerken testdata
 
             System.out.println("testdata is ingelezen.");
 
             //bankmedewerkers voor HoofdMKB en HoofdParticulieren
             BankUser bankUser1 = new BankUser("piet", "pietgeheim", "Hoofd MKB");
             BankUser bankUser2 = new BankUser("marie", "mariegeheim", "Hoofd Particulieren");
-            BankUser bankUser3 = new BankUser("ralph", "1234", "Account Manager");
+
 
             bankUserDao.save(bankUser1);
             bankUserDao.save(bankUser2);
-            bankUserDao.save(bankUser3);
+
 
             balanceTopTen.balanceTopTen_IBAN();
             System.out.println("dbinit klaar.");
 
 
+            // -- testing company and SMEusers ----
+            SMEUser smeUser1 = new SMEUser("Jan", "1234", "Medewerker");
+            SMEUser smeUser2 = new SMEUser("Andy", "1234", "Eigenaar");
+            SMEUser smeUser3 = new SMEUser("Loujain", "1234", "Admin");
+            BankUser bankUser3 = new BankUser("ralph", "1234", "Account Manager");
+
+            smeUserDao.save(smeUser1);
+            smeUserDao.save(smeUser2);
+            smeUserDao.save(smeUser3);
+            bankUserDao.save(bankUser3);
+
+            Company hva = new Company(82345678, "hva");
+            companyDao.save(hva);
         }
 
     }

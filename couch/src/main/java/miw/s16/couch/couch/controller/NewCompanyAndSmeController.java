@@ -38,9 +38,6 @@ public class NewCompanyAndSmeController implements WebMvcConfigurer {
     private SMEUser newSMEuser = new SMEUser();
     private BankAccount bankAccount = new BankAccount();
     private Company newCompany = new Company();
-    // for testing
-    private BankUser bankUser = new BankUser();
-
 
     @GetMapping(value = "couch-zakelijk")
     public String newCompanyHandler(Model model) {
@@ -72,17 +69,15 @@ public class NewCompanyAndSmeController implements WebMvcConfigurer {
         } else {
             bankAccount.setAccountType("Zakelijk");
             bankAccountDao.save(bankAccount);
-            // To do -- enter validation of unique kvk nummer
-
             company.addCompanyAccount(bankAccount);
             company.setPinCode(1234);
             company.addCompanyEmployee(newSMEuser);
             companyDao.save(company);
             newCompany = company;
             model.addAttribute("roles", roles);
-            model.addAttribute("role", "");
+           // model.addAttribute("role", "");
             model.addAttribute("smeUser", newSMEuser);
-            model.addAttribute("companySector", "");
+            //model.addAttribute("companySector", "");
             return "new_SMEUser";
         }
     }
@@ -92,9 +87,6 @@ public class NewCompanyAndSmeController implements WebMvcConfigurer {
     public String newSMEUserHandler(@Valid @ModelAttribute("smeUser") @RequestBody SMEUser smeUser, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("roles", roles);
-            model.addAttribute("role", "");
-            model.addAttribute("smeUser", newSMEuser);
-            model.addAttribute("companySector", "");
             return "new_SMEUser";
 //
         } else {

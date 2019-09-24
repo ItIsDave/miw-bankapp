@@ -1,7 +1,9 @@
 <!DOCTYPE html>
+<html lang="en">
 <html lang="en"  xmlns:="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta charset="UTF-8">
     <title> Couch Bank nieuwe zakelijke klant</title>
 </head>
 <body>
@@ -20,8 +22,8 @@
         </td>
         <tr>
             <td><label for="kvk">KvK nummer: </label> </td>
-            <td><input type="number"  th:field="*{chamberOfCommerceId}"  id="kvk" name="chamberOfCommerceId" min ="10000000" required/></td>
-            <td th:if="${#fields.hasErrors('chamberOfCommerceId')}">KvK-nummer ongeldig.</td>
+            <td><input type="text"  th:field="*{chamberOfCommerceId}"  id="kvk" required/></td>
+            <td th:if="${#fields.hasErrors('chamberOfCommerceId')}" th:errors="*{chamberOfCommerceId}">KvK-nummer ongeldig.</td>
         </tr>
         <tr>
             <td><label for="companyName">Handelsnaam:</td>
