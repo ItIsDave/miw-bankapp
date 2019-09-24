@@ -36,23 +36,21 @@ public class TransactionController implements WebMvcConfigurer {
 
     // if user chooses to make a new transaction
     @GetMapping(value = "transactionRequest")
-    public String pageHandlerGet(@ModelAttribute User user, Model model, HttpServletRequest request, @RequestParam("id") String ibanId) {
+    public String pageHandlerGet(@ModelAttribute User user, Model model, HttpServletRequest request) {
         // log in session
         Transaction transaction = new Transaction();
         HttpSession session = request.getSession (true);
         String userName = (String) session.getAttribute("userName");
-        RetailUser retailUser1  = (RetailUser) session.getAttribute("retailUser");
-        BankAccount bankAccountFrom = bankAccountDao.findByIban(ibanId);
-
+        String iban = (String) session.getAttribute("clickedIBAN");
+        BankAccount bankAccountFrom = bankAccountDao.findByIban(iban);
         transaction.setBankAccount(accountTo);
-        transaction.setFromAccount(bankAccountFrom.getIBAN());
+        transaction.setFromAccount(iban);
         System.out.println("datum - tijd is: " + transaction.getTransactionDate().toString());
         model.addAttribute("transaction", transaction);
         model.addAttribute("date_time", transaction.getTransactionDate().toString());
         model.addAttribute("bankAccountFrom", bankAccountFrom.getIBAN());
         model.addAttribute("bankAccountTo", transaction.getToAccount());
         model.addAttribute("userName", userName);
-        model.addAttribute("user", user);
         model.addAttribute("balance", bankAccountFrom.getBalance());
         return "transaction";
     }
