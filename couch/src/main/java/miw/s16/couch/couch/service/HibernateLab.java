@@ -31,10 +31,9 @@ public class HibernateLab {
     TestdataCreator testData;
 
     @Autowired
-
     SMEUserDao smeUserDao;
 
-
+    @Autowired
     BalanceTopTen balanceTopTen;
 
     @Autowired
@@ -133,9 +132,8 @@ public class HibernateLab {
             retailUserDao.save(jan);
             retailUserDao.save(boudewijn);
 
-            //  testData.makeRetailUserList();                          //AMS: haalt retail data op uit CSV file
-            //  testData.retailUserListSplitAddBankaccountAndSave();    //AMS: verwerken testdata
-
+            testData.makeRetailUserList();                          //AMS: haalt retail data op uit CSV file
+            testData.retailUserListSplitAddBankaccountAndSave();    //AMS: verwerken testdata
             System.out.println("testdata is ingelezen.");
 
             //bankmedewerkers voor HoofdMKB en HoofdParticulieren
