@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface SMEUserDao extends CrudRepository<SMEUser, Integer> {
 
-    public SMEUser findByUserName(String userName);
+    public List<SMEUser> findByUserName(String userName);
 
     public SMEUser findByUserId(int userId);
 
