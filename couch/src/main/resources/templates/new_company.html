@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <html lang="en"  xmlns:="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title> Couch Bank nieuwe zakelijke klant</title>
@@ -9,7 +9,7 @@
 <body>
 <h1>Couch Bank nieuwe zakelijke klant</h1>
 
-<label for="company"><h2>1. Vul hieronder uw bedrijfsgegevens in</h2></label>
+<h2><label for="company">1. Vul hieronder uw bedrijfsgegevens in</label></h2>
 <br><br>
 <form id="company" action="#" th:action="@{couch-zakelijk}" th:object="${company}" method="post">
     <table>
@@ -23,13 +23,13 @@
         <tr>
             <td><label for="kvk">KvK nummer: </label> </td>
             <td><input type="text"  th:field="*{chamberOfCommerceId}"  id="kvk" required/></td>
-            <td th:if="${#fields.hasErrors('chamberOfCommerceId')}" th:errors="*{chamberOfCommerceId}">KvK-nummer ongeldig.</td>
+            <td th:if="${#fields.hasErrors('chamberOfCommerceId')}" >KvK-nummer ongeldig.</td>
         </tr>
         <tr>
-            <td><label for="companyName">Handelsnaam:</td>
+            <td><label for="companyName">Handelsnaam:</label></td>
             <td><input type="text" th:field="*{companyName}" id="companyName" name="companyName" required/></td>
         <tr>
-            <td><label for="sector">Kies bedrijf branche: </td>
+        <td><label for="sector">Kies bedrijf branche:</label> </td>
         <td>
         <select id="sector" th:field="*{sector}" required>
         <option value=""> -- </option>
@@ -37,27 +37,27 @@
         </select>
         </td>
         <tr>
-            <td><label for="streetName">Straat: </td>
+        <td><label for="streetName">Straat:</label> </td>
             <td><input type="text" th:field="*{streetName}" id="streetName" name="streetName" required/></td>
         <tr>
         <tr>
-            <td><label for="streetNumber">Nummer:</td>
+        <td><label for="streetNumber">Nummer:</label></td>
             <td><input type="text" th:field="*{streetNumber}" id="streetNumber" name="streetNumber" required/></td>
         <tr>
         <tr>
-            <td><label for="zipcode">Zipcode</td>
+        <td><label for="zipcode">Zipcode</label></td>
             <td><input type="text" th:field="*{zipcode}" id="zipcode" name="zipcode" required/></td>
         <tr>
         <tr>
-            <td><label for="city">Stad:</td>
+        <td><label for="city">Stad:</label></td>
             <td><input type="text" th:field="*{city}" id="city" name="city" required/></td>
         <tr>
         <tr>
-            <td><label for="phone">Tel:</td>
+        <td><label for="phone">Tel:</label></td>
             <td><input type="text" th:field="*{phoneNumber}" id="phone" name="phone" required/></td>
         <tr>
         <tr>
-            <td><label for="email">email:</td>
+        <td><label for="email">email:</label></td>
             <td><input type="email" th:field="*{email}" id="email" name="email" required/></td>
         <tr>
 

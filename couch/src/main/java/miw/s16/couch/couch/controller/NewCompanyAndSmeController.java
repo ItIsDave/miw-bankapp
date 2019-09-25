@@ -75,6 +75,7 @@ public class NewCompanyAndSmeController implements WebMvcConfigurer {
             companyDao.save(company);
             // saving company in session
             session.setAttribute("companyName", company.getCompanyName());
+            model.addAttribute("company", company);
             model.addAttribute("roles", roles);
            // model.addAttribute("role", "");
             model.addAttribute("smeUser", smeUser);
@@ -85,7 +86,7 @@ public class NewCompanyAndSmeController implements WebMvcConfigurer {
 
     // create a new SME User
     @PostMapping(value = "newSMEUser")
-    public String newSMEUserHandler(@Valid @ModelAttribute("smeUser") @RequestBody SMEUser smeUser, BindingResult bindingResult, Model model, HttpServletRequest request) {
+    public String newSMEUserHandler(@Valid @ModelAttribute("smeUser") @RequestBody SMEUser smeUser, BindingResult bindingResult, Model model, Company company, HttpServletRequest request) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("roles", roles);
             return "new_SMEUser";
@@ -109,7 +110,7 @@ public class NewCompanyAndSmeController implements WebMvcConfigurer {
 //
             HttpSession session = request.getSession(true);
             String companyName = (String) session.getAttribute("companyName");
-            Company company = companyDao.findByCompanyName(companyName).get(0);
+            company = companyDao.findByCompanyName(companyName).get(0);
             smeUser.setCompany(company);
             smeUserDao.save(smeUser);
             return "new_SMEUser_success";

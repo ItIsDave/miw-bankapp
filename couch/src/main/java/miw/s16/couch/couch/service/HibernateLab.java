@@ -148,7 +148,7 @@ public class HibernateLab {
             balanceTopTen.balanceTopTen_IBAN();
             System.out.println("dbinit klaar.");
 
-            
+
         }
 
     }
