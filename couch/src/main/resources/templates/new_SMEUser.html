@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title> Couch Bank nieuwe zakelijke klant</title>
+</head>
+<body>
+<h1>Couch Bank nieuwe zakelijke klant</h1>
+
+<h2><label for="smeUser">2. Vul hieronder uw gegevens in</label></h2>
+<br><br>
+<form id="smeUser" action="#" th:action="@{newSMEUser}" th:object="${smeUser}" method="post" >
+    <table>
+         <tr>
+            <td><label for="role">Kies Role:</label>
+            <td>
+             <select id="role" th:field="*{roleEmployee}" name="roleEmployee" required>
+             <option value=""> -- </option>
+             <option  th:each="role: ${roles}" th:value = "${role}" th:utext = "${role}" ></option>
+             </select>
+        </tr>
+        <tr>
+            <td><label for="bsn"> Uw BSN: </label>
+            <td><input id="bsn" type="number" th:field="*{bsn}" name="bsn" min="10000000" required/></td>
+            <td th:if="${#fields.hasErrors('bsn')}" >Bsn ongeldig.</td>
+        </tr>
+        <tr>
+            <td><label for="userName"> Kies gebruikersnaam: </label>
+            <td><input id="userName" type="text" th:field="*{userName}" name="userName" required/></td>
+            <td th:if="${#fields.hasErrors('userName')}">Username ongeldig.</td>
+        </tr>
+        <tr>
+            <td><label for="userPassword">Kies wachtwoord:</label>
+            <td><input id="userPassword" type="text" th:field="*{userPassword}" name="userPassword" required/></td>
+            <td th:if="${#fields.hasErrors('userPassword')}" >Wachtwoord ongeldig.</td>
+        </tr>
+        <td><input type="submit" value="Volgende"></td>
+    </table>
+</form>
+
+</body>
+</html>

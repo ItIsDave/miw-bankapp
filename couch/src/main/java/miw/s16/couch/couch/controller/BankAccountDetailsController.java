@@ -33,7 +33,6 @@ public class BankAccountDetailsController {
     //coding by PH & AV
     @GetMapping(value = "/bankAccountDetails")
     public String bankAccountDetailsHandler(@RequestParam("id") int bankAccountId, Model model, HttpServletRequest request) {
-        final int N_TRANSACTIONS = 10;//max #transactions displayed
         // log in session
         HttpSession session = request.getSession(true);
         String userName = (String) session.getAttribute("userName");
@@ -43,38 +42,13 @@ public class BankAccountDetailsController {
         List <Transaction> transactionList = clickedBankAccount.getTransactions();
         List <Transaction> transactionToList = clickedBankAccount.getTransactionsTo();
         for (Transaction t:transactionToList) { transactionList.add(t); }
-        Collections.sort(transactionList);//order by transaction_date (made comparable)
-        Collections.reverse(transactionList);// ... desc
-        if (transactionList.size() >= N_TRANSACTIONS) {
-            transactionList = transactionList.subList(0, N_TRANSACTIONS);//BvB ... where rownum < ...
-        }
+        Collections.sort(transactionList);
+        Collections.reverse(transactionList);
         model.addAttribute("userName", userName);
         model.addAttribute("iban", clickedBankAccount.getIBAN());
-        model.addAttribute("balance", clickedBankAccount.getBalance());
+        model.addAttribute("balance", clickedBankAccount.twoDecimalBalance(clickedBankAccount.getBalance()));
         model.addAttribute("allTransactions", transactionList);
         return "bank_account_details";
     }
 
-    @RequestMapping(value = "transactionRequest")
-    public String pageHandler(@ModelAttribute User user, Model model, HttpServletRequest request, @RequestParam("id") String ibanId) {
-        Transaction transaction = new Transaction();
-        // log in session
-        HttpSession session = request.getSession (true);
-        String userName = (String) session.getAttribute("userName");
-        RetailUser retailUser = (RetailUser)session.getAttribute("retailUser");//BvB
-        BankAccount bankAccountFrom = bankAccountDao.findByIban(ibanId);
-        transaction.setBankAccount(bankAccountFrom);
-        transaction.setFromAccount(bankAccountFrom.getIBAN());
-        System.out.println("datum - tijd is: " + transaction.getTransactionDate().toString());
-        model.addAttribute("transaction", transaction);
-//        model.addAttribute("date_time", transaction.getTransactionDate().toString());
-        model.addAttribute("date", transaction.getDay());//BvB
-        model.addAttribute("bankAccountFrom", bankAccountFrom.getIBAN());
-        model.addAttribute("bankAccountTo", transaction.getToAccount());
-        model.addAttribute("userName", userName);
-        model.addAttribute("user", user);
-        model.addAttribute("retailUserFullName", retailUser.getFullName());//BvB
-        model.addAttribute("balance", bankAccountFrom.getBalance());
-        return "transaction";
-    }
 }

@@ -20,7 +20,7 @@
         <tr th:each="bankAccount: ${allBankAccounts}">
             <td><a href="/bankAccountDetails" th:href="@{/bankAccountDetails(id=${bankAccount.bankAccountId})}"
                    th:text="${bankAccount.iBAN}"></a></td>
-            <td th:text="${bankAccount.balance}"></td>
+            <td><span th:text="${#numbers.formatDecimal(bankAccount.balance, 1, 2)}"/></td>
         </tr>
     </table>
 <br>

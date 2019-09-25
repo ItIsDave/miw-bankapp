@@ -12,7 +12,8 @@ import java.util.List;
 public interface RetailUserDao extends CrudRepository<RetailUser, Integer> {
 
 
-    public List<RetailUser> findByBsn(int bsn);
+   public List<RetailUser> findByBsn(int bsn); // bsn should be unique
+   // public RetailUser findByBsn(int bsn)
 
     public List<RetailUser> findByLastName(String lastName);
 

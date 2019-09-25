@@ -31,10 +31,17 @@ public class HibernateLab {
     TestdataCreator testData;
 
     @Autowired
+    SMEUserDao smeUserDao;
+
+    @Autowired
     BalanceTopTen balanceTopTen;
 
     @Autowired
     BankUserDao bankUserDao;
+
+    @Autowired
+    CompanyDao companyDao;
+
 
     public HibernateLab() {
         super();
@@ -42,7 +49,7 @@ public class HibernateLab {
 
     public void dbinit() {
 
-       // to ensure no data duplication
+        // to ensure no data duplication
         if (userDao.findByUserPassword("1").size() == 0) {
             // user info for checking if DB is empty
             User johnDoe = new User("John Doe", "1");
@@ -51,7 +58,7 @@ public class HibernateLab {
             User adamantia = new User("Adamantia", "1234");
             User alet = new User("Alet", "1234");
             User arnout = new User("Arnout", "1234");
-           // RetailUser boudewijn = new RetailUser("Boudewijn", "1234");
+            // RetailUser boudewijn = new RetailUser("Boudewijn", "1234");
             User david = new User("David", "1234");
             User patrick = new User("Patrick", "1234");
 
@@ -63,27 +70,27 @@ public class HibernateLab {
             BankAccount account5 = new BankAccount("NL10COUC0523456794", 100.00);
 
             // Creating Retail user data
-            RetailUser bart = new RetailUser("Bart", "1234",  987654321, "Bart",
+            RetailUser bart = new RetailUser("Bart", "1234", 987654321, "Bart",
                     "", "Simpson", "Kalverstraat", 25, "B", "1011AB", "Amsterdam", "690000000", "25-10-1900", "bart@hva.nl", "Retail");
             RetailUser charlotte = new RetailUser("Charlotte", "1234", 987654322,
-                    "Charlotte",  "de", "Witte", "Keizersgracht", 40,
+                    "Charlotte", "de", "Witte", "Keizersgracht", 40,
                     "A", "1017DS", "Amsterdam", "690000001", "25-10-1999", "cdv@gmail.com", "Retail");
             RetailUser karin = new RetailUser("Karin", "1234", 987654325,
-                    "Karin",  "van", "Dijk", "Prinsengracht", 200,
+                    "Karin", "van", "Dijk", "Prinsengracht", 200,
                     "A", "1017KS", "Amsterdam", "690000801", "25-10-1990", "kvd@gmail.com", "Retail");
             RetailUser jan = new RetailUser("Jan", "1234", 987654326,
-                    "Jan",  "", "Bakken", "Herengracht", 100,
+                    "Jan", "", "Bakken", "Herengracht", 100,
                     "C", "1018AC", "Amsterdam", "6901230801", "25-10-1989", "jbakker@gmail.com", "Retail");
 
 
             //Creating transaction data
             Date d = new Date();
-            RetailUser boudewijn = new RetailUser("Boudewijn", "1234",  987654321, "Boudewijn",
+            RetailUser boudewijn = new RetailUser("Boudewijn", "1234", 987654321, "Boudewijn",
                     "", "Simpson", "Kalverstraat", 25, "B", "1011AB", "Amsterdam", "690000000", "25-10-1900", "bart@hva.nl", "Retail");
 
             // the to and from are strings. For the test we are going to connect each transaction with one of the retail users bank account
-            Transaction t1 = new Transaction(100.0,d,account1, account2, "verjaardag");
-            Transaction t2 = new Transaction(10.0,d, account1, account3, " ");
+            Transaction t1 = new Transaction(100.0, d, account1, account2, "verjaardag");
+            Transaction t2 = new Transaction(10.0, d, account1, account3, " ");
             Transaction t3 = new Transaction(500.0, d, account4, account1, " ");
             Transaction t4 = new Transaction(1500.0, d, account5, account4, " ");
 
@@ -125,22 +132,37 @@ public class HibernateLab {
             retailUserDao.save(jan);
             retailUserDao.save(boudewijn);
 
-           // testData.makeRetailUserList();                          //AMS: haalt retail data op uit CSV file
-            //testData.retailUserListSplitAddBankaccountAndSave();    //AMS: verwerken testdata
+            testData.makeRetailUserList();                          //AMS: haalt retail data op uit CSV file
+            testData.retailUserListSplitAddBankaccountAndSave();    //AMS: verwerken testdata
             System.out.println("testdata is ingelezen.");
 
             //bankmedewerkers voor HoofdMKB en HoofdParticulieren
             BankUser bankUser1 = new BankUser("piet", "pietgeheim", "Hoofd MKB");
             BankUser bankUser2 = new BankUser("marie", "mariegeheim", "Hoofd Particulieren");
 
+
             bankUserDao.save(bankUser1);
             bankUserDao.save(bankUser2);
+
+
+            balanceTopTen.balanceTopTen_IBAN();
+            System.out.println("dbinit klaar.");
+
+
+            // -- testing company and SMEusers ----
+            SMEUser smeUser1 = new SMEUser("Jan", "1234", "Medewerker");
+            SMEUser smeUser2 = new SMEUser("Andy", "1234", "Eigenaar");
+            SMEUser smeUser3 = new SMEUser("Loujain", "1234", "Admin");
+            BankUser bankUser3 = new BankUser("ralph", "1234", "Account Manager");
+
+            smeUserDao.save(smeUser1);
+            smeUserDao.save(smeUser2);
+            smeUserDao.save(smeUser3);
+            bankUserDao.save(bankUser3);
+
+            Company hva = new Company(82345678, "hva");
+            companyDao.save(hva);
         }
-//        balanceTopTen.balanceTopTen_IBAN();
-        System.out.println("dbinit klaar.");
-
-
 
     }
-
 }

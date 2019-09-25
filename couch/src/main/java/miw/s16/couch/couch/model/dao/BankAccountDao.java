@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Set;
 
-//coding by PvdH / Bvb
+//coding by PvdH
 
 public interface BankAccountDao extends CrudRepository<BankAccount, Integer> {
 
@@ -21,4 +21,7 @@ public interface BankAccountDao extends CrudRepository<BankAccount, Integer> {
 
 //added BvB
     public List<BankAccount> findTop10ByOrderByBalanceDesc();
+
+    public List<BankAccount> findByAccountType (String accountType);
+
 }

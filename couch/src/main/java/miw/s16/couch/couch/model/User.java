@@ -7,15 +7,20 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 
 import miw.s16.couch.couch.model.constraints.UsernameDoesNotExistConstraint;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.context.annotation.Configuration;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import java.util.ArrayList;
+import java.util.List;
 
-//@Configuration
-//@EnableAutoConfiguration
+@Configuration
+@EnableAutoConfiguration
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class User  {
-    @Id
+   @Id
     @GeneratedValue
     private int userId;
     @Column(name = "userName", unique = true)
@@ -27,12 +32,10 @@ public class User  {
 
     // empty constructor
     public User() {
-       super();
+        this("","");
     }
 
-
-    public User(String userName, String userPassword) {
-        super();
+    public User(@NotEmpty String userName, @NotEmpty String userPassword) {
         this.userName = userName;
         this.userPassword = userPassword;
 
@@ -61,5 +64,6 @@ public class User  {
     public void setUserId(int userId) {
         this.userId = userId;
     }
+
 }
 
