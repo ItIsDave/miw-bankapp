@@ -9,6 +9,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -35,9 +37,7 @@ public class NewCompanyAndSmeController implements WebMvcConfigurer {
     private List<String> companyForm = new ArrayList<>();
     private List<String> sectors = new ArrayList<>();
     private List<String> roles = new ArrayList<>();
-    private SMEUser newSMEuser = new SMEUser();
     private BankAccount bankAccount = new BankAccount();
-    private Company newCompany = new Company();
 
     @GetMapping(value = "couch-zakelijk")
     public String newCompanyHandler(Model model) {
@@ -57,7 +57,8 @@ public class NewCompanyAndSmeController implements WebMvcConfigurer {
 
     // create a new company
     @PostMapping(value = "couch-zakelijk")
-    public String newSMEUserHandler(@Valid @ModelAttribute("company") @RequestBody Company company, BindingResult bindingResult, Model model) {
+    public String newSMEUserHandler(@Valid @ModelAttribute("company") @RequestBody Company company, BindingResult bindingResult, SMEUser smeUser, Model model, HttpServletRequest request) {
+        HttpSession session = request.getSession(true);
         if (roles.size() == 0) {
             Collections.addAll(roles, "Eigenaar", "Medewerker", "Admin");
         }
@@ -71,12 +72,12 @@ public class NewCompanyAndSmeController implements WebMvcConfigurer {
             bankAccountDao.save(bankAccount);
             company.addCompanyAccount(bankAccount);
             company.setPinCode(1234);
-            company.addCompanyEmployee(newSMEuser);
             companyDao.save(company);
-            newCompany = company;
+            // saving company in session
+            session.setAttribute("companyName", company.getCompanyName());
             model.addAttribute("roles", roles);
            // model.addAttribute("role", "");
-            model.addAttribute("smeUser", newSMEuser);
+            model.addAttribute("smeUser", smeUser);
             //model.addAttribute("companySector", "");
             return "new_SMEUser";
         }
@@ -84,7 +85,7 @@ public class NewCompanyAndSmeController implements WebMvcConfigurer {
 
     // create a new SME User
     @PostMapping(value = "newSMEUser")
-    public String newSMEUserHandler(@Valid @ModelAttribute("smeUser") @RequestBody SMEUser smeUser, BindingResult bindingResult, Model model) {
+    public String newSMEUserHandler(@Valid @ModelAttribute("smeUser") @RequestBody SMEUser smeUser, BindingResult bindingResult, Model model, HttpServletRequest request) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("roles", roles);
             return "new_SMEUser";
@@ -105,9 +106,11 @@ public class NewCompanyAndSmeController implements WebMvcConfigurer {
 //                // if its the first zakelijk account, add it to the list of their existing accounts
 //                // work in progress ---
 //                existingUser.addBankAccount(bankAccount);
-//            }
-
-            smeUser.setCompany(newCompany);
+//
+            HttpSession session = request.getSession(true);
+            String companyName = (String) session.getAttribute("companyName");
+            Company company = companyDao.findByCompanyName(companyName).get(0);
+            smeUser.setCompany(company);
             smeUserDao.save(smeUser);
             return "new_SMEUser_success";
 //

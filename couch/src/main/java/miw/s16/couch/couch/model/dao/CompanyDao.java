@@ -9,6 +9,7 @@ public interface CompanyDao  extends CrudRepository<Company, Integer> {
 
     public Company findBychamberOfCommerceId(int chamberOfCommerceId);
 
+    public List<Company> findByCompanyName(String companyName);
 
 
 }

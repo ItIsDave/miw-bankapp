@@ -16,7 +16,7 @@ public class SMEUser extends User {
     private String roleEmployee;
 
     // one employee belongs to one company
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne(cascade = CascadeType.ALL)
     private Company company = new Company();
     // SMEUser is not necessarily a retail User
     @NotNull
@@ -27,6 +27,11 @@ public class SMEUser extends User {
 
     public SMEUser() {
         this("", "");
+    }
+
+    public SMEUser(String userName, String password, Company company) {
+        super(userName, password);
+        this.company = company;
     }
 
     public SMEUser(String userName, String userPassword) {

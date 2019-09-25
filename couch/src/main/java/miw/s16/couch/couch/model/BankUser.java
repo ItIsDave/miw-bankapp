@@ -25,6 +25,7 @@ public class BankUser extends User {
     // changed because of "must not be empty errors"
     public BankUser(){
      this(" ", " ");
+     this.companies = new ArrayList<>();
     }
 
     public BankUser(@NotEmpty String userName, @NotEmpty String userPassword) {

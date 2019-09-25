@@ -159,9 +159,6 @@ public class HibernateLab {
             smeUserDao.save(smeUser2);
             smeUserDao.save(smeUser3);
             bankUserDao.save(bankUser3);
-
-            Company hva = new Company(82345678, "hva");
-            companyDao.save(hva);
         }
 
     }
