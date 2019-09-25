@@ -2,7 +2,7 @@ package miw.s16.couch.couch.controller;
 
 import miw.s16.couch.couch.model.BankAccount;
 import miw.s16.couch.couch.model.RetailUser;
-import miw.s16.couch.couch.model.User;
+import miw.s16.couch.couch.model.SMEUser;
 import miw.s16.couch.couch.model.dao.BankAccountDao;
 import miw.s16.couch.couch.model.dao.RetailUserDao;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -19,18 +18,11 @@ import javax.validation.Valid;
 @Controller
 public class NewUserController implements WebMvcConfigurer {
 
-//
-//    @GetMapping(value = "newRetailUser")  //van select type -> new retail user
-//    public String newRetailUserHandler(Model model){
-//        model.addAttribute("RetailUser", new RetailUser());
-//        return "new_retail_user";
-//    }
 
-
-@Autowired
+    @Autowired
     RetailUserDao retailUserDao;
 
-@Autowired
+    @Autowired
     BankAccountDao bankAccountDao;
 
    @GetMapping(value = "newRetailUser")  //van select type -> new retail user
@@ -53,5 +45,6 @@ public class NewUserController implements WebMvcConfigurer {
         return "new_retail_user_success";
     }
    }
+
 }
 
