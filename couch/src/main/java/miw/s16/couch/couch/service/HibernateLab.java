@@ -141,20 +141,7 @@ public class HibernateLab {
 
             bankUserDao.save(bankUser1);
             bankUserDao.save(bankUser2);
-
-            // -- testing company and SMEusers ----
-            SMEUser smeUser1 = new SMEUser("Jan", "1234", "Medewerker");
-            SMEUser smeUser2 = new SMEUser("Andy", "1234", "Eigenaar");
-            SMEUser smeUser3 = new SMEUser("Loujain", "1234", "Admin");
-            BankUser bankUser3 = new BankUser("ralph", "1234", "Account Manager");
-
-            smeUserDao.save(smeUser1);
-            smeUserDao.save(smeUser2);
-            smeUserDao.save(smeUser3);
-            bankUserDao.save(bankUser3);
-
-            Company hva = new Company(82345678, "hva");
-            companyDao.save(hva);
+            
         }
 
         System.out.println("dbinit klaar.");
