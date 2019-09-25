@@ -5,22 +5,36 @@
     <title>Bankmedewerker dashboard</title>
 </head>
 <body>
-<h1>Hoofdparticulieren</h1>
+<h1><span th:text="${roleBoolean} ? 'Hoofd Particulieren'  : 'Hoofd MKB' "></span></h1>
+<!--Welkom tekst afh. van de user name.-->
+<div th:if="${roleBoolean==true}">
 <h2>
-    Overzicht top <span th:text="*{listSize}"></span> particulieren met hoogste saldo:
+    Overzicht top <span th:text="*{listSize}"></span> particulieren met hoogste saldo
 </h2>
 <p>
     N.B. bij meerdere rekeninghouders wordt eerste rekeninghouder getoond.
 </p>
-De lengte van de lijst is ingesteld op:
-<div th:text="*{listSize}"></div>
 <table>
-    <div th:unless="${#lists.isEmpty(top10_IBAN_List)}">
-      <tr th:each="iban : ${top10_IBAN_List}">
-            <td><span th:text="${iban}"/></td>
-
+    <th>
+    <td>IBAN</td>
+    <td>Saldo</td>
+    <td>Clientnummer</td>
+    <td>Voornaam</td>
+    <td>Achternaam</td>
+    </th>
+    <div th:unless="${#lists.isEmpty(top10_Client_List)}">
+      <tr th:each="item : ${top10_Client_List}">
+            <td><span th:text="${item}"/></td>
       </tr>
     </div>
 </table>
+</div>
+</div>
+
+<div th:if="${roleBoolean==false}">
+    queries voor Hoofd MKB komt hier.
+</div>
+<a href="/bankemployee">Uitloggen als bankmedewerker</a>
+<!--<button type="button" href="/bankemployee">Uitloggen als bankmedewerker</button>-->
 </body>
 </html>

@@ -33,29 +33,34 @@ public class LoginControllerBankemployee {
     @Autowired
     BalanceTopTen balanceTopTen;
 
-
+    @GetMapping(value = "bankemployee_")
+    public String indexHandler(Model model) {
+        User user = new User();
+        model.addAttribute("user", user);
+        return "index_bankemployee";
+    }
 
 
     @PostMapping(value = "overview_bankemployee")
     public String loginHandler(@ModelAttribute User user, Model model, HttpServletRequest request) {
         boolean loginOk = validator.validateMemberPassword(user);
         List<BankUser> loggedInBankUser = bankUserDao.findByUserName(user.getUserName());
-        //ophalen & opslaan alle bankaccounts die bij deze user horen
-        //List <BankAccount> loggedInBankAccounts = loggedInRetailUser.get(0).getBankAccounts();
-
         if (loginOk) {
             HttpSession session = request.getSession(true);
             // -- for login session ---
             session.setAttribute("userName", user.getUserName());
-            //session.setAttribute("retailUser", loggedInRetailUser.get(0));
             session.setAttribute("userId", user.getUserId());
             model.addAttribute("userName", loggedInBankUser.get(0).getUserName());
-            model.addAttribute("role", loggedInBankUser.get(0).getRole());
-            //model.addAttribute("allEvents", eventList); hier komt arrayList van strings
-            ArrayList<String> top10IBANList = balanceTopTen.balanceTopTen_IBAN();
-            model.addAttribute("top10_IBAN_List",top10IBANList);
-            model.addAttribute("listSize", top10IBANList.size());
-            //model.addAttribute("allBankAccounts", loggedInBankAccounts);
+            boolean roleBoolean = (loggedInBankUser.get(0).getRole().equals("Hoofd Particulieren"));
+            model.addAttribute("roleBoolean", roleBoolean);
+            if (roleBoolean) {
+                ArrayList<String> top10ClientList = balanceTopTen.balanceTopTen_Client();
+                model.addAttribute("top10_Client_List",top10ClientList);
+                model.addAttribute("listSize", top10ClientList.size());
+            } else {
+                System.out.println("info volgt voor de hoofdMKB.");
+                //hier code voor de HoofdMKB
+            }
             return "personal_page_bankemployee";
         }
         return "login_failed_bankemployee";
