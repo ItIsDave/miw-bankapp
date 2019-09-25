@@ -37,16 +37,22 @@ public class NewEnOfAccountController {
     }
 
     @PostMapping(value = "new_enof_account")
-    public String addUserToAccountHandler(@Valid BankAccount bankAccount, BindingResult bindingResult){
+    public String addUserToAccountHandler(@Valid BankAccount bankAccount, BindingResult bindingResult, HttpServletRequest request){
         System.out.println("POST: bank acc id is " + bankAccount.getBankAccountId());
         System.out.println("POST: bank iban is " + bankAccount.getIBAN());
         System.out.println("POST: bank koppelcode is " + bankAccount.getKoppelcode());
         if(bindingResult.hasErrors()){
             return "new_enof_account";
         } else {
+            // log in session
+            HttpSession session = request.getSession(true);
+            BankAccount sessionBankAccount = (BankAccount) session.getAttribute("clickedBankAccount");
+            sessionBankAccount.setKoppelcode(bankAccount.getKoppelcode());
+            System.out.println("POST: session bank id " + sessionBankAccount.getBankAccountId());
+            System.out.println("POST: session IBAN " + sessionBankAccount.getIBAN());
+            System.out.println("POST: session bank koppelcode " + sessionBankAccount.getKoppelcode());
             System.out.println("iban is "+ bankAccount.getIBAN());
-            System.out.println("koppelcode is "+ bankAccount.getKoppelcode());
-            bankAccountDao.save(bankAccount);
+            bankAccountDao.save(sessionBankAccount);
             return "personal_page";
         }
     }

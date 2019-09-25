@@ -12,11 +12,11 @@
 <br>
 <h3><span th:text="${session.clickedBankAccount.getIBAN()}"></span></h3>
 <br>
-<form action="#" th:action="@{new_enof_account}"  method="post">
+<form action="#" th:action="@{new_enof_account}" th:object="${bankAccount}" method="post">
     <table>
         <tr>
             <td>Kies een 5 cijferige koppelcode: </td>
-            <td><input type="text" name="koppelcode" th:field="*{bankAccount.koppelcode}"/> </td>
+            <td><input type="text" name="koppelcode" th:field="*{koppelcode}"/> </td>
             <td th:if="*{#fields.hasErrors('koppelcode')}">Ongeldige invoer: Kies een 5-cijferige koppelcode (niet 00000)</td>
         </tr>
     </table>
