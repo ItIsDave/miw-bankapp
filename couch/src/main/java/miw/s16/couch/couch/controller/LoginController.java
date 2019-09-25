@@ -84,14 +84,7 @@ public class LoginController {
         model.addAttribute("smeUser", smeUser);
         return "company_login";
     }
-
-
-    @GetMapping(value = "bankemployee")
-    public String bankUserHandler(Model model) {
-        User user = new User();
-        model.addAttribute("user", user);
-        return "index_bankemployee";
-    }
+    
 
     @GetMapping(value = "newUser")
     public String newUserHandler() {

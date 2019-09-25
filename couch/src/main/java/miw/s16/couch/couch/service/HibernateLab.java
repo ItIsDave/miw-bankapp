@@ -141,7 +141,7 @@ public class HibernateLab {
 
             bankUserDao.save(bankUser1);
             bankUserDao.save(bankUser2);
-            
+
         }
 
         System.out.println("dbinit klaar.");
