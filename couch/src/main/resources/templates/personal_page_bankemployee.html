@@ -6,7 +6,7 @@
 </head>
 <body>
 <h1><span th:text="${roleBoolean} ? 'Hoofd Particulieren'  : 'Hoofd MKB' "></span></h1>
-Welkom tekst afh. van de user name.
+<!--Welkom tekst afh. van de user name.-->
 <div th:if="${roleBoolean==true}">
 <h2>
     Overzicht top <span th:text="*{listSize}"></span> particulieren met hoogste saldo
@@ -34,7 +34,7 @@ Welkom tekst afh. van de user name.
 <div th:if="${roleBoolean==false}">
     queries voor Hoofd MKB komt hier.
 </div>
-
 <a href="/bankemployee">Uitloggen als bankmedewerker</a>
+<!--<button type="button" href="/bankemployee">Uitloggen als bankmedewerker</button>-->
 </body>
 </html>
