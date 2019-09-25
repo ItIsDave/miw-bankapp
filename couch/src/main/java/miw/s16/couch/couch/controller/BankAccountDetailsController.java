@@ -33,6 +33,7 @@ public class BankAccountDetailsController {
     //coding by PH & AV
     @GetMapping(value = "/bankAccountDetails")
     public String bankAccountDetailsHandler(@RequestParam("id") int bankAccountId, Model model, HttpServletRequest request) {
+        final int N_TRANSACTIONS = 10;//max #transactions displayed
         // log in session
         HttpSession session = request.getSession(true);
         String userName = (String) session.getAttribute("userName");
@@ -42,8 +43,11 @@ public class BankAccountDetailsController {
         List <Transaction> transactionList = clickedBankAccount.getTransactions();
         List <Transaction> transactionToList = clickedBankAccount.getTransactionsTo();
         for (Transaction t:transactionToList) { transactionList.add(t); }
-        Collections.sort(transactionList);
-        Collections.reverse(transactionList);
+        Collections.sort(transactionList);//order by transaction_date (made comparable)
+        Collections.reverse(transactionList);// ... desc
+        if (transactionList.size() >= N_TRANSACTIONS) {
+            transactionList = transactionList.subList(0, N_TRANSACTIONS);//BvB ... where rownum < ...
+        }
         model.addAttribute("userName", userName);
         model.addAttribute("iban", clickedBankAccount.getIBAN());
         model.addAttribute("balance", clickedBankAccount.getBalance());
