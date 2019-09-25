@@ -31,9 +31,6 @@ public class HibernateLab {
     TestdataCreator testData;
 
     @Autowired
-    BalanceTopTen balanceTopTen;
-
-    @Autowired
     BankUserDao bankUserDao;
 
     public HibernateLab() {
@@ -138,7 +135,6 @@ public class HibernateLab {
             bankUserDao.save(bankUser1);
             bankUserDao.save(bankUser2);
         }
-        balanceTopTen.balanceTopTen_Client();
         System.out.println("dbinit klaar.");
 
 
