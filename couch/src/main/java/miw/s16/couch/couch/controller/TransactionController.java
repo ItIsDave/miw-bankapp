@@ -48,7 +48,7 @@ public class TransactionController implements WebMvcConfigurer {
         model.addAttribute("bankAccountFrom", bankAccountFrom.getIBAN());
         model.addAttribute("bankAccountTo", transaction.getToAccount());
         model.addAttribute("userName", userName);
-        model.addAttribute("balance", String.format("%.2f", bankAccountFrom.getBalance()));
+        model.addAttribute("balance", bankAccountFrom.twoDecimalBalance(bankAccountFrom.getBalance()));
         return "transaction";
     }
 
@@ -74,7 +74,7 @@ public class TransactionController implements WebMvcConfigurer {
             model.addAttribute("bankAccountFrom", bankAccountFrom.getIBAN());
             model.addAttribute("bankAccountTo", transaction.getToAccount());
             model.addAttribute("userName", userName);
-            model.addAttribute("balance", String.format("%.2f", bankAccountFrom.getBalance()));
+            model.addAttribute("balance", bankAccountFrom.twoDecimalBalance(bankAccountFrom.getBalance()));
             return "transaction";
         } else {
             String feedback = transactionService.TransactionCalculation(transaction.getToAccount(), bankAccountFrom,

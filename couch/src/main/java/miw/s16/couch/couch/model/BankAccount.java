@@ -184,6 +184,8 @@ public class BankAccount {
     public void addTransactionTo(Transaction transaction){ transactionsTo.add(transaction); }
     //    public void addRetailUser (RetailUser retailuser) {retailusers.add(retailuser);}
 
+    public String twoDecimalBalance(double balance){ return String.format("%.2f", balance); }
+
     @Override
     public String toString() {
         return iban;

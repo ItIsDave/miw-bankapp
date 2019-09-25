@@ -46,7 +46,7 @@ public class BankAccountDetailsController {
         Collections.reverse(transactionList);
         model.addAttribute("userName", userName);
         model.addAttribute("iban", clickedBankAccount.getIBAN());
-        model.addAttribute("balance", String.format("%.2f", clickedBankAccount.getBalance()));
+        model.addAttribute("balance", clickedBankAccount.twoDecimalBalance(clickedBankAccount.getBalance()));
         model.addAttribute("allTransactions", transactionList);
         return "bank_account_details";
     }
