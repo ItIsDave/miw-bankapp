@@ -9,7 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -53,8 +52,13 @@ public class NewEnOfAccountController {
             System.out.println("POST: session bank koppelcode " + sessionBankAccount.getKoppelcode());
             System.out.println("iban is "+ bankAccount.getIBAN());
             bankAccountDao.save(sessionBankAccount);
-            return "personal_page";
+            return "new_enof_account_success";
         }
+    }
+
+    @GetMapping(value="new_enof_account_success")
+    public String newEnOfAccountSuccessHandler(){
+        return "new_enof_account_success";
     }
 }
 

@@ -20,7 +20,7 @@ public class BankAccount {
     private String iban;
     private double balance;
     //@Pattern(regexp = "^\\d+$")
-    @Pattern(regexp="([0-9])")        //enkel integers als input
+    @Pattern(regexp="^(0|[1-9][0-9]*)$")        //enkel integers als input
     @Size(min=5, max=5)
     private String koppelcode;
     @OneToMany(mappedBy = "bankAccount")
