@@ -58,12 +58,13 @@ public class LoginController {
     @PostMapping(value = "overview")
     public String loginHandler(@ModelAttribute User user, Model model, HttpServletRequest request) {
         boolean loginOk = validator.validateMemberPassword(user);
-        List<RetailUser> loggedInRetailUser = retailUserDao.findByUserName(user.getUserName());
-        //ophalen & opslaan alle bankaccounts die bij deze user horen
-        List<BankAccount> loggedInBankAccounts = loggedInRetailUser.get(0).getBankAccounts();
+
 
         if (loginOk) {
             HttpSession session = request.getSession(true);
+            List<RetailUser> loggedInRetailUser = retailUserDao.findByUserName(user.getUserName());
+            //ophalen & opslaan alle bankaccounts die bij deze user horen
+            List<BankAccount> loggedInBankAccounts = loggedInRetailUser.get(0).getBankAccounts();
             // -- for login session ---
             session.setAttribute("userName", user.getUserName());
             session.setAttribute("retailUser", loggedInRetailUser.get(0));
