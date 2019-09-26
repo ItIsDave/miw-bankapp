@@ -33,7 +33,7 @@ public class LoginControllerBankemployee {
     @Autowired
     BalanceTopTen balanceTopTen;
 
-    @GetMapping(value = "bankemployee_")
+    @GetMapping(value = "bankemployee")
     public String indexHandler(Model model) {
         User user = new User();
         model.addAttribute("user", user);
