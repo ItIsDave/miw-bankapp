@@ -48,6 +48,8 @@ public class BankAccountDetailsController {
         model.addAttribute("iban", clickedBankAccount.getIBAN());
         model.addAttribute("balance", clickedBankAccount.twoDecimalBalance(clickedBankAccount.getBalance()));
         model.addAttribute("allTransactions", transactionList);
+        session.setAttribute("clickedBankAccount", clickedBankAccount);
+        session.setAttribute("bankAccountId", clickedBankAccount.getBankAccountId());
         return "bank_account_details";
     }
 
