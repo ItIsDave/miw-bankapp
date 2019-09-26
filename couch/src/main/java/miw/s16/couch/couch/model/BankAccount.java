@@ -19,10 +19,9 @@ public class BankAccount {
     @Column(name ="iban", unique = true)
     private String iban;
     private double balance;
-    @Pattern(regexp = "^\\d+$")
-    //@Pattern(regexp="([0-9])")        //enkel integers als input
+    //@Pattern(regexp = "^\\d+$")
+    @Pattern(regexp="([0-9])")        //enkel integers als input
     @Size(min=5, max=5)
-    @NotNull
     private String koppelcode;
     @OneToMany(mappedBy = "bankAccount")
     private List<Transaction> transactions;
@@ -42,7 +41,6 @@ public class BankAccount {
         this.balance = balance;
         this.transactions = new ArrayList<>();
         this.transactionsTo = new ArrayList<>();
-        this.koppelcode = "00000";
     }
 
     public BankAccount( String iBAN, double balance) {
@@ -52,7 +50,6 @@ public class BankAccount {
         this.transactions = new ArrayList<>();
         this.transactionsTo = new ArrayList<>();
         //this.retailusers = new ArrayList<>();
-        this.koppelcode = "00000";
     }
 
     //getters
