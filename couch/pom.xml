@@ -13,7 +13,7 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>couch</name>
     <description>Bank App Spring Framework</description>
-
+<packaging>jar</packaging><!--remote server config - BvB -->
     <properties>
         <java.version>11</java.version>
     </properties>
@@ -82,6 +82,11 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <!--remote server config - BvB -->
+                <configuration>
+                    <executable>true</executable>
+                </configuration>
+                <!-- -->
             </plugin>
         </plugins>
     </build>

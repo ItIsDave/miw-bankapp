@@ -216,8 +216,9 @@ public class RetailUser extends User {
       bankAccounts.add(bankAccount);
     }
 
+//Added by BvB
     public String getFullName(){
-        return firstName + " " + ((middleName != null) ? middleName + " " : "") + lastName;
+       return firstName + " " + ((middleName != null) ? middleName + " " : "") + lastName;
     }
 }
 

@@ -38,9 +38,18 @@ public class RetailPersonalPageController<retailUser> {
     public String overviewHandler(@ModelAttribute User user, Model model, HttpServletRequest request) {
         HttpSession session = request.getSession(true);
         String userName = (String) session.getAttribute("userName");
-        RetailUser retailUser = retailUserDao.findByUserName(userName).get(0);
+//        RetailUser retailUser = retailUserDao.findByUserName(userName).get(0); replaced by lines below - BvB
+        List<RetailUser> retailUsers = retailUserDao.findByUserName(userName);
+        RetailUser retailUser;
+        if (retailUsers.size() > 0){
+          retailUser = retailUsers.get(0);
+        }
+        else {
+            retailUser = (RetailUser)session.getAttribute("retailUser");
+        }
         List<BankAccount> loggedInBankAccounts  = retailUser.getBankAccounts();
         model.addAttribute("userName", userName);
+        model.addAttribute("retailUserFullName", retailUser.getFullName());//added by BvB
         model.addAttribute("allBankAccounts", loggedInBankAccounts);
         return "personal_page";
     }
