@@ -2,12 +2,43 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
+
+    <style>
+        body {
+            background-color: khaki;
+        }
+        h1 {
+            color: rgb(52,50,83);
+            margin-left: 40px;
+        }
+        h2 {
+            color: rgb(52,50,83);
+            margin-left: 40px;
+        }
+        h3 {
+            color: rgb(52,50,83);
+            margin-left: 40px;
+        }
+        table {
+            color: rgb(52,50,83);
+            margin-left: 40px;
+            width: 30%;
+        }
+        form {
+            color: rgb(52,50,83);
+        }
+        a {
+            color: rgb(52,50,83);
+            margin-left: 40px;
+        }
+    </style>
+
     <title>Index</title>
 </head>
 <body>
 <h1>Welkom bij Couch Bank</h1>
 <br>
-<h3>Login</h3>
+<h2>Login</h2>
 <form action="#" th:action="@{overview}" th:object="${user}" method="post">
     <table>
 
@@ -17,7 +48,7 @@
             <td><input type="text" th:field="*{userName}"/></td>
         </tr>
         <tr>
-            <td>Password:</td>
+            <td>Wachtwoord:</td>
             <td><label>
                 <input type="text" th:field="*{userPassword}"/>
             </label>
@@ -27,18 +58,21 @@
             <td><input type="submit" value="Login"></td>
         </tr>
     </table>
+    <br>
 </form>
 <form>
-<h3>Nieuwe Klant </h3>
-Klik <a href="newUser">hier</a>  om een account te maken
+<h3>Nieuwe klant </h3>
+<a href="newUser"> Klik hier</a> om een account te maken
 </form>
+<br>
 <form>
-    <h3>Zakelijke Klant </h3>
-    <a href="zakelijk-klant">Log in zakelijk</a>
+    <h3>Zakelijke klant </h3>
+    <a href="zakelijk-klant">Login</a>
 </form>
+<br>
 <form>
     <h3>Couch Medewerker </h3>
-    <a href="bankemployee">Internal login</a>
+    <a href="bankemployee">Login</a>
 </form>
 </body>
 </html>
