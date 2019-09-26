@@ -2,6 +2,7 @@ package miw.s16.couch.couch.controller;
 
 import miw.s16.couch.couch.model.BankAccount;
 import miw.s16.couch.couch.model.RetailUser;
+import miw.s16.couch.couch.model.User;
 import miw.s16.couch.couch.model.dao.BankAccountDao;
 import miw.s16.couch.couch.model.dao.RetailUserDao;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 public class NewEnOfAccountController {
@@ -76,10 +78,11 @@ public class NewEnOfAccountController {
     }
 
     @PostMapping(value = "Koppelcode_invoeren")
-    public String koppelcodeValidationHandler(@Valid BankAccount bankAccount, BindingResult bindingResult, HttpServletRequest request){
+    public String koppelcodeValidationHandler(@Valid BankAccount bankAccount,  BindingResult bindingResult, Model model, HttpServletRequest request){
         // log in session
         HttpSession session = request.getSession(true);
-        RetailUser loggedInUser = (RetailUser) session.getAttribute("retailUser");
+        String userName = (String) session.getAttribute("userName");
+        RetailUser loggedInUser = retailUserDao.findByUserName(userName).get(0);
         if(bindingResult.hasErrors()){
             return "fillout_koppelcode";
         }
@@ -88,6 +91,9 @@ public class NewEnOfAccountController {
         loggedInUser.addBankAccount(enofAccount);
         bankAccountDao.save(enofAccount);
         retailUserDao.save(loggedInUser);
+        List<BankAccount> loggedInBankAccounts  = loggedInUser.getBankAccounts();
+        model.addAttribute("userName", userName);
+        model.addAttribute("allBankAccounts", loggedInBankAccounts);
         return "personal_page";
     }
 
