@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Couch Bank</title>
+</head>
+<body>
+<div>U heeft een koppelcode en IBAN gekregen van de persoon met wie u een en/of rekening wilt openen. Vul deze gegevens in onderstaande velden in. Hierna heeft u beide toegang tot dezelfde rekening in uw persoonlijke overzichtspagina.</div>
+<form action="#" th:action="@{Koppelcode_invoeren}" th:object="${bankAccount}" method="post">
+    <table>
+        <tr>
+            <td>IBAN: </td>
+            <td><input type="text" name="IBAN" th:field="*{IBAN}" placeholder = ""/> </td>
+            <td th:if="*{#fields.hasErrors('IBAN')}">IBAN ongeldig.</td>
+        </tr>
+        <tr>
+            <td>Koppelcode: </td>
+            <td><input type="text" name="koppelcode" th:field="*{koppelcode}"/> </td>
+            <td th:if="*{#fields.hasErrors('koppelcode')}">koppelcode ongeldig.</td>
+        </tr>
+    </table>
+    <button type="submit">Verstuur</button>
+</form>
+<br>
+Ga <a href="/overview" >terug</a> naar uw persoonlijke pagina.
+
+</body>
+</html>
