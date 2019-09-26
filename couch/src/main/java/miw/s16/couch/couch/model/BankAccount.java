@@ -47,6 +47,14 @@ public class BankAccount {
         //this.retailusers = new ArrayList<>();
     }
 
+
+    public BankAccount(String iban, double balance, List<Company> companies, String accountType) {
+        this.iban = iban;
+        this.balance = balance;
+        this.companies = companies;
+        this.accountType = accountType;
+    }
+
     public BankAccount(String iban, double balance, List<Transaction> transactions, List<RetailUser> retailUsers, List<Company> companies) {
         this.iban = iban;
         this.balance = balance;
@@ -64,6 +72,7 @@ public class BankAccount {
         this.companies = companies;
         this.accountType = accountType;
     }
+
 
     //getters
     public String getIBAN() { return iban; }
