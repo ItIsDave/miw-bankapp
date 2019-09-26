@@ -2,6 +2,9 @@ package miw.s16.couch.couch.model;
 
 import javax.persistence.Entity;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.math.BigInteger;
 import java.text.DecimalFormat;
 import java.util.*;
@@ -16,6 +19,10 @@ public class BankAccount {
     @Column(name ="iban", unique = true)
     private String iban;
     private double balance;
+    //@Pattern(regexp = "^\\d+$")
+    @Pattern(regexp="^(0|[1-9][0-9]*)$")        //enkel integers als input
+    @Size(min=5, max=5)
+    private String koppelcode;
     @OneToMany(mappedBy = "bankAccount")
     private List<Transaction> transactions;
     //iaw Boudewijn added, both depraciation and deposit amounts are now collected from db
@@ -81,6 +88,9 @@ public class BankAccount {
     public List<Transaction> getTransactions() { return transactions; }
     public List<Transaction> getTransactionsTo() { return transactionsTo; }
     public List<RetailUser> getRetailUsers() { return retailUsers; }
+    public String getKoppelcode() {
+        return koppelcode;
+    }
 
     public void setBankAccountId(int bankAccountId) {
         this.bankAccountId = bankAccountId;
@@ -117,6 +127,18 @@ public class BankAccount {
 
     //setter for changes in balance, transactions and retailusers
     public void setBalance(double balance) { this.balance = balance; }
+    public void setKoppelcode(String koppelcode) {
+        this.koppelcode = koppelcode;
+    }
+    public void setIBAN(String iban) {
+        this.iban = iban;
+    }
+
+    public void addRetailUser(RetailUser retailUser){
+        retailUsers.add(retailUser);
+
+    }
+
 
     public String getAccountType() {
         return accountType;

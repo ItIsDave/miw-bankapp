@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Couch Bank</title>
+</head>
+<body>
+<p>Koppelcode met succes aangemaakt.</p>
+<br>
+<table>
+    <tr>
+        <td><b>IBAN: </b></td>
+        <td><b><span th:text="${session.clickedBankAccount.getIBAN()}"></span></b></td>
+    </tr>
+    <tr>
+        <td><b>Koppelcode: </b></td>
+        <td><b><span th:text="${session.clickedBankAccount.getKoppelcode()}"></span></b></td>
+    </tr>
+</table>
+<br>
+<div>Geef bovenstaande koppelcode en IBAN aan de persoon met wie u de en/of rekening wilt beheren.
+Deze persoon kan vanuit zijn persoonlijke overzicht de rekening koppelen. Hierna heeft u beiden toegang tot de rekening.</div>
+<br>
+Klik <a href="/overview">hier</a> om terug te gaan naar uw persoonlijke overzicht.
+</body>
+</html>
