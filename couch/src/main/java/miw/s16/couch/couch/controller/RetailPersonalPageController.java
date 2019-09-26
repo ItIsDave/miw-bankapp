@@ -38,14 +38,9 @@ public class RetailPersonalPageController<retailUser> {
     public String overviewHandler(@ModelAttribute User user, Model model, HttpServletRequest request) {
         HttpSession session = request.getSession(true);
         String userName = (String) session.getAttribute("userName");
-        RetailUser retailUser1  = (RetailUser) session.getAttribute("retailUser");
-
-        List <BankAccount> loggedInBankAccounts = retailUser1.getBankAccounts();
-//        String bankAccount = retailUser1.getBankAccounts().get(0).getIBAN();
-        session.setAttribute("userName", userName);
-//        session.setAttribute("bankAccount", bankAccount);
+        RetailUser retailUser = retailUserDao.findByUserName(userName).get(0);
+        List<BankAccount> loggedInBankAccounts  = retailUser.getBankAccounts();
         model.addAttribute("userName", userName);
-//        model.addAttribute("bankAccount", bankAccount);
         model.addAttribute("allBankAccounts", loggedInBankAccounts);
         return "personal_page";
     }
@@ -56,14 +51,15 @@ public class RetailPersonalPageController<retailUser> {
         // log in session
         HttpSession session = request.getSession(true);
         String userName = (String) session.getAttribute("userName");
-        RetailUser retailUser1 = (RetailUser) session.getAttribute("retailUser");
+        //RetailUser retailUser1 = (RetailUser) session.getAttribute("retailUser");
+        RetailUser retailUser = retailUserDao.findByUserName(userName).get(0);
         //nieuwe IBAN wordt aangemaakt, aan retailuser gekoppeld en in DB opgeslagen
         BankAccount newBankAccount = new BankAccount();
-        retailUser1.addBankAccount(newBankAccount);
+        retailUser.addBankAccount(newBankAccount);
         bankAccountDao.save(newBankAccount);
-        retailUserDao.save(retailUser1);
+        retailUserDao.save(retailUser);
         //collect all bankaccounts in 1 list
-        List<BankAccount> bankAccountsList = retailUser1.getBankAccounts();
+        List<BankAccount> bankAccountsList = retailUser.getBankAccounts();
         model.addAttribute("userName", userName);
         model.addAttribute("allBankAccounts", bankAccountsList);
         return "personal_page";

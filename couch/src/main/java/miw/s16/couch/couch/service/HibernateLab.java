@@ -31,10 +31,14 @@ public class HibernateLab {
     TestdataCreator testData;
 
     @Autowired
-    BalanceTopTen balanceTopTen;
+    BankUserDao bankUserDao;
 
     @Autowired
-    BankUserDao bankUserDao;
+    SMEUserDao smeUserDao;
+
+    @Autowired
+    CompanyDao companyDao;
+
 
     public HibernateLab() {
         super();
@@ -42,10 +46,11 @@ public class HibernateLab {
 
     public void dbinit() {
 
-       // to ensure no data duplication
+        // to ensure no data duplication
         if (userDao.findByUserPassword("1").size() == 0) {
-            // user info for checking if DB is empty
             User johnDoe = new User("John Doe", "1");
+            // user info for checking if DB is empty
+          /*  User johnDoe = new User("John Doe", "1");
 
             // Inserting user data
             User adamantia = new User("Adamantia", "1234");
@@ -82,8 +87,8 @@ public class HibernateLab {
                     "", "Simpson", "Kalverstraat", 25, "B", "1011AB", "Amsterdam", "690000000", "25-10-1900", "bart@hva.nl", "Retail");
 
             // the to and from are strings. For the test we are going to connect each transaction with one of the retail users bank account
-            Transaction t1 = new Transaction(100.0,d,account1, account2, "verjaardag");
-            Transaction t2 = new Transaction(10.0,d, account1, account3, " ");
+            Transaction t1 = new Transaction(100.0, d, account1, account2, "verjaardag");
+            Transaction t2 = new Transaction(10.0, d, account1, account3, " ");
             Transaction t3 = new Transaction(500.0, d, account4, account1, " ");
             Transaction t4 = new Transaction(1500.0, d, account5, account4, " ");
 
@@ -123,8 +128,9 @@ public class HibernateLab {
             retailUserDao.save(karin);
             retailUserDao.save(charlotte);
             retailUserDao.save(jan);
-            retailUserDao.save(boudewijn);
+            retailUserDao.save(boudewijn);*/
 
+            userDao.save(johnDoe);
             testData.makeRetailUserList();                          //AMS: haalt retail data op uit CSV file
             testData.retailUserListSplitAddBankaccountAndSave();    //AMS: verwerken testdata
             System.out.println("testdata is ingelezen.");
@@ -135,8 +141,9 @@ public class HibernateLab {
 
             bankUserDao.save(bankUser1);
             bankUserDao.save(bankUser2);
+
         }
-        balanceTopTen.balanceTopTen_IBAN();
+
         System.out.println("dbinit klaar.");
 
 

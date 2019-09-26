@@ -82,7 +82,6 @@ public class TestdataCreator {
     public void retailUserListSplitAddBankaccountAndSave() {        //de methode mag niet static zijn,
                                                                     // omdat de dao niet static mag zijn
         for (int index = 0; index < BESTAND_GROOTTE-1; index++) {
-            //System.out.println("aantal records is: " + retailUserList.size());
             String[] recordSplit = retailUserList.get(index).split(";");  //er zijn 14 kolommen
             // per attribuut van User en retailUserClient de strings toekennen
             userName = recordSplit[0];
@@ -103,18 +102,18 @@ public class TestdataCreator {
                 bsn = Integer.parseInt(bsnString);
             RetailUser retailUser = new RetailUser(userName,userPassword,bsn,firstName,middleName,lastName,streetName,houseNumber,
                     extension,zipcode,city,phoneNumber,dateOfBirth,email,"");
-            //maak eerst een bankaccount
-            Double balance =  Math.round(Math.random() * MAX_INIT_BALANCE) / 100.0;  //bedrag met 2 decimalen
-            BankAccount bankAccount = new BankAccount(balance);
-            retailUser.addBankAccount(bankAccount);
-            if(bankAccountDao== null){
-                System.out.println("doe verder niks");
-            } else {
-                //System.out.println("opslag naar de db start..");
-                bankAccountDao.save(bankAccount);
-                //System.out.println("nieuw bankaccount gemaakt en opgeslagen.");
+            //maak eerst een of twee bankaccounts per retailuser
+            int aantalRekeningen = 0;
+            if (Math.random() > 0.5) {
+                aantalRekeningen += 1;
             }
-            retailUserDao.save(retailUser);
+            for (int index2 = 0; index2 <=aantalRekeningen ; index2++) {
+                Double balance =  Math.round(Math.random() * MAX_INIT_BALANCE) / 100.0;  //bedrag met 2 decimalen
+                BankAccount bankAccount = new BankAccount(balance);
+                bankAccountDao.save(bankAccount);
+                retailUser.addBankAccount(bankAccount);
+                retailUserDao.save(retailUser);
+            }
         }
     }
 }
