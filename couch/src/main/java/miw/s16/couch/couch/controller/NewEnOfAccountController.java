@@ -1,6 +1,7 @@
 package miw.s16.couch.couch.controller;
 
 import miw.s16.couch.couch.model.BankAccount;
+import miw.s16.couch.couch.model.RetailUser;
 import miw.s16.couch.couch.model.dao.BankAccountDao;
 import miw.s16.couch.couch.model.dao.RetailUserDao;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,8 @@ public class NewEnOfAccountController {
 
     @Autowired
     BankAccountDao bankAccountDao;
+
+    //Omzetten rekening in en/of rekening
 
     @GetMapping(value = "new_enof_account")
     public String newEnOfAccountHandler(Model model, HttpServletRequest request) {
@@ -60,5 +63,33 @@ public class NewEnOfAccountController {
     public String newEnOfAccountSuccessHandler(){
         return "new_enof_account_success";
     }
+
+
+    //Invoeren koppelcode en koppelen aan rekening
+
+    @GetMapping(value="Koppelcode_invoeren")
+    public String enOfKoppelingHandler(Model model){
+        BankAccount bankAccount = new BankAccount();
+        bankAccount.setIBAN(null);
+        model.addAttribute("bankAccount", bankAccount);
+        return "fillout_koppelcode";
+    }
+
+    @PostMapping(value = "Koppelcode_invoeren")
+    public String koppelcodeValidationHandler(@Valid BankAccount bankAccount, BindingResult bindingResult, HttpServletRequest request){
+        // log in session
+        HttpSession session = request.getSession(true);
+        RetailUser loggedInUser = (RetailUser) session.getAttribute("retailUser");
+        if(bindingResult.hasErrors()){
+            return "fillout_koppelcode";
+        }
+        BankAccount enofAccount = bankAccountDao.findByIban(bankAccount.getIBAN());
+        enofAccount.addRetailUser(loggedInUser);
+        loggedInUser.addBankAccount(enofAccount);
+        bankAccountDao.save(enofAccount);
+        retailUserDao.save(loggedInUser);
+        return "personal_page";
+    }
+
 }
 

@@ -68,6 +68,15 @@ public class BankAccount {
     public void setKoppelcode(String koppelcode) {
         this.koppelcode = koppelcode;
     }
+    public void setIBAN(String iban) {
+        this.iban = iban;
+    }
+
+    public void addRetailUser(RetailUser retailUser){
+        retailUsers.add(retailUser);
+
+    }
+
 
 /*
     IBAN rules: https://nl.wikipedia.org/wiki/International_Bank_Account_Number

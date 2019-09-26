@@ -24,7 +24,7 @@
         </tr>
         <tr>
             <td>BSN: *</td>
-            <td><input type="text" name="bsn" th:field="*{bsn}"/></td>
+            <td><input type="text" name="bsn" th:field="*{bsn}" th:placeholder="" /></td>
             <td th:if="${#fields.hasErrors('bsn')}" th:errors="*{bsn}">Bsn ongeldig.</td>
         </tr>
         <tr>
@@ -48,7 +48,7 @@
         </tr>
         <tr>
             <td>Huisnummer: *</td>
-            <td><input type="text" name="houseNumber" th:field="*{houseNumber}"/></td>
+            <td><input type="text" name="houseNumber" th:field="*{houseNumber}" th:placeholder="" /></td>
             <td th:if="${#fields.hasErrors('houseNumber')}">Huisnummer ongeldig.</td>
         </tr>
         <tr>
