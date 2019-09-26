@@ -5,7 +5,7 @@
     <title>Inlogscherm bankmedewerker</title>
 </head>
 <body>
-<h3>Login</h3>
+<h3>Login bankmedewerker</h3>
 <form action="#" th:action="@{overview_bankemployee}" th:object="${user}" method="post">
     <table>
         <br>
@@ -16,7 +16,7 @@
         <tr>
             <td>Wachtwoord:</td>
             <td><label>
-                <input type="text" th:field="*{userPassword}"/>
+                <input type="password" th:field="*{userPassword}"/>
             </label>
             <td>
         </tr>

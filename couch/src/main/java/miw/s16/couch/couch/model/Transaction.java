@@ -154,7 +154,7 @@ public class Transaction implements Comparable<Transaction> { //implements Seria
     }
 
     //added by BvB
-    public String getDay(){
+    public String getTransactionDay(){
         final int NULLYEAR = 1900;
         int year = transactionDate.getYear() + NULLYEAR
         ,   month = transactionDate.getMonth() + 1 //month is like array index (0-11)
@@ -169,7 +169,7 @@ public class Transaction implements Comparable<Transaction> { //implements Seria
                 ", description='" + description + '\'' +
                 ", amount=" + amount +
                 ", transactionDate=" + transactionDate.toString() +
-                ", transactionDay=" +  this.getDay() +
+                ", transactionDay=" + this.getTransactionDay() +
                 ", from=" + fromAccount +
                 ", to=" + toAccount +
                 ", isPin=" + isPin +

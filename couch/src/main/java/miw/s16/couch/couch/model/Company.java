@@ -46,11 +46,15 @@ public class Company {
     private List<SMEUser> employees = new ArrayList<>();
     @ManyToMany
     private List<BankAccount> companyAccounts = new ArrayList<>();
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private BankUser accountManager = new BankUser();
 
     public Company() {
         super();
+    }
+
+    public Company(@NotEmpty String companyName) {
+        this.companyName = companyName;
     }
 
     public Company(@NotNull @Min(value = 10000000, message = "KvK-nummer moet 8 cijfers zijn zonder punten.") @Max(value = 99999999, message = "KvK-nummer moet 8 cijfers zijn zonder punten.") int chamberOfCommerceId, @NotEmpty String companyName) {

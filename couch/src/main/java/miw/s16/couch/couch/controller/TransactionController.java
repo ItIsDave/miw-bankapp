@@ -45,7 +45,7 @@ public class TransactionController implements WebMvcConfigurer {
         System.out.println("datum - tijd is: " + transaction.getTransactionDate().toString());
         model.addAttribute("transaction", transaction);
 //        model.addAttribute("date_time", transaction.getTransactionDate().toString());
-        model.addAttribute("date", transaction.getDay());//BvB
+        model.addAttribute("date", transaction.getTransactionDay());//BvB
         model.addAttribute("bankAccountFrom", bankAccountFrom.getIBAN());
         model.addAttribute("bankAccountTo", transaction.getToAccount());
         model.addAttribute("userName", userName);
@@ -72,7 +72,7 @@ public class TransactionController implements WebMvcConfigurer {
         if (error) {
             model.addAttribute("transaction", transaction);
 //            model.addAttribute("date_time", transaction.getTransactionDate().toString());
-            model.addAttribute("date", transaction.getDay());//BvB
+            model.addAttribute("date", transaction.getTransactionDay());//BvB
             model.addAttribute("bankAccountFrom", bankAccountFrom.getIBAN());
             model.addAttribute("bankAccountTo", transaction.getToAccount());
             model.addAttribute("userName", userName);

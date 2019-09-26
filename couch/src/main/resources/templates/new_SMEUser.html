@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <title> Couch Bank nieuwe zakelijke klant</title>
 </head>
@@ -21,8 +21,8 @@
         </tr>
         <tr>
             <td><label for="bsn"> Uw BSN: </label>
-            <td><input id="bsn" type="number" th:field="*{bsn}" name="bsn" min="10000000" required/></td>
-            <td th:if="${#fields.hasErrors('bsn')}" >Bsn ongeldig.</td>
+            <td><input id="bsn" type="number" th:field="*{bsn}" name="bsn" min="10000000" required></td>
+            <td th:if="${#fields.hasErrors('bsn')}" > Bsn ongeldig.</td>
         </tr>
         <tr>
             <td><label for="userName"> Kies gebruikersnaam: </label>
@@ -31,7 +31,7 @@
         </tr>
         <tr>
             <td><label for="userPassword">Kies wachtwoord:</label>
-            <td><input id="userPassword" type="text" th:field="*{userPassword}" name="userPassword" required/></td>
+            <td><input id="userPassword" type="text" th:field="*{userPassword}" name="userPassword" required /></td>
             <td th:if="${#fields.hasErrors('userPassword')}" >Wachtwoord ongeldig.</td>
         </tr>
         <td><input type="submit" value="Volgende"></td>

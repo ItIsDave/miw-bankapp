@@ -60,14 +60,15 @@ public class RetailPersonalPageController<retailUser> {
         // log in session
         HttpSession session = request.getSession(true);
         String userName = (String) session.getAttribute("userName");
-        RetailUser retailUser1 = (RetailUser) session.getAttribute("retailUser");
+        //RetailUser retailUser1 = (RetailUser) session.getAttribute("retailUser");
+        RetailUser retailUser = retailUserDao.findByUserName(userName).get(0);
         //nieuwe IBAN wordt aangemaakt, aan retailuser gekoppeld en in DB opgeslagen
         BankAccount newBankAccount = new BankAccount();
-        retailUser1.addBankAccount(newBankAccount);
+        retailUser.addBankAccount(newBankAccount);
         bankAccountDao.save(newBankAccount);
-        retailUserDao.save(retailUser1);
+        retailUserDao.save(retailUser);
         //collect all bankaccounts in 1 list
-        List<BankAccount> bankAccountsList = retailUser1.getBankAccounts();
+        List<BankAccount> bankAccountsList = retailUser.getBankAccounts();
         model.addAttribute("userName", userName);
         model.addAttribute("allBankAccounts", bankAccountsList);
         return "personal_page";
