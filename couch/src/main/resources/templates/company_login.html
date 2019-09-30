@@ -11,14 +11,13 @@
 
         <br>
         <tr>
-            <td>Usernaam:</td>
-            <td><input type="text" th:field="*{userName}"/></td>
+            <td><label for="username">Usernaam:</label></td>
+            <td><input type="text" th:field="*{userName}" id="username"/></td>
         </tr>
         <tr>
-            <td>Wachtwoord:</td>
-            <td><label>
-                <input type="text" th:field="*{userPassword}"/>
-            </label>
+            <td><label for="password">Wachtwoord:</label></td>
+            <td>
+                <input type="text" th:field="*{userPassword}" id="password"/>
             <td>
         </tr>
         <tr>
