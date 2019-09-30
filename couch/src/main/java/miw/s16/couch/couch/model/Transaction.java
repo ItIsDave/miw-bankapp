@@ -3,6 +3,8 @@ package miw.s16.couch.couch.model;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Entity
@@ -153,6 +155,17 @@ public class Transaction implements Comparable<Transaction> { //implements Seria
         return bankAccount.getBalance();
     }
 
+    //added by BvB, tip from Huub (teacher)
+
+    public String getTransactionDateFormatted() {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return dateFormat.format(transactionDate);
+    }
+
+    public String getTransactionDay(){
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");//HH:mm:ss
+        return dateFormat.format(transactionDate);
+    }
 
     @Override
     public String toString() {
@@ -160,7 +173,8 @@ public class Transaction implements Comparable<Transaction> { //implements Seria
                 "idTransaction=" + transactionId +
                 ", description='" + description + '\'' +
                 ", amount=" + amount +
-                ", transactionDate=" + transactionDate.toString() +
+                ", transactionDate=" + this.getTransactionDateFormatted() +
+                ", transactionDay=" + this.getTransactionDay() +
                 ", from=" + fromAccount +
                 ", to=" + toAccount +
                 ", isPin=" + isPin +

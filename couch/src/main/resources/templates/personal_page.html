@@ -7,7 +7,8 @@
     <title>User Dashboard</title>
 </head>
 <body>
-<h1>Welkom <span th:text="${userName}"></span></h1>
+<!--<h1>Welkom <span th:text="${userName}"></span></h1>-->
+<h1>Welkom <span th:text="${retailUserFullName}"></span></h1>
 
 <div th:unless="${#lists.isEmpty(allBankAccounts)}">
 
