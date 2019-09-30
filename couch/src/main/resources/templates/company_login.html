@@ -5,17 +5,17 @@
     <title>Title</title>
 </head>
 <body>
-<h3>Login Zakelijn</h3>
+<h3>Login Zakelijk</h3>
 <form action="#" th:action="@{zakelijk-klant}" th:object="${smeUser}" method="post">
     <table>
 
         <br>
         <tr>
-            <td>Bedrijf naam:</td>
+            <td>Usernaam:</td>
             <td><input type="text" th:field="*{userName}"/></td>
         </tr>
         <tr>
-            <td>Password:</td>
+            <td>Wachtwoord:</td>
             <td><label>
                 <input type="text" th:field="*{userPassword}"/>
             </label>
