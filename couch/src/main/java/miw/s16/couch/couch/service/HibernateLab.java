@@ -47,8 +47,8 @@ public class HibernateLab {
     public void dbinit() {
 
         // to ensure no data duplication
-       if (userDao.findByUserPassword("1").size() == 0) {
-            User johnDoe = new User("John Doe", "1");
+//       if (userDao.findByUserPassword("1").size() == 0) {
+//            User johnDoe = new User("John Doe", "1");
             // user info for checking if DB is empty
           /*  User johnDoe = new User("John Doe", "1");
 
@@ -130,19 +130,19 @@ public class HibernateLab {
             retailUserDao.save(jan);
             retailUserDao.save(boudewijn);*/
 
-            userDao.save(johnDoe);
+//            userDao.save(johnDoe);
  //           testData.makeRetailUserList();                          //AMS: haalt retail data op uit CSV file
  //           testData.retailUserListSplitAddBankaccountAndSave();    //AMS: verwerken testdata
  //           System.out.println("testdata is ingelezen.");
 
             //bankmedewerkers voor HoofdMKB en HoofdParticulieren
-            BankUser bankUser1 = new BankUser("piet", "pietgeheim", "Hoofd MKB");
-            BankUser bankUser2 = new BankUser("marie", "mariegeheim", "Hoofd Particulieren");
+//            BankUser bankUser1 = new BankUser("piet", "pietgeheim", "Hoofd MKB");
+//            BankUser bankUser2 = new BankUser("marie", "mariegeheim", "Hoofd Particulieren");
 
-            bankUserDao.save(bankUser1);
-            bankUserDao.save(bankUser2);
+//            bankUserDao.save(bankUser1);
+//            bankUserDao.save(bankUser2);
 
-        }
+//        }
 
         System.out.println("dbinit klaar.");
 
