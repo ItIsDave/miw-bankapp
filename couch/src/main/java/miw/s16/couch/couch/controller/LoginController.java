@@ -58,17 +58,21 @@ public class LoginController {
     @PostMapping(value = "overview")
     public String loginHandler(@ModelAttribute User user, Model model, HttpServletRequest request) {
         boolean loginOk = validator.validateMemberPassword(user);
-        List<RetailUser> loggedInRetailUser = retailUserDao.findByUserName(user.getUserName());
+        List<RetailUser> loggedInRetailUsers = retailUserDao.findByUserName(user.getUserName());
         //ophalen & opslaan alle bankaccounts die bij deze user horen
-        List<BankAccount> loggedInBankAccounts = loggedInRetailUser.get(0).getBankAccounts();
+        RetailUser loggedInRetailUser = loggedInRetailUsers.get(0);//BvB
+//        List<BankAccount> loggedInBankAccounts = loggedInRetailUser.get(0).getBankAccounts();
+        List<BankAccount> loggedInBankAccounts = loggedInRetailUser.getBankAccounts();
 
         if (loginOk) {
             HttpSession session = request.getSession(true);
             // -- for login session ---
             session.setAttribute("userName", user.getUserName());
-            session.setAttribute("retailUser", loggedInRetailUser.get(0));
+//            session.setAttribute("retailUser", loggedInRetailUser.get(0));
+            session.setAttribute("retailUser", loggedInRetailUser);//BvB
             session.setAttribute("userId", user.getUserId());
-            model.addAttribute("userName", loggedInRetailUser.get(0).getUserName());
+            model.addAttribute("userName", loggedInRetailUser.getUserName());
+            model.addAttribute("retailUserFullName", loggedInRetailUser.getFullName());//BvB
             model.addAttribute("allBankAccounts", loggedInBankAccounts);
             return "personal_page";
         }
