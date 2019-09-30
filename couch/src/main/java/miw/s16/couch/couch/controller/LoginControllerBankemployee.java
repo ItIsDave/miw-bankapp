@@ -53,6 +53,8 @@ public class LoginControllerBankemployee {
             model.addAttribute("userName", loggedInBankUser.get(0).getUserName());
             boolean roleBoolean = (loggedInBankUser.get(0).getRole().equals("Hoofd Particulieren"));
             model.addAttribute("roleBoolean", roleBoolean);
+            boolean roleBooleanHoofdMKB = (loggedInBankUser.get(0).getRole().equals("Hoofd MKB"));
+            model.addAttribute("roleBooleanHMKB", roleBooleanHoofdMKB);
             if (roleBoolean) {
                 ArrayList<String> top10ClientList = balanceTopTen.balanceTopTen_Client();
                 model.addAttribute("top10_Client_List",top10ClientList);

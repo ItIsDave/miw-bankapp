@@ -37,7 +37,8 @@ public class BalanceTopTen {
                 top10Line += " bankaccount not assigned";//for example NL10COUC0423456793 + NL10COUC0323456792
             }
             else {
-                top10Line += " " + retailUsers.get(0).getUserId() +  " " + retailUsers.get(0).getFirstName() +  " " + retailUsers.get(0).getLastName();
+                top10Line += " " + retailUsers.get(0).getUserId() +  " " + retailUsers.get(0).getFirstName()
+                        +  " " + retailUsers.get(0).getMiddleName() +  " " + retailUsers.get(0).getLastName();
             }
             top10List.add(top10Line);
 
