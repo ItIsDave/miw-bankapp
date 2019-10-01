@@ -57,6 +57,7 @@ public class BankAccountDetailsController {
         model.addAttribute("allTransactions", transactionList);
         session.setAttribute("clickedBankAccount", clickedBankAccount);
         session.setAttribute("bankAccountId", clickedBankAccount.getBankAccountId());
+        session.setAttribute("fullNames", retailUserFullNames);//BvB to transfer to transactions
         return "bank_account_details";
     }
 
