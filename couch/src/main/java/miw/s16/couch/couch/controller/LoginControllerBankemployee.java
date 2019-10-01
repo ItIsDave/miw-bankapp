@@ -51,17 +51,17 @@ public class LoginControllerBankemployee {
             session.setAttribute("userName", user.getUserName());
             session.setAttribute("userId", user.getUserId());
             model.addAttribute("userName", loggedInBankUser.get(0).getUserName());
-            boolean roleBoolean = (loggedInBankUser.get(0).getRole().equals("Hoofd Particulieren"));
-            model.addAttribute("roleBoolean", roleBoolean);
+            boolean roleBooleanHoofdParticulieren = (loggedInBankUser.get(0).getRole().equals("Hoofd Particulieren"));
+            model.addAttribute("roleBoolean", roleBooleanHoofdParticulieren);
             boolean roleBooleanHoofdMKB = (loggedInBankUser.get(0).getRole().equals("Hoofd MKB"));
             model.addAttribute("roleBooleanHMKB", roleBooleanHoofdMKB);
-            if (roleBoolean) {
+            if (roleBooleanHoofdParticulieren) {
                 ArrayList<String> top10ClientList = balanceTopTen.balanceTopTen_Client();
                 model.addAttribute("top10_Client_List",top10ClientList);
                 model.addAttribute("listSize", top10ClientList.size());
-            } else {
-                System.out.println("info volgt voor de hoofdMKB.");
-                //hier code voor de HoofdMKB
+            }
+            if (roleBooleanHoofdMKB) {
+
             }
             return "personal_page_bankemployee";
         }

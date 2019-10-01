@@ -57,7 +57,9 @@ public class NewCompanyAndSmeController implements WebMvcConfigurer {
 
     // create a new company
     @PostMapping(value = "couch-zakelijk")
-    public String newSMEUserHandler(@Valid @ModelAttribute("company") @RequestBody Company company, BindingResult bindingResult, SMEUser smeUser, Model model, HttpServletRequest request) {
+    public String newSMEUserHandler(@Valid @ModelAttribute("company") @RequestBody Company company,
+                                    BindingResult bindingResult, SMEUser smeUser, Model model,
+                                    HttpServletRequest request) {
         HttpSession session = request.getSession(true);
         if (roles.size() == 0) {
             Collections.addAll(roles, "Eigenaar", "Medewerker", "Admin");
