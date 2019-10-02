@@ -47,7 +47,7 @@ public class HibernateLab {
 
     public void dbinit() {
 
-         //to ensure no data duplication
+        // to ensure no data duplication
        if (userDao.findByUserPassword("1").size() == 0) {
             User johnDoe = new User("John Doe", "1");
             // user info for checking if DB is empty
@@ -172,6 +172,7 @@ public class HibernateLab {
                smeUserDao.save(smeUser1);
            }  //einde vd loop
         }
+
         System.out.println("dbinit klaar.");
 
 
