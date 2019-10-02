@@ -26,9 +26,8 @@ public class BalanceTopTen {
     public ArrayList<String> balanceTopTen_Client() {
         ArrayList<String> top10List = new ArrayList<>();
         String top10Line = "";
-        bankAccounts = bankAccountDao.findTop10ByOrderByBalanceDesc();
+        bankAccounts = bankAccountDao.findTop10ByAccountTypeIsNullOrderByBalanceDesc();
         for (BankAccount b: bankAccounts) {
-            //hier komt een opzoekmethode met een bankaccount om de retailUser te vinden
             top10Line = b.getIBAN() + " " + b.getBalance();
             reportedBankAccounts.clear();
             reportedBankAccounts.add(b);
@@ -37,13 +36,11 @@ public class BalanceTopTen {
                 top10Line += " bankaccount not assigned";//for example NL10COUC0423456793 + NL10COUC0323456792
             }
             else {
-                top10Line += " " + retailUsers.get(0).getUserId() +  " " + retailUsers.get(0).getFirstName()
-                        +  " " + retailUsers.get(0).getMiddleName() +  " " + retailUsers.get(0).getLastName();
+                top10Line += " " + retailUsers.get(0).getUserId() +  " " + retailUsers.get(0).getFullName();
+            //retailUsers.get(0).getFirstName() +  " " + retailUsers.get(0).getMiddleName() +  " " + retailUsers.get(0).getLastName();
             }
             top10List.add(top10Line);
-
         }
-
             return top10List;
     }
 

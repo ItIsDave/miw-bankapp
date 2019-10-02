@@ -167,6 +167,7 @@ public class HibernateLab {
                Company company1 = new Company(NumberKvK, "Bedrijf1", "Eenmanszaak", "Verzekeringen", "Marten Meesweg", 1, "3012AA",
                        "Rotterdam", "0104134321", 1234, FALSE, smeUserList1, bankAccountList1,
                        accountManager1, "b.verzekeraar@nn.nl");  //company moet worden gevuld met list<SMEUser>: smeUserList1
+               company1.setSector("ICT");
                companyDao.save(company1);
                smeUser1.setCompany(company1);    //dit koppelt deze company aan de smeUser
                smeUserDao.save(smeUser1);
