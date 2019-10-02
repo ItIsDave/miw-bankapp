@@ -110,6 +110,7 @@ public class TestdataCreator {
             for (int index2 = 0; index2 <=aantalRekeningen ; index2++) {
                 Double balance =  Math.round(Math.random() * MAX_INIT_BALANCE) / 100.0;  //bedrag met 2 decimalen
                 BankAccount bankAccount = new BankAccount(balance);
+                bankAccount.setAccountType("Particulier");
                 bankAccountDao.save(bankAccount);
                 retailUser.addBankAccount(bankAccount);
                 retailUserDao.save(retailUser);

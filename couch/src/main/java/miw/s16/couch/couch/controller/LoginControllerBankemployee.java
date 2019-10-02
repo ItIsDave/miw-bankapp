@@ -50,20 +50,19 @@ public class LoginControllerBankemployee {
             session.setAttribute("userName", user.getUserName());
             session.setAttribute("userId", user.getUserId());
             model.addAttribute("userName", loggedInBankUser.get(0).getUserName());
+            String bankUserRole = loggedInBankUser.get(0).getRole();
+            model.addAttribute("bankUserRole", loggedInBankUser.get(0).getRole());
+
+            //nadat de pagina is aangepast, 3 booleans kunnen weg
             boolean roleBooleanHoofdParticulieren = (loggedInBankUser.get(0).getRole().equals("Hoofd Particulieren"));
             model.addAttribute("roleBooleanHP", roleBooleanHoofdParticulieren);
             boolean roleBooleanHoofdMKB = (loggedInBankUser.get(0).getRole().equals("Hoofd MKB"));
             model.addAttribute("roleBooleanHMKB", roleBooleanHoofdMKB);
             boolean roleBooleanAccountManager = (loggedInBankUser.get(0).getRole().equals("Account Manager"));
             model.addAttribute("roleBooleanAM", roleBooleanAccountManager);
-            if (roleBooleanHoofdParticulieren) {
-                ArrayList<String> top10ClientList = balanceTopTen.balanceTopTen_Client();
-                model.addAttribute("top10_Client_List",top10ClientList);
-                model.addAttribute("listSize", top10ClientList.size());
-            }
-            if (roleBooleanHoofdMKB) {
-
-            }
+            ArrayList<String> top10ClientList = balanceTopTen.balanceTopTen_Client(bankUserRole);
+            model.addAttribute("top10_Client_List",top10ClientList);
+            model.addAttribute("listSize", top10ClientList.size());
             return "personal_page_bankemployee";
         }
         return "login_failed_bankemployee";

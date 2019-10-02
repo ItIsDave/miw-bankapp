@@ -36,7 +36,8 @@ public class NewUserController implements WebMvcConfigurer {
         if(bindingResult.hasErrors()){
             return "new_retail_user";
         } else {
-            BankAccount bankAccount = new BankAccount();        //bankaccount wordt gegenereerd
+            BankAccount bankAccount = new BankAccount();        //bankaccount wordt gegenereerd, Arnout type toegevoegd
+            bankAccount.setAccountType("Particulier");
             retailUser.addBankAccount(bankAccount);             //ba gekoppeld aan user
             retailUser.setRole("Retail");
             bankAccountDao.save(bankAccount);                   //ba opgeslagen in DB
