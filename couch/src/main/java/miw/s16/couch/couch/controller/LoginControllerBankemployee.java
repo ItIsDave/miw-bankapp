@@ -1,6 +1,7 @@
 package miw.s16.couch.couch.controller;
 
 import miw.s16.couch.couch.model.BankUser;
+import miw.s16.couch.couch.model.RetailUser;
 import miw.s16.couch.couch.model.User;
 import miw.s16.couch.couch.model.dao.BankUserDao;
 import miw.s16.couch.couch.model.dao.UserDao;
@@ -36,7 +37,9 @@ public class LoginControllerBankemployee {
     @GetMapping(value = "bankemployee")
     public String indexHandler(Model model) {
         User user = new User();
+        RetailUser retailUser = new RetailUser();
         model.addAttribute("user", user);
+        model.addAttribute("retailUser", retailUser);
         return "index_bankemployee";
     }
 

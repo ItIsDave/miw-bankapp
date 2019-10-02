@@ -47,10 +47,10 @@ public class LoginController {
         RetailUser retailUser = new RetailUser();
         SMEUser smeUser = new SMEUser();
         BankUser bankUser = new BankUser();
-        model.addAttribute("user", user);
-        model.addAttribute("smeUser", smeUser);
-        model.addAttribute("bankUser", bankUser);
         model.addAttribute("retailUser", retailUser);
+        model.addAttribute("smeUser", smeUser);
+        model.addAttribute("user", user);
+        model.addAttribute("bankUser", bankUser);
         return "index";
     }
 
@@ -63,19 +63,14 @@ public class LoginController {
         if (loginOk) {
             HttpSession session = request.getSession(true);
             String userName = user.getUserName();//BvB
-//            List<RetailUser> loggedInRetailUser = retailUserDao.findByUserName(user.getUserName());
             List<RetailUser> loggedInRetailUsers = retailUserDao.findByUserName(userName);
             //ophalen & opslaan alle bankaccounts die bij deze user horen
             RetailUser loggedInRetailUser = loggedInRetailUsers.get(0);
-//            List<BankAccount> loggedInBankAccounts = loggedInRetailUser.get(0).getBankAccounts();
             List<BankAccount> loggedInBankAccounts = loggedInRetailUser.getBankAccounts();
             // -- for login session ---
-//            session.setAttribute("userName", user.getUserName());
-//            session.setAttribute("retailUser", loggedInRetailUser.get(0));
             session.setAttribute("userName", userName);
             session.setAttribute("retailUser", loggedInRetailUser);
             session.setAttribute("userId", user.getUserId());
-//            model.addAttribute("userName", loggedInRetailUser.get(0).getUserName());
             model.addAttribute("userName", loggedInRetailUser.getUserName());
             model.addAttribute("retailUserFullName", loggedInRetailUser.getFullName());
             model.addAttribute("allBankAccounts", loggedInBankAccounts);
@@ -85,11 +80,10 @@ public class LoginController {
     }
 
 
-    @GetMapping(value ="zakelijk-klant")
-    public String newCompanyHandler(Model model) {
+    @GetMapping(value ="zakelijk-login")
+    public String newCompanyHandler(@ModelAttribute User user, Model model) {
         SMEUser smeUser = new SMEUser();
-        Company company = new Company();
-        model.addAttribute("company", company);
+        model.addAttribute("user", user);
         model.addAttribute("smeUser", smeUser);
         return "company_login";
     }

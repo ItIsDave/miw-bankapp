@@ -44,6 +44,11 @@ public class SMEUser extends User {
         this.roleEmployee = roleEmployee;
     }
 
+    public SMEUser(String userName, String userPassword, String roleEmployee, int bsn) {
+        this.roleEmployee = roleEmployee;
+        this.bsn = bsn;
+    }
+
     public SMEUser(String userName, String userPassword, String roleEmployee, Company company) {
         super(userName, userPassword);
         this.roleEmployee = roleEmployee;

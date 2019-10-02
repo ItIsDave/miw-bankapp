@@ -7,6 +7,7 @@ import miw.s16.couch.couch.model.dao.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.validation.constraints.*;
 import java.util.*;
 
 
@@ -52,13 +53,6 @@ public class HibernateLab {
             // user info for checking if DB is empty
           /*  User johnDoe = new User("John Doe", "1");
 
-            // Inserting user data
-            User adamantia = new User("Adamantia", "1234");
-            User alet = new User("Alet", "1234");
-            User arnout = new User("Arnout", "1234");
-           // RetailUser boudewijn = new RetailUser("Boudewijn", "1234");
-            User david = new User("David", "1234");
-            User patrick = new User("Patrick", "1234");
 
             // Creating Bank account data
             BankAccount account1 = new BankAccount("NL10COUC0123456790", 80.00);
@@ -136,11 +130,39 @@ public class HibernateLab {
 //           System.out.println("testdata is ingelezen.");
 
             //bankmedewerkers voor HoofdMKB en HoofdParticulieren
+           RetailUser boudewijn = new RetailUser("Boudewijn", "1234",  987654321, "Boudewijn",
+                   "", "Simpson", "Kalverstraat", 25, "B", "1011AB", "Amsterdam", "690000000", "25-10-1900", "bart@hva.nl", "Retail");
+
+           retailUserDao.save(boudewijn);
+           BankAccount account6 = new BankAccount("NL10COUC0523456795", 13000);
+
+           boudewijn.addBankAccount(account6);
+           bankAccountDao.save(account6);
+
+
             BankUser bankUser1 = new BankUser("piet", "pietgeheim", "Hoofd MKB");
             BankUser bankUser2 = new BankUser("marie", "mariegeheim", "Hoofd Particulieren");
 
             bankUserDao.save(bankUser1);
             bankUserDao.save(bankUser2);
+
+           SMEUser smeUser1 = new SMEUser("goldman", "1234", "Eigenaar", 10000020);
+           smeUserDao.save(smeUser1);
+
+
+
+
+
+            Company testCOmpany = new Company(10876546,"BLAH", "B.V", "ICT", "Wegstraat", 15, "1024AM", "Amsterdam", "786453627", 1245, true, "blah@gmail.com");
+           BankAccount account10 = new BankAccount("NL10COUC0523456665", 10000.00);
+
+            testCOmpany.addCompanyAccount(account10);
+           bankAccountDao.save(account10);
+            companyDao.save(testCOmpany);
+
+        smeUser1.setCompany(testCOmpany);
+        smeUserDao.save(smeUser1);
+
 
         }
 
