@@ -86,7 +86,14 @@ public class Company {
         this.companyAccounts = companyAccounts;
     }
 
-    public Company(@NotNull @Positive @Min(value = 10000000, message = "KvK-nummer moet 8 cijfers zijn zonder punten.") @Max(value = 99999999, message = "KvK-nummer moet 8 cijfers zijn zonder punten.") int chamberOfCommerceId, @NotEmpty String companyName, @NotEmpty String companyType, @NotEmpty String sector, @NotEmpty String streetName, @NotNull @Positive int streetNumber, @NotEmpty String zipcode, @NotEmpty String city, @NotEmpty @Size(min = 9, max = 11) String phoneNumber, int pinCode, boolean hasPin, List<SMEUser> employees, List<BankAccount> companyAccounts, BankUser accountManager, String email) {
+    public Company(@NotNull @Positive @Min(value = 10000000,
+            message = "KvK-nummer moet 8 cijfers zijn zonder punten.") @Max(value = 99999999,
+            message = "KvK-nummer moet 8 cijfers zijn zonder punten.") int chamberOfCommerceId,
+                   @NotEmpty String companyName, @NotEmpty String companyType, @NotEmpty String sector,
+                   @NotEmpty String streetName, @NotNull @Positive int streetNumber, @NotEmpty String zipcode,
+                   @NotEmpty String city, @NotEmpty @Size(min = 9, max = 11) String phoneNumber,
+                   int pinCode, boolean hasPin, List<SMEUser> employees,
+                   List<BankAccount> companyAccounts, BankUser accountManager, String email) {
         this.chamberOfCommerceId = chamberOfCommerceId;
         this.companyName = companyName;
         this.companyType = companyType;

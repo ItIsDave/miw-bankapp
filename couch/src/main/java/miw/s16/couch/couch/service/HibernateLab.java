@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.*;
 
+import static java.lang.Boolean.FALSE;
 
 
 @Service
@@ -131,9 +132,8 @@ public class HibernateLab {
             retailUserDao.save(boudewijn);*/
 
             userDao.save(johnDoe);
-//           testData.makeRetailUserList();                          //AMS: haalt retail data op uit CSV file
-//           testData.retailUserListSplitAddBankaccountAndSave();    //AMS: verwerken testdata
-//           System.out.println("testdata is ingelezen.");
+            testData.makeRetailUserList();                          //AMS: haalt retail data op uit CSV file
+            testData.retailUserListSplitAddBankaccountAndSave();    //AMS: verwerken testdata
 
             //bankmedewerkers voor HoofdMKB en HoofdParticulieren
             BankUser bankUser1 = new BankUser("piet", "pietgeheim", "Hoofd MKB");
@@ -142,9 +142,40 @@ public class HibernateLab {
             bankUserDao.save(bankUser1);
             bankUserDao.save(bankUser2);
 
+           //testdata 11 keer SMEUser, Bankaccount, BankUser, Company - door Arnout toegevoegd
+           for (int index = 10; index < 21 ; index++) {
+               String userNameAccountManager = "AccountMan" + index;
+               String userPwAccountManager = "PwAccountMan" + index;
+               BankUser accountManager1 = new BankUser(userNameAccountManager, userPwAccountManager, "Account Manager");
+               bankUserDao.save(accountManager1);
+               //maak een bankaccount met saldo en IBAN, save
+               final int MAX_INIT_BALANCE = 10000000;
+               Double balance = Math.round(Math.random() * MAX_INIT_BALANCE) / 100.0;  //bedrag met 2 decimalen
+               BankAccount bankAccount1 = new BankAccount(balance);
+               bankAccount1.setAccountType("Zakelijk");
+               bankAccountDao.save(bankAccount1);
+               //maak smeUser, smeUserList, bankAccountList, company,
+               String directeurUserName = "Directeur" + index;
+               SMEUser smeUser1 = new SMEUser(directeurUserName, "directeur", "CEO");
+               smeUser1.setBsn(10000010);
+               //2 lijsten om company te kunnen vullen
+               List<SMEUser> smeUserList1 = new ArrayList<>();
+               smeUserList1.add(smeUser1);
+               List<BankAccount> bankAccountList1 = new ArrayList<>();
+               bankAccountList1.add(bankAccount1);
+               Integer NumberKvK = 10000000 + index;
+               Company company1 = new Company(NumberKvK, "Bedrijf1", "Eenmanszaak", "Verzekeringen", "Marten Meesweg", 1, "3012AA",
+                       "Rotterdam", "0104134321", 1234, FALSE, smeUserList1, bankAccountList1,
+                       accountManager1, "b.verzekeraar@nn.nl");  //company moet worden gevuld met list<SMEUser>: smeUserList1
+               company1.setSector("ICT");
+               companyDao.save(company1);
+               smeUser1.setCompany(company1);    //dit koppelt deze company aan de smeUser
+               smeUserDao.save(smeUser1);
+           }  //einde vd loop
         }
 
         System.out.println("dbinit klaar.");
+
 
 
 
