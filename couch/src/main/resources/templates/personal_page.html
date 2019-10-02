@@ -2,13 +2,56 @@
 
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+
+    <style>
+        body {
+            background-color: aliceblue!important;
+        }
+
+        form {
+            color: rgb(52,50,83);
+        }
+        nav {
+            color: rgb(52, 50, 83);
+            margin-left: 360px;
+            margin-right: 40px;
+        }
+        table {
+            color: rgb(52,50,83);
+            width: 30%;
+        }
+        .bg-primary {
+            background-color: #112D32!important;
+            color: white!important;
+        }
+        .bg-secondary {
+            background-color: #11254E58!important;
+            color: rgb(52,50,83)!important;
+        }
+    </style>
+
     <title>User Dashboard</title>
 </head>
 <body>
-<!--<h1>Welkom <span th:text="${userName}"></span></h1>-->
-<h1>Welkom <span th:text="${retailUserFullName}"></span></h1>
+<nav class="navbar navbar-default">
+<div class="container-fluid">
+    <div class="navbar-header">
+        <a class="navbar-brand" >Couch Bank</a>
+    </div>
+    <ul class="nav navbar-nav">
+        <li class="active"><a href="/">Uitloggen</a></li>
+    </ul>
+</div>
+</nav>
+    <div class="row"></div>
+    <div class="p-3 mb-2 bg-primary text-white">Welkom <span th:text="${retailUserFullName}"></span></div>
+<div class="p-3 mb-2 bg-secondary text-white">
 
 <div th:unless="${#lists.isEmpty(allBankAccounts)}">
 
@@ -29,13 +72,11 @@
 <br>
 <form action="#" th:action="@{newAccountRequest}" th:object="${user}" method="post">
     <tr>Klik om een nieuwe rekening te openen: </tr>
-    <input type="submit" value="Rekening openen">
-</form>
-Klik hier indien u een koppelcode heeft gekregen om een en/of rekening te openen:
+    <input type="submit" value="Rekening openen"></form>
+    <br>
+    <tr>Klik hier indien u een koppelcode heeft gekregen om een en/of rekening te openen: </tr>
 <a th:href="@{Koppelcode_invoeren}"><button>Koppelcode invoeren</button></a>
 <br>
-
-<a href="/">Uitloggen</a>
-
+</div>
 </body>
 </html>

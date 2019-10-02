@@ -43,7 +43,6 @@ public class LoginControllerBankemployee {
         return "index_bankemployee";
     }
 
-
     @PostMapping(value = "overview_bankemployee")
     public String loginHandler(@ModelAttribute User user, Model model, HttpServletRequest request) {
         boolean loginOk = validator.validateMemberPassword(user);
@@ -54,19 +53,22 @@ public class LoginControllerBankemployee {
             session.setAttribute("userName", user.getUserName());
             session.setAttribute("userId", user.getUserId());
             model.addAttribute("userName", loggedInBankUser.get(0).getUserName());
-            boolean roleBoolean = (loggedInBankUser.get(0).getRole().equals("Hoofd Particulieren"));
-            model.addAttribute("roleBoolean", roleBoolean);
-            if (roleBoolean) {
+            boolean roleBooleanHoofdParticulieren = (loggedInBankUser.get(0).getRole().equals("Hoofd Particulieren"));
+            model.addAttribute("roleBooleanHP", roleBooleanHoofdParticulieren);
+            boolean roleBooleanHoofdMKB = (loggedInBankUser.get(0).getRole().equals("Hoofd MKB"));
+            model.addAttribute("roleBooleanHMKB", roleBooleanHoofdMKB);
+            boolean roleBooleanAccountManager = (loggedInBankUser.get(0).getRole().equals("Account Manager"));
+            model.addAttribute("roleBooleanAM", roleBooleanAccountManager);
+            if (roleBooleanHoofdParticulieren) {
                 ArrayList<String> top10ClientList = balanceTopTen.balanceTopTen_Client();
                 model.addAttribute("top10_Client_List",top10ClientList);
                 model.addAttribute("listSize", top10ClientList.size());
-            } else {
-                System.out.println("info volgt voor de hoofdMKB.");
-                //hier code voor de HoofdMKB
+            }
+            if (roleBooleanHoofdMKB) {
+
             }
             return "personal_page_bankemployee";
         }
         return "login_failed_bankemployee";
     }
-
 }
