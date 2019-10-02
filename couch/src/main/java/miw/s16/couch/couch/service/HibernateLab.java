@@ -181,13 +181,14 @@ public class HibernateLab {
                //maak smeUser, smeUserList, bankAccountList, company,
                String directeurUserName = "Directeur" + index;
                SMEUser smeUser1 = new SMEUser(directeurUserName, "directeur", "CEO");
-               smeUser1.setBsn(10000010);
+               // bsn moet unique zijn
+               smeUser1.setBsn(10000000 + index);
                //2 lijsten om company te kunnen vullen
                List<SMEUser> smeUserList1 = new ArrayList<>();
                smeUserList1.add(smeUser1);
                List<BankAccount> bankAccountList1 = new ArrayList<>();
                bankAccountList1.add(bankAccount1);
-               Integer NumberKvK = 10000000 + index;
+               int NumberKvK = 10000000 + index;
                Company company1 = new Company(NumberKvK, "Bedrijf1", "Eenmanszaak", "Verzekeringen", "Marten Meesweg", 1, "3012AA",
                        "Rotterdam", "0104134321", 1234, FALSE, smeUserList1, bankAccountList1,
                        accountManager1, "b.verzekeraar@nn.nl");  //company moet worden gevuld met list<SMEUser>: smeUserList1

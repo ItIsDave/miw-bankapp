@@ -37,7 +37,7 @@ public class TransactionController implements WebMvcConfigurer {
         // log in session
         Transaction transaction = new Transaction();
         HttpSession session = request.getSession (true);
-        String userName = (String) session.getAttribute("userName");
+//        String userName = (String) session.getAttribute("userName");
         String iban = (String) session.getAttribute("clickedIBAN");
         BankAccount bankAccountFrom = bankAccountDao.findByIban(iban);
         transaction.setBankAccount(accountTo);
@@ -45,10 +45,9 @@ public class TransactionController implements WebMvcConfigurer {
         System.out.println("datum - tijd is: " + transaction.getTransactionDate().toString());
         model.addAttribute("transaction", transaction);
         model.addAttribute("date", transaction.getTransactionDay());//BvB
-        model.addAttribute("bankAccountFrom", bankAccountFrom.getIBAN());
+        model.addAttribute("bankAccountFrom", iban);
         model.addAttribute("bankAccountTo", transaction.getToAccount());
         model.addAttribute("fullNames", session.getAttribute("fullNames"));//BvB
-        model.addAttribute("data", session.getAttribute("data"));
         model.addAttribute("balance", bankAccountFrom.twoDecimalBalance(bankAccountFrom.getBalance()));
         return "transaction";
     }

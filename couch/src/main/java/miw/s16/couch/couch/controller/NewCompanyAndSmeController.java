@@ -117,7 +117,7 @@ public class NewCompanyAndSmeController implements WebMvcConfigurer {
             smeUser.setCompany(company);
             smeUserDao.save(smeUser);
             // test if works for killing session
-            session.invalidate();
+//            session.invalidate();
             return "new_SMEUser_success";
 //
         }

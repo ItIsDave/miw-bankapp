@@ -5,6 +5,7 @@ import miw.s16.couch.couch.model.dao.BankAccountDao;
 import miw.s16.couch.couch.model.dao.CompanyDao;
 import miw.s16.couch.couch.model.dao.SMEUserDao;
 import miw.s16.couch.couch.service.PasswordValidator;
+import org.apache.tomcat.util.digester.ArrayStack;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -44,7 +45,7 @@ public class CompanyPageController {
             session.setAttribute("fullNames",companyData);
             model.addAttribute("userName", loggedInUser.get(0).getUserName());
             model.addAttribute("role", loggedInUser.get(0).getRoleEmployee());
-            model.addAttribute("companyName", loggedInUser.get(0).getCompany().getCompanyName());
+            model.addAttribute("company",  company);
             model.addAttribute("companyAccounts", loggedInUser.get(0).getCompany().getCompanyAccounts().get(0));
             model.addAttribute("allBankAccounts", loggedInUser.get(0).getCompany().getCompanyAccounts());
             return "sme_page";
@@ -60,16 +61,20 @@ public class CompanyPageController {
         int kvkNr = (int) session.getAttribute("companyKvK");
         Company currentCompany = companyDao.findBychamberOfCommerceId(kvkNr);
         SMEUser loggedInUser = smeUserDao.findByUserName(userName).get(0);
+        System.out.println(loggedInUser.getUserName());
+        System.out.println(currentCompany.getCompanyType());
         BankAccount newBankAccount = new BankAccount();
         currentCompany.addCompanyAccount(newBankAccount);
         bankAccountDao.save(newBankAccount);
         companyDao.save(currentCompany);
+        List<User> employeeList = new ArrayStack<>();
         List<BankAccount> bankAccountsList = currentCompany.getCompanyAccounts();
-        model.addAttribute("userName", userName);
+        model.addAttribute("company", loggedInUser.getCompany());
+        model.addAttribute("userName", loggedInUser.getRoleEmployee());
         model.addAttribute("role", loggedInUser.getRoleEmployee());
         model.addAttribute("companyName", loggedInUser.getCompany().getCompanyName());
-        model.addAttribute("companyAccounts", loggedInUser.getCompany().getCompanyAccounts().get(0));
         model.addAttribute("allBankAccounts", bankAccountsList);
+        model.addAttribute("allEmployees", employeeList);
         return "sme_page";
     }
 
@@ -78,18 +83,17 @@ public class CompanyPageController {
     public String companyAccountDetailsHandler(@RequestParam("id") int bankAccountId, Model model, HttpServletRequest request){
         HttpSession session = request.getSession(true);
         String userName = (String) session.getAttribute("userName");
-        //chosen Iban incl balance & transactions collected from DB
         BankAccount clickedBankAccount = bankAccountDao.findByBankAccountId(bankAccountId);
-        List <Transaction> transactionList = clickedBankAccount.getTransactions();
-        List <Transaction> transactionToList = clickedBankAccount.getTransactionsTo();
-        for (Transaction t:transactionToList) { transactionList.add(t); }
-        Collections.sort(transactionList);
-        Collections.reverse(transactionList);
+        session.setAttribute("clickedIBAN", clickedBankAccount.getIBAN());
+//        List <Transaction> transactionList = clickedBankAccount.getTransactions();
+//        List <Transaction> transactionToList = clickedBankAccount.getTransactionsTo();
+//        for (Transaction t:transactionToList) { transactionList.add(t); }
+//        Collections.sort(transactionList);
+//        Collections.reverse(transactionList);
         model.addAttribute("iban", clickedBankAccount.getIBAN());
         model.addAttribute("balance", clickedBankAccount.twoDecimalBalance(clickedBankAccount.getBalance()));
-        model.addAttribute("allTransactions", transactionList);
+        model.addAttribute("allTransactions", clickedBankAccount.getTransactions());
         model.addAttribute("fullNames", session.getAttribute("fullNames"));
-        session.setAttribute("clickedBankAccount",clickedBankAccount.getIBAN());
         session.setAttribute("bankAccountId", clickedBankAccount.getBankAccountId());
         return "company_account_details";
     }
