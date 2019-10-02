@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head>Zakelijk Pagina
+<head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="/static/css/styles.css">
+        <title>Zakelijk Pagina</title>
 </head>
 <body>
+<h1>Zakelijk Pagina</h1>
+<h2>Bedrijfsnaam: <span th:text="${company.companyName}"></span></h2>
+<h3>KvK nummer: <span th:text="${company.chamberOfCommerceId}"></span></h3>
+<h3>Ondernemingsform: <span th:text="${company.companyType}"></span></h3>
+<p>Gebruiker: <span th:text="${userName}"></span></p><p>role: <span th:text ="${role}"></span></p>
 
-<h1> <span th:text="${company.companyName}"></span></h1>
-
-        <br>
-<p>Access: <span th:text="${userName}"> role: <span th:text ="${role}"></span></span></p>
 
 <div th:unless="${#lists.isEmpty(allBankAccounts)}">
 

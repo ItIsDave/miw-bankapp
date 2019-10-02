@@ -10,11 +10,10 @@
     <title>Transaction</title>
 </head>
 <body>
-<!--<h1>Welkom <span th:text="${userName}"></span></h1> BvB-->
-<h1>Welkom <span th:text="${fullNames}"></span></h1>
+<h1><span th:text="${fullNames}"></span></h1>
 <h2>IBAN <span th:text="${bankAccountFrom}"></span></h2>
-<h2>Saldo <span th:text="${balance}" th:field="*{balance}"> </span> euro </h2>
-<h2>Transactie details</h2>
+<h3>Saldo <span th:text="${balance}" th:field="*{balance}"> </span> euro </h3>
+<h3>Transactie details</h3>
 
 <form action="#" th:action="@{transactionConfirmation(id=${bankAccountFrom})}" th:object="${transaction}" method="post">
     <input type="hidden" th:field="*{fromAccount}"/>
@@ -47,7 +46,12 @@
     </table>
 </form>
 <br>
+<td th:unless="${bankAccountType=='Zakelijk'}">
 Ga <a href="/overview">terug</a> naar uw persoonlijke pagina.
+</td>
+<td th:if="${bankAccountType=='Zakelijk'}">
+    Ga <a href="/zakelijk-klant">terug</a> naar uw zakelijk pagina.
+</td>
 <br>
 <br>
 <a href="/">Uitloggen</a>
