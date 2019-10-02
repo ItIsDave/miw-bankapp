@@ -10,6 +10,11 @@
 Klik <a href="/transactionRequest">hier</a> voor een nieuwe transactie te maken.
 <br>
 <br>
-Ga <a href="/overview">terug</a> naar uw profiel pagina.
+<td th:unless="${bankAccountType=='Zakelijk'}">
+    Ga <a href="/overview">terug</a> naar uw persoonlijke pagina.
+</td>
+<td th:if="${bankAccountType=='Zakelijk'}">
+    Ga <a href="/zakelijk-klant">terug</a> naar uw zakelijk pagina.
+</td>
 </body>
 </html>

@@ -74,10 +74,12 @@ public class TransactionController implements WebMvcConfigurer {
             model.addAttribute("bankAccountTo", transaction.getToAccount());
             model.addAttribute("userName", userName);
             model.addAttribute("balance", bankAccountFrom.twoDecimalBalance(bankAccountFrom.getBalance()));
+            model.addAttribute("bankAccountType", bankAccountFrom.getAccountType());
             return "transaction";
         } else {
             String feedback = transactionService.TransactionCalculation(transaction.getToAccount(), bankAccountFrom,
                     transaction.getAmount(), transaction.getTransactionDate(), transaction.getDescription(), transaction.getPin());
+            model.addAttribute("bankAccountType", bankAccountFrom.getAccountType());
             model.addAttribute("feedback", feedback);
             return "transaction_feedback";
         }
