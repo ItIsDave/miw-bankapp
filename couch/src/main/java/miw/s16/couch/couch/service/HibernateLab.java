@@ -103,10 +103,10 @@ public class HibernateLab {
             accountTest.setAccountType("Zakelijk");
             BankUser accountManagerTest = new BankUser("Jan Zucchini", "1234", "Account Manager");
             List<SMEUser> employees = new ArrayList<>();
-            SMEUser smeUserTest = new SMEUser("FranT", "1234", "CEO",20000000 );
-            SMEUser smeUserTest2 = new SMEUser("FrankP", "1234", "Medewerker", 20000001);
-            SMEUser smeUserTest3 = new SMEUser("JohnA", "1234", "Admin", 20000002);
-            SMEUser existingRetailUser = new SMEUser("Char", "1234", "Medewerker", 987654325);
+            SMEUser smeUserTest = new SMEUser("sme1", "1234", "CEO",20000000, "Fran", " ", "Tomato");
+            SMEUser smeUserTest2 = new SMEUser("sme2", "1234", "Medewerker", 20000001, "Frank", "van", "Zucchini");
+            SMEUser smeUserTest3 = new SMEUser("sme3", "1234", "Admin", 20000002, "John", "de", "Artichoke");
+            SMEUser existingRetailUser = new SMEUser("sme4", "1234", "Medewerker", 987654325, "Charlotte", "de", "Witte");
             employees.add(smeUserTest);
             employees.add(smeUserTest2);
             employees.add(smeUserTest3);

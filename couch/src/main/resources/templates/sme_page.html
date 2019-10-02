@@ -25,7 +25,26 @@
                 <tr th:each="bankAccount: ${allBankAccounts}">
                         <td><a href="/companyAccountDetails" th:href="@{/companyAccountDetails(id=${bankAccount.bankAccountId})}"
                                th:text="${bankAccount.iBAN}"></a></td>
-                        <td><span th:text="${#numbers.formatDecimal(bankAccount.balance, 1, 2)}"/></td>
+                        <td><span th:text="${#numbers.formatDecimal(bankAccount.balance, 1, 2)}"></span></td>
+                </tr>
+        </table>
+        <br>
+</div>
+
+<div th:unless="${#lists.isEmpty(employees)}">
+
+        <table>
+                <tr>
+                        <th>Voornaam</th>
+                        <th>Tussn</th>
+                        <th>Achternaam</th>
+                        <th>Role</th>
+                </tr>
+                <tr th:each="smeUser: ${employees}">
+                        <td><span th:text="${smeUser.firstName}"></span></td>
+                        <td><span th:text="${smeUser.middleName}"></span></td>
+                        <td><span th:text="${smeUser.lastName}"></span></td>
+                        <td><span th:text="${smeUser.roleEmployee}"></span></td>
                 </tr>
         </table>
         <br>

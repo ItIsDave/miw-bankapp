@@ -46,7 +46,7 @@ public class CompanyPageController {
             model.addAttribute("userName", loggedInUser.get(0).getUserName());
             model.addAttribute("role", loggedInUser.get(0).getRoleEmployee());
             model.addAttribute("company", company);
-            model.addAttribute("companyAccounts", loggedInUser.get(0).getCompany().getCompanyAccounts());
+            model.addAttribute("employees", company.getEmployees());
             model.addAttribute("allBankAccounts", loggedInUser.get(0).getCompany().getCompanyAccounts());
             return "sme_page";
         }
@@ -64,9 +64,8 @@ public class CompanyPageController {
         model.addAttribute("userName", userName);
         model.addAttribute("role", smeUser.getRoleEmployee());
         model.addAttribute("company", currentCompany);
-        model.addAttribute("companyAccounts", currentCompany.getCompanyAccounts());
         model.addAttribute("allBankAccounts", currentCompany.getCompanyAccounts());
-
+        model.addAttribute("employees", currentCompany.getEmployees());
         return "sme_page";
 
     }
@@ -79,20 +78,18 @@ public class CompanyPageController {
         int kvkNr = (int) session.getAttribute("companyKvK");
         Company currentCompany = companyDao.findBychamberOfCommerceId(kvkNr);
         SMEUser loggedInUser = smeUserDao.findByUserName(userName).get(0);
-        System.out.println(loggedInUser.getUserName());
-        System.out.println(currentCompany.getCompanyType());
         BankAccount newBankAccount = new BankAccount();
+        newBankAccount.setAccountType("Zakelijk");
         currentCompany.addCompanyAccount(newBankAccount);
         bankAccountDao.save(newBankAccount);
         companyDao.save(currentCompany);
-        List<User> employeeList = new ArrayStack<>();
         List<BankAccount> bankAccountsList = currentCompany.getCompanyAccounts();
         model.addAttribute("company", loggedInUser.getCompany());
         model.addAttribute("userName", loggedInUser.getRoleEmployee());
         model.addAttribute("role", loggedInUser.getRoleEmployee());
         model.addAttribute("companyName", loggedInUser.getCompany().getCompanyName());
         model.addAttribute("allBankAccounts", bankAccountsList);
-        model.addAttribute("allEmployees", employeeList);
+        model.addAttribute("employees", currentCompany.getEmployees());
         return "sme_page";
     }
 
@@ -103,11 +100,11 @@ public class CompanyPageController {
         String userName = (String) session.getAttribute("userName");
         BankAccount clickedBankAccount = bankAccountDao.findByBankAccountId(bankAccountId);
         session.setAttribute("clickedIBAN", clickedBankAccount.getIBAN());
-//        List <Transaction> transactionList = clickedBankAccount.getTransactions();
-//        List <Transaction> transactionToList = clickedBankAccount.getTransactionsTo();
-//        for (Transaction t:transactionToList) { transactionList.add(t); }
-//        Collections.sort(transactionList);
-//        Collections.reverse(transactionList);
+        List <Transaction> transactionList = clickedBankAccount.getTransactions();
+        List <Transaction> transactionToList = clickedBankAccount.getTransactionsTo();
+        for (Transaction t:transactionToList) { transactionList.add(t); }
+        Collections.sort(transactionList);
+        Collections.reverse(transactionList);
         model.addAttribute("iban", clickedBankAccount.getIBAN());
         model.addAttribute("balance", clickedBankAccount.twoDecimalBalance(clickedBankAccount.getBalance()));
         model.addAttribute("allTransactions", clickedBankAccount.getTransactions());
