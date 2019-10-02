@@ -1,0 +1,16 @@
+.big-heading {
+    font-family: "Source Sans Pro";
+    font-size: 3.5rem;
+    line-height: 1.5;
+}
+
+.container-fluid {
+    padding: 7% 55%;
+}
+.container-end{
+    padding: 4% 10%;
+}
+
+table {
+    border-color: red;
+}
