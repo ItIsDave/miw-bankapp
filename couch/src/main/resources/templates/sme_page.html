@@ -5,9 +5,34 @@
 <body>
 <h1> <span th:text="${companyName}"></span></h1>
 <h2><span th:text="${companyAccounts}"></span></h2>
-
-<h3>Page under construction. </h3>
         <br>
 <p>Access: <span th:text="${userName}"> role: <span th:text ="${role}"></span></p>
+
+<div th:unless="${#lists.isEmpty(allBankAccounts)}">
+
+        <table>
+                <tr>
+                        <th>Bankrekening(IBAN)</th>
+                        <th>Saldo</th>
+                </tr>
+                <tr th:each="bankAccount: ${allBankAccounts}">
+                        <td><a href="/bankAccountDetails" th:href="@{/bankAccountDetails(id=${bankAccount.bankAccountId})}"
+                               th:text="${bankAccount.iBAN}"></a></td>
+                        <td><span th:text="${#numbers.formatDecimal(bankAccount.balance, 1, 2)}"/></td>
+                </tr>
+        </table>
+        <br>
+</div>
+
+<br>
+<form action="#" th:action="@{newCompanyAccountRequest}" th:object="${company}" method="post">
+        <tr>Klik om een nieuwe rekening te openen: </tr>
+        <input type="submit" value="Rekening openen">
+</form>
+
+
+<a href="/">Uitloggen</a>
+
 </body>
 </html>
+
