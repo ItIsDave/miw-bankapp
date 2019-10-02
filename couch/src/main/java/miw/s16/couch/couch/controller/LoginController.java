@@ -59,17 +59,25 @@ public class LoginController {
     public String loginHandler(@ModelAttribute User user, Model model, HttpServletRequest request) {
         boolean loginOk = validator.validateMemberPassword(user);
 
-
+//adding full name for naming (tenaamstelling) purposes, and some code cleaning - BvB
         if (loginOk) {
             HttpSession session = request.getSession(true);
-            List<RetailUser> loggedInRetailUser = retailUserDao.findByUserName(user.getUserName());
+            String userName = user.getUserName();//BvB
+//            List<RetailUser> loggedInRetailUser = retailUserDao.findByUserName(user.getUserName());
+            List<RetailUser> loggedInRetailUsers = retailUserDao.findByUserName(userName);
             //ophalen & opslaan alle bankaccounts die bij deze user horen
-            List<BankAccount> loggedInBankAccounts = loggedInRetailUser.get(0).getBankAccounts();
+            RetailUser loggedInRetailUser = loggedInRetailUsers.get(0);
+//            List<BankAccount> loggedInBankAccounts = loggedInRetailUser.get(0).getBankAccounts();
+            List<BankAccount> loggedInBankAccounts = loggedInRetailUser.getBankAccounts();
             // -- for login session ---
-            session.setAttribute("userName", user.getUserName());
-            session.setAttribute("retailUser", loggedInRetailUser.get(0));
+//            session.setAttribute("userName", user.getUserName());
+//            session.setAttribute("retailUser", loggedInRetailUser.get(0));
+            session.setAttribute("userName", userName);
+            session.setAttribute("retailUser", loggedInRetailUser);
             session.setAttribute("userId", user.getUserId());
-            model.addAttribute("userName", loggedInRetailUser.get(0).getUserName());
+//            model.addAttribute("userName", loggedInRetailUser.get(0).getUserName());
+            model.addAttribute("userName", loggedInRetailUser.getUserName());
+            model.addAttribute("retailUserFullName", loggedInRetailUser.getFullName());
             model.addAttribute("allBankAccounts", loggedInBankAccounts);
             return "personal_page";
         }

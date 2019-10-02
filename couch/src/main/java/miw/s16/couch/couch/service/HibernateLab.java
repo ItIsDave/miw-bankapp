@@ -131,9 +131,9 @@ public class HibernateLab {
             retailUserDao.save(boudewijn);*/
 
             userDao.save(johnDoe);
- //           testData.makeRetailUserList();                          //AMS: haalt retail data op uit CSV file
- //           testData.retailUserListSplitAddBankaccountAndSave();    //AMS: verwerken testdata
- //           System.out.println("testdata is ingelezen.");
+//           testData.makeRetailUserList();                          //AMS: haalt retail data op uit CSV file
+//           testData.retailUserListSplitAddBankaccountAndSave();    //AMS: verwerken testdata
+//           System.out.println("testdata is ingelezen.");
 
             //bankmedewerkers voor HoofdMKB en HoofdParticulieren
             BankUser bankUser1 = new BankUser("piet", "pietgeheim", "Hoofd MKB");
