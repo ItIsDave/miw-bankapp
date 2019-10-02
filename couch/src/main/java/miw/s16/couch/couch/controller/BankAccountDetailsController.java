@@ -1,9 +1,7 @@
 package miw.s16.couch.couch.controller;
 
 import miw.s16.couch.couch.model.BankAccount;
-import miw.s16.couch.couch.model.RetailUser;
 import miw.s16.couch.couch.model.Transaction;
-import miw.s16.couch.couch.model.User;
 import miw.s16.couch.couch.model.dao.BankAccountDao;
 import miw.s16.couch.couch.model.dao.RetailUserDao;
 import miw.s16.couch.couch.service.Naming;
@@ -15,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
