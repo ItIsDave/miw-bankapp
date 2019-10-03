@@ -2,6 +2,7 @@ package miw.s16.couch.couch.controller;
 
 import miw.s16.couch.couch.model.*;
 import miw.s16.couch.couch.model.dao.*;
+import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -115,6 +116,8 @@ public class NewCompanyAndSmeController implements WebMvcConfigurer {
             company = companyDao.findByCompanyName(companyName).get(0);
             smeUser.setCompany(company);
             smeUserDao.save(smeUser);
+            // test if works for killing session
+//            session.invalidate();
             return "new_SMEUser_success";
 //
         }

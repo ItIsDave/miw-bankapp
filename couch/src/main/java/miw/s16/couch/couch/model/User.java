@@ -17,6 +17,7 @@ import java.util.List;
 
 @Configuration
 @EnableAutoConfiguration
+
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class User  {

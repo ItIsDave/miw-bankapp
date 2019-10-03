@@ -57,9 +57,17 @@ public class Company {
         this.companyName = companyName;
     }
 
-    public Company(@NotNull @Min(value = 10000000, message = "KvK-nummer moet 8 cijfers zijn zonder punten.") @Max(value = 99999999, message = "KvK-nummer moet 8 cijfers zijn zonder punten.") int chamberOfCommerceId, @NotEmpty String companyName) {
+
+    public Company( int chamberOfCommerceId,String companyName) {
         this.chamberOfCommerceId = chamberOfCommerceId;
         this.companyName = companyName;
+    }
+
+
+    public Company(int chamberOfCommerceId, String companyName, String companyType) {
+        this.chamberOfCommerceId = chamberOfCommerceId;
+        this.companyName = companyName;
+        this.companyType = companyType;
     }
 
     public Company(int chamberOfCommerceId, String companyName, List<SMEUser> employees) {
@@ -76,7 +84,7 @@ public class Company {
         this.companyAccounts = companyAccounts;
     }
 
-    public Company(int chamberOfCommerceId, @NotEmpty String companyName, String sector, int pinCode, boolean hasPin, List<SMEUser> employees, List<BankAccount> companyAccounts) {
+    public Company(int chamberOfCommerceId, String companyName, String sector, int pinCode, boolean hasPin, List<SMEUser> employees, List<BankAccount> companyAccounts) {
         this.chamberOfCommerceId = chamberOfCommerceId;
         this.companyName = companyName;
         this.sector = sector;
@@ -94,6 +102,7 @@ public class Company {
                    @NotEmpty String city, @NotEmpty @Size(min = 9, max = 11) String phoneNumber,
                    int pinCode, boolean hasPin, List<SMEUser> employees,
                    List<BankAccount> companyAccounts, BankUser accountManager, String email) {
+
         this.chamberOfCommerceId = chamberOfCommerceId;
         this.companyName = companyName;
         this.companyType = companyType;

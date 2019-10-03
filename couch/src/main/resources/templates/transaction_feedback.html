@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
+    <title>Transaction</title>
     <meta charset="UTF-8">
-    <title>Welkom</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet"  href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}" >
 </head>
 <body>
 <h1 th:utext="${#strings.unescapeJava(#strings.replace(#strings.escapeJava(feedback),'\n','&lt;br /&gt;'))}"></h1>
@@ -10,6 +13,11 @@
 Klik <a href="/transactionRequest">hier</a> voor een nieuwe transactie te maken.
 <br>
 <br>
-Ga <a href="/overview">terug</a> naar uw profiel pagina.
+<td th:unless="${bankAccountType=='Zakelijk'}">
+    Ga <a href="/overview">terug</a> naar uw persoonlijke pagina.
+</td>
+<td th:if="${bankAccountType=='Zakelijk'}">
+    Ga <a href='/zakelijk'>terug</a> naar uw zakelijk pagina.
+</td>
 </body>
 </html>

@@ -3,22 +3,22 @@
       xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet"  href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}" >
     <title>Transaction</title>
 </head>
 <body>
-<!--<h1>Welkom <span th:text="${userName}"></span></h1> BvB-->
-<h1>Welkom <span th:text="${fullNames}"></span></h1>
+<h1><span th:text="${fullNames}"></span></h1>
 <h2>IBAN <span th:text="${bankAccountFrom}"></span></h2>
-<h2>Saldo <span th:text="${balance}" th:field="*{balance}"> </span> euro </h2>
-<h2>Transactie details</h2>
+<h3>Saldo <span th:text="${balance}" th:field="*{balance}"> </span> euro </h3>
+<h3>Transactie details</h3>
 
 <form action="#" th:action="@{transactionConfirmation(id=${bankAccountFrom})}" th:object="${transaction}" method="post">
     <input type="hidden" th:field="*{fromAccount}"/>
 
     <table>
         <tr>
-<!--            <td>transactie datum-tijd:</td>
-            <td><span th:text="${date_time}"></span></td> BvB -->
             <td>transactie datum:</td>
             <td><span th:text="${date}"></span></td>
         </tr>
@@ -45,8 +45,12 @@
     </table>
 </form>
 <br>
+<td th:unless="${bankAccountType=='Zakelijk'}">
 Ga <a href="/overview">terug</a> naar uw persoonlijke pagina.
-<br>
+</td>
+<td th:if="${bankAccountType=='Zakelijk'}">
+    Ga <a href='/zakelijk'>terug</a> naar uw zakelijk pagina.
+</td>
 <br>
 <a href="/">Uitloggen</a>
 </body>

@@ -2,30 +2,27 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Login Zakelijk</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="../static/css/styles.css">
 </head>
 <body>
+<div class="container">
 <h3>Login Zakelijk</h3>
-<form action="#" th:action="@{zakelijk-klant}" th:object="${smeUser}" method="post">
-    <table>
-
-        <br>
-        <tr>
-            <td>Usernaam:</td>
-            <td><input type="text" th:field="*{userName}"/></td>
-        </tr>
-        <tr>
-            <td>Wachtwoord:</td>
-            <td><label>
-                <input type="text" th:field="*{userPassword}"/>
-            </label>
-            <td>
-        </tr>
-        <tr>
-            <td><input type="submit" value="Login"></td>
-        </tr>
-    </table>
+<form action="#" th:action="@{zakelijk-klant}" th:object="${smeUser}" method="post" class="col-sm-4" >
+    <div class="form-group">
+        <label for="username">Gebruikersnaam:</label>
+        <input class="form-control" type="text" th:field="*{userName}" id="username"/>
+    </div>
+    <div class="form-group">
+        <label for="password">Wachtwoord:</label>
+        <input class="form-control" type="password" th:field="*{userPassword}" id="password"/>
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Login</button>
+    </div>
 </form>
-
+</div>
 </body>
 </html>

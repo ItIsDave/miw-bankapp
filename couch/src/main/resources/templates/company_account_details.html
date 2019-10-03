@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}"/>
+
+    <title>Rekeningoverzicht</title>
+</head>
+<body>
+<h1><span th:text="${fullNames}"></span></h1>
+
+<br>
+<table>
+    <tr>
+        <th>Bankrekeningnummer</th>
+        <th>Actueel Saldo</th>
+    </tr>
+    <tr>
+        <td th:text="${iban}"></td>
+        <td th:text="${balance}"></td>
+    </tr>
+</table>
+<br>
+<table>
+    <tr>
+        <th>Datum</th>
+        <th>Tegenrekening</th>
+        <th>Omschrijving</th>
+        <th>Bij- of afschrijving</th>
+        <th>Bedrag</th>
+    </tr>
+    <tr th:each="transaction: ${allTransactions}">
+        <td th:text="${transaction.transactionDate}"></td>
+        <td th:text="${transaction.bankAccount.IBAN == iban} ? ${transaction.bankAccountTo} : ${transaction.bankAccount}"></td>
+        <td th:text="${transaction.description}"></td>
+        <td th:text="${transaction.bankAccount.IBAN == iban} ? 'Af': 'Bij'"></td>
+        <td><span th:text="${#numbers.formatDecimal(transaction.amount, 1, 2)}"/></td>
+    </tr>
+</table>
+<br>
+<table>
+    <form action="#" th:action="@{transactionRequest}" th:object="${user}" method="post">
+        <input type="submit" value="Overboeking maken">
+    </form>
+
+</table>
+
+<br>
+
+Ga <a href="/zakelijk" >terug</a> naar uw zakelijke pagina.
+
+<br>
+<br>
+
+<a href="/">Uitloggen</a>
+
+</body>
+</html>
