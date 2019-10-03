@@ -62,6 +62,7 @@ public class CompanyPageController {
         Company currentCompany = companyDao.findBychamberOfCommerceId(kvkNr);
         String userName = (String) session.getAttribute("userName");
         SMEUser smeUser = smeUserDao.findByUserName(userName).get(0);
+        model.addAttribute("smeUser", smeUser);
         model.addAttribute("userName", userName);
         model.addAttribute("role", smeUser.getRoleEmployee());
         model.addAttribute("company", currentCompany);
@@ -87,6 +88,7 @@ public class CompanyPageController {
         companyDao.save(currentCompany);
         List<BankAccount> bankAccountsList = currentCompany.getCompanyAccounts();
         model.addAttribute("company", loggedInUser.getCompany());
+        model.addAttribute("smeUser",  loggedInUser);
         model.addAttribute("userName", loggedInUser.getRoleEmployee());
         model.addAttribute("role", loggedInUser.getRoleEmployee());
         model.addAttribute("companyName", loggedInUser.getCompany().getCompanyName());
