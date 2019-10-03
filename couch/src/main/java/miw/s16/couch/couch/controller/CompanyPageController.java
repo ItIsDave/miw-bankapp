@@ -39,7 +39,7 @@ public class CompanyPageController {
         // validation that smeuser is member of the company & login details
         if (loginOk && company != null) {
             HttpSession session = request.getSession(true);
-            String companyData = company.getCompanyName() + "kvk: " + company.getChamberOfCommerceId() + " access : " + loggedInUser.get(0).getRoleEmployee();
+            String companyData = company.getCompanyName() + " kvkNr: " + company.getChamberOfCommerceId() + " gebruiker  : "+ loggedInUser.get(0).getFirstName()+" " + loggedInUser.get(0).getLastName();
             session.setAttribute("companyKvK", loggedInUser.get(0).getCompany().getChamberOfCommerceId());
             session.setAttribute("userName", loggedInUser.get(0).getUserName());
             session.setAttribute("fullNames", companyData);

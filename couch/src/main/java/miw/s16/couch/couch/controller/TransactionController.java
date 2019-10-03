@@ -81,6 +81,7 @@ public class TransactionController implements WebMvcConfigurer {
                     transaction.getAmount(), transaction.getTransactionDate(), transaction.getDescription(), transaction.getPin());
             model.addAttribute("bankAccountType", bankAccountFrom.getAccountType());
             model.addAttribute("feedback", feedback);
+            model.addAttribute("fullNames", session.getAttribute("fullNames"));
             return "transaction_feedback";
         }
     }
