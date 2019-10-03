@@ -49,7 +49,7 @@ public class HibernateLab {
     public void dbinit() {
 
         // to ensure no data duplication
-         // user info for checking if DB is empty
+        // user info for checking if DB is empty
         if (userDao.findByUserPassword("1").size() == 0) {
             User johnDoe = new User("John Doe", "1");
             userDao.save(johnDoe);
@@ -98,7 +98,7 @@ public class HibernateLab {
             retailUserDao.save(jan);
             retailUserDao.save(boudewijn);
 
-            //  Data for Company & employees ----
+            //  ----  Data for Company & employees ----
             BankAccount accountTest = new BankAccount("NL10COUC0523455661", 150000);
             accountTest.setAccountType("Zakelijk");
             BankUser accountManagerTest = new BankUser("Jan Zucchini", "1234", "Account Manager");
@@ -158,9 +158,13 @@ public class HibernateLab {
                 bankAccountDao.save(bankAccount1);
                 //maak smeUser, smeUserList, bankAccountList, company,
                 String directeurUserName = "Directeur" + index;
-                SMEUser smeUser1 = new SMEUser(directeurUserName, "directeur", "CEO");
-                // bsn moet unique zijn
-                smeUser1.setBsn(10000000 + index);
+                // ----- added/ changed  the following lines : name details in smeUser ---------------
+                int i = index - 10;
+                String[] firstNames = {"Jan","Maria", "Helen", "Kyrone", "Mark", "Dakota", "Pia", "Ralph", "Baber", "Lin", "Fan"};
+                String[] middleNames = {"de","Louisa", "van der", "-", "-", "-", "Peter", "-", "-", "-", "Zi"};
+                String[] lastNames = {"Bakker", "Gonzales", "Helder", "Fourier", "Zuckerberg", "Soung", "Dahlquist", "Ahmad","Bilal", "Stephanidis", "Chao"};
+                SMEUser smeUser1 = new SMEUser(directeurUserName, "directeur", "CEO", 10000000 + index, firstNames[i], middleNames[i], lastNames[i]);
+                // ------------------------------------------------ //
                 //2 lijsten om company te kunnen vullen
                 List<SMEUser> smeUserList1 = new ArrayList<>();
                 smeUserList1.add(smeUser1);
@@ -175,6 +179,7 @@ public class HibernateLab {
                 smeUser1.setCompany(company1);    //dit koppelt deze company aan de smeUser
                 smeUserDao.save(smeUser1);
             }  //einde vd loop
+
             System.out.println("dbinit klaar.");
         }
     }
