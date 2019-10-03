@@ -10,7 +10,7 @@ import java.util.List;
 @Entity
 public class Company {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int companyId;
     @Column(name = "kvkNr", unique = true)
     @NotNull

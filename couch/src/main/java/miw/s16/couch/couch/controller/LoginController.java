@@ -41,7 +41,7 @@ public class LoginController {
 
     @GetMapping(value = "/")
     public String indexHandler(Model model) {
-        System.out.println("hier ben ik weer");
+      //  System.out.println("hier ben ik weer");
         lab.dbinit();
         User user = new User();
         RetailUser retailUser = new RetailUser();
