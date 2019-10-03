@@ -43,6 +43,7 @@ public class CompanyPageController {
             session.setAttribute("companyKvK", loggedInUser.get(0).getCompany().getChamberOfCommerceId());
             session.setAttribute("userName", loggedInUser.get(0).getUserName());
             session.setAttribute("fullNames", companyData);
+            model.addAttribute("smeUser", loggedInUser.get(0));
             model.addAttribute("userName", loggedInUser.get(0).getUserName());
             model.addAttribute("role", loggedInUser.get(0).getRoleEmployee());
             model.addAttribute("company", company);

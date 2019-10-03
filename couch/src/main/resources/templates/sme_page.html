@@ -1,76 +1,87 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:="http://www.w3.org/1999/xhtml"  xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}"/>
-        <title>Zakelijk Pagina</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}"/>
+    <title>Zakelijk Pagina</title>
+    <link rel="stylesheet" href="../static/css/styles.css">
 </head>
 <body>
 <div class="container">
-<h1>Zakelijk Pagina</h1>
-<h2>Bedrijfsnaam: <span th:text="${company.companyName}"></span></h2>
-<h3>KvK nummer: <span th:text="${company.chamberOfCommerceId}"></span></h3>
-<h3>Ondernemingsform: <span th:text="${company.companyType}"></span></h3>
-<p>Gebruiker: <span th:text="${userName}"></span></p><p>role: <span th:text ="${role}"></span></p>
+    <h1>Zakelijk Pagina</h1>
+    <div>
+        <ul class="list-inline">
+            <li class="list-inline-item"><h2>Bedrijfsnaam: <span th:text="${company.companyName}"></span></h2></li>
+            <li class="list-inline-item"> <h3>KvK nummer: <span th:text="${company.chamberOfCommerceId}"></span></h3></li>
+            <li class="list-inline-item"> <h3>Ondernemingsform: <span th:text="${company.companyType}"></span></h3></li>
+        </ul>
+    </div>
+    <div>
+        <ul class="list-inline">
+            <li class="list-inline-item"><h2>Accessed by: <span th:text="${smeUser.firstName}"></span></h2></li>
+            <li class="list-inline-item"> <h3> <span th:text="${smeUser.middleName}"></span></h3></li>
+            <li class="list-inline-item"> <h3> <span th:text=" ${smeUser.lastName}"></span></h3></li>
+        </ul>
+    </div>
 
-
-<div th:unless="${#lists.isEmpty(allBankAccounts)}">
+    <div th:unless="${#lists.isEmpty(allBankAccounts)}">
 
         <table class="table table-sm">
-                <thead>
-                <tr>
-                        <th>Bankrekening(IBAN)</th>
-                        <th>Saldo</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="bankAccount: ${allBankAccounts}">
-                        <td><a href='/companyAccountDetails' th:href="@{companyAccountDetails(id=${bankAccount.bankAccountId})}"
-                               th:text="${bankAccount.iBAN}"></a></td>
-                        <td><span th:text="${#numbers.formatDecimal(bankAccount.balance, 1, 2)}"></span></td>
-                </tr>
-                </tbody>
+            <thead title="Rekeningen">
+            <tr>
+                <th>Bankrekening(IBAN)</th>
+                <th>Saldo</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="bankAccount: ${allBankAccounts}">
+                <td><a href='/companyAccountDetails' th:href="@{companyAccountDetails(id=${bankAccount.bankAccountId})}"
+                       th:text="${bankAccount.iBAN}"></a></td>
+                <td><span th:text="${#numbers.formatDecimal(bankAccount.balance, 1, 2)}"></span></td>
+            </tr>
+            </tbody>
         </table>
         <br>
-</div>
+    </div>
 
-<div th:unless="${#lists.isEmpty(employees)}">
+    <div th:unless="${#lists.isEmpty(employees)}">
         <table class="table table-sm">
-          <thead>
-                <tr>
-                        <th>Voornaam</th>
-                        <th>Tussn</th>
-                        <th>Achternaam</th>
-                        <th>Role</th>
-                </tr>
-          </thead>
-                <tbody>
-                <tr th:each="smeUser: ${employees}">
-                        <td><span th:text="${smeUser.firstName}"></span></td>
-                        <td><span th:text="${smeUser.middleName}"></span></td>
-                        <td><span th:text="${smeUser.lastName}"></span></td>
-                        <td><span th:text="${smeUser.roleEmployee}"></span></td>
-                </tr>
-                </tbody>
+            <thead title="Medewerkers">
+            <tr>
+                <th>Voornaam</th>
+                <th>Tussn</th>
+                <th>Achternaam</th>
+                <th>Role</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="smeUser: ${employees}">
+                <td><span th:text="${smeUser.firstName}"></span></td>
+                <td><span th:text="${smeUser.middleName}"></span></td>
+                <td><span th:text="${smeUser.lastName}"></span></td>
+                <td><span th:text="${smeUser.roleEmployee}"></span></td>
+            </tr>
+            </tbody>
         </table>
         <br>
-</div>
+    </div>
 
-<br>
-<form action="#" th:action="@{newInvoiceRequest}" th:object="${company}" method="post">
-        <tr>Klik om een nieuwe factuur te maken: </tr>
+    <br>
+    <form action="#" th:action="@{newInvoiceRequest}" th:object="${company}" method="post">
+        <tr>Klik om een nieuwe factuur te maken:</tr>
         <input type="submit" value="Factuur">
-</form>
-<br>
-<form action="#" th:action="@{newCompanyAccountRequest}" th:object="${company}" method="post">
-        <tr>Klik om een nieuwe rekening te openen: </tr>
+    </form>
+    <br>
+    <form action="#" th:action="@{newCompanyAccountRequest}" th:object="${company}" method="post">
+        <tr>Klik om een nieuwe rekening te openen:</tr>
         <input type="submit" value="Rekening openen">
-</form>
+    </form>
 
 
-<a href="/">Uitloggen</a>
+    <a href="/">Uitloggen</a>
 </div>
 </body>
 </html>

@@ -9,6 +9,7 @@ import miw.s16.couch.couch.service.HibernateLab;
 import miw.s16.couch.couch.service.PasswordValidator;
 import miw.s16.couch.couch.service.TestdataCreator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -38,7 +39,7 @@ public class LoginController {
     @Autowired
     UserDao userDao;
 
-    @GetMapping
+    @GetMapping(value = "/")
     public String indexHandler(Model model) {
         lab.dbinit();
         User user = new User();

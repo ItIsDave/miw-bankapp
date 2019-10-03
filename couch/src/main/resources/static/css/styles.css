@@ -11,15 +11,10 @@
     padding: 4% 10%;
 }
 
-table {
-    border-color: red;
-}
-
-
 body {
     background-color: aliceblue!important;
-    color: rgb(52,50,83);
 }
+
 form {
     color: rgb(52,50,83);
 }
@@ -38,5 +33,5 @@ table {
 }
 .bg-secondary {
     background-color: #11254E58!important;
-    color: rgb(52,50,83)!important;
+
 }
