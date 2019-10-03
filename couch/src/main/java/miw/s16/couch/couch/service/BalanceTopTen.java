@@ -32,12 +32,14 @@ public class BalanceTopTen {
     public ArrayList<String> balanceTopTen_Client(String role) {
         ArrayList<String> top10List = new ArrayList<>();
         String top10Line = "";
-        if (role.equals("Hoofd Particulieren")) {
-            bankAccounts = bankAccountDao.findTop10ByAccountTypeOrderByBalanceDesc("Particulier");
+
+        if (role.equals("Hoofd Particulieren") || role.equals("Hoofd MKB") ) {
+            if (role.equals("Hoofd Particulieren")) {
+                bankAccounts = bankAccountDao.findTop10ByAccountTypeOrderByBalanceDesc("Particulier");
             }
-        if (role.equals("Hoofd MKB")) {
-            bankAccounts = bankAccountDao.findTop10ByAccountTypeOrderByBalanceDesc("Zakelijk");
-        }
+            if (role.equals("Hoofd MKB")) {
+                bankAccounts = bankAccountDao.findTop10ByAccountTypeOrderByBalanceDesc("Zakelijk");
+            }
         for (BankAccount b: bankAccounts) {
             top10Line = b.getIBAN() + " " + b.getBalance();
             reportedBankAccounts.clear();
@@ -62,7 +64,8 @@ public class BalanceTopTen {
                         }
             }
             top10List.add(top10Line);
-        }//einde for b loop
+        } //einde for each b loop
+        } //einde if
         return top10List;
     }
 

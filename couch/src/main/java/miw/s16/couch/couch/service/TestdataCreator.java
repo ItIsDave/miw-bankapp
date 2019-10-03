@@ -69,7 +69,6 @@ public class TestdataCreator {
         try {
             File retailCSVFile = new File("couch/resources/testdata.csv");
             reader = new Scanner(retailCSVFile);
-            //variant waarbij de bestand grootte niet bekend:
             while (reader.hasNextLine()) {
                 retailUserList.add(reader.nextLine());
             }
@@ -79,8 +78,8 @@ public class TestdataCreator {
         }
     }
 
-    public void retailUserListSplitAddBankaccountAndSave() {        //de methode mag niet static zijn,
-                                                                    // omdat de dao niet static mag zijn
+    public void retailUserListSplitAddBankaccountAndSave() {
+
         for (int index = 0; index < BESTAND_GROOTTE-1; index++) {
             String[] recordSplit = retailUserList.get(index).split(";");  //er zijn 14 kolommen
             // per attribuut van User en retailUserClient de strings toekennen
