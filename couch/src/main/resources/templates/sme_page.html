@@ -26,7 +26,7 @@
 <div class="container">
     <br>
     <h1>Zakelijk Pagina</h1>
-    <h2><span th:text="${company.companyName}"> </span><span th:text="${company.companyType}"></span> - KvK nummer: <span th:text="${company.chamberOfCommerceId}"></span></h2>
+    <h2><span th:text="${company.companyName}"> </span> <span th:text="${company.companyType}"></span> - KvK nummer: <span th:text="${company.chamberOfCommerceId}"></span></h2>
 
 
     <div th:unless="${#lists.isEmpty(allBankAccounts)}">
