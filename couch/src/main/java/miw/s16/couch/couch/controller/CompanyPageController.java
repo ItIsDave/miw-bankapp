@@ -5,7 +5,6 @@ import miw.s16.couch.couch.model.dao.BankAccountDao;
 import miw.s16.couch.couch.model.dao.CompanyDao;
 import miw.s16.couch.couch.model.dao.SMEUserDao;
 import miw.s16.couch.couch.service.PasswordValidator;
-import org.apache.tomcat.util.digester.ArrayStack;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,14 +30,15 @@ public class CompanyPageController {
     @Autowired
     BankAccountDao bankAccountDao;
 
-    // zakelijk klant login
+    // zakelijk klant login & validation
     @PostMapping(value = "zakelijk-klant")
     public String smeLoginHandler(@ModelAttribute User user, Model model, HttpServletRequest request) {
         boolean loginOk = validator.validateMemberPassword(user);
-        HttpSession session = request.getSession(true);
         List<SMEUser> loggedInUser = smeUserDao.findByUserName(user.getUserName());
-        if (loginOk) {
-            Company company = loggedInUser.get(0).getCompany();
+        Company company = loggedInUser.get(0).getCompany();
+        // validation that smeuser is member of the company & login details
+        if (loginOk && company != null) {
+            HttpSession session = request.getSession(true);
             String companyData = company.getCompanyName() + "kvk: " + company.getChamberOfCommerceId() + " access : " + loggedInUser.get(0).getRoleEmployee();
             session.setAttribute("companyKvK", loggedInUser.get(0).getCompany().getChamberOfCommerceId());
             session.setAttribute("userName", loggedInUser.get(0).getUserName());
@@ -53,14 +53,14 @@ public class CompanyPageController {
         return "login_failed";
     }
 
-    @GetMapping(value = "zakelijk-klant")
+    // user goes back to page
+    @GetMapping(value = "zakelijk")
     public String smeHandler(@ModelAttribute User user, Model model, HttpServletRequest request) {
         HttpSession session = request.getSession(true);
         int kvkNr = (int) session.getAttribute("companyKvK");
         Company currentCompany = companyDao.findBychamberOfCommerceId(kvkNr);
         String userName = (String) session.getAttribute("userName");
         SMEUser smeUser = smeUserDao.findByUserName(userName).get(0);
-        String data = (String) session.getAttribute("fullNames");
         model.addAttribute("userName", userName);
         model.addAttribute("role", smeUser.getRoleEmployee());
         model.addAttribute("company", currentCompany);
@@ -70,6 +70,7 @@ public class CompanyPageController {
 
     }
 
+    // request for a new company account
     @PostMapping(value = "newCompanyAccountRequest")
     public String newCompanyAccountRequestHandler(@ModelAttribute User user, Model model, HttpServletRequest request) {
         // log in session
@@ -93,16 +94,15 @@ public class CompanyPageController {
         return "sme_page";
     }
 
-    // for company account
-    @GetMapping(value = "/companyAccountDetails")
+    // company details per clicked bank account
+    @GetMapping(value = "companyAccountDetails")
     public String companyAccountDetailsHandler(@RequestParam("id") int bankAccountId, Model model, HttpServletRequest request) {
         HttpSession session = request.getSession(true);
-        String userName = (String) session.getAttribute("userName");
         BankAccount clickedBankAccount = bankAccountDao.findByBankAccountId(bankAccountId);
         session.setAttribute("clickedIBAN", clickedBankAccount.getIBAN());
         List <Transaction> transactionList = clickedBankAccount.getTransactions();
         List <Transaction> transactionToList = clickedBankAccount.getTransactionsTo();
-        for (Transaction t:transactionToList) { transactionList.add(t); }
+        transactionList.addAll(transactionToList);
         Collections.sort(transactionList);
         Collections.reverse(transactionList);
         model.addAttribute("iban", clickedBankAccount.getIBAN());
