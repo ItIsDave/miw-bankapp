@@ -38,7 +38,6 @@ public class NewCompanyAndSmeController implements WebMvcConfigurer {
     private List<String> companyForm = new ArrayList<>();
     private List<String> sectors = new ArrayList<>();
     private List<String> roles = new ArrayList<>();
-    private BankAccount bankAccount = new BankAccount();
 
     @GetMapping(value = "couch-zakelijk")
     public String newCompanyHandler(Model model) {
@@ -71,6 +70,7 @@ public class NewCompanyAndSmeController implements WebMvcConfigurer {
             model.addAttribute("company", company);
             return "new_company";
         } else {
+            BankAccount bankAccount = new BankAccount();
             bankAccount.setAccountType("Zakelijk");
             bankAccountDao.save(bankAccount);
             company.addCompanyAccount(bankAccount);

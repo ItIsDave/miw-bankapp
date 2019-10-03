@@ -29,11 +29,16 @@
         </tr>
         <tr>
             <td><label for="middleName"> Tussenvoegsel: </label>
-            <td><input id="middlename" type="text" th:field="*{middleName}" name="middleName" required></td>
+            <td><input id="middleName" type="text" th:field="*{middleName}" name="middleName" required></td>
         </tr>
         <tr>
             <td><label for="lastName"> Uw achternaam: </label>
             <td><input id="lastName" type="text" th:field="*{lastName}" name="lastName" required></td>
+        </tr>
+        <tr>
+            <td><label for="bsn"> Uw bsn: </label>
+            <td><input id="bsn" type="text" th:field="*{bsn}" name="bsn" required/></td>
+            <td th:if="${#fields.hasErrors('bsn')}">Bsn ongeldig.</td>
         </tr>
         <tr>
             <td><label for="userName"> Kies gebruikersnaam: </label>

@@ -10,26 +10,28 @@
     <link rel="stylesheet" href="../static/css/styles.css">
 </head>
 <body>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" >Couch Bank</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li class="active"><a href="/">Uitloggen</a></li>
+        </ul>
+    </div>
+</nav>
+<div class="row"></div>
+<div class="p-3 mb-2 bg-primary text-white">Welkom <span th:text="${smeUser.firstName}"></span> <span th:text="${smeUser.lastName}"></span></div>
+<div class="p-3 mb-2 bg-secondary text-white"></div>
 <div class="container">
+    <br>
     <h1>Zakelijk Pagina</h1>
-    <div>
-        <ul class="list-inline">
-            <li class="list-inline-item"><h2>Bedrijfsnaam: <span th:text="${company.companyName}"></span></h2></li>
-            <li class="list-inline-item"> <h3>KvK nummer: <span th:text="${company.chamberOfCommerceId}"></span></h3></li>
-            <li class="list-inline-item"> <h3>Ondernemingsform: <span th:text="${company.companyType}"></span></h3></li>
-        </ul>
-    </div>
-    <div>
-        <ul class="list-inline">
-            <li class="list-inline-item"><h2>Accessed by: <span th:text="${smeUser.firstName}"></span></h2></li>
-            <li class="list-inline-item"> <h3> <span th:text="${smeUser.middleName}"></span></h3></li>
-            <li class="list-inline-item"> <h3> <span th:text=" ${smeUser.lastName}"></span></h3></li>
-        </ul>
-    </div>
+    <h2><span th:text="${company.companyName}"> </span><span th:text="${company.companyType}"></span> - KvK nummer: <span th:text="${company.chamberOfCommerceId}"></span></h2>
+
 
     <div th:unless="${#lists.isEmpty(allBankAccounts)}">
 
-        <table class="table table-sm">
+        <table class="table table-sm" title="Overzicht">
             <thead title="Rekeningen">
             <tr>
                 <th>Bankrekening(IBAN)</th>
@@ -48,13 +50,14 @@
     </div>
 
     <div th:unless="${#lists.isEmpty(employees)}">
-        <table class="table table-sm">
+        <h4>Medewerkers</h4>
+        <table class="table table-sm" >
             <thead title="Medewerkers">
             <tr>
                 <th>Voornaam</th>
                 <th>Tussn</th>
                 <th>Achternaam</th>
-                <th>Role</th>
+                <th>Rol</th>
             </tr>
             </thead>
             <tbody>
@@ -80,8 +83,6 @@
         <input type="submit" value="Rekening openen">
     </form>
 
-
-    <a href="/">Uitloggen</a>
 </div>
 </body>
 </html>
