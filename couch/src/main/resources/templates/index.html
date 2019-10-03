@@ -31,6 +31,34 @@
             background-color: #11254E58!important;
             color: rgb(52,50,83)!important;
         }
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #333;
+        }
+        h3 {
+            color: white;
+            padding-left: 160px;
+        }
+        li {
+            float: left;
+            text-align: center;
+            padding: 14px 16px;
+        }
+        li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            padding-left: 160px;
+        }
+        li a:hover {
+            background-color: #111;
+        }
+
     </style>
 
     <title>Index</title>
@@ -48,13 +76,11 @@
 </nav>
 <div class="row"></div>
 <div class="p-3 mb-2 bg-primary text-white">Welkom <span th:text="${retailUserFullName}"></span></div>
-<div class="p-3 mb-2 bg-secondary text-white"></div>
+<div class="p-3 mb-2 bg-secondary text-white">
 <br>
 <h2>Login</h2>
 <form action="#" th:action="@{overview}" th:object="${user}" method="post">
     <table>
-
-        <br>
         <tr>
             <td>Naam:</td>
             <td><input type="text" th:field="*{userName}"/></td>
@@ -67,24 +93,20 @@
             <td>
         </tr>
         <tr>
-            <td><input type="submit" value="Login"></td>
+            <br>
+            <br>
+            <td><input type="submit" value="bevestig"></td>
         </tr>
     </table>
     <br>
 </form>
-<form>
-<h3>Nieuwe klant </h3>
-<a href="newUser"> Klik hier</a> om een account te maken
-</form>
-<br>
-<form>
-    <h3>Zakelijke klant </h3>
-    <a href="zakelijk-klant">Login</a>
-</form>
-<br>
-<form>
-    <h3>Couch Medewerker </h3>
-    <a href="bankemployee">Login</a>
-</form>
+</div>
+<footer>
+<ul>
+    <li><h3>Nieuwe klant</h3><a href="#newUser">Login</a></li>
+    <li><h3>Zakelijke klant</h3><a href="#zakelijk-klant">Login</a></li>
+    <li><h3>Couch medewerker</h3><a href="#bankemployee">Login</a></li>
+</ul>
+    </footer>
 </body>
 </html>
