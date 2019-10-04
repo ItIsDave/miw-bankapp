@@ -1,0 +1,37 @@
+.big-heading {
+    font-family: "Source Sans Pro";
+    font-size: 3.5rem;
+    line-height: 1.5;
+}
+
+.container-fluid {
+    padding: 7% 55%;
+}
+.container-end{
+    padding: 4% 10%;
+}
+
+body {
+    background-color: aliceblue!important;
+}
+
+form {
+    color: rgb(52,50,83);
+}
+nav {
+    color: rgb(52, 50, 83);
+    margin-left: 360px;
+    margin-right: 40px;
+}
+table {
+    color: rgb(52,50,83);
+    width: 30%;
+}
+.bg-primary {
+    background-color: #112D32!important;
+    color: white!important;
+}
+.bg-secondary {
+    background-color: #11254E58!important;
+
+}

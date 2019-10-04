@@ -50,8 +50,6 @@ public class RetailUser extends User {
     private List<BankAccount> bankAccounts = new ArrayList<BankAccount>();
 
 
-
-
 //    public RetailUser() {
 //        super();
 //    }

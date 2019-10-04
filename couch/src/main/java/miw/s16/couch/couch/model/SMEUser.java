@@ -23,6 +23,9 @@ public class SMEUser extends User {
     @Min(value = 10000000)
     @Max(value = 999999999)
     private int bsn;
+    private String firstName;
+    private String middleName;
+    private String lastName;
 
 
     public SMEUser() {
@@ -44,6 +47,16 @@ public class SMEUser extends User {
         this.roleEmployee = roleEmployee;
     }
 
+    public SMEUser(String userName, String userPassword, String roleEmployee, int bsn, String firstName, String middleName, String lastName) {
+        super(userName, userPassword);
+        this.roleEmployee = roleEmployee;
+        this.bsn = bsn;
+        this.firstName = firstName;
+        this.middleName = middleName;
+        this.lastName = lastName;
+
+    }
+
     public SMEUser(String userName, String userPassword, String roleEmployee, Company company) {
         super(userName, userPassword);
         this.roleEmployee = roleEmployee;
@@ -55,6 +68,15 @@ public class SMEUser extends User {
         this.roleEmployee = roleEmployee;
         this.company = company;
         this.bsn = bsn;
+    }
+
+    public SMEUser(String roleEmployee, Company company, @NotNull @Min(value = 10000000) @Max(value = 999999999) int bsn, String firstName, String middleName, String lastName) {
+        this.roleEmployee = roleEmployee;
+        this.company = company;
+        this.bsn = bsn;
+        this.firstName = firstName;
+        this.middleName = middleName;
+        this.lastName = lastName;
     }
 
     public int getBsn() {
@@ -71,6 +93,30 @@ public class SMEUser extends User {
 
     public void setRoleEmployee(String roleEmployee) {
         this.roleEmployee = roleEmployee;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getMiddleName() {
+        return middleName;
+    }
+
+    public void setMiddleName(String middleName) {
+        this.middleName = middleName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public Company getCompany() {

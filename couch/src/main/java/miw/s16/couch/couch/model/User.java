@@ -20,7 +20,7 @@ import java.util.List;
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class User  {
-   @Id
+    @Id
     @GeneratedValue
     private int userId;
     @Column(name = "userName", unique = true)

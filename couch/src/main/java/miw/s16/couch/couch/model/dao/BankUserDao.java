@@ -13,4 +13,7 @@ public interface BankUserDao extends CrudRepository<BankUser,Integer> {
 
     public List<BankUser> findByUserName(String userName);
 
+
+    public List<BankUser> findAllByRole(String role);
+
 }

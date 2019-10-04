@@ -2,6 +2,8 @@ package miw.s16.couch.couch.controller;
 
 import miw.s16.couch.couch.model.*;
 import miw.s16.couch.couch.model.dao.*;
+import org.apache.tomcat.util.digester.ArrayStack;
+import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,11 +39,11 @@ public class NewCompanyAndSmeController implements WebMvcConfigurer {
     private List<String> companyForm = new ArrayList<>();
     private List<String> sectors = new ArrayList<>();
     private List<String> roles = new ArrayList<>();
-    private BankAccount bankAccount = new BankAccount();
+    private List<BankUser> accountManagers = new ArrayList<>();
+
 
     @GetMapping(value = "couch-zakelijk")
-    public String newCompanyHandler(Model model) {
-        Company company = new Company();
+    public String newCompanyHandler(Model model, Company company) {
         if (companyForm.size() == 0 && sectors.size() == 0) {
             Collections.addAll(companyForm, "B.V.", "Eenmanszaak", "Vereniging of Stichting", "V.O.F", "Andere ondernemingsvorm");
             // branch-informatie van KvK
@@ -51,13 +53,14 @@ public class NewCompanyAndSmeController implements WebMvcConfigurer {
         }
         model.addAttribute("companyForm", companyForm);
         model.addAttribute("sectors", sectors);
-        model.addAttribute("company", company);
         return "new_company";
     }
 
     // create a new company
     @PostMapping(value = "couch-zakelijk")
-    public String newSMEUserHandler(@Valid @ModelAttribute("company") @RequestBody Company company, BindingResult bindingResult, SMEUser smeUser, Model model, HttpServletRequest request) {
+    public String newSMEUserHandler(@Valid @ModelAttribute("company") @RequestBody Company company,
+                                    BindingResult bindingResult, SMEUser smeUser, Model model,
+                                    HttpServletRequest request) {
         HttpSession session = request.getSession(true);
         if (roles.size() == 0) {
             Collections.addAll(roles, "Eigenaar", "Medewerker", "Admin");
@@ -68,8 +71,14 @@ public class NewCompanyAndSmeController implements WebMvcConfigurer {
             model.addAttribute("company", company);
             return "new_company";
         } else {
+            BankAccount bankAccount = new BankAccount();
             bankAccount.setAccountType("Zakelijk");
             bankAccountDao.save(bankAccount);
+            // assign random account manager
+            accountManagers = bankUserDao.findAllByRole("Account Manager");
+            int random = (int )(Math.random() * accountManagers.size() + 1);
+            company.setAccountManager(accountManagers.get(random));
+            System.out.println(company.getAccountManager().getUserName());
             company.addCompanyAccount(bankAccount);
             company.setPinCode(1234);
             companyDao.save(company);
@@ -113,6 +122,8 @@ public class NewCompanyAndSmeController implements WebMvcConfigurer {
             company = companyDao.findByCompanyName(companyName).get(0);
             smeUser.setCompany(company);
             smeUserDao.save(smeUser);
+            // test if works for killing session
+//            session.invalidate();
             return "new_SMEUser_success";
 //
         }
