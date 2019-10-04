@@ -70,6 +70,7 @@ public class RetailPersonalPageController<retailUser> {
         //collect all bankaccounts in 1 list
         List<BankAccount> bankAccountsList = retailUser.getBankAccounts();
         model.addAttribute("userName", userName);
+        model.addAttribute("retailUserFullName", retailUser.getFullName());
         model.addAttribute("allBankAccounts", bankAccountsList);
         return "personal_page";
     }
