@@ -1,65 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="css/styles.css">
-
-    <style>
-        body {
-            background-color: aliceblue!important;
-            color: rgb(52,50,83);
-        }
-        form {
-            color: rgb(52,50,83);
-        }
-        nav {
-            color: rgb(52, 50, 83);
-            margin-left: 360px;
-            margin-right: 40px;
-        }
-        table {
-            color: rgb(52,50,83);
-            width: 30%;
-        }
-        .bg-primary {
-            background-color: #112D32!important;
-            color: white!important;
-        }
-        .bg-secondary {
-            background-color: #11254E58!important;
-            color: rgb(52,50,83)!important;
-        }
-        ul {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-            background-color: #333;
-        }
-        h3 {
-            color: white;
-            padding-left: 160px;
-        }
-        li {
-            float: left;
-            text-align: center;
-            padding: 14px 16px;
-        }
-        li a {
-            display: block;
-            color: white;
-            text-align: center;
-            padding: 14px 16px;
-            text-decoration: none;
-            padding-left: 160px;
-        }
-        li a:hover {
-            background-color: #111;
-        }
-
-    </style>
+    <link rel="stylesheet"  href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}" >
 
     <title>Index</title>
 </head>

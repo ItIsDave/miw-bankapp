@@ -1,6 +1,7 @@
 package miw.s16.couch.couch.controller;
 
 import miw.s16.couch.couch.model.BankUser;
+import miw.s16.couch.couch.model.RetailUser;
 import miw.s16.couch.couch.model.User;
 import miw.s16.couch.couch.model.dao.BankUserDao;
 import miw.s16.couch.couch.model.dao.UserDao;
@@ -12,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -35,37 +37,59 @@ public class LoginControllerBankemployee {
 
     @GetMapping(value = "bankemployee")
     public String indexHandler(Model model) {
+        User user2 = new User();
+        model.addAttribute("user2", user2);
         User user = new User();
+        RetailUser retailUser = new RetailUser();
         model.addAttribute("user", user);
+        model.addAttribute("retailUser", retailUser);
         return "index_bankemployee";
     }
 
     @PostMapping(value = "overview_bankemployee")
-    public String loginHandler(@ModelAttribute User user, Model model, HttpServletRequest request) {
+    public String loginHandler(@ModelAttribute User user, Model model, HttpSession session) {
         boolean loginOk = validator.validateMemberPassword(user);
         List<BankUser> loggedInBankUser = bankUserDao.findByUserName(user.getUserName());
         if (loginOk) {
-            HttpSession session = request.getSession(true);
             // -- for login session ---
-            session.setAttribute("userName", user.getUserName());
-            session.setAttribute("userId", user.getUserId());
+            session.setAttribute("user", user);  //vereenvoudigd naar user
+            System.out.println("de username is: " + (User) session.getAttribute("user"));
             model.addAttribute("userName", loggedInBankUser.get(0).getUserName());
+            String bankUserRole = loggedInBankUser.get(0).getRole();
+            model.addAttribute("bankUserRole", loggedInBankUser.get(0).getRole());
+
+            //nadat de pagina is aangepast, 3 booleans kunnen weg
             boolean roleBooleanHoofdParticulieren = (loggedInBankUser.get(0).getRole().equals("Hoofd Particulieren"));
             model.addAttribute("roleBooleanHP", roleBooleanHoofdParticulieren);
             boolean roleBooleanHoofdMKB = (loggedInBankUser.get(0).getRole().equals("Hoofd MKB"));
             model.addAttribute("roleBooleanHMKB", roleBooleanHoofdMKB);
             boolean roleBooleanAccountManager = (loggedInBankUser.get(0).getRole().equals("Account Manager"));
             model.addAttribute("roleBooleanAM", roleBooleanAccountManager);
-            if (roleBooleanHoofdParticulieren) {
-                ArrayList<String> top10ClientList = balanceTopTen.balanceTopTen_Client();
-                model.addAttribute("top10_Client_List",top10ClientList);
-                model.addAttribute("listSize", top10ClientList.size());
-            }
-            if (roleBooleanHoofdMKB) {
-
-            }
+            ArrayList<String> top10ClientList = balanceTopTen.balanceTopTen_Client(bankUserRole);
+            model.addAttribute("top10_Client_List",top10ClientList);
+            model.addAttribute("listSize", top10ClientList.size());
             return "personal_page_bankemployee";
         }
         return "login_failed_bankemployee";
     }
+
+    @GetMapping(value = "logout_bankemployee")
+    public String logoutBankEmployeeHandler(Model model, HttpSession httpSession) {
+        //geen annotatie voor HttpSession zetten.
+    //model.addAttribute("user", (User) httpSession.getAttribute("user") );  //het is een user object, omdat een user object is meegegeven in de pagina x
+    System.out.println("uitloggen..  bankmedewerker");
+    httpSession.invalidate();  // invalidates the current session and unbinds any objects that were previously bound to it.
+    //met behulp van de html pagina "wie_ben_ik" icm de handler verliesMij en de pagina wie_ben_ik_nu getest dat dit werkt
+    return "logged_out";
+    }
+
+    //deze handler was nodig om te testen of .invalidate() werkt
+   /* @GetMapping(value = "verlies_mij")
+    public String verliesMij(Model model, HttpSession httpSession) {
+        model.addAttribute("user", (User) httpSession.getAttribute("user") );  //waarschijnlijk foutvermelding naar deze regel
+        System.out.println("nu kwijt?");
+        return "wie_ben_ik_nu";
+    }*/
+
+
 }

@@ -34,23 +34,19 @@ public class TransactionController implements WebMvcConfigurer {
 
     @RequestMapping(value = "transactionRequest")
     public String pageHandlerGet(@ModelAttribute User user, Model model, HttpServletRequest request) {
-        // log in session
         Transaction transaction = new Transaction();
         HttpSession session = request.getSession (true);
-        String userName = (String) session.getAttribute("userName");
         String iban = (String) session.getAttribute("clickedIBAN");
-        BankAccount bankAccountFrom = bankAccountDao.findByIban(iban);
+        BankAccount bankAccountFrom1 = bankAccountDao.findByIban(iban);
         transaction.setBankAccount(accountTo);
         transaction.setFromAccount(iban);
-        System.out.println("datum - tijd is: " + transaction.getTransactionDate().toString());
         model.addAttribute("transaction", transaction);
-//        model.addAttribute("date_time", transaction.getTransactionDate().toString());
         model.addAttribute("date", transaction.getTransactionDay());//BvB
-        model.addAttribute("bankAccountFrom", bankAccountFrom.getIBAN());
+        model.addAttribute("bankAccountFrom", iban);
+        model.addAttribute("bankAccountType", bankAccountFrom1.getAccountType()); // adding logic for company transactions
         model.addAttribute("bankAccountTo", transaction.getToAccount());
-//        model.addAttribute("userName", userName);
         model.addAttribute("fullNames", session.getAttribute("fullNames"));//BvB
-        model.addAttribute("balance", bankAccountFrom.twoDecimalBalance(bankAccountFrom.getBalance()));
+        model.addAttribute("balance", bankAccountFrom1.twoDecimalBalance(bankAccountFrom1.getBalance()));
         return "transaction";
     }
 
@@ -78,11 +74,14 @@ public class TransactionController implements WebMvcConfigurer {
             model.addAttribute("bankAccountTo", transaction.getToAccount());
             model.addAttribute("userName", userName);
             model.addAttribute("balance", bankAccountFrom.twoDecimalBalance(bankAccountFrom.getBalance()));
+            model.addAttribute("bankAccountType", bankAccountFrom.getAccountType());
             return "transaction";
         } else {
             String feedback = transactionService.TransactionCalculation(transaction.getToAccount(), bankAccountFrom,
                     transaction.getAmount(), transaction.getTransactionDate(), transaction.getDescription(), transaction.getPin());
+            model.addAttribute("bankAccountType", bankAccountFrom.getAccountType());
             model.addAttribute("feedback", feedback);
+            model.addAttribute("fullNames", session.getAttribute("fullNames"));
             return "transaction_feedback";
         }
     }

@@ -3,51 +3,73 @@
       xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}">
     <title>Transaction</title>
 </head>
 <body>
-<!--<h1>Welkom <span th:text="${userName}"></span></h1> BvB-->
-<h1>Welkom <span th:text="${fullNames}"></span></h1>
-<h2>IBAN <span th:text="${bankAccountFrom}"></span></h2>
-<h2>Saldo <span th:text="${balance}" th:field="*{balance}"> </span> euro </h2>
-<h2>Transactie details</h2>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand">Couch Bank</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li class="active"><a href="/">Uitloggen</a></li>
+        </ul>
+    </div>
+</nav>
+<div class="row"></div>
+<div class="p-3 mb-2 bg-primary text-white"><span th:text="${fullNames}"></span></div>
+<div class="p-3 mb-2 bg-secondary text-white"></div>
+<div class="container">
+    <h2>IBAN <span th:text="${bankAccountFrom}"></span></h2>
+    <h3>Saldo <span th:text="${balance}" th:field="*{balance}"> </span> euro </h3>
+    <h3>Transactie details</h3>
 
-<form action="#" th:action="@{transactionConfirmation(id=${bankAccountFrom})}" th:object="${transaction}" method="post">
-    <input type="hidden" th:field="*{fromAccount}"/>
+    <form action="#" th:action="@{transactionConfirmation(id=${bankAccountFrom})}" th:object="${transaction}"
+          method="post">
+        <input type="hidden" th:field="*{fromAccount}"/>
 
-    <table>
-        <tr>
-<!--            <td>transactie datum-tijd:</td>
-            <td><span th:text="${date_time}"></span></td> BvB -->
-            <td>transactie datum:</td>
-            <td><span th:text="${date}"></span></td>
-        </tr>
-        <tr>
-            <td>van IBAN:</td>
-            <td><span th:text="${bankAccountFrom}" th:field="*{fromAccount}">  </span> </td>
-        </tr>
+        <table>
+            <tr>
+                <td>transactie datum:</td>
+                <td><span th:text="${date}"></span></td>
+            </tr>
+            <tr>
+                <td>van IBAN:</td>
+                <td><span th:text="${bankAccountFrom}" th:field="*{fromAccount}">  </span></td>
+            </tr>
             <td>bedrag in euro's</td>
-            <td><input type=number name="amount" th:field="*{amount}" step="any" min="0.1" th:attr="max=${balance}" required/></td>
+            <td><input type=number name="amount" th:field="*{amount}" step="any" min="0.1" th:attr="max=${balance}"
+                       required/></td>
             <td th:if="${#fields.hasErrors('amount')}">Amount moet groter dan 0 zijn.</td>
-        <tr>
-        <tr>
-            <td>naar IBAN:</td>
-            <td><input type="text" name="toAccount" required pattern="[a-zA-Z]{2}[0-9]{2}[a-zA-Z0-9]+" th:field="*{toAccount}" /></td>
-            <td th:if="*{toAccount}==${bankAccountFrom}"> Van en naar rekening mogen niet gelijk zijn.</td>
-            <td th:if="${#fields.hasErrors('toAccount')}"> IBAN ongeldig</td>
-        </tr>
-        <tr>
-            <td>omschrijving:</td>
-            <td><input type="text" th:field="*{description}"/></td>
-        </tr>
-            <td><input type="submit" value="Bevestig"></td>
-        </tr>
-    </table>
-</form>
-<br>
-Ga <a href="/overview">terug</a> naar uw persoonlijke pagina.
-<br>
-<br>
-<a href="/">Uitloggen</a>
+            <tr>
+            <tr>
+                <td>naar IBAN:</td>
+                <td><input type="text" name="toAccount" required pattern="[a-zA-Z]{2}[0-9]{2}[a-zA-Z0-9]+"
+                           th:field="*{toAccount}"/></td>
+                <td th:if="*{toAccount}==${bankAccountFrom}"> Van en naar rekening mogen niet gelijk zijn.</td>
+                <td th:if="${#fields.hasErrors('toAccount')}"> IBAN ongeldig</td>
+            </tr>
+            <tr>
+                <td>omschrijving:</td>
+                <td><input type="text" th:field="*{description}"/></td>
+            </tr>
+        </table>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Bevestig</button>
+            </div>
+    </form>
+    <br>
+    <td th:unless="${bankAccountType=='Zakelijk'}">
+        Ga <a href="/overview">terug</a> naar uw persoonlijke pagina.
+    </td>
+    <td th:if="${bankAccountType=='Zakelijk'}">
+        Ga <a href='/zakelijk'>terug</a> naar uw zakelijk pagina.
+    </td>
+    <br>
+    <a href="/">Uitloggen</a>
 </body>
 </html>
