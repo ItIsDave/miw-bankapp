@@ -42,10 +42,12 @@ public class LoginController {
     @GetMapping(value = "/")
     public String indexHandler(Model model, HttpServletRequest request) {
         System.out.println("hier ben ik weer");
-        HttpSession session = request.getSession(true);
         // destroy session
-        session.invalidate();
-        // initiate database 
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            session.invalidate();
+        }
+        // initiate database
         lab.dbinit();
         User user = new User();
         RetailUser retailUser = new RetailUser();
