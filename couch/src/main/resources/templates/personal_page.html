@@ -7,34 +7,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="css/styles.css">
-
-    <style>
-        body {
-            background-color: aliceblue!important;
-        }
-
-        form {
-            color: rgb(52,50,83);
-        }
-        nav {
-            color: rgb(52, 50, 83);
-            margin-left: 360px;
-            margin-right: 40px;
-        }
-        table {
-            color: rgb(52,50,83);
-            width: 30%;
-        }
-        .bg-primary {
-            background-color: #112D32!important;
-            color: white!important;
-        }
-        .bg-secondary {
-            background-color: #11254E58!important;
-            color: rgb(52,50,83)!important;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}" >
 
     <title>User Dashboard</title>
 </head>
@@ -66,7 +39,7 @@
             <td><span th:text="${#numbers.formatDecimal(bankAccount.balance, 1, 2)}"/></td>
         </tr>
     </table>
-<br>
+    <br>
 </div>
 
 <br>
