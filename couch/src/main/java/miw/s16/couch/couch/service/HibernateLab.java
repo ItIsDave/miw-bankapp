@@ -132,8 +132,8 @@ public class HibernateLab {
             smeUserDao.save(existingRetailUser);
 
 
-            //   testData.makeRetailUserList();                          //AMS: haalt retail data op uit CSV file
-         //   testData.retailUserListSplitAddBankaccountAndSave();    //AMS: verwerken testdata
+            testData.makeRetailUserList();                          //AMS: haalt retail data op uit CSV file
+            testData.retailUserListSplitAddBankaccountAndSave();    //AMS: verwerken testdata
 
             //bankmedewerkers voor HoofdMKB en HoofdParticulieren
 

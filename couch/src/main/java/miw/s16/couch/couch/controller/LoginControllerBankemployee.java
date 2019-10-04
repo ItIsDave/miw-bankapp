@@ -53,7 +53,6 @@ public class LoginControllerBankemployee {
         if (loginOk) {
             // -- for login session ---
             session.setAttribute("user", user);  //vereenvoudigd naar user
-            System.out.println("de username is: " + (User) session.getAttribute("user"));
             model.addAttribute("userName", loggedInBankUser.get(0).getUserName());
             String bankUserRole = loggedInBankUser.get(0).getRole();
             model.addAttribute("bankUserRole", loggedInBankUser.get(0).getRole());
@@ -73,11 +72,11 @@ public class LoginControllerBankemployee {
         return "login_failed_bankemployee";
     }
 
-    @GetMapping(value = "logout_bankemployee")
-    public String logoutBankEmployeeHandler(Model model, HttpSession httpSession) {
+    @GetMapping(value = "logout")
+    public String logoutAnyUser(Model model, HttpSession httpSession) {
         //geen annotatie voor HttpSession zetten.
     //model.addAttribute("user", (User) httpSession.getAttribute("user") );  //het is een user object, omdat een user object is meegegeven in de pagina x
-    System.out.println("uitloggen..  bankmedewerker");
+    System.out.println("logout retailUser or bankUser");
     httpSession.invalidate();  // invalidates the current session and unbinds any objects that were previously bound to it.
     //met behulp van de html pagina "wie_ben_ik" icm de handler verliesMij en de pagina wie_ben_ik_nu getest dat dit werkt
     return "logged_out";
