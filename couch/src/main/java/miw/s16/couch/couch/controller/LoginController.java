@@ -40,12 +40,12 @@ public class LoginController {
     UserDao userDao;
 
     @GetMapping(value = "/")
-    public String indexHandler(Model model, HttpServletRequest request) {
-        System.out.println("hier ben ik weer");
-        HttpSession session = request.getSession(true);
+    public String indexHandler(Model model, HttpSession session) {
         // destroy session
-        session.invalidate();
-        // initiate database 
+        if (session != null) {
+            session.invalidate();
+        }
+        // initiate database
         lab.dbinit();
         User user = new User();
         RetailUser retailUser = new RetailUser();
