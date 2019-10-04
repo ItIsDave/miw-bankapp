@@ -41,7 +41,6 @@ public class LoginController {
 
     @GetMapping(value = "/")
     public String indexHandler(Model model, HttpServletRequest request) {
-        System.out.println("hier ben ik weer");
         HttpSession session = request.getSession(true);
         // destroy session
         session.invalidate();
