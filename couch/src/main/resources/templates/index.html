@@ -21,12 +21,11 @@
 </nav>
 <div class="row"></div>
 <div class="p-3 mb-2 bg-primary text-white">Welkom <span th:text="${retailUserFullName}"></span></div>
-<div class="p-3 mb-2 bg-secondary text-white"></div>
+<div class="p-3 mb-2 bg-secondary text-white">
 <br>
 <h2>Login</h2>
 <form action="#" th:action="@{overview}" th:object="${user}" method="post">
     <table>
-
         <tr>
             <td>Naam:</td>
             <td><input type="text" th:field="*{userName}"/></td>
@@ -39,24 +38,20 @@
             <td>
         </tr>
         <tr>
-            <td><input type="submit" value="Login"></td>
+            <br>
+            <br>
+            <td><input type="submit" value="bevestig"></td>
         </tr>
     </table>
     <br>
 </form>
-<form>
-<h3>Nieuwe klant </h3>
-<a href="newUser"> Klik hier</a> om een account te maken
-</form>
-<br>
-<form>
-    <h3>Zakelijke klant </h3>
-    <a href="zakelijk-login">Login</a>
-</form>
-<br>
-<form>
-    <h3>Couch Medewerker </h3>
-    <a href="bankemployee">Login</a>
-</form>
+</div>
+<footer>
+<ul>
+    <li><h3>Nieuwe klant</h3><a href="#newUser">Login</a></li>
+    <li><h3>Zakelijke klant</h3><a href="#zakelijk-klant">Login</a></li>
+    <li><h3>Couch medewerker</h3><a href="#bankemployee">Login</a></li>
+</ul>
+    </footer>
 </body>
 </html>
