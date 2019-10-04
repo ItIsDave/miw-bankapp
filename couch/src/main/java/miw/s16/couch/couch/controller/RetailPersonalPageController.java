@@ -74,6 +74,7 @@ public class RetailPersonalPageController<retailUser> {
         model.addAttribute("allBankAccounts", bankAccountsList);
         return "personal_page";
     }
+    
 }
 
 
