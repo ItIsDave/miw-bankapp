@@ -87,6 +87,9 @@ public class NewEnOfAccountController {
             return "fillout_koppelcode";
         }
         BankAccount enofAccount = bankAccountDao.findByIban(bankAccount.getIBAN());
+        if (!bankAccount.getKoppelcode().equals(enofAccount.getKoppelcode()) ){
+            return "fillout_koppelcode";
+        }
         enofAccount.addRetailUser(loggedInUser);
         loggedInUser.addBankAccount(enofAccount);
         bankAccountDao.save(enofAccount);
@@ -96,6 +99,5 @@ public class NewEnOfAccountController {
         model.addAttribute("allBankAccounts", loggedInBankAccounts);
         return "personal_page";
     }
-
 }
 
