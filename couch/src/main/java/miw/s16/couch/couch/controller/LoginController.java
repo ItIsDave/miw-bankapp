@@ -40,10 +40,8 @@ public class LoginController {
     UserDao userDao;
 
     @GetMapping(value = "/")
-    public String indexHandler(Model model, HttpServletRequest request) {
-        System.out.println("hier ben ik weer");
+    public String indexHandler(Model model, HttpSession session) {
         // destroy session
-        HttpSession session = request.getSession(false);
         if (session != null) {
             session.invalidate();
         }
