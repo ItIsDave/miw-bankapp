@@ -4,6 +4,7 @@ import miw.s16.couch.couch.model.*;
 import miw.s16.couch.couch.model.dao.BankAccountDao;
 import miw.s16.couch.couch.model.dao.CompanyDao;
 import miw.s16.couch.couch.model.dao.SMEUserDao;
+import miw.s16.couch.couch.service.AddBankAccountService;
 import miw.s16.couch.couch.service.AddOrDeleteEmployeeService;
 import miw.s16.couch.couch.service.PasswordValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,9 @@ public class CompanyPageController {
 
     @Autowired
     AddOrDeleteEmployeeService addOrDeleteEmployeeService;
+
+    @Autowired
+    AddBankAccountService addBankAccountService;
 
     private Integer newbsn;
     private String newrole;
@@ -98,19 +102,13 @@ public class CompanyPageController {
         int kvkNr = (int) session.getAttribute("companyKvK");
         Company currentCompany = companyDao.findBychamberOfCommerceId(kvkNr);
         SMEUser loggedInUser = smeUserDao.findByUserName(userName).get(0);
-        BankAccount newBankAccount = new BankAccount();
-        newBankAccount.setAccountType("Zakelijk");
-        currentCompany.addCompanyAccount(newBankAccount);
-        bankAccountDao.save(newBankAccount);
-        companyDao.save(currentCompany);
-        String message = "Success!";
-        List<BankAccount> bankAccountsList = currentCompany.getCompanyAccounts();
+        String message = addBankAccountService.addBankAccount(currentCompany);
         model.addAttribute("company", loggedInUser.getCompany());
         model.addAttribute("smeUser",  loggedInUser);
         model.addAttribute("userName", loggedInUser.getRoleEmployee());
         model.addAttribute("role", loggedInUser.getRoleEmployee());
         model.addAttribute("companyName", loggedInUser.getCompany().getCompanyName());
-        model.addAttribute("allBankAccounts", bankAccountsList);
+        model.addAttribute("allBankAccounts", currentCompany.getCompanyAccounts());
         model.addAttribute("employees", currentCompany.getEmployees());
         model.addAttribute("newbsn", 0);
         model.addAttribute("newrole", "");
@@ -163,4 +161,6 @@ public class CompanyPageController {
         model.addAttribute("roles", roles);
         return "sme_page";
     }
+
+
 }
