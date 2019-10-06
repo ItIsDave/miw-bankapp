@@ -36,6 +36,7 @@ public class CompanyPageController {
 
     private Integer newbsn;
     private String newrole;
+    private String[] roles = {"CEO", "Medewerker", "Admin"};
 
 
 
@@ -45,6 +46,7 @@ public class CompanyPageController {
         boolean loginOk = validator.validateMemberPassword(user);
         List<SMEUser> loggedInUser = smeUserDao.findByUserName(user.getUserName());
         Company company = loggedInUser.get(0).getCompany();
+
         // validation that smeuser is member of the company & login details
         if (loginOk && company != null) {
             HttpSession session = request.getSession(true);
@@ -60,6 +62,7 @@ public class CompanyPageController {
             model.addAttribute("allBankAccounts", loggedInUser.get(0).getCompany().getCompanyAccounts());
             model.addAttribute("newbsn", 0);
             model.addAttribute("newrole", "");
+            model.addAttribute("roles", roles);
             return "sme_page";
         }
         return "login_failed";
@@ -81,6 +84,7 @@ public class CompanyPageController {
         model.addAttribute("employees", currentCompany.getEmployees());
         model.addAttribute("newbsn", 0);
         model.addAttribute("newrole", "");
+        model.addAttribute("roles", roles);
         return "sme_page";
 
     }
@@ -99,6 +103,7 @@ public class CompanyPageController {
         currentCompany.addCompanyAccount(newBankAccount);
         bankAccountDao.save(newBankAccount);
         companyDao.save(currentCompany);
+        String message = "Success!";
         List<BankAccount> bankAccountsList = currentCompany.getCompanyAccounts();
         model.addAttribute("company", loggedInUser.getCompany());
         model.addAttribute("smeUser",  loggedInUser);
@@ -109,6 +114,8 @@ public class CompanyPageController {
         model.addAttribute("employees", currentCompany.getEmployees());
         model.addAttribute("newbsn", 0);
         model.addAttribute("newrole", "");
+        model.addAttribute("roles", roles);
+        model.addAttribute("message", message);
         return "sme_page";
     }
 
@@ -128,6 +135,7 @@ public class CompanyPageController {
         model.addAttribute("allTransactions", clickedBankAccount.getTransactions());
         model.addAttribute("fullNames", session.getAttribute("fullNames"));
         session.setAttribute("bankAccountId", clickedBankAccount.getBankAccountId());
+        model.addAttribute("roles", roles);
         return "company_account_details";
     }
 
@@ -139,8 +147,6 @@ public class CompanyPageController {
         int kvkNr = (int) session.getAttribute("companyKvK");
         Company currentCompany = companyDao.findBychamberOfCommerceId(kvkNr);
         SMEUser loggedInUser = smeUserDao.findByUserName(userName).get(0);
-        System.out.println(newbsn);
-        System.out.println(newrole);
         String feedback = addOrDeleteEmployeeService.addEmployee(newbsn, currentCompany, newrole);
         companyDao.save(currentCompany);
         List<BankAccount> bankAccountsList = currentCompany.getCompanyAccounts();
@@ -154,6 +160,7 @@ public class CompanyPageController {
         model.addAttribute("newbsn", newbsn);
         model.addAttribute("newrole", newrole);
         model.addAttribute("feedback", feedback);
+        model.addAttribute("roles", roles);
         return "sme_page";
     }
 }

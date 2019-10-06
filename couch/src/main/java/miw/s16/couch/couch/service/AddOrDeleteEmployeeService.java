@@ -35,16 +35,16 @@ public class AddOrDeleteEmployeeService {
         // bsn is unique but we have set it up as a list
         String feedback;
         if (smeUserDao.findByBsn(bsn) != null) {
-            feedback = "User already works for another company";
+            feedback = "User niet beschikbaar";
         } else if (retailUserDao.findByBsn(bsn) != null) {
-            RetailUser retailsUser = retailUserDao.findByBsn(bsn).get(0);
+            RetailUser retailsUser = retailUserDao.findByBsn(bsn);
             SMEUser newEmployee = new SMEUser(retailsUser.getUserName() + "Z", "1234", role, bsn, retailsUser.getFirstName(), retailsUser.getMiddleName(), retailsUser.getLastName());
             newEmployee.setCompany(company);
             smeUserDao.save(newEmployee);
             companyDao.save(company);
-            feedback ="Success, employee added";
+            feedback = "Success! Employee added";
         } else {
-            feedback = "Not existing user";
+            feedback = "User niet gevonden";
         }
         return feedback;
     }
