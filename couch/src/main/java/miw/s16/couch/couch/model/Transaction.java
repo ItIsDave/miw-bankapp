@@ -41,7 +41,7 @@ public class Transaction implements Comparable<Transaction> { //implements Seria
 
 
     public Transaction(String description, double amount, Date transactionDate,
-                       String fromAccount, String toAccount,  boolean isPin) {
+                       String fromAccount, String toAccount, boolean isPin) {
         this.description = description;
         this.amount = amount;
         this.transactionDate = transactionDate;
@@ -151,7 +151,7 @@ public class Transaction implements Comparable<Transaction> { //implements Seria
         this.isPin = isPin;
     }
 
-    public double getBalance(BankAccount bankAccount){
+    public double getBalance(BankAccount bankAccount) {
         return bankAccount.getBalance();
     }
 
@@ -162,7 +162,7 @@ public class Transaction implements Comparable<Transaction> { //implements Seria
         return dateFormat.format(transactionDate);
     }
 
-    public String getTransactionDay(){
+    public String getTransactionDay() {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");//HH:mm:ss
         return dateFormat.format(transactionDate);
     }
@@ -180,6 +180,7 @@ public class Transaction implements Comparable<Transaction> { //implements Seria
                 ", isPin=" + isPin +
                 '}';
     }
+
     @Override
     public int compareTo(Transaction o) {
         return getTransactionDate().compareTo(o.getTransactionDate());

@@ -4,6 +4,7 @@ import miw.s16.couch.couch.model.*;
 import miw.s16.couch.couch.model.dao.BankAccountDao;
 import miw.s16.couch.couch.model.dao.CompanyDao;
 import miw.s16.couch.couch.model.dao.SMEUserDao;
+import miw.s16.couch.couch.service.AddOrDeleteEmployeeService;
 import miw.s16.couch.couch.service.PasswordValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,6 +31,14 @@ public class CompanyPageController {
     @Autowired
     BankAccountDao bankAccountDao;
 
+    @Autowired
+    AddOrDeleteEmployeeService addOrDeleteEmployeeService;
+
+    private Integer newbsn;
+    private String newrole;
+
+
+
     // zakelijk klant login & validation
     @PostMapping(value = "zakelijk-klant")
     public String smeLoginHandler(@ModelAttribute User user, Model model, HttpServletRequest request) {
@@ -49,6 +58,8 @@ public class CompanyPageController {
             model.addAttribute("company", company);
             model.addAttribute("employees", company.getEmployees());
             model.addAttribute("allBankAccounts", loggedInUser.get(0).getCompany().getCompanyAccounts());
+            model.addAttribute("newbsn", 0);
+            model.addAttribute("newrole", "");
             return "sme_page";
         }
         return "login_failed";
@@ -68,6 +79,8 @@ public class CompanyPageController {
         model.addAttribute("company", currentCompany);
         model.addAttribute("allBankAccounts", currentCompany.getCompanyAccounts());
         model.addAttribute("employees", currentCompany.getEmployees());
+        model.addAttribute("newbsn", 0);
+        model.addAttribute("newrole", "");
         return "sme_page";
 
     }
@@ -94,6 +107,8 @@ public class CompanyPageController {
         model.addAttribute("companyName", loggedInUser.getCompany().getCompanyName());
         model.addAttribute("allBankAccounts", bankAccountsList);
         model.addAttribute("employees", currentCompany.getEmployees());
+        model.addAttribute("newbsn", 0);
+        model.addAttribute("newrole", "");
         return "sme_page";
     }
 
@@ -114,5 +129,31 @@ public class CompanyPageController {
         model.addAttribute("fullNames", session.getAttribute("fullNames"));
         session.setAttribute("bankAccountId", clickedBankAccount.getBankAccountId());
         return "company_account_details";
+    }
+
+    // request for a new employee
+    @PostMapping(value = "newEmployeeRequest")
+    public String newEmployeeRequestHandler(@RequestParam("newbsn") int newbsn, @RequestParam("newrole") String newrole, Model model, HttpServletRequest request) {
+        HttpSession session = request.getSession(true);
+        String userName = (String) session.getAttribute("userName");
+        int kvkNr = (int) session.getAttribute("companyKvK");
+        Company currentCompany = companyDao.findBychamberOfCommerceId(kvkNr);
+        SMEUser loggedInUser = smeUserDao.findByUserName(userName).get(0);
+        System.out.println(newbsn);
+        System.out.println(newrole);
+        String feedback = addOrDeleteEmployeeService.addEmployee(newbsn, currentCompany, newrole);
+        companyDao.save(currentCompany);
+        List<BankAccount> bankAccountsList = currentCompany.getCompanyAccounts();
+        model.addAttribute("company", loggedInUser.getCompany());
+        model.addAttribute("smeUser",  loggedInUser);
+        model.addAttribute("userName", loggedInUser.getRoleEmployee());
+        model.addAttribute("role", loggedInUser.getRoleEmployee());
+        model.addAttribute("companyName", loggedInUser.getCompany().getCompanyName());
+        model.addAttribute("allBankAccounts", bankAccountsList);
+        model.addAttribute("employees", currentCompany.getEmployees());
+        model.addAttribute("newbsn", newbsn);
+        model.addAttribute("newrole", newrole);
+        model.addAttribute("feedback", feedback);
+        return "sme_page";
     }
 }

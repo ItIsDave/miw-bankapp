@@ -43,24 +43,24 @@
         <td><label for="streetName">Straat:</label> </td>
             <td><input type="text" th:field="*{streetName}" id="streetName" name="streetName" required/></td>
         <td th:if="${#fields.hasErrors('streetName')}" th:errors="*{streetName}">Ongeldig.</td>
-        <tr>
+        </tr>
         <tr>
         <td><label for="streetNumber">Nummer:</label></td>
             <td><input type="text" th:field="*{streetNumber}" id="streetNumber" name="streetNumber" required/></td>
-        <tr>
+        </tr>
         <tr>
         <td><label for="zipcode">Zipcode</label></td>
             <td><input type="text" th:field="*{zipcode}" id="zipcode" name="zipcode" required/></td>
-        <tr>
+        </tr>
         <tr>
         <td><label for="city">Stad:</label></td>
             <td><input type="text" th:field="*{city}" id="city" name="city" required/></td>
-        <tr>
+        </tr>
         <tr>
         <td><label for="phone">Tel:</label></td>
             <td><input type="text" th:field="*{phoneNumber}" id="phone" name="phone" required/></td>
             <td th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}">Tel ongeldig</td>
-        <tr>
+        </tr>
         <tr>
         <td><label for="email">email:</label></td>
             <td><input type="email" th:field="*{email}" id="email" name="email" required/></td>

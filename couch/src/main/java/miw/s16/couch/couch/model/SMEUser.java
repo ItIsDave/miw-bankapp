@@ -127,6 +127,9 @@ public class SMEUser extends User {
         this.company = company;
     }
 
-
+    @Override
+    public String toString(){
+        return "first name" +firstName + " last name" + lastName +"bsn " + bsn;
+    }
 }
 

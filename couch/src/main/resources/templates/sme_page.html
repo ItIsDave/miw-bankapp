@@ -6,6 +6,8 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
     <title>Zakelijk Pagina</title>
 </head>
 <body>
@@ -47,6 +49,12 @@
         </table>
         <br>
     </div>
+    <div th:if="${feedback!= null}">
+        <div class="alert alert-info alert-dismissible">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>Info!</strong> <span th:text="${feedback}"></span>
+        </div>
+    </div>
 
     <div th:unless="${#lists.isEmpty(employees)}">
         <h4>Medewerkers</h4>
@@ -72,11 +80,18 @@
     </div>
 
     <br>
-    <form action="#" th:action="@{newInvoiceRequest}" th:object="${company}" method="post">
-        <tr>Klik om een nieuwe factuur te maken:</tr>
-        <input type="submit" value="Factuur">
+    <form action="#" th:action="@{newEmployeeRequest}" method="post">
+        <td>Add employee:</td>
+        <td><label for="newbsn">bsn:</label></td>
+        <td><input type="text" name ="newbsn" id="newbsn" th:object="${newbsn}"></td>
+        <td><label for="newrole" >role:</label></td>
+        <td><input type="text" id="newrole" name="newrole" th:object="${newrole}"> </td>
+        <input type="submit" value="Submit">
     </form>
     <br>
+
+
+
     <form action="#" th:action="@{newCompanyAccountRequest}" th:object="${company}" method="post">
         <tr>Klik om een nieuwe rekening te openen:</tr>
         <input type="submit" value="Rekening openen">

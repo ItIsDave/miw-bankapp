@@ -74,7 +74,7 @@ public class HibernateLab {
             RetailUser jan = new RetailUser("Jan", "1234", 987654326,
                     "Jan", "", "Bakken", "Herengracht", 100,
                     "C", "1018AC", "Amsterdam", "6901230801", "25-10-1989", "jbakker@gmail.com", "Retail");
-            RetailUser boudewijn = new RetailUser("Boudewijn", "1234", 987654321, "Boudewijn",
+            RetailUser felix = new RetailUser("Felix", "1234", 987654321, "Boudewijn",
                     "", "Simpson", "Kalverstraat", 25, "B", "1011AB", "Amsterdam", "690000000", "25-10-1900", "bart@hva.nl", "Retail");
 
             // confirmation that DB is running
@@ -82,7 +82,7 @@ public class HibernateLab {
             charlotte.addBankAccount(account2);
             bart.addBankAccount(account1);
             jan.addBankAccount(account5);
-            boudewijn.addBankAccount(account6);
+            felix.addBankAccount(account6);
 
             bankAccountDao.save(account1);
             bankAccountDao.save(account2);
@@ -96,7 +96,7 @@ public class HibernateLab {
             retailUserDao.save(karin);
             retailUserDao.save(charlotte);
             retailUserDao.save(jan);
-            retailUserDao.save(boudewijn);
+            retailUserDao.save(felix);
 
             //  ----  Data for Company & employees ----
             BankAccount accountTest = new BankAccount("NL10COUC0523455661", 150000);
@@ -106,7 +106,7 @@ public class HibernateLab {
             SMEUser smeUserTest = new SMEUser("sme1", "1234", "CEO",20000000, "Fran", " ", "Tomato");
             SMEUser smeUserTest2 = new SMEUser("sme2", "1234", "Medewerker", 20000001, "Frank", "van", "Zucchini");
             SMEUser smeUserTest3 = new SMEUser("sme3", "1234", "Admin", 20000002, "John", "de", "Artichoke");
-            SMEUser existingRetailUser = new SMEUser("sme4", "1234", "Medewerker", 987654325, "Charlotte", "de", "Witte");
+            SMEUser existingRetailUser = new SMEUser("sme4", "1234", "Medewerker", 987654322, "Charlotte", "de", "Witte");
             employees.add(smeUserTest);
             employees.add(smeUserTest2);
             employees.add(smeUserTest3);
