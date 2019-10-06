@@ -23,8 +23,8 @@
     </div>
 </nav>
     <div class="row"></div>
-    <div class="p-3 mb-2 bg-primary text-white">Welkom <span th:text="${retailUserFullName}"></span></div>
-<div class="p-3 mb-2 bg-secondary text-white">
+<div class="p-3 mb-2 bg-primary text-white"><span class="marginl40">Welkom <span th:text="${retailUserFullName}"></span></span></div>
+<div class="p-3 mb-2 bg-secondary text-white"><span class="marginl40"><span>
 
 <div th:unless="${#lists.isEmpty(allBankAccounts)}">
 
@@ -39,7 +39,7 @@
             <td><span th:text="${#numbers.formatDecimal(bankAccount.balance, 1, 2)}"/></td>
         </tr>
     </table>
-    <br>
+<br>
 </div>
 
 <br>
@@ -50,6 +50,6 @@
     <tr>Klik hier indien u een koppelcode heeft gekregen om een en/of rekening te openen: </tr>
 <a th:href="@{Koppelcode_invoeren}"><button>Koppelcode invoeren</button></a>
 <br>
-</div>
+</span></span></div>
 </body>
 </html>

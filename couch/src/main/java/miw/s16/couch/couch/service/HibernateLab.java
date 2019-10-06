@@ -50,7 +50,7 @@ public class HibernateLab {
 
         // to ensure no data duplication
         // user info for checking if DB is empty
-        if (userDao.findByUserPassword("1").size() == 0) {
+       if (userDao.findByUserPassword("1").size() == 0) {
             User johnDoe = new User("John Doe", "1");
             userDao.save(johnDoe);
 
@@ -132,8 +132,8 @@ public class HibernateLab {
             smeUserDao.save(existingRetailUser);
 
 
-            testData.makeRetailUserList();                          //AMS: haalt retail data op uit CSV file
-            testData.retailUserListSplitAddBankaccountAndSave();    //AMS: verwerken testdata
+            //testData.makeRetailUserList();                          //AMS: haalt retail data op uit CSV file
+            //testData.retailUserListSplitAddBankaccountAndSave();    //AMS: verwerken testdata
 
             //bankmedewerkers voor HoofdMKB en HoofdParticulieren
 
@@ -182,5 +182,7 @@ public class HibernateLab {
 
             System.out.println("dbinit klaar.");
         }
+
+
     }
 }
