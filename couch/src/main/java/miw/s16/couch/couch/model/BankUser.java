@@ -20,9 +20,6 @@ public class BankUser extends User {
     private List<Company> companies = new ArrayList<>();
 
 
-//    public BankUser(){ super(); }
-
-    // changed because of "must not be empty errors"
     public BankUser(){
      this(" ", " ");
      this.companies = new ArrayList<>();

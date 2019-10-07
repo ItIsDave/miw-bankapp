@@ -13,6 +13,7 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -84,7 +85,7 @@ public class LoginController {
     }
 
 
-    @GetMapping(value ="zakelijk-login")
+    @GetMapping(value = "zakelijk-login")
     public String newCompanyHandler(@ModelAttribute User user, Model model) {
         SMEUser smeUser = new SMEUser();
         model.addAttribute("user", user);

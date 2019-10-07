@@ -32,7 +32,7 @@ public class TransactionService {
     public String TransactionCalculation(String accountTo, BankAccount bankAccount, Double amount,
                                          Date transactionDate, String description, Boolean isPin) {
 
-        if (accountTo.equals(bankAccount.getIBAN())){
+        if (accountTo.equals(bankAccount.getIBAN())) {
             return "U kunt geen geld overmaken naar uw eigen bankrekening";
         }
         BankAccount bankAccountTo = bankAccountDao.findByIban(accountTo);

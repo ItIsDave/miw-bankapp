@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet"  href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}" >
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}">
     <link rel="icon" th:href="@{/images/favicon.png}" type="image/png" sizes="24x24">
     <title>Couch Bank</title>
 </head>
@@ -20,43 +21,41 @@
 <div class="p-3 mb-2 bg-primary text-white">Welkom <span th:text="${retailUserFullName}"></span></div>
 <div class="p-3 mb-2 bg-secondary text-white">
     <br>
-<div class="container">
-    <h2>Login</h2>
-    <form action="#" th:action="@{overview}" th:object="${user}" method="post" class="col-sm-4" >
-        <div class="form-group">
-            <label for="userName">Gebruikersaam:</label>
-            <input class="form-control" type="text" id="userName" name="userName" th:field="*{userName}"/>
-        </div>
-        <div class="form-group">
-            <label for="password">Wachtwoord:</label>
-            <input class="form-control" type="password" th:field="*{userPassword}" id="password"/>
-        </div>
-        <div class="form-group">
-            <button type="submit" class="btn btn-light">Bevestig</button>
-        </div>
-    </form>
-</div>
+    <div class="container">
+        <h2>Login</h2>
+        <form action="#" th:action="@{overview}" th:object="${user}" method="post" class="col-sm-4">
+            <div class="form-group">
+                <label for="userName">Gebruikersaam:</label>
+                <input class="form-control" type="text" id="userName" name="userName" th:field="*{userName}"/>
+            </div>
+            <div class="form-group">
+                <label for="password">Wachtwoord:</label>
+                <input class="form-control" type="password" th:field="*{userPassword}" id="password"/>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-light">Bevestig</button>
+            </div>
+        </form>
+    </div>
 </div>
 <div class="card-group">
     <div class="card">
-        <!--                <img class="card-img-top" src="..." alt="Card image cap">-->
+
         <div class="card-body">
             <h5 class="card-title">Nieuwe klant</h5>
-            <p class="text-muted"><a href="newUser" class="card-link">Account aanmaken</a></p>
+            <p class="text-muted"><a href="newUser">Account aanmaken</a></p>
         </div>
     </div>
     <div class="card">
-        <!--                <img class="card-img-top" src="..." alt="Card image cap">-->
         <div class="card-body">
             <h5 class="card-title">Zakelijke klanten</h5>
             <p class="text-muted"><a href="zakelijk-login">Login</a></p>
         </div>
     </div>
     <div class="card">
-        <!--                <img class="card-img-top" src="..." alt="Card image cap">-->
         <div class="card-body">
             <h5 class="card-title">Couch medewerkers</h5>
-            <p class="text-muted"><a href="bankemployee" class="card-link">Login</a></p>
+            <p class="text-muted"><a href="bankemployee">Login</a></p>
         </div>
     </div>
 </div>

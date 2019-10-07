@@ -30,15 +30,15 @@ public class AddBankAccountService {
     public String addBankAccount(Company currentCompany) {
         // bsn is unique but we have set it up as a list
         String message;
-        if (MAX_ACCOUNTS > 6) {
-            message = "You reached the max account numbers";
+        if (currentCompany.getCompanyAccounts().size() >= MAX_ACCOUNTS) {
+            message = "U kunt niet meer dan "+ MAX_ACCOUNTS + " rekeningen hebben. ";
         } else {
             BankAccount newBankAccount = new BankAccount();
             newBankAccount.setAccountType("Zakelijk");
             currentCompany.addCompanyAccount(newBankAccount);
             bankAccountDao.save(newBankAccount);
             companyDao.save(currentCompany);
-            message = "Success!";
+            message = "Succes!";
         }
         return message;
     }

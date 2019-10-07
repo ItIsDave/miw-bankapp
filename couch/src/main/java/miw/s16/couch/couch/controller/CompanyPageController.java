@@ -43,7 +43,6 @@ public class CompanyPageController {
     private String[] roles = {"CEO", "Medewerker", "Admin"};
 
 
-
     // zakelijk klant login & validation
     @PostMapping(value = "zakelijk-klant")
     public String smeLoginHandler(@ModelAttribute User user, Model model, HttpServletRequest request) {
@@ -54,7 +53,7 @@ public class CompanyPageController {
         // validation that smeuser is member of the company & login details
         if (loginOk && company != null) {
             HttpSession session = request.getSession(true);
-            String companyData = company.getCompanyName() + " kvkNr: " + company.getChamberOfCommerceId() + " gebruiker  : "+ loggedInUser.get(0).getFirstName()+" " + loggedInUser.get(0).getLastName();
+            String companyData = company.getCompanyName() + " kvkNr: " + company.getChamberOfCommerceId() + " gebruiker  : " + loggedInUser.get(0).getFirstName() + " " + loggedInUser.get(0).getLastName();
             session.setAttribute("companyKvK", loggedInUser.get(0).getCompany().getChamberOfCommerceId());
             session.setAttribute("userName", loggedInUser.get(0).getUserName());
             session.setAttribute("fullNames", companyData);
@@ -104,7 +103,7 @@ public class CompanyPageController {
         SMEUser loggedInUser = smeUserDao.findByUserName(userName).get(0);
         String message = addBankAccountService.addBankAccount(currentCompany);
         model.addAttribute("company", loggedInUser.getCompany());
-        model.addAttribute("smeUser",  loggedInUser);
+        model.addAttribute("smeUser", loggedInUser);
         model.addAttribute("userName", loggedInUser.getRoleEmployee());
         model.addAttribute("role", loggedInUser.getRoleEmployee());
         model.addAttribute("companyName", loggedInUser.getCompany().getCompanyName());
@@ -123,8 +122,8 @@ public class CompanyPageController {
         HttpSession session = request.getSession(true);
         BankAccount clickedBankAccount = bankAccountDao.findByBankAccountId(bankAccountId);
         session.setAttribute("clickedIBAN", clickedBankAccount.getIBAN());
-        List <Transaction> transactionList = clickedBankAccount.getTransactions();
-        List <Transaction> transactionToList = clickedBankAccount.getTransactionsTo();
+        List<Transaction> transactionList = clickedBankAccount.getTransactions();
+        List<Transaction> transactionToList = clickedBankAccount.getTransactionsTo();
         transactionList.addAll(transactionToList);
         Collections.sort(transactionList);
         Collections.reverse(transactionList);
@@ -149,7 +148,7 @@ public class CompanyPageController {
         companyDao.save(currentCompany);
         List<BankAccount> bankAccountsList = currentCompany.getCompanyAccounts();
         model.addAttribute("company", loggedInUser.getCompany());
-        model.addAttribute("smeUser",  loggedInUser);
+        model.addAttribute("smeUser", loggedInUser);
         model.addAttribute("userName", loggedInUser.getRoleEmployee());
         model.addAttribute("role", loggedInUser.getRoleEmployee());
         model.addAttribute("companyName", loggedInUser.getCompany().getCompanyName());
