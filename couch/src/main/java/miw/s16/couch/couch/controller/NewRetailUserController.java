@@ -16,7 +16,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import javax.validation.Valid;
 
 @Controller
-public class NewUserController implements WebMvcConfigurer {
+public class NewRetailUserController implements WebMvcConfigurer {
 
 
     @Autowired

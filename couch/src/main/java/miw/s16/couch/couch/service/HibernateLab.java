@@ -63,7 +63,7 @@ public class HibernateLab {
             BankAccount account6 = new BankAccount("NL10COUC0523456795", 13000);
 
             // Creating Retail user data
-            RetailUser bart = new RetailUser("Bart", "1234", 987654321, "Bart",
+            RetailUser bart = new RetailUser("Bart", "1234", 987654975, "Bart",
                     "", "Simpson", "Kalverstraat", 25, "B", "1011AB", "Amsterdam", "690000000", "10-10-1900", "bart@hva.nl", "Retail");
             RetailUser charlotte = new RetailUser("Charlotte", "1234", 987654322,
                     "Charlotte", "de", "Witte", "Keizersgracht", 40,
