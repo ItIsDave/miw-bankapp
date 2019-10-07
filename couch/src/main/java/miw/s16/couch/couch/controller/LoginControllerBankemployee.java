@@ -39,10 +39,6 @@ public class LoginControllerBankemployee {
     public String indexHandler(Model model) {
         User user2 = new User();
         model.addAttribute("user2", user2);
-        User user = new User();
-        RetailUser retailUser = new RetailUser();
-        model.addAttribute("user", user);
-        model.addAttribute("retailUser", retailUser);
         return "index_bankemployee";
     }
 

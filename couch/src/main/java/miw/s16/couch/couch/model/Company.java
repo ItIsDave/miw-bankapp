@@ -53,47 +53,6 @@ public class Company {
         super();
     }
 
-    public Company(@NotEmpty String companyName) {
-        this.companyName = companyName;
-    }
-
-
-    public Company( int chamberOfCommerceId,String companyName) {
-        this.chamberOfCommerceId = chamberOfCommerceId;
-        this.companyName = companyName;
-    }
-
-
-    public Company(int chamberOfCommerceId, String companyName, String companyType) {
-        this.chamberOfCommerceId = chamberOfCommerceId;
-        this.companyName = companyName;
-        this.companyType = companyType;
-    }
-
-    public Company(int chamberOfCommerceId, String companyName, List<SMEUser> employees) {
-        this.chamberOfCommerceId = chamberOfCommerceId;
-        this.companyName = companyName;
-        this.employees = employees;
-    }
-
-    public Company(int chamberOfCommerceId, String companyName, String sector, List<SMEUser> employees, List<BankAccount> companyAccounts) {
-        this.chamberOfCommerceId = chamberOfCommerceId;
-        this.companyName = companyName;
-        this.sector = sector;
-        this.employees = employees;
-        this.companyAccounts = companyAccounts;
-    }
-
-    public Company(int chamberOfCommerceId, String companyName, String sector, int pinCode, boolean hasPin, List<SMEUser> employees, List<BankAccount> companyAccounts) {
-        this.chamberOfCommerceId = chamberOfCommerceId;
-        this.companyName = companyName;
-        this.sector = sector;
-        this.pinCode = pinCode;
-        this.hasPin = hasPin;
-        this.employees = employees;
-        this.companyAccounts = companyAccounts;
-    }
-
     public Company(@NotNull @Positive @Min(value = 10000000,
             message = "KvK-nummer moet 8 cijfers zijn zonder punten.") @Max(value = 99999999,
             message = "KvK-nummer moet 8 cijfers zijn zonder punten.") int chamberOfCommerceId,

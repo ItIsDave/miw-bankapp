@@ -13,5 +13,7 @@ public interface SMEUserDao extends CrudRepository<SMEUser, Integer> {
 
     public List<SMEUser> findByCompany(Company company);
 
+    public SMEUser findByBsn(int bsn);
+
 
 }

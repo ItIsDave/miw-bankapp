@@ -1,6 +1,7 @@
 package miw.s16.couch.couch.model;
 
 
+import miw.s16.couch.couch.model.constraints.bsnDoesNotExistConstraint;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.Range;
 
@@ -16,6 +17,7 @@ import java.util.List;
 public class RetailUser extends User {
 
 
+    @bsnDoesNotExistConstraint
     @NotNull
     @Min(value = 10000000, message = "BSN moet 8 of 9 cijfers zijn, zonder punten.")  //AMS: aantal posities mag zijn: 8
     @Max(value = 999999999, message = "BSN moet 8 of 9 cijfers zijn, zonder punten.") //AMS: 8 of 9 posities voldoen
@@ -40,7 +42,7 @@ public class RetailUser extends User {
     @Size(min= 9, max=11) //AMS: in de testdata 11 posities nodig
     private String phoneNumber;
     @NotEmpty
-    @Pattern(regexp = "^(0?[1-9]|[12][0-9]|3[01])/(0?[1-9]|1[0-2])/(1[9][0-9]{2}|200[0-1])$")
+    @Pattern(regexp = "^(0?[1-9]|1[0-2])-(0?[1-9]|[12][0-9]|3[01])-(1[9][0-9]{2}|200[0-2])$")
     private String dateOfBirth;
     @NotEmpty
     @Email
@@ -219,5 +221,11 @@ public class RetailUser extends User {
     public String getFullName(){
        return firstName + " " + ((middleName != null) ? middleName + " " : "") + lastName;
     }
+
+@Override
+    public String toString(){
+        return "first name" +firstName + " last name" + lastName +"bsn " + bsn;
+    }
+
 }
 

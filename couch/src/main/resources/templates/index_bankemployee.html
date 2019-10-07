@@ -2,15 +2,32 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}" >
     <title>Inlogscherm bankmedewerker</title>
 </head>
 <body>
-<h3>Login bankmedewerker</h3>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" >Couch Bank</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li class="active"><a href="/">Uitloggen</a></li>
+        </ul>
+    </div>
+</nav>
+<div class="row"></div>
+<div class="p-3 mb-2 bg-primary text-white">Welkom medewerker<span th:text="${retailUserFullName}"></span></div>
+<div class="p-3 mb-2 bg-secondary text-white"></div>
+<br>
+<h2>Login bankmedewerker</h2>
 <form action="#" th:action="@{overview_bankemployee}" th:object="${user2}" method="post">
     <table>
         <br>
         <tr>
-            <td>Gebruikersnaam:</td>
+            <td>Naam:</td>
             <td><input type="text" th:field="*{userName}"/></td>
         </tr>
         <tr>

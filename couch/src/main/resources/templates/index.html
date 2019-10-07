@@ -12,7 +12,7 @@
 <nav class="navbar navbar-default">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand" >Couch Bank</a>
+            <img th:src="@{/images/couchlogo.png}" alt="logo" height="100"/>
         </div>
         <ul class="nav navbar-nav">
             <li class="active"><a href="/">Uitloggen</a></li>
@@ -27,18 +27,17 @@
 <form action="#" th:action="@{overview}" th:object="${user}" method="post">
     <table>
         <tr>
-            <td>Naam:</td>
-            <td><input type="text" th:field="*{userName}"/></td>
+            <td><label for="userName">Naam:</label></td>
+            <td><input type="text" id="userName" name ="userName" th:field="*{userName}"/></td>
         </tr>
         <tr>
-            <td>Wachtwoord:</td>
+            <td><label for="userPassword">Wachtwoord:</label> </td>
             <td><label>
-                <input type="password" th:field="*{userPassword}"/>
+                <input type="password" id="userPassword" name= "userPassword" th:field="*{userPassword}"/>
             </label>
             <td>
         </tr>
         <tr>
-            <br>
             <br>
             <td><input type="submit" value="bevestig"></td>
         </tr>
@@ -46,12 +45,28 @@
     <br>
 </form>
 </div>
-<footer>
-<ul>
-    <li><h3>Nieuwe klant</h3><a href="#newUser">Login</a></li>
-    <li><h3>Zakelijke klant</h3><a href="#zakelijk-klant">Login</a></li>
-    <li><h3>Couch medewerker</h3><a href="#bankemployee">Login</a></li>
-</ul>
-    </footer>
+        <div class="card-group">
+            <div class="card">
+<!--                <img class="card-img-top" src="..." alt="Card image cap">-->
+                <div class="card-body">
+                    <h5 class="card-title">Nieuwe klant</h5>
+                    <p class="text-muted"><a href="newUser" class="card-link">Account aanmaken</a></p>
+                </div>
+            </div>
+            <div class="card">
+<!--                <img class="card-img-top" src="..." alt="Card image cap">-->
+                <div class="card-body">
+                    <h5 class="card-title">Zakelijke klant</h5>
+                    <p class="text-muted"><a href="zakelijk-login">Login</a></p>
+                </div>
+            </div>
+            <div class="card">
+<!--                <img class="card-img-top" src="..." alt="Card image cap">-->
+                <div class="card-body">
+                    <h5 class="card-title">Couch medewerkerer</h5>
+                    <p class="text-muted"><a href="bankemployee" class="card-link" >Login</a></p>
+                </div>
+            </div>
+        </div>
 </body>
 </html>
