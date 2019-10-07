@@ -3,15 +3,24 @@
       xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Couch Bank</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet"  href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}" >
     <link rel="icon" th:href="@{/images/favicon.png}" type="image/png" sizes="24x24">
+    <title>Couch Bank</title>
 </head>
 <body>
-<h1>Couch Bank nieuwe zakelijke klant</h1>
-
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <img th:src="@{/images/couchlogo.png}" alt="logo" height="100"/>
+        </div>
+    </div>
+</nav>
+<div class="row"></div>
+<div class="p-3 mb-2 bg-primary text-white">Couch Bank nieuwe zakelijke klant
+    <span th:text="${retailUserFullName}"></span></div>
+<br>
 <h2><label for="company">1. Vul hieronder uw bedrijfsgegevens in</label></h2>
 <br><br>
 <form id="company" action="#" th:action="@{couch-zakelijk}" th:object="${company}" method="post">
@@ -67,10 +76,11 @@
             <td><input type="email" th:field="*{email}" id="email" name="email" required/></td>
             <td th:if="${#fields.hasErrors('email')}" th:errors="*{email}" >Email ongeldig</td>
         <tr>
-
     </tr>
     </table>
-    <input type="submit" value="Volgende">
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Volgende</button>
+    </div>
 </form>
 </body>
 </html>

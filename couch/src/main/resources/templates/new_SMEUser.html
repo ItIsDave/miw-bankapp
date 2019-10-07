@@ -2,17 +2,25 @@
 <html lang="en" xmlns:="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <title>Couch Bank</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}">
+    <link rel="stylesheet"  href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}" >
     <link rel="icon" th:href="@{/images/favicon.png}" type="image/png" sizes="24x24">
-
+    <title>Couch Bank</title>
 </head>
 <body>
-<h1>Couch Bank nieuwe zakelijke klant</h1>
-
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <img th:src="@{/images/couchlogo.png}" alt="logo" height="100"/>
+        </div>
+    </div>
+</nav>
+<div class="row"></div>
+<div class="p-3 mb-2 bg-primary text-white">Couch Bank nieuwe zakelijke klant
+    <span th:text="${retailUserFullName}"></span></div>
+<br>
 <h2><label for="smeUser">2. Vul hieronder uw gegevens in</label></h2>
 <br><br>
 <form id="smeUser" action="#" th:action="@{newSMEUser}" th:object="${smeUser}" method="post" >
@@ -52,8 +60,10 @@
             <td><input id="userPassword" type="text" th:field="*{userPassword}" name="userPassword" required /></td>
             <td th:if="${#fields.hasErrors('userPassword')}" >Wachtwoord ongeldig.</td>
         </tr>
-        <td><input type="submit" value="Volgende"></td>
     </table>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Volgende</button>
+    </div>
 </form>
 
 </body>
