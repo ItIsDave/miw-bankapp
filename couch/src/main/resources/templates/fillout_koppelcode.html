@@ -4,9 +4,28 @@
 <head>
     <meta charset="UTF-8">
     <title>Couch Bank</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet"  href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}" >
+    <link rel="icon" th:href="@{/images/favicon.png}" type="image/png" sizes="24x24">
 </head>
 <body>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <img th:src="@{/images/couchlogo.png}" alt="logo" height="100"/>
+        </div>
+        <ul class="nav navbar-nav">
+            <li class="active"><a href="/logout">Uitloggen</a></li>
+        </ul>
+    </div>
+</nav>
+<div class="row"></div>
+<div class="p-3 mb-2 bg-primary text-white">Nieuwe en/of rekening <span th:text="${retailUserFullName}"></span></div>
+<div class="p-3 mb-2 bg-secondary text-white">
+    <br>
 <div>U heeft een koppelcode en IBAN gekregen van de persoon met wie u een en/of rekening wilt openen. Vul deze gegevens in onderstaande velden in. Hierna heeft u beide toegang tot dezelfde rekening in uw persoonlijke overzichtspagina.</div>
+    <br>
 <form action="#" th:action="@{Koppelcode_invoeren}" th:object="${bankAccount}" method="post">
     <table>
         <tr>

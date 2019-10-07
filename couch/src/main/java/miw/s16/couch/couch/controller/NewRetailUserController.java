@@ -25,24 +25,25 @@ public class NewRetailUserController implements WebMvcConfigurer {
     @Autowired
     BankAccountDao bankAccountDao;
 
-   @GetMapping(value = "newRetailUser")  //van select type -> new retail user
+    //van select type -> new retail user
+   @GetMapping(value = "newRetailUser")
     public String newRetailUserHandler(Model model, RetailUser retailUser){
        model.addAttribute("retailUser", retailUser);
         return "new_retail_user";
     }
 
+    //afhandeling invoer form nieuwe retailuser
     @PostMapping(value ="newRetailUser")
     public String retailUserHandler(@Valid RetailUser retailUser, BindingResult bindingResult){
         if(bindingResult.hasErrors()){
             return "new_retail_user";
         } else {
-            BankAccount bankAccount = new BankAccount();        //bankaccount wordt gegenereerd, Arnout type toegevoegd
+            BankAccount bankAccount = new BankAccount();
             bankAccount.setAccountType("Particulier");
-            retailUser.addBankAccount(bankAccount);             //ba gekoppeld aan user
+            retailUser.addBankAccount(bankAccount);
             retailUser.setRole("Retail");
-            bankAccountDao.save(bankAccount);                   //ba opgeslagen in DB
-            retailUserDao.save(retailUser);                     //user opgeslagen in DB
-            System.out.println("User ID: " + retailUser.getUserId());
+            bankAccountDao.save(bankAccount);
+            retailUserDao.save(retailUser);
         return "new_retail_user_success";
     }
    }

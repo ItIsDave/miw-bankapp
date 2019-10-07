@@ -5,8 +5,26 @@
     <meta charset="UTF-8">
     <title>Couch Bank</title>
     <link rel="stylesheet" href="../static/css/styles.css">
+    <link rel="icon" th:href="@{/images/favicon.png}" type="image/png" sizes="24x24">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet"  href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}" >
 </head>
 <body>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <img th:src="@{/images/couchlogo.png}" alt="logo" height="100"/>
+        </div>
+        <ul class="nav navbar-nav">
+            <li class="active"><a href="/logout">Uitloggen</a></li>
+        </ul>
+    </div>
+</nav>
+<div class="row"></div>
+<div class="p-3 mb-2 bg-primary text-white">Nieuwe en/of rekening <span th:text="${retailUserFullName}"></span></div>
+<div class="p-3 mb-2 bg-secondary text-white">
+    <br>
 <p>Koppelcode met succes aangemaakt.</p>
 <br>
 <table>

@@ -4,7 +4,6 @@
     line-height: 1.5;
 }
 
-
 .container-end{
     padding: 4% 10%;
 }
@@ -18,7 +17,7 @@ form {
 }
 nav {
     color: rgb(52, 50, 83);
-    margin-left: 360px;
+    margin-left: 40px;
     margin-right: 40px;
 }
 table {
