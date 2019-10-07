@@ -50,7 +50,7 @@ public class HibernateLab {
 
         // to ensure no data duplication
         // user info for checking if DB is empty
-       if (userDao.findByUserPassword("1").size() == 0) {
+ /*      if (userDao.findByUserPassword("1").size() == 0) {
             User johnDoe = new User("John Doe", "1");
             userDao.save(johnDoe);
 
@@ -182,7 +182,7 @@ public class HibernateLab {
 
             System.out.println("dbinit klaar.");
         }
-
+*/
 
     }
 }
