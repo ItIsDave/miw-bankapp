@@ -27,24 +27,17 @@ public class NewEnOfAccountController {
     BankAccountDao bankAccountDao;
 
     //Omzetten rekening in en/of rekening
-
     @GetMapping(value = "new_enof_account")
     public String newEnOfAccountHandler(Model model, HttpServletRequest request) {
         // log in session
         HttpSession session = request.getSession(true);
         BankAccount bankAccount = (BankAccount) session.getAttribute("clickedBankAccount");
-        System.out.println("GET: bank acc id is " + bankAccount.getBankAccountId());
-        System.out.println("GET: bank iban is " + bankAccount.getIBAN());
-        System.out.println("GET: bank koppelcode is " + bankAccount.getKoppelcode());
         model.addAttribute("bankAccount", bankAccount);
         return "new_enof_account";
     }
 
     @PostMapping(value = "new_enof_account")
     public String addUserToAccountHandler(@Valid BankAccount bankAccount, BindingResult bindingResult, HttpServletRequest request){
-        System.out.println("POST: bank acc id is " + bankAccount.getBankAccountId());
-        System.out.println("POST: bank iban is " + bankAccount.getIBAN());
-        System.out.println("POST: bank koppelcode is " + bankAccount.getKoppelcode());
         if(bindingResult.hasErrors()){
             return "new_enof_account";
         } else {
@@ -52,10 +45,6 @@ public class NewEnOfAccountController {
             HttpSession session = request.getSession(true);
             BankAccount sessionBankAccount = (BankAccount) session.getAttribute("clickedBankAccount");
             sessionBankAccount.setKoppelcode(bankAccount.getKoppelcode());
-            System.out.println("POST: session bank id " + sessionBankAccount.getBankAccountId());
-            System.out.println("POST: session IBAN " + sessionBankAccount.getIBAN());
-            System.out.println("POST: session bank koppelcode " + sessionBankAccount.getKoppelcode());
-            System.out.println("iban is "+ bankAccount.getIBAN());
             bankAccountDao.save(sessionBankAccount);
             return "new_enof_account_success";
         }
@@ -68,7 +57,6 @@ public class NewEnOfAccountController {
 
 
     //Invoeren koppelcode en koppelen aan rekening
-
     @GetMapping(value="Koppelcode_invoeren")
     public String enOfKoppelingHandler(Model model){
         BankAccount bankAccount = new BankAccount();

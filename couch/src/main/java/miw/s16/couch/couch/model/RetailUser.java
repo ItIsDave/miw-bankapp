@@ -1,6 +1,7 @@
 package miw.s16.couch.couch.model;
 
 
+import miw.s16.couch.couch.model.constraints.bsnDoesNotExistConstraint;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.Range;
 
@@ -16,6 +17,7 @@ import java.util.List;
 public class RetailUser extends User {
 
 
+    @bsnDoesNotExistConstraint
     @NotNull
     @Min(value = 10000000, message = "BSN moet 8 of 9 cijfers zijn, zonder punten.")  //AMS: aantal posities mag zijn: 8
     @Max(value = 999999999, message = "BSN moet 8 of 9 cijfers zijn, zonder punten.") //AMS: 8 of 9 posities voldoen
