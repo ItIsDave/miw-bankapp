@@ -29,7 +29,7 @@
 <div class="p-3 mb-2 bg-secondary text-white">
 <!--<h1>Hoofd Particulieren</h1>--><!--
 <h2>Welkom Hoofd Particulieren</h2>-->
-<h3>Overzicht top <span th:text="*{listSize}"></span> particulieren met hoogste saldo</h3>
+    <h3>Overzicht top <span th:text="*{listSize}"></span> particulieren met hoogste saldo</h3></div>
 <p>N.B. bij een en/of rekening wordt de eerste rekeninghouder getoond.</p>
 <table>
     <tr>
@@ -42,7 +42,7 @@
     </div>
 </table>
 </div>
-</div>
+
 
 
 <div th:if="${roleBooleanHMKB}">
@@ -50,7 +50,7 @@
     <div class="p-3 mb-2 bg-secondary text-white">
     <!--<h1>Hoofd MKB</h1>
     <h2>Welkom Hoofd MKB</h2>-->
-    <h3>Overzicht top <span th:text="*{listSize}"></span> MKB klanten met hoogste saldo</h3>
+        <h3>Overzicht top <span th:text="*{listSize}"></span> MKB klanten met hoogste saldo</h3></div>
     <table>
         <tr>
             <td>IBAN van bankrekening Saldo Bedrijfsnaam Rechtsvorm</td>
@@ -62,7 +62,7 @@
         </div>
     </table>
 </div>
-</div>
+
 
 <div th:if="${roleBooleanAM}">
     <div class="p-3 mb-2 bg-primary text-white">Welkom accountmanager</div>

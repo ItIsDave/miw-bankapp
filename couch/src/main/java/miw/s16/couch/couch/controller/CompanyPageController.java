@@ -6,6 +6,7 @@ import miw.s16.couch.couch.model.dao.CompanyDao;
 import miw.s16.couch.couch.model.dao.SMEUserDao;
 import miw.s16.couch.couch.service.AddBankAccountService;
 import miw.s16.couch.couch.service.AddOrDeleteEmployeeService;
+import miw.s16.couch.couch.service.CompanySMEValidator;
 import miw.s16.couch.couch.service.PasswordValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,6 +23,9 @@ public class CompanyPageController {
 
     @Autowired
     PasswordValidator validator;
+
+    @Autowired
+    CompanySMEValidator validator2;
 
     @Autowired
     SMEUserDao smeUserDao;
@@ -47,26 +51,28 @@ public class CompanyPageController {
     @PostMapping(value = "zakelijk-klant")
     public String smeLoginHandler(@ModelAttribute User user, Model model, HttpServletRequest request) {
         boolean loginOk = validator.validateMemberPassword(user);
-        List<SMEUser> loggedInUser = smeUserDao.findByUserName(user.getUserName());
-        Company company = loggedInUser.get(0).getCompany();
-
         // validation that smeuser is member of the company & login details
-        if (loginOk && company != null) {
-            HttpSession session = request.getSession(true);
-            String companyData = company.getCompanyName() + " kvkNr: " + company.getChamberOfCommerceId() + " gebruiker  : " + loggedInUser.get(0).getFirstName() + " " + loggedInUser.get(0).getLastName();
-            session.setAttribute("companyKvK", loggedInUser.get(0).getCompany().getChamberOfCommerceId());
-            session.setAttribute("userName", loggedInUser.get(0).getUserName());
-            session.setAttribute("fullNames", companyData);
-            model.addAttribute("smeUser", loggedInUser.get(0));
-            model.addAttribute("userName", loggedInUser.get(0).getUserName());
-            model.addAttribute("role", loggedInUser.get(0).getRoleEmployee());
-            model.addAttribute("company", company);
-            model.addAttribute("employees", company.getEmployees());
-            model.addAttribute("allBankAccounts", loggedInUser.get(0).getCompany().getCompanyAccounts());
-            model.addAttribute("newbsn", 0);
-            model.addAttribute("newrole", "");
-            model.addAttribute("roles", roles);
-            return "sme_page";
+        if (loginOk) {
+            List<SMEUser> loggedInUser = smeUserDao.findByUserName(user.getUserName());
+            boolean smeUserOk = validator2.validateEmployee(loggedInUser.get(0));
+            if (smeUserOk) {
+                Company company = loggedInUser.get(0).getCompany();
+                HttpSession session = request.getSession(true);
+                String companyData = company.getCompanyName() + " kvkNr: " + company.getChamberOfCommerceId() + " gebruiker  : " + loggedInUser.get(0).getFirstName() + " " + loggedInUser.get(0).getLastName();
+                session.setAttribute("companyKvK", loggedInUser.get(0).getCompany().getChamberOfCommerceId());
+                session.setAttribute("userName", loggedInUser.get(0).getUserName());
+                session.setAttribute("fullNames", companyData);
+                model.addAttribute("smeUser", loggedInUser.get(0));
+                model.addAttribute("userName", loggedInUser.get(0).getUserName());
+                model.addAttribute("role", loggedInUser.get(0).getRoleEmployee());
+                model.addAttribute("company", company);
+                model.addAttribute("employees", company.getEmployees());
+                model.addAttribute("allBankAccounts", loggedInUser.get(0).getCompany().getCompanyAccounts());
+                model.addAttribute("newbsn", 0);
+                model.addAttribute("newrole", "");
+                model.addAttribute("roles", roles);
+                return "sme_page";
+            }
         }
         return "login_failed";
     }

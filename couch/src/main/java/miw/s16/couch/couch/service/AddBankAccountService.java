@@ -18,7 +18,7 @@ public class AddBankAccountService {
 
     @Autowired
     SMEUserDao smeUserDao;
-    private final static int MAX_ACCOUNTS = 8;
+    private final static int MAX_ACCOUNTS = 5;
 
 
     public AddBankAccountService() {
