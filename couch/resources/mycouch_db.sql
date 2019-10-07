@@ -30,7 +30,8 @@ CREATE TABLE `bank_account` (
   `koppelcode` varchar(5) DEFAULT NULL,
   PRIMARY KEY (`bank_account_id`),
   UNIQUE KEY `UK_699j998jxie2f134gfnu86q96` (`iban`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 #COLLATE=utf8mb4_0900_ai_ci
+;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -57,7 +58,9 @@ CREATE TABLE `bank_user` (
   `role` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `UK_6fivg6xaoh8hfn52vdmxfxrv9` (`user_name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 
+#COLLATE=utf8mb4_0900_ai_ci
+;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -96,7 +99,8 @@ CREATE TABLE `company` (
   UNIQUE KEY `UK_c4m9eryixog8v7knfd9y7d48j` (`kvk_nr`),
   KEY `FKq4qekl39sf72s4jymbuei8co1` (`account_manager_user_id`),
   CONSTRAINT `FKq4qekl39sf72s4jymbuei8co1` FOREIGN KEY (`account_manager_user_id`) REFERENCES `bank_user` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 #COLLATE=utf8mb4_0900_ai_ci
+;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -123,7 +127,8 @@ CREATE TABLE `company_company_accounts` (
   KEY `FKjelxha79ogxx220spn6i98v9u` (`companies_company_id`),
   CONSTRAINT `FKjelxha79ogxx220spn6i98v9u` FOREIGN KEY (`companies_company_id`) REFERENCES `company` (`company_id`),
   CONSTRAINT `FKs8ha5g1sjpj6f7p8jsulaaut2` FOREIGN KEY (`company_accounts_bank_account_id`) REFERENCES `bank_account` (`bank_account_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 #COLLATE=utf8mb4_0900_ai_ci
+;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -145,7 +150,9 @@ DROP TABLE IF EXISTS `hibernate_sequence`;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `hibernate_sequence` (
   `next_val` bigint(20) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 
+#COLLATE=utf8mb4_0900_ai_ci
+;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -178,7 +185,9 @@ CREATE TABLE `loan` (
   KEY `FKg0kt1yuxbkptxg5uty315qdpk` (`internal_bank_account_bank_account_id`),
   CONSTRAINT `FKfcpx3k1d79qry4kbdis2y30iw` FOREIGN KEY (`customer_bank_account_bank_account_id`) REFERENCES `bank_account` (`bank_account_id`),
   CONSTRAINT `FKg0kt1yuxbkptxg5uty315qdpk` FOREIGN KEY (`internal_bank_account_bank_account_id`) REFERENCES `bank_account` (`bank_account_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 
+#COLLATE=utf8mb4_0900_ai_ci
+;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -204,7 +213,9 @@ CREATE TABLE `loan_transactions` (
   KEY `FKsa6kk22jawenfytbu0aegtr1w` (`loan_loan_id`),
   CONSTRAINT `FKavnhyb6qej9xbhboq1ilk2lhv` FOREIGN KEY (`transactions_transaction_id`) REFERENCES `transaction` (`transaction_id`),
   CONSTRAINT `FKsa6kk22jawenfytbu0aegtr1w` FOREIGN KEY (`loan_loan_id`) REFERENCES `loan` (`loan_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 
+#COLLATE=utf8mb4_0900_ai_ci
+;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -242,7 +253,9 @@ CREATE TABLE `retail_user` (
   `zipcode` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `UK_7qc10bu9saj6sj2180a8a64oi` (`user_name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 
+#COLLATE=utf8mb4_0900_ai_ci
+;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -269,7 +282,9 @@ CREATE TABLE `retail_user_bank_accounts` (
   KEY `FK7quph92yws2icg1mc27d1jx0x` (`retail_users_user_id`),
   CONSTRAINT `FK7quph92yws2icg1mc27d1jx0x` FOREIGN KEY (`retail_users_user_id`) REFERENCES `retail_user` (`user_id`),
   CONSTRAINT `FKlqm6574kppjpq1e3krt7mxn72` FOREIGN KEY (`bank_accounts_bank_account_id`) REFERENCES `bank_account` (`bank_account_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 
+#COLLATE=utf8mb4_0900_ai_ci
+;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -303,7 +318,9 @@ CREATE TABLE `smeuser` (
   UNIQUE KEY `UK_hmmb0rxt845pir87t0akfcl47` (`user_name`),
   KEY `FKfhrp52ke4jajgbkvkxg7hs7gs` (`company_company_id`),
   CONSTRAINT `FKfhrp52ke4jajgbkvkxg7hs7gs` FOREIGN KEY (`company_company_id`) REFERENCES `company` (`company_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 
+#COLLATE=utf8mb4_0900_ai_ci
+;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -338,7 +355,9 @@ CREATE TABLE `transaction` (
   KEY `FKhax5qksrtsyte6cg4lo7iv8nh` (`bank_account_to_bank_account_id`),
   CONSTRAINT `FKhax5qksrtsyte6cg4lo7iv8nh` FOREIGN KEY (`bank_account_to_bank_account_id`) REFERENCES `bank_account` (`bank_account_id`),
   CONSTRAINT `FKhjgavgb9fcld0wwa8jbhthgme` FOREIGN KEY (`bank_account_bank_account_id`) REFERENCES `bank_account` (`bank_account_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 
+#COLLATE=utf8mb4_0900_ai_ci
+;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -363,7 +382,9 @@ CREATE TABLE `user` (
   `user_password` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `UK_lqjrcobrh9jc8wpcar64q1bfh` (`user_name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 
+#COLLATE=utf8mb4_0900_ai_ci
+;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
