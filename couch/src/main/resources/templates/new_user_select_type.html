@@ -1,17 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Couch Bank</title>
+    <link rel="icon" th:href="@{/images/favicon.png}" type="image/png" sizes="24x24">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet"  href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}" >
 </head>
 <body>
-<h1>Selecteer het type rekening dat u wilt openen:</h1>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <img th:src="@{/images/couchlogo.png}" alt="logo" height="100"/>
+        </div>
+    </div>
+</nav>
+<div class="row"></div>
+<div class="p-3 mb-2 bg-primary text-white">Welkom nieuwe klant <span th:text="${retailUserFullName}"></span></div>
+<div class="p-3 mb-2 bg-secondary text-white">
+    <br>
+<h2>Selecteer het type rekening dat u wilt openen:</h2>
 <br>
 <a href="newRetailUser"><h3>Ik wil een privé rekening openen</h3></a>
 <br>
 <a href="couch-zakelijk"><h3>Ik wil een zakelijke rekening openen</h3></a>
 <br>
-Klik <a href="home">hier</a> om terug te gaan naar het vorige scherm
+Klik <a href="/">hier</a> om terug te gaan naar het vorige scherm
 
 </body>
 </html>

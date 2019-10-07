@@ -1,16 +1,30 @@
 <!DOCTYPE html>
-<html lang="en"  xmlns:="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+<html lang="en"  xmlns:="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
+
 ​
 <head>
     <meta charset="UTF-8">
-    <title>Couch Bank nieuwe klant</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet"  href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}" >
+    <link rel="icon" th:href="@{/images/favicon.png}" type="image/png" sizes="24x24">
+    <title>Couch Bank</title>
 </head>
 <body>
-<h2>Welkom nieuwe klant! Vul hieronder uw gegevens in. Velden met een * zijn verplicht.</h2>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <img th:src="@{/images/couchlogo.png}" alt="logo" height="100"/>
+        </div>
+    </div>
+</nav>
+<div class="row"></div>
+<div class="p-3 mb-2 bg-primary text-white">Welkom nieuwe klant<span th:text="${retailUserFullName}"></span></div>
+<div class="p-3 mb-2 bg-secondary text-white">
+    <br>
+<h2>Vul hieronder uw gegevens in. Velden met een * zijn verplicht.</h2>
 <br>
 <form action="#" th:action="@{newRetailUser}" th:object="${retailUser}" method="post">
-
     <table>
         <tr>
             <td>Kies gebruikersnaam: *</td>
@@ -80,13 +94,10 @@
             <td><input type="text" name="email" th:field="*{email}"/></td>
             <td th:if="${#fields.hasErrors('email')}">Email ongeldig.</td>
         </tr>
-       <!--<tr th:if="${#fields.hasErrors('*')}"><td th:each="err: ${#fields.errors('*')}" th:text="${err}">Input is incorrect</td></tr>-->
     </table>
         <button name="submit" type="submit" value="0">Verstuur</button>
-
-    
 </form>
 <br>
-Klik <a href="home">hier</a> om terug te gaan naar het login scherm
+Klik <a href="/">hier</a> om terug te gaan naar het login scherm
 </body>
 </html>

@@ -4,8 +4,26 @@
 <head>
     <meta charset="UTF-8">
     <title>Couch Bank</title>
+    <link rel="icon" th:href="@{/images/favicon.png}" type="image/png" sizes="24x24">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet"  href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}">
 </head>
 <body>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <img th:src="@{/images/couchlogo.png}" alt="logo" height="100"/>
+        </div>
+        <ul class="nav navbar-nav">
+            <li class="active"><a href="/logout">Uitloggen</a></li>
+        </ul>
+    </div>
+</nav>
+<div class="row"></div>
+<div class="p-3 mb-2 bg-primary text-white">Nieuwe en/of rekening <span th:text="${retailUserFullName}"></span></div>
+<div class="p-3 mb-2 bg-secondary text-white">
+    <br>
 <div><span th:text="${session.retailUser.getFirstName()}"></span>, je hebt aangegeven een en/of rekening te willen openen.
     Kies in onderstaand formulier een 5-cijferige koppelcode. De onderstaande rekening wordt omgezet in een en/of rekening.
     De persoon met wie je deze rekening wilt delen krijgt toegang zodra hij de door jou bepaalde koppelcode invoert:</div>
