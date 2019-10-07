@@ -22,7 +22,7 @@
 <div class="p-3 mb-2 bg-primary text-white">Couch Bank nieuwe zakelijke klant
     <span th:text="${retailUserFullName}"></span></div>
 <br>
-<div class="p-3 mb-2 bg-secondary text-white"><h2><label for="smeUser">2. Vul hieronder uw gegevens in</label></h2>
+<div class="p-3 mb-2 bg-secondary text-white"><h2><label for="smeUser">2. Vul hieronder uw gegevens in</label></h2></div>
     <br><br>
     <div class="container">
         <form id="smeUser" action="#" th:action="@{newSMEUser}" th:object="${smeUser}" method="post">
@@ -37,29 +37,29 @@
                 </tr>
                 <tr>
                     <td><label for="firstName"> Uw voornaam:: </label>
-                    <td><input id="firstName" type="text" th:field="*{firstName}" name="firstName" required></td>
+                    <td><input id="firstName" type="text" th:field="*{firstName}" name="firstName" required placeholder="voornaam"></td>
                 </tr>
                 <tr>
                     <td><label for="middleName"> Tussenvoegsel: </label>
-                    <td><input id="middleName" type="text" th:field="*{middleName}" name="middleName"></td>
+                    <td><input id="middleName" type="text" th:field="*{middleName}" name="middleName" placeholder="middlenaam"></td>
                 </tr>
                 <tr>
                     <td><label for="lastName"> Uw achternaam: </label>
-                    <td><input id="lastName" type="text" th:field="*{lastName}" name="lastName" required></td>
+                    <td><input id="lastName" type="text" th:field="*{lastName}" name="lastName" required placeholder="achternaam"></td>
                 </tr>
                 <tr>
                     <td><label for="bsn"> Uw bsn: </label>
-                    <td><input id="bsn" type="text" th:field="*{bsn}" name="bsn" required/></td>
+                    <td><input id="bsn" type="text" th:field="*{bsn}" name="bsn" required placeholder="12345678" minlength="8" maxlength="8"/></td>
                     <td th:if="${#fields.hasErrors('bsn')}">Bsn ongeldig.</td>
                 </tr>
                 <tr>
                     <td><label for="userName"> Kies gebruikersnaam: </label>
-                    <td><input id="userName" type="text" th:field="*{userName}" name="userName" required/></td>
+                    <td><input id="userName" type="text" th:field="*{userName}" name="userName" required placeholder="gebruikersnaam"/></td>
                     <td th:if="${#fields.hasErrors('userName')}">Username ongeldig.</td>
                 </tr>
                 <tr>
                     <td><label for="userPassword">Kies wachtwoord:</label>
-                    <td><input id="userPassword" type="text" th:field="*{userPassword}" name="userPassword" required/>
+                    <td><input id="userPassword" type="text" th:field="*{userPassword}" name="userPassword" required placeholder="password"/>
                     </td>
                     <td th:if="${#fields.hasErrors('userPassword')}">Wachtwoord ongeldig.</td>
                 </tr>

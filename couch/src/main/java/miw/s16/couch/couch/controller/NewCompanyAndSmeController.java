@@ -78,7 +78,6 @@ public class NewCompanyAndSmeController implements WebMvcConfigurer {
             accountManagers = bankUserDao.findAllByRole("Account Manager");
             int random = (int )(Math.random() * accountManagers.size() + 1);
             company.setAccountManager(accountManagers.get(random));
-            System.out.println(company.getAccountManager().getUserName());
             company.addCompanyAccount(bankAccount);
             company.setPinCode(1234);
             companyDao.save(company);
@@ -86,9 +85,7 @@ public class NewCompanyAndSmeController implements WebMvcConfigurer {
             session.setAttribute("companyName", company.getCompanyName());
             model.addAttribute("company", company);
             model.addAttribute("roles", roles);
-           // model.addAttribute("role", "");
             model.addAttribute("smeUser", smeUser);
-            //model.addAttribute("companySector", "");
             return "new_SMEUser";
         }
     }
@@ -99,33 +96,17 @@ public class NewCompanyAndSmeController implements WebMvcConfigurer {
         if (bindingResult.hasErrors()) {
             model.addAttribute("roles", roles);
             return "new_SMEUser";
-//
         } else {
-//            // Check if user already exists as a client
-//            List<RetailUser> existingUsers = new ArrayList<>();
-//            existingUsers = retailUserDao.findByBsn(smeUser.getBsn());
-//            if (existingUsers != null) {
-//                RetailUser existingUser = existingUsers.get(0); // bsn should be unique -- to check
-//                List<BankAccount> accounts = retailUserDao.findBankAccountsByUserName(existingUser.getUserName());
-//
-//                // && check if user already has another business account
-//                for (BankAccount account : accounts)
-//                    if (account.getAccountType().equals("Zakelijk")) {
-//                        return "account_overflow";
-//                    }
-//                // if its the first zakelijk account, add it to the list of their existing accounts
-//                // work in progress ---
-//                existingUser.addBankAccount(bankAccount);
-//
             HttpSession session = request.getSession(true);
             String companyName = (String) session.getAttribute("companyName");
             company = companyDao.findByCompanyName(companyName).get(0);
+            int bsn = smeUser.getBsn();
+            //check is user already has a company
+            if (smeUserDao.findByBsn(bsn) != null) {
+                return "account_overflow"; }
             smeUser.setCompany(company);
             smeUserDao.save(smeUser);
-            // test if works for killing session
-//            session.invalidate();
             return "new_SMEUser_success";
-//
         }
     }
 }

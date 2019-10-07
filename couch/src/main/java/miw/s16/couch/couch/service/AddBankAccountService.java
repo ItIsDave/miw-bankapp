@@ -2,11 +2,8 @@ package miw.s16.couch.couch.service;
 
 import miw.s16.couch.couch.model.BankAccount;
 import miw.s16.couch.couch.model.Company;
-import miw.s16.couch.couch.model.RetailUser;
-import miw.s16.couch.couch.model.SMEUser;
 import miw.s16.couch.couch.model.dao.BankAccountDao;
 import miw.s16.couch.couch.model.dao.CompanyDao;
-import miw.s16.couch.couch.model.dao.RetailUserDao;
 import miw.s16.couch.couch.model.dao.SMEUserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
