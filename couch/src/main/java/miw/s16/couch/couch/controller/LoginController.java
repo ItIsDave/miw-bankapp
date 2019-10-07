@@ -8,6 +8,7 @@ import miw.s16.couch.couch.model.dao.UserDao;
 import miw.s16.couch.couch.service.HibernateLab;
 import miw.s16.couch.couch.service.PasswordValidator;
 import miw.s16.couch.couch.service.TestdataCreator;
+import miw.s16.couch.couch.service.TypeOfUserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Controller;
@@ -24,6 +25,9 @@ public class LoginController {
 
     @Autowired
     PasswordValidator validator;
+
+    @Autowired
+    TypeOfUserValidator validatorType;
 
     @Autowired
     HibernateLab lab;
@@ -62,8 +66,11 @@ public class LoginController {
     // user log in & user validation and direction to personal page
     @PostMapping(value = "overview")
     public String loginHandler(@ModelAttribute User user, Model model, HttpServletRequest request) {
+        // check if user is a Retail User
+        if (!validatorType.validateRetailUser(user)) {
+            return "login_failed";
+        }
         boolean loginOk = validator.validateMemberPassword(user);
-
 //adding full name for naming (tenaamstelling) purposes, and some code cleaning - BvB
         if (loginOk) {
             HttpSession session = request.getSession(true);
@@ -92,7 +99,6 @@ public class LoginController {
         model.addAttribute("smeUser", smeUser);
         return "company_login";
     }
-
 
     @GetMapping(value = "newUser")
     public String newUserHandler() {
