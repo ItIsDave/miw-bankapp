@@ -219,5 +219,11 @@ public class RetailUser extends User {
     public String getFullName(){
        return firstName + " " + ((middleName != null) ? middleName + " " : "") + lastName;
     }
+
+@Override
+    public String toString(){
+        return "first name" +firstName + " last name" + lastName +"bsn " + bsn;
+    }
+
 }
 

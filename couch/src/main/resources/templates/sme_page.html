@@ -6,6 +6,8 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
     <title>Zakelijk Pagina</title>
 </head>
 <body>
@@ -27,6 +29,12 @@
     <h1>Zakelijk Pagina</h1>
     <h2><span th:text="${company.companyName}"> </span> <span th:text="${company.companyType}"></span> - KvK nummer: <span th:text="${company.chamberOfCommerceId}"></span></h2>
 
+    <div th:if="${message!= null}">
+        <div class="alert alert-info alert-dismissible">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong><span th:text="${message}"></span></strong>
+        </div>
+    </div>
 
     <div th:unless="${#lists.isEmpty(allBankAccounts)}">
 
@@ -46,6 +54,12 @@
             </tbody>
         </table>
         <br>
+    </div>
+    <div th:if="${feedback!= null}">
+        <div class="alert alert-info alert-dismissible">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong><span th:text="${feedback}"></span></strong>
+        </div>
     </div>
 
     <div th:unless="${#lists.isEmpty(employees)}">
@@ -72,11 +86,20 @@
     </div>
 
     <br>
-    <form action="#" th:action="@{newInvoiceRequest}" th:object="${company}" method="post">
-        <tr>Klik om een nieuwe factuur te maken:</tr>
-        <input type="submit" value="Factuur">
+    <form action="#" th:action="@{newEmployeeRequest}" method="post">
+        <td>Add employee:</td>
+        <td><label for="newbsn">bsn:</label></td>
+        <td><input type="number" name ="newbsn" id="newbsn" th:object="${newbsn}" minlength="8" maxlength="9" min="10000000" max="999999999" required></td>
+        <td><label for="newrole" >Rol:</label>
+            <select id="newrole" name="newrole" th:object="${newrole}" required>
+                <option value=""> -- </option>
+                <option  th:each="newrole: ${roles}" th:value = "${newrole}" th:utext = "${newrole}" ></option>
+            </select>
+        </td>
+        <input type="submit" value="Submit">
     </form>
     <br>
+
     <form action="#" th:action="@{newCompanyAccountRequest}" th:object="${company}" method="post">
         <tr>Klik om een nieuwe rekening te openen:</tr>
         <input type="submit" value="Rekening openen">

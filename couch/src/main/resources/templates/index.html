@@ -27,18 +27,17 @@
 <form action="#" th:action="@{overview}" th:object="${user}" method="post">
     <table>
         <tr>
-            <td>Naam:</td>
-            <td><input type="text" th:field="*{userName}"/></td>
+            <td><label for="userName">Naam:</label></td>
+            <td><input type="text" id="userName" name ="userName" th:field="*{userName}"/></td>
         </tr>
         <tr>
-            <td>Wachtwoord:</td>
+            <td><label for="userPassword">Wachtwoord:</label> </td>
             <td><label>
-                <input type="password" th:field="*{userPassword}"/>
+                <input type="password" id="userPassword" name= "userPassword" th:field="*{userPassword}"/>
             </label>
             <td>
         </tr>
         <tr>
-            <br>
             <br>
             <td><input type="submit" value="bevestig"></td>
         </tr>
@@ -48,9 +47,9 @@
 </div>
 <footer>
 <ul>
-    <li><h3>Nieuwe klant</h3><a href="#newUser">Login</a></li>
-    <li><h3>Zakelijke klant</h3><a href="#zakelijk-klant">Login</a></li>
-    <li><h3>Couch medewerker</h3><a href="#bankemployee">Login</a></li>
+    <li><h3>Nieuwe klant</h3><a href="newUser">Login</a></li>
+    <li><h3>Zakelijke klant</h3><a href="zakelijk-login">Login</a></li>
+    <li><h3>Couch medewerker</h3><a href="bankemployee">Login</a></li>
 </ul>
     </footer>
 </body>

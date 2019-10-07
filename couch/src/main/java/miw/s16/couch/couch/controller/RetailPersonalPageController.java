@@ -67,6 +67,8 @@ public class RetailPersonalPageController<retailUser> {
         retailUser.addBankAccount(newBankAccount);
         bankAccountDao.save(newBankAccount);
         retailUserDao.save(retailUser);
+
+
         //collect all bankaccounts in 1 list
         List<BankAccount> bankAccountsList = retailUser.getBankAccounts();
         model.addAttribute("userName", userName);
@@ -74,6 +76,7 @@ public class RetailPersonalPageController<retailUser> {
         model.addAttribute("allBankAccounts", bankAccountsList);
         return "personal_page";
     }
+
 }
 
 
