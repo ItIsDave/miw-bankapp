@@ -64,18 +64,18 @@ public class HibernateLab {
 
             // Creating Retail user data
             RetailUser bart = new RetailUser("Bart", "1234", 987654321, "Bart",
-                    "", "Simpson", "Kalverstraat", 25, "B", "1011AB", "Amsterdam", "690000000", "25-10-1900", "bart@hva.nl", "Retail");
+                    "", "Simpson", "Kalverstraat", 25, "B", "1011AB", "Amsterdam", "690000000", "10-10-1900", "bart@hva.nl", "Retail");
             RetailUser charlotte = new RetailUser("Charlotte", "1234", 987654322,
                     "Charlotte", "de", "Witte", "Keizersgracht", 40,
-                    "A", "1017DS", "Amsterdam", "690000001", "25-10-1999", "cdv@gmail.com", "Retail");
+                    "A", "1017DS", "Amsterdam", "690000001", "10-10-1999", "cdv@gmail.com", "Retail");
             RetailUser karin = new RetailUser("Karin", "1234", 987654325,
                     "Karin", "van", "Dijk", "Prinsengracht", 200,
-                    "A", "1017KS", "Amsterdam", "690000801", "25-10-1990", "kvd@gmail.com", "Retail");
+                    "A", "1017KS", "Amsterdam", "690000801", "10-10-1990", "kvd@gmail.com", "Retail");
             RetailUser jan = new RetailUser("Jan", "1234", 987654326,
                     "Jan", "", "Bakken", "Herengracht", 100,
-                    "C", "1018AC", "Amsterdam", "6901230801", "25-10-1989", "jbakker@gmail.com", "Retail");
+                    "C", "1018AC", "Amsterdam", "6901230801", "10-10-1989", "jbakker@gmail.com", "Retail");
             RetailUser felix = new RetailUser("Felix", "1234", 987654321, "Boudewijn",
-                    "", "Simpson", "Kalverstraat", 25, "B", "1011AB", "Amsterdam", "690000000", "25-10-1900", "bart@hva.nl", "Retail");
+                    "", "Simpson", "Kalverstraat", 25, "B", "1011AB", "Amsterdam", "690000000", "10-10-1900", "bart@hva.nl", "Retail");
 
             // confirmation that DB is running
             System.out.println("Creating schema");
@@ -132,8 +132,8 @@ public class HibernateLab {
             smeUserDao.save(existingRetailUser);
 
 
-            //testData.makeRetailUserList();                          //AMS: haalt retail data op uit CSV file
-            //testData.retailUserListSplitAddBankaccountAndSave();    //AMS: verwerken testdata
+            testData.makeRetailUserList();                          //AMS: haalt retail data op uit CSV file
+            testData.retailUserListSplitAddBankaccountAndSave();    //AMS: verwerken testdata
 
             //bankmedewerkers voor HoofdMKB en HoofdParticulieren
 

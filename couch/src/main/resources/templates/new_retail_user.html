@@ -71,7 +71,7 @@
             <td th:if="${#fields.hasErrors('phoneNumber')}">Telefoonnummer ongeldig.</td>
         </tr>
         <tr>
-            <td>Geboortedatum (dd/mm/yyyy): *</td>
+            <td>Geboortedatum (mm-dd-jjjj): *</td>
             <td><input type="text" name="dateOfBirth" th:field="*{dateOfBirth}"/></td>
             <td th:if="${#fields.hasErrors('dateOfBirth')}">Geboortedatum ongeldig.</td>
         </tr>

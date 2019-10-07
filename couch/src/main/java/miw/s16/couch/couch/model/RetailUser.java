@@ -40,7 +40,7 @@ public class RetailUser extends User {
     @Size(min= 9, max=11) //AMS: in de testdata 11 posities nodig
     private String phoneNumber;
     @NotEmpty
-    @Pattern(regexp = "^(0?[1-9]|[12][0-9]|3[01])/(0?[1-9]|1[0-2])/(1[9][0-9]{2}|200[0-1])$")
+    @Pattern(regexp = "^(0?[1-9]|1[0-2])-(0?[1-9]|[12][0-9]|3[01])-(1[9][0-9]{2}|200[0-2])$")
     private String dateOfBirth;
     @NotEmpty
     @Email
