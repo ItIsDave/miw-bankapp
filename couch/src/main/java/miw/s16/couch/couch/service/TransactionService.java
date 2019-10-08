@@ -58,7 +58,7 @@ public class TransactionService {
                         "\nUw huidige saldo is " + String.format("%.2f", newBalance) + " euro.</small>";
             }
         } else {
-            return "Overboeking mislukt. Bank rekening niet gevonden.";
+            return "Overboeking mislukt. Bankrekening niet gevonden.";
         }
     }
 
