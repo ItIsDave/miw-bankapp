@@ -7,6 +7,7 @@ import miw.s16.couch.couch.model.dao.BankUserDao;
 import miw.s16.couch.couch.model.dao.UserDao;
 import miw.s16.couch.couch.service.BalanceTopTen;
 import miw.s16.couch.couch.service.PasswordValidator;
+import miw.s16.couch.couch.service.TypeOfUserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +23,9 @@ import java.util.List;
 
 @Controller
 public class LoginControllerBankemployee {
+
+    @Autowired
+    TypeOfUserValidator validatorType;
 
     @Autowired
     PasswordValidator validator;
@@ -44,6 +48,10 @@ public class LoginControllerBankemployee {
 
     @PostMapping(value = "overview_bankemployee")
     public String loginHandler(@ModelAttribute User user, Model model, HttpSession session) {
+//added by BvB, copied from LoginController
+        if (!validatorType.validateBankUser(user)) {
+            return "login_failed_bankemployee";
+        }
         boolean loginOk = validator.validateMemberPassword(user);
         List<BankUser> loggedInBankUser = bankUserDao.findByUserName(user.getUserName());
         if (loginOk) {
