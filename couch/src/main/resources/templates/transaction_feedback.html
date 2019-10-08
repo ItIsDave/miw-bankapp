@@ -29,7 +29,7 @@
 <div class="container">
     <h3 th:utext="${#strings.unescapeJava(#strings.replace(#strings.escapeJava(feedback),'\n','&lt;br /&gt;'))}"></h3>
 <br>
-Klik <a href="transactionRequest">hier</a> voor een nieuwe transactie te maken.
+Klik <a href="transactionRequest">hier</a> voor een nieuwe transactie.
 <br>
 <br>
 <td th:unless="${bankAccountType=='Zakelijk'}">
